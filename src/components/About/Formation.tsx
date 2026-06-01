@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/UI/Badge';
 
@@ -74,11 +75,12 @@ export const Formation = () => {
               className="flex gap-6 pb-6 border-b border-dark-border last:border-b-0"
             >
               {/* Logo */}
-              <div className="w-20 h-20 flex-shrink-0 bg-dark-bg rounded-lg p-2 border border-dark-border flex items-center justify-center">
-                <img
+              <div className="w-20 h-20 flex-shrink-0 bg-dark-bg rounded-lg p-2 border border-dark-border flex items-center justify-center relative">
+                <Image
                   src={edu.logo}
                   alt={edu.institution}
-                  className="w-full h-full object-contain"
+                  fill
+                  className="object-contain p-2"
                 />
               </div>
 

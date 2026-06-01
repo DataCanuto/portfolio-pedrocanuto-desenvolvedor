@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, ShoppingCart } from 'lucide-react';
@@ -28,10 +29,11 @@ export default function GaleriaArtwork({ artwork }: GaleriaArtworkProps) {
           className="relative overflow-hidden h-64 bg-gray-900"
           onClick={() => setIsExpanded(true)}
         >
-          <img
+          <Image
             src={artwork.image}
             alt={artwork.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-300"
           />
           
           {artwork.status === 'vendido' && (

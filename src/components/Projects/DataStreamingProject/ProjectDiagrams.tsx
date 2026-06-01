@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -131,11 +132,12 @@ export default function ProjectDiagrams({ title = 'Arquitetura & Diagramas' }: D
             {/* Mermaid Diagram ou Imagem */}
             <div className="bg-dark-bg rounded-lg p-4 overflow-x-auto">
               {(currentDiagram as any).isImage ? (
-                <div className="flex justify-center">
-                  <img
+                <div className="flex justify-center relative w-full h-96">
+                  <Image
                     src={(currentDiagram as any).imagePath}
                     alt={currentDiagram.name}
-                    className="max-w-full h-auto rounded-lg"
+                    fill
+                    className="object-contain rounded-lg"
                   />
                 </div>
               ) : (

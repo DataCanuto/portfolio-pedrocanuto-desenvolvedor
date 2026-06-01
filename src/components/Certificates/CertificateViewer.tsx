@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
@@ -79,12 +80,13 @@ export const CertificateViewer = ({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: currentSide === 'back' ? -20 : 20 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-full flex items-center justify-center"
+              className="w-full h-full flex items-center justify-center relative"
             >
-              <img
+              <Image
                 src={currentSide === 'front' ? frontImage : backImage || frontImage}
                 alt={`${certificate.title} - ${currentSide}`}
-                className="max-w-full max-h-full object-contain"
+                fill
+                className="object-contain"
               />
             </motion.div>
 
