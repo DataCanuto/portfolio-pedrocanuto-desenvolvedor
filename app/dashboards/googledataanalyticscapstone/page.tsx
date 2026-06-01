@@ -1,14 +1,11 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import {
   ProjectOverview,
   ProjectDiagrams,
   TechStack,
   Dashboard,
-  ChartsGrid,
-  UserComparisonChart,
 } from '@/components/Projects/GoogleDataAnalyticsCapsone';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
@@ -19,8 +16,6 @@ export default function GoogleDataAnalyticsCapstonePage() {
     { id: 'hero', label: 'Projeto', icon: <BarChart3 size={16} /> },
     { id: 'overview', label: 'Visão Geral', icon: <TrendingUp size={16} /> },
     { id: 'dashboard', label: 'Dashboard', icon: <Activity size={16} /> },
-    { id: 'charts', label: 'Gráficos', icon: <BarChart3 size={16} /> },
-    { id: 'users', label: 'Análise de Usuários', icon: <Users size={16} /> },
     { id: 'diagrams', label: 'Fluxo de Análise', icon: <Zap size={16} /> },
     { id: 'stack', label: 'Stack Tecnológico', icon: <Code2 size={16} /> },
     { id: 'insights', label: 'Insights Principais', icon: <BookOpen size={16} /> },
@@ -112,32 +107,7 @@ export default function GoogleDataAnalyticsCapstonePage() {
         <ProjectDiagrams />
       </section>
 
-      {/* Visualizações Adicionais */}
-      <section id="charts" className="py-16 px-4 md:px-8 bg-dark-bg">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
-              <span className="text-accent-orange">📈</span> Visualizações Detalhadas
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Gráficos interativos com análise profunda dos dados de fitness tracking
-            </p>
-          </motion.div>
 
-          <ChartsGrid timeFrame="weekly" />
-        </div>
-      </section>
-
-      {/* User Comparison */}
-      <section id="users">
-        <UserComparisonChart />
-      </section>
 
       {/* Stack Tecnológico */}
       <section id="stack">
@@ -165,7 +135,7 @@ export default function GoogleDataAnalyticsCapstonePage() {
                 </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
-                A análise reveló uma correlação positiva forte entre TotalSteps e Calorias queimadas, confirmando que caminhada e corrida são os principais drivers de despesa calórica na população estudada.
+                A análise revelou uma correlação positiva forte entre TotalSteps e Calorias queimadas, confirmando que caminhada e corrida são os principais drivers de despesa calórica na população estudada.
               </p>
             </div>
 
