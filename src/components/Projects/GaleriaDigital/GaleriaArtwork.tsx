@@ -112,11 +112,12 @@ export default function GaleriaArtwork({ artwork }: GaleriaArtworkProps) {
               </div>
 
               <div className="p-6">
-                <div className="mb-6">
-                  <img
+                <div className="mb-6 relative w-full h-96">
+                  <Image
                     src={artwork.image}
                     alt={artwork.title}
-                    className="w-full rounded-lg"
+                    fill
+                    className="rounded-lg object-contain"
                   />
                 </div>
 
