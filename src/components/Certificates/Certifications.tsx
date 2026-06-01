@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Certificate } from '@/types/certificate';
@@ -131,12 +132,13 @@ const CertificateCard = ({ certificate, onPreview }: CertificateCardProps) => {
     >
       <div className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden transition-all duration-300 group-hover:border-accent-orange group-hover:shadow-lg group-hover:shadow-accent-orange/20 h-full flex flex-col cursor-pointer">
         {/* Certificate Preview */}
-        <div className="w-full h-48 bg-gradient-to-br from-dark-header-btn to-dark-bg flex items-center justify-center overflow-hidden">
+        <div className="w-full h-48 bg-gradient-to-br from-dark-header-btn to-dark-bg flex items-center justify-center overflow-hidden relative">
           {certificate.logo ? (
-            <img
+            <Image
               src={certificate.logo}
               alt={certificate.issuer}
-              className="max-h-40 max-w-40 object-contain"
+              fill
+              className="object-contain p-4"
             />
           ) : (
             <div className="text-accent-orange text-2xl font-bold opacity-20 text-center px-4">
