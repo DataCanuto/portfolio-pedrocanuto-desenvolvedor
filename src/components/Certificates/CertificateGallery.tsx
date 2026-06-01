@@ -10,16 +10,16 @@ const certificatesData: Certificate[] = [
     title: 'Google AI Essentials',
     issuer: 'Coursera / Google',
     date: new Date('2024-12-31'),
-    filePath: '/assets/CERTIFICADOS/DATA SCIENCE/COURSERA/GoogleAiEssentials/',
-    imageUrl: '/img/cert-placeholder.jpg',
+    image: '/assets/certificados_img/google ai essentials/Coursera_Google AI Essentials.jpg',
+    category: 'certification',
   },
   {
     id: '2',
     title: 'Google Data Analytics 2024',
     issuer: 'Coursera / Google',
     date: new Date('2024-12-31'),
-    filePath: '/assets/CERTIFICADOS/DATA SCIENCE/COURSERA/GoogleDataAnalytics2024-12-31/',
-    imageUrl: '/img/cert-placeholder.jpg',
+    image: '/assets/certificados_img/google data analytics/COURSERA_GOOGLE_DATA_ANALYTICS_2024.jpg',
+    category: 'certification',
   },
 ];
 
