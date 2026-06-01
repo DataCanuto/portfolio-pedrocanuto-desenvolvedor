@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Globe, MapPin, Users, Phone, Mail, Shield } from 'lucide-react';
+import { Globe, MapPin, Users, Shield } from 'lucide-react';
 
 interface ClientInfoProps {
   clientName?: string;
