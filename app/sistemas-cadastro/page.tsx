@@ -7,7 +7,6 @@ import AreaHeader from '@/components/Projects/AreaHeader';
 import { Footer } from '@/components';
 
 export default function SistemasCadastro() {
-  const areaSlug = 'sistemas-cadastro';
   const areaTitle = 'Sistemas de Cadastro';
   const areaIcon = '📋';
 
