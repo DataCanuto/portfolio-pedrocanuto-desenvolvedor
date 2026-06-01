@@ -7,7 +7,6 @@ import AreaHeader from '@/components/Projects/AreaHeader';
 import { Footer } from '@/components';
 
 export default function LandingPages() {
-  const areaSlug = 'landing-pages';
   const areaTitle = 'Landing Pages';
   const areaIcon = '🚀';
 
