@@ -9,7 +9,7 @@ import {
 } from '@/components/Projects/GoogleDataAnalyticsCapsone';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
-import { BarChart3, Database, Code2, Zap, Users, BookOpen, Activity, TrendingUp } from 'lucide-react';
+import { BarChart3, Database, Code2, Zap, BookOpen, Activity, TrendingUp } from 'lucide-react';
 
 export default function GoogleDataAnalyticsCapstonePage() {
   const projectSections = [
