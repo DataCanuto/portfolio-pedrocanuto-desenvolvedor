@@ -14,8 +14,6 @@ export { Contact } from './Contact/ContactSection';
 export { Footer } from './Footer/Footer';
 export { Button } from './UI/Button';
 export { Badge } from './UI/Badge';
-export { PageLoader } from './UI/PageLoader';
-export { ThemeToggle } from './UI/ThemeToggle';
 
 // Data Streaming Project Components
 export { ProjectOverview, ProjectDiagrams, ProjectChallenges, TechStack, ClientInfo } from './Projects/DataStreamingProject';

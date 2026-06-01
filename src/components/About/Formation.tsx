@@ -13,6 +13,13 @@ interface Education {
 
 const education: Education[] = [
   {
+    year: '2026-2030',
+    title: 'Engenharia de Software',
+    institution: 'Estácio',
+    description: 'Curso de ensino superior',
+    logo: '/assets/logo_formacoes/logo-estacio.png',
+  },
+  {
     year: '2025-2027',
     title: 'Desenvolvimento de Sistemas',
     institution: 'SENAI CIMATEC',

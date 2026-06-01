@@ -5,3 +5,4 @@ export { default as DashboardMetrics } from './DashboardMetrics';
 export { default as Dashboard } from './Dashboard';
 export { default as ChartsGrid } from './ChartsGrid';
 export { default as UserComparisonChart } from './UserComparisonChart';
+export { default as UserCorrelationAnalysis } from './UserCorrelationAnalysis';

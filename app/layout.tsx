@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
-import { PageLoader, ThemeToggle } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Pedro Canuto - Desenvolvedor de Sistemas',
@@ -47,8 +46,6 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="bg-dark-bg text-dark-header-text">
-        <PageLoader />
-        <ThemeToggle />
         {children}
       </body>
     </html>
