@@ -4,9 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Database, Lock } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
+import ProjectAreaCard from '@/components/Projects/ProjectAreaCard';
 import { Footer } from '@/components';
 
 export default function SistemasCadastro() {
+  const areaSlug = 'sistemas-cadastro';
   const areaTitle = 'Sistemas de Cadastro';
   const areaIcon = '📋';
 
@@ -14,6 +16,19 @@ export default function SistemasCadastro() {
     { label: 'Início', href: '/', isActive: false },
     { label: 'Apresentação', href: '#apresentacao', isActive: false },
     { label: 'Projetos', href: '#projetos', isActive: true },
+  ];
+
+  const projects = [
+    {
+      id: 'pedro-canuto-musico',
+      title: 'Pedro Canuto Música',
+      slug: 'pedro-canuto-musico',
+      description:
+        'Sistema de cadastro de alunos e agenda de aulas de música em Java com Spring Boot, aplicando na prática os conhecimentos do curso Técnico em Desenvolvimento de Sistemas para gerenciar meu próprio serviço profissional.',
+      company: 'Projeto Pessoal',
+      technologies: ['Java', 'Spring Boot', 'Spring Data JPA', 'Spring Security', 'MySQL'],
+      icon: '🎵',
+    },
   ];
 
   return (
@@ -81,12 +96,24 @@ export default function SistemasCadastro() {
               <span className="text-accent-orange">Projetos</span>
             </h2>
             <p className="text-gray-400 text-lg mt-4">
-              Projetos em breve. Volte em seguida para conferir nossas soluções.
+              Explore minhas soluções de sistemas de cadastro em produção
             </p>
           </motion.div>
 
-          <div className="bg-dark-bg-secondary border border-dark-border rounded-lg p-12 text-center">
-            <p className="text-gray-400 text-lg">Projetos de Sistemas de Cadastro em desenvolvimento...</p>
+          {/* Grid de Projetos */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <ProjectAreaCard
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                company={project.company}
+                technologies={project.technologies}
+                slug={project.slug}
+                areaSlug={areaSlug}
+                icon={project.icon}
+              />
+            ))}
           </div>
         </div>
       </section>
