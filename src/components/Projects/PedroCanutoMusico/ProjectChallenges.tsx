@@ -16,68 +16,68 @@ interface Challenge {
 const challenges: Challenge[] = [
   {
     id: 1,
-    title: 'Processamento de PDFs Escaneados',
+    title: 'Do Zero ao Deploy: Primeira Aplicação Full Stack em Java',
     description:
-      'Muitos documentos eram imagens de PDF (scans), impossibilitando extração de texto direta. Necessário implementar OCR para reconhecer caracteres em imagens.',
+      'Este foi o primeiro projeto aplicando de ponta a ponta os conceitos de Spring Boot vistos em sala de aula, unindo backend Java a uma interface web funcional para um caso de uso real.',
     solution:
-      'Integração com Tesseract OCR com configuração otimizada para documentos financeiros em português. Implementação de pré-processamento de imagens com Pillow para aumentar acurácia.',
+      'Estruturação da aplicação em camadas (Controller, Service, Repository), seguindo as boas práticas de arquitetura MVC ensinadas no curso técnico do SENAI CIMATEC.',
     impact:
-      'Capacidade de processar 100% dos documentos, incluindo scans antigos de baixa qualidade.',
+      'Consolidação prática dos fundamentos de Spring Boot, servindo de base para os próximos sistemas de cadastro do portfólio.',
     difficulty: 'high',
   },
   {
     id: 2,
-    title: 'Normalização de Nomes de Clientes',
+    title: 'Conflito de Horários na Agenda',
     description:
-      'Nomes inconsistentes entre fontes diferentes: abreviações, prefixos (Sr., Sra.), sobrenomes em diferentes ordens. Dificultava matching cross-referência.',
+      'Duas aulas não podem ocupar o mesmo horário. Era preciso impedir que um novo agendamento sobrepusesse um compromisso já existente na agenda do professor.',
     solution:
-      'Desenvolvimento de algoritmo customizado de processamento de nomes com regras específicas para nomes brasileiros. Remoção de prefixos, tratamento de casos especiais (herança, empresa).',
+      'Implementação de uma regra de negócio na camada de serviço que valida a sobreposição de intervalos de horário antes de persistir uma nova aula, comparando data e hora de início/fim.',
     impact:
-      'Redução de 95% em inconsistências de nomes, melhorando precisão do matching de clientes.',
-    difficulty: 'medium',
+      'Eliminação de conflitos de agenda, garantindo que cada horário tenha no máximo uma aula vinculada.',
+    difficulty: 'high',
   },
   {
     id: 3,
-    title: 'Extração Precisa de Datas em Português',
+    title: 'Modelagem do Relacionamento Aluno–Aula',
     description:
-      'Variações no formato de datas brasileiras (dd/mm/yyyy), diferentes labels e formatos de texto. Regex simples falhava em casos edge.',
+      'Um aluno pode ter várias aulas ao longo do tempo, e cada aula pertence a um único aluno. Era preciso representar corretamente essa relação no banco de dados.',
     solution:
-      'Implementação de regex robusto com múltiplos padrões e tratamento de exceções. Validação com biblioteca `dateutil` para garantir datas válidas.',
+      'Uso das anotações @OneToMany e @ManyToOne do Spring Data JPA entre as entidades Aluno e Aula, com chave estrangeira e carregamento otimizado das relações.',
     impact:
-      'Taxa de sucesso de 99% na extração de datas, eliminando erros de parsing.',
+      'Estrutura de dados normalizada, permitindo consultar rapidamente o histórico completo de aulas de cada aluno.',
     difficulty: 'medium',
   },
   {
     id: 4,
-    title: 'Consolidação de Múltiplos Documentos por Cliente',
+    title: 'Autenticação e Separação de Papéis (Admin x Público)',
     description:
-      'Clientes possuem múltiplas NFs, Prestações e Planilhas. Full Outer Join complexo para manter integridade de dados sem perder informações.',
+      'A área administrativa — agenda e cadastro de alunos — precisa ficar protegida, enquanto a página pública de apresentação do serviço deve permanecer aberta a qualquer visitante.',
     solution:
-      'Implementação de pandas merge com chaves compostas e validação pós-merge. Estrutura de dados com listas para armazenar múltiplas origens.',
+      'Configuração do Spring Security restringindo as rotas administrativas a usuários autenticados, mantendo as rotas públicas de apresentação liberadas.',
     impact:
-      'Consolidação perfeita de dados com 100% de integridade, documentação de clientes com arquivos faltantes.',
+      'Separação clara entre a experiência do visitante/aluno e o painel de controle do administrador.',
     difficulty: 'high',
   },
   {
     id: 5,
-    title: 'Performance com Grandes Volumes',
+    title: 'Validação de Dados de Cadastro',
     description:
-      'Pipeline processando centenas de arquivos PDF. Operações de file I/O e OCR são lentas. Necessidade de otimização para execução eficiente.',
+      'Os formulários de cadastro de alunos e agendamento de aulas precisavam impedir dados inválidos: e-mails malformados, horários inconsistentes e campos obrigatórios em branco.',
     solution:
-      'Implementação de processamento em chunks, cache de resultados OCR, e otimização de regex. Uso de pandas operations vetorizadas em vez de loops.',
+      'Aplicação de Bean Validation (@NotBlank, @Email, @Future) diretamente nas entidades e DTOs, com tratamento centralizado de exceções para retornar mensagens claras ao usuário.',
     impact:
-      'Redução de 60% no tempo de processamento mantendo qualidade dos resultados.',
-    difficulty: 'high',
+      'Redução de erros de cadastro e maior confiabilidade dos dados armazenados no sistema.',
+    difficulty: 'medium',
   },
   {
     id: 6,
-    title: 'Validação e Relatório de Qualidade',
+    title: 'Persistência e Organização do Schema do Banco',
     description:
-      'Necessidade de identificar documentos faltantes, duplicatas e inconsistências. Rastreamento de qualidade crítico para análise posterior.',
+      'Era necessário manter a estrutura do banco relacional consistente entre o ambiente de desenvolvimento e as evoluções do código ao longo do curso.',
     solution:
-      'Desenvolvimento de sistema de validação multi-camadas com métricas de qualidade. Geração automática de relatório de arquivos faltantes em Excel.',
+      'Uso do Spring Data JPA com Hibernate para geração e controle do schema, junto de dados iniciais de teste para validar os fluxos de cadastro e agendamento.',
     impact:
-      'Visibilidade total da qualidade dos dados com documentação de gaps e inconsistências.',
+      'Ambiente de desenvolvimento reproduzível, com o schema do banco sempre sincronizado ao modelo de entidades.',
     difficulty: 'medium',
   },
 ];
@@ -118,7 +118,8 @@ export default function ProjectChallenges() {
             🛠️ <span className="text-accent-orange">Desafios</span> & Soluções
           </h2>
           <p className="text-gray-400 text-lg">
-            Principais obstáculos encontrados durante o desenvolvimento e as soluções implementadas
+            Principais obstáculos encontrados ao aplicar Spring Boot em um projeto real e as
+            soluções implementadas
           </p>
         </motion.div>
 

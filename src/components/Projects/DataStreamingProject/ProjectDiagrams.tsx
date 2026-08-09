@@ -5,11 +5,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface DiagramsProps {
-  title?: string;
-}
-
-export default function ProjectDiagrams({ title = 'Arquitetura & Diagramas' }: DiagramsProps) {
+export default function ProjectDiagrams() {
   const [activeDiagram, setActiveDiagram] = useState<'classes' | 'flow' | 'uml'>(
     'uml'
   );
@@ -129,39 +125,16 @@ export default function ProjectDiagrams({ title = 'Arquitetura & Diagramas' }: D
               <p className="text-gray-400">{currentDiagram.description}</p>
             </div>
 
-            {/* Mermaid Diagram ou Imagem */}
+            {/* Imagem do Diagrama */}
             <div className="bg-dark-bg rounded-lg p-4 overflow-x-auto">
-              {(currentDiagram as any).isImage ? (
-                <div className="flex justify-center relative w-full h-96">
-                  <Image
-                    src={(currentDiagram as any).imagePath}
-                    alt={currentDiagram.name}
-                    fill
-                    className="object-contain rounded-lg"
-                  />
-                </div>
-              ) : (
-                <>
-                  <pre className="text-sm text-gray-300 font-mono whitespace-pre-wrap break-words">
-                    <code>{currentDiagram.content}</code>
-                  </pre>
-                  <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                    <p className="text-blue-300 text-sm">
-                      💡 Para visualizar os diagramas em formato gráfico, use uma ferramenta como
-                      <br />
-                      <a
-                        href="https://mermaid.live"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent-orange hover:underline font-semibold"
-                      >
-                        Mermaid Live Editor
-                      </a>
-                      {' '}(copia/cola o código acima)
-                    </p>
-                  </div>
-                </>
-              )}
+              <div className="flex justify-center relative w-full h-96">
+                <Image
+                  src={currentDiagram.imagePath}
+                  alt={currentDiagram.name}
+                  fill
+                  className="object-contain rounded-lg"
+                />
+              </div>
             </div>
 
             {/* Botões de Navegação */}

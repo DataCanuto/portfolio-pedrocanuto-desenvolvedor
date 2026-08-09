@@ -17,8 +17,6 @@ export function useScrollSpy(items: ScrollSpyItem[], offset: number = 100) {
       if (timeoutId) clearTimeout(timeoutId);
 
       timeoutId = setTimeout(() => {
-        const scrollY = window.scrollY;
-        
         // Find which section is currently visible on screen
         let activeSection = items[0]?.id || 'hero';
         

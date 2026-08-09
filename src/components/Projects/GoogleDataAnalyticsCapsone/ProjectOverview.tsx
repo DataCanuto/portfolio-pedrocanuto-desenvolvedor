@@ -65,7 +65,7 @@ export default function ProjectOverview({
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
-            <span className="text-accent-orange">Visão</span> Geral do Projeto
+            {title}
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl">{description}</p>
         </motion.div>

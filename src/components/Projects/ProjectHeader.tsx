@@ -15,7 +15,6 @@ interface ProjectHeaderProps {
   projectTitle: string;
   sections: SectionItem[];
   areaSlug: string;
-  onBackClick?: () => void;
   backUrl?: string;
 }
 
@@ -23,7 +22,6 @@ export default function ProjectHeader({
   projectTitle,
   sections,
   areaSlug,
-  onBackClick,
   backUrl,
 }: ProjectHeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

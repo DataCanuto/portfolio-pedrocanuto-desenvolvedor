@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Code2, Settings, BarChart3, Palette } from 'lucide-react';
 
 interface Service {
-  id: string;
+  id: number;
   title: string;
   description: string;
   icon: React.ReactNode;

@@ -14,8 +14,6 @@ import {
   LineChart,
   Line,
   ResponsiveContainer,
-  BarChart,
-  Bar,
 } from 'recharts';
 import { TrendingUp, Users, Activity, BarChart3 } from 'lucide-react';
 
@@ -31,14 +29,6 @@ const userCorrelationData = [
   { userId: 'U8', totalSteps: 256789, totalCalories: 64500, avgSteps: 8902, avgCalories: 2234 },
   { userId: 'U9', totalSteps: 167890, totalCalories: 51200, avgSteps: 5820, avgCalories: 1776 },
   { userId: 'U10', totalSteps: 201234, totalCalories: 57900, avgSteps: 6974, avgCalories: 2007 },
-];
-
-// Dados agregados para comparação
-const aggregatedData = [
-  { range: '100k-150k', avgCalories: 45500, count: 2, minSteps: 100000, maxSteps: 150000 },
-  { range: '150k-200k', avgCalories: 53800, count: 4, minSteps: 150000, maxSteps: 200000 },
-  { range: '200k-250k', avgCalories: 60000, count: 3, minSteps: 200000, maxSteps: 250000 },
-  { range: '250k+', avgCalories: 64500, count: 1, minSteps: 250000, maxSteps: 300000 },
 ];
 
 // Calcular linha de tendência
@@ -235,7 +225,7 @@ export default function UserCorrelationAnalysis() {
                   fillOpacity={0.7}
                   shape="circle"
                 >
-                  {userCorrelationData.map((entry, index) => (
+                  {userCorrelationData.map((_entry, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={`hsl(${index * 36}, 100%, 50%)`}
@@ -249,7 +239,7 @@ export default function UserCorrelationAnalysis() {
                   data={trendlineData}
                   fill="none"
                   line={{ stroke: '#f97316', strokeWidth: 2, strokeDasharray: '5 5' }}
-                  shape="line"
+                  shape={() => <></>}
                 />
               </ScatterChart>
             </ResponsiveContainer>
@@ -343,7 +333,7 @@ export default function UserCorrelationAnalysis() {
                 <Tooltip
                   contentStyle={{ backgroundColor: '#1a1a2e', border: '1px solid #f97316' }}
                   labelStyle={{ color: '#fff' }}
-                  formatter={(value) => value.toLocaleString()}
+                  formatter={(value) => value?.toLocaleString() ?? ''}
                 />
                 <Legend />
                 <Line 

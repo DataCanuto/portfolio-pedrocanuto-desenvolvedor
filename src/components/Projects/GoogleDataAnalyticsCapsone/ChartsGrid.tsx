@@ -35,7 +35,7 @@ const weekdayActivityData = [
   { day: 'Seg', calories: 2120, steps: 8500, sleep: 7.2 },
   { day: 'Ter', calories: 2087, steps: 8243, sleep: 6.8 },
   { day: 'Qua', calories: 1945, steps: 7892, sleep: 7.5 },
-  { day: 'Qui', calories: 2234, steps: 9102, calories: 2456, sleep: 7.1 },
+  { day: 'Qui', calories: 2234, steps: 9102, sleep: 7.1 },
   { day: 'Sex', calories: 2198, steps: 8765, sleep: 6.9 },
   { day: 'Sab', calories: 2456, steps: 10234, sleep: 8.2 },
   { day: 'Dom', calories: 1956, steps: 7892, sleep: 8.5 },
@@ -88,7 +88,7 @@ interface ChartsGridProps {
   timeFrame?: 'daily' | 'weekly' | 'monthly';
 }
 
-export default function ChartsGrid({ timeFrame = 'weekly' }: ChartsGridProps) {
+export default function ChartsGrid({ timeFrame: _timeFrame = 'weekly' }: ChartsGridProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
