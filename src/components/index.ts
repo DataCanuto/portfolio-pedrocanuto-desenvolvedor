@@ -18,6 +18,15 @@ export { Badge } from './UI/Badge';
 // Data Streaming Project Components
 export { ProjectOverview, ProjectDiagrams, ProjectChallenges, TechStack, ClientInfo } from './Projects/DataStreamingProject';
 
+// Pedro Canuto Música Project Components
+export {
+  ProjectOverview as PedroCanutoMusicoOverview,
+  ProjectDiagrams as PedroCanutoMusicoDiagrams,
+  ProjectChallenges as PedroCanutoMusicoChallenges,
+  TechStack as PedroCanutoMusicoTechStack,
+  AdminAgendaPreview,
+} from './Projects/PedroCanutoMusico';
+
 // Area & Project Header Components
 export { default as AreaHeader } from './Projects/AreaHeader';
 export { default as ProjectHeader } from './Projects/ProjectHeader';

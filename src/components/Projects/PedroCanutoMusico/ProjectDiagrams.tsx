@@ -161,7 +161,7 @@ export default function ProjectDiagrams() {
   };
 
   return (
-    <section id="diagrams" className="py-16 px-4 md:px-8 bg-dark-bg-secondary">
+    <section className="py-16 px-4 md:px-8 bg-dark-bg-secondary">
       <div className="max-w-6xl mx-auto">
         {/* Título */}
         <motion.div
