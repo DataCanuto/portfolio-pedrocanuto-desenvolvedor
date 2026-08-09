@@ -2,17 +2,19 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Code2, GitBranch, ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
+import { Layers, Lightbulb, Rocket, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ProjectDiagrams() {
-  const [activeDiagram, setActiveDiagram] = useState<'process' | 'insights' | 'actions'>('process');
+  const [activeDiagram, setActiveDiagram] = useState<'arquitetura' | 'aprendizados' | 'proximos'>(
+    'arquitetura'
+  );
 
   const diagrams = [
     {
-      id: 'process',
-      name: 'Processo de Análise',
-      icon: Code2,
-      description: 'Etapas do pipeline de análise de dados',
+      id: 'arquitetura',
+      name: 'Arquitetura em Camadas',
+      icon: Layers,
+      description: 'Como uma requisição percorre a aplicação Spring Boot, do clique do usuário até o banco de dados',
       content: (
         <div className="space-y-6">
           <div className="flex items-center gap-4">
@@ -20,8 +22,8 @@ export default function ProjectDiagrams() {
               1
             </div>
             <div className="flex-grow">
-              <h4 className="text-lg font-bold text-dark-header-text">Importação de Dados</h4>
-              <p className="text-gray-400 text-sm">Leitura de 6 arquivos CSV de atividade horária</p>
+              <h4 className="text-lg font-bold text-dark-header-text">Interface Web</h4>
+              <p className="text-gray-400 text-sm">Aluno ou administrador interage com as páginas de cadastro e agenda</p>
             </div>
           </div>
 
@@ -30,8 +32,8 @@ export default function ProjectDiagrams() {
               2
             </div>
             <div className="flex-grow">
-              <h4 className="text-lg font-bold text-dark-header-text">Limpeza & Transformação</h4>
-              <p className="text-gray-400 text-sm">Remoção de duplicatas, tratamento de nulos, conversão de tipos</p>
+              <h4 className="text-lg font-bold text-dark-header-text">Controller</h4>
+              <p className="text-gray-400 text-sm">Recebe a requisição HTTP e delega o processamento para a camada de serviço</p>
             </div>
           </div>
 
@@ -40,8 +42,8 @@ export default function ProjectDiagrams() {
               3
             </div>
             <div className="flex-grow">
-              <h4 className="text-lg font-bold text-dark-header-text">Análise Exploratória (EDA)</h4>
-              <p className="text-gray-400 text-sm">Distribuição de dados, correlações, padrões horários e semanais</p>
+              <h4 className="text-lg font-bold text-dark-header-text">Service</h4>
+              <p className="text-gray-400 text-sm">Aplica as regras de negócio, como a verificação de conflito de horário na agenda</p>
             </div>
           </div>
 
@@ -50,8 +52,8 @@ export default function ProjectDiagrams() {
               4
             </div>
             <div className="flex-grow">
-              <h4 className="text-lg font-bold text-dark-header-text">Segmentação de Usuários</h4>
-              <p className="text-gray-400 text-sm">Classificação por padrões de atividade e engajamento</p>
+              <h4 className="text-lg font-bold text-dark-header-text">Repository (Spring Data JPA)</h4>
+              <p className="text-gray-400 text-sm">Executa as operações de persistência sobre as entidades Aluno, Aula e Usuário</p>
             </div>
           </div>
 
@@ -60,82 +62,82 @@ export default function ProjectDiagrams() {
               5
             </div>
             <div className="flex-grow">
-              <h4 className="text-lg font-bold text-dark-header-text">Insights & Recomendações</h4>
-              <p className="text-gray-400 text-sm">Descoberta de padrões para estratégias de gamificação</p>
+              <h4 className="text-lg font-bold text-dark-header-text">Banco de Dados Relacional</h4>
+              <p className="text-gray-400 text-sm">Armazena alunos, aulas e usuários de forma normalizada e consistente</p>
             </div>
           </div>
         </div>
       ),
     },
     {
-      id: 'insights',
-      name: 'Principais Insights',
-      icon: TrendingUp,
-      description: 'Descobertas-chave da análise',
+      id: 'aprendizados',
+      name: 'Principais Aprendizados',
+      icon: Lightbulb,
+      description: 'O que este projeto consolidou sobre desenvolvimento com Java e Spring Boot',
       content: (
         <div className="space-y-4">
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">📊 Correlação Forte</h4>
+            <h4 className="font-bold text-accent-orange mb-2">🧱 Arquitetura em Camadas</h4>
             <p className="text-gray-300 text-sm">
-              Relação positiva forte entre TotalSteps e Calorias queimadas, confirmando que caminhada/corrida são principais drivers de despesa calórica.
+              Separar Controller, Service e Repository facilita testar e evoluir cada parte da aplicação de forma isolada.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">⏰ Picos de Atividade</h4>
+            <h4 className="font-bold text-accent-orange mb-2">✅ Regras de Negócio no Service</h4>
             <p className="text-gray-300 text-sm">
-              Padrões consistentes de picos de atividade no final da tarde e noite (pós-trabalho), com menor atividade nas primeiras horas da manhã.
+              Validações como o conflito de horário pertencem à camada de serviço, não ao controller nem à view.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">📈 Qualidade de Dados</h4>
+            <h4 className="font-bold text-accent-orange mb-2">🔐 Segurança desde o Início</h4>
             <p className="text-gray-300 text-sm">
-              Dados horários mais completos (60+ dias por usuário) comparado aos dados diários (45 dias), fornecendo visão mais confiável do comportamento.
+              Definir cedo quais rotas são públicas e quais exigem autenticação evita retrabalho posterior com Spring Security.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">🎯 Padrões Semanais</h4>
+            <h4 className="font-bold text-accent-orange mb-2">⚡ ORM Acelera o Desenvolvimento</h4>
             <p className="text-gray-300 text-sm">
-              Distribuição consistente de atividade ao longo da semana, com menos outliers extremos em comparação com dados diários.
+              Spring Data JPA e Hibernate eliminam boa parte do SQL manual, mantendo o foco nas regras do domínio.
             </p>
           </div>
         </div>
       ),
     },
     {
-      id: 'actions',
-      name: 'Ações Recomendadas',
-      icon: GitBranch,
-      description: 'Estratégias para melhoria',
+      id: 'proximos',
+      name: 'Próximos Passos',
+      icon: Rocket,
+      description: 'Evoluções planejadas para o sistema a partir da versão atual',
       content: (
         <div className="space-y-4">
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">🏆 Sistema de Reconhecimento</h4>
+            <h4 className="font-bold text-accent-orange mb-2">🔔 Notificações Automáticas</h4>
             <p className="text-gray-300 text-sm">
-              Implementar mensagens automáticas mensais informando aos usuários seu percentil em relação a TotalSteps ou Calorias na comunidade.
+              Envio de lembretes por e-mail ou WhatsApp confirmando o horário das aulas agendadas.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">🎮 Gamificação</h4>
+            <h4 className="font-bold text-accent-orange mb-2">💳 Controle de Pagamentos</h4>
             <p className="text-gray-300 text-sm">
-              Criar metas semanais baseadas nos picos de atividade observados, com sistema de recompensas para engajar usuários durante períodos críticos.
+              Registro do status de pagamento de cada aula, com histórico por aluno.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">📱 Notificações Inteligentes</h4>
+            <h4 className="font-bold text-accent-orange mb-2">📱 Acesso do Aluno à Própria Agenda</h4>
             <p className="text-gray-300 text-sm">
-              Enviar notificações push durante horários de pico identificados para motivar atividade e maximizar engajamento nos períodos mais ativos.
+              Área logada para o aluno visualizar suas próximas aulas sem depender do administrador.
             </p>
           </div>
 
           <div className="bg-dark-bg/50 border border-dark-border rounded-lg p-4">
-            <h4 className="font-bold text-accent-orange mb-2">🔄 Detecção de Churn</h4>
+            <h4 className="font-bold text-accent-orange mb-2">📈 Relatórios de Frequência</h4>
             <p className="text-gray-300 text-sm">
-              Usar machine learning para identificar usuários em risco de inatividade baseado em padrões de declínio, permitindo intervenção proativa.
+              Painéis simples mostrando assiduidade e evolução de cada aluno ao longo do tempo.
             </p>
           </div>
         </div>
@@ -149,13 +151,13 @@ export default function ProjectDiagrams() {
   const handleNext = () => {
     const currentIndex = getCurrentIndex();
     const nextIndex = (currentIndex + 1) % diagrams.length;
-    setActiveDiagram(diagrams[nextIndex].id as any);
+    setActiveDiagram(diagrams[nextIndex].id as typeof activeDiagram);
   };
 
   const handlePrev = () => {
     const currentIndex = getCurrentIndex();
     const prevIndex = (currentIndex - 1 + diagrams.length) % diagrams.length;
-    setActiveDiagram(diagrams[prevIndex].id as any);
+    setActiveDiagram(diagrams[prevIndex].id as typeof activeDiagram);
   };
 
   return (
@@ -170,10 +172,10 @@ export default function ProjectDiagrams() {
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
-            <span className="text-accent-orange">Fluxo</span> de Análise
+            <span className="text-accent-orange">Arquitetura</span> & Aprendizados
           </h2>
           <p className="text-gray-400 text-lg">
-            Etapas e insights do projeto de análise de fitness tracking
+            Como a aplicação foi estruturada e o que ela consolidou em termos técnicos
           </p>
         </motion.div>
 
@@ -188,7 +190,7 @@ export default function ProjectDiagrams() {
           {diagrams.map((diagram) => (
             <button
               key={diagram.id}
-              onClick={() => setActiveDiagram(diagram.id as any)}
+              onClick={() => setActiveDiagram(diagram.id as typeof activeDiagram)}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 ${
                 activeDiagram === diagram.id
                   ? 'bg-accent-orange text-black shadow-lg shadow-accent-orange/50'

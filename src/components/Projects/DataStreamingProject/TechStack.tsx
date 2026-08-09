@@ -4,11 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Database, FileText, Zap, Code } from 'lucide-react';
 
-interface TechStackProps {
-  title?: string;
-}
-
-export default function TechStack({ title = 'Stack Tecnológico' }: TechStackProps) {
+export default function TechStack() {
   const technologies = [
     {
       category: 'Linguagem & Ambiente',

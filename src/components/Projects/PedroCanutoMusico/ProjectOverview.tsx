@@ -2,26 +2,18 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BarChart3 } from 'lucide-react';
+import { GraduationCap, Music, Layers, ShieldCheck } from 'lucide-react';
 
 interface ProjectOverviewProps {
-  title: string;
-  description: string;
-  mainGoal: string;
-  keyFeatures: string[];
-  stats: Array<{
-    label: string;
-    value: string;
-    icon: React.ReactNode;
-  }>;
+  title?: string;
+  description?: string;
+  mainGoal?: string;
 }
 
 export default function ProjectOverview({
-  title,
-  description,
-  mainGoal,
-  keyFeatures,
-  stats,
+  title = 'Pedro Canuto Música',
+  description = 'Sistema de cadastro e agendamento de aulas de música, desenvolvido em Java com Spring Boot como aplicação prática dos conhecimentos adquiridos no curso Técnico em Desenvolvimento de Sistemas do SENAI CIMATEC.',
+  mainGoal = 'Aplicar, em um problema real do meu dia a dia como educador musical, os fundamentos de Spring Boot aprendidos em sala de aula: modelagem de entidades, persistência com Spring Data JPA, regras de negócio na camada de serviço e autenticação de uma área administrativa.',
 }: ProjectOverviewProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -42,6 +34,24 @@ export default function ProjectOverview({
       transition: { duration: 0.5 },
     },
   };
+
+  const stats = [
+    {
+      label: 'Entidades Modeladas',
+      value: '4',
+      icon: <Layers className="text-accent-orange" size={24} />,
+    },
+    {
+      label: 'Base Teórica',
+      value: 'Curso SENAI',
+      icon: <GraduationCap className="text-accent-orange" size={24} />,
+    },
+    {
+      label: 'Área Restrita',
+      value: 'Spring Security',
+      icon: <ShieldCheck className="text-accent-orange" size={24} />,
+    },
+  ];
 
   return (
     <section className="py-16 px-4 md:px-8 bg-dark-bg">
@@ -70,7 +80,7 @@ export default function ProjectOverview({
         >
           <div className="flex items-start gap-4">
             <div className="p-3 bg-accent-orange/10 rounded-lg">
-              <BarChart3 className="text-accent-orange" size={28} />
+              <Music className="text-accent-orange" size={28} />
             </div>
             <div>
               <h3 className="text-2xl font-bold text-dark-header-text mb-3">
@@ -87,7 +97,7 @@ export default function ProjectOverview({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -96,41 +106,12 @@ export default function ProjectOverview({
               className="bg-dark-bg-secondary border border-dark-border rounded-xl p-6 hover:border-accent-orange/50 transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-accent-orange/10 rounded-lg text-accent-orange">
-                  {stat.icon}
-                </div>
-                <h4 className="text-gray-300 font-medium">{stat.label}</h4>
+                <div className="p-2 bg-accent-orange/10 rounded-lg">{stat.icon}</div>
+                <p className="text-gray-400 text-sm font-semibold">{stat.label}</p>
               </div>
-              <p className="text-3xl font-bold text-accent-orange">{stat.value}</p>
+              <p className="text-2xl font-bold text-accent-orange">{stat.value}</p>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Recursos Principais */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-dark-header-text mb-6">
-            ✨ Recursos <span className="text-accent-orange">Principais</span>
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {keyFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-3 p-4 bg-dark-bg-secondary border border-dark-border rounded-lg hover:border-accent-orange/50 transition-all duration-300"
-              >
-                <ArrowRight className="text-accent-orange flex-shrink-0" size={20} />
-                <span className="text-gray-300">{feature}</span>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </div>
     </section>
