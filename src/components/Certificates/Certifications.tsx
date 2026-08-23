@@ -12,8 +12,8 @@ const certificationsData: Certificate[] = [
     title: 'Globant - Java Spring Boot AI',
     issuer: 'Globant',
     date: new Date('2025-05-24'),
-    image: '/assets/certificados_img/globant-java-spring-boot-ai/certificate.jpg',
-    logo: '/assets/logo_certificados/globant-logo.png',
+    image: '/assets/certificados_img/public/assets/certificados_img/javaSpringBootLogoCertificado.jpg',
+    logo: '/assets/logo_certificados/public/assets/logo_certificados/javaSpringBootLogoCertificado.jpg',
     category: 'certification',
   },
   {
