@@ -155,12 +155,12 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   );
 };
 
-export const Projects = () => {
+export const GithubArea = () => {
   const [selectedProject, setSelectedProject] = useState<GitHubRepository | null>(null);
   const { projects, isLoading } = useGitHubProjects();
 
   return (
-    <section id="projects" className="py-20 bg-dark-bg-secondary">
+    <section id="githubArea" className="py-20 bg-dark-bg-secondary">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -169,8 +169,11 @@ export const Projects = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
-            Meu <span className="text-accent-orange">Repositório</span>
+            Repositórios no <span className="text-accent-orange">GitHub</span>
           </h2>
+          <p className="text-gray-400 max-w-2xl mb-8">
+            Feed automático dos meus repositórios públicos mais recentes, direto da API do GitHub.
+          </p>
           <div className="w-16 h-1 bg-accent-orange mb-12"></div>
         </motion.div>
 

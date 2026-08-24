@@ -11,7 +11,7 @@ const navItems = [
   { id: 'about', label: 'Sobre' },
   { id: 'formation', label: 'Formação' },
   { id: 'certifications', label: 'Certificados' },
-  { id: 'projects', label: 'Projetos' },
+  { id: 'projetos-area', label: 'Projetos' },
   { id: 'contact', label: 'Contato' },
 ];
 
