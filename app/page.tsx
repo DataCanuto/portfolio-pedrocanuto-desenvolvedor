@@ -6,7 +6,8 @@ import { ServicesCatalog } from '@/components/Services/ServicesCatalog';
 import { About } from '@/components/About/About';
 import { Formation } from '@/components/About/Formation';
 import { Certifications } from '@/components/Certificates/Certifications';
-import { Projects } from '@/components/Projects/ProjectsGrid';
+import { ProjectsTimeline } from '@/components/Projects/ProjectsTimeline';
+import { GithubArea } from '@/components/Projects/GithubArea';
 import { Contact } from '@/components/Contact/ContactSection';
 import { Footer } from '@/components/Footer/Footer';
 
@@ -19,7 +20,8 @@ export default function Home() {
       <About />
       <Formation />
       <Certifications />
-      <Projects />
+      <ProjectsTimeline />
+      <GithubArea />
       <Contact />
       <Footer />
     </main>
