@@ -28,8 +28,8 @@ export const projectsTimeline: ProjectTimelineEntry[] = [
     context: 'Projeto Pessoal',
     language: { name: 'Java', color: LANGUAGE_COLORS.Java },
     resume:
-      'Sistema de cadastro de alunos e agenda de aulas de música em Java com Spring Boot, aplicando na prática os fundamentos do curso Técnico em Desenvolvimento de Sistemas do SENAI CIMATEC para gerenciar meu próprio serviço como educador musical.',
-    href: '/sistemas-cadastro/pedro-canuto-musico',
+      'Sistema fullstack de cadastro de alunos e agenda de aulas de música: backend em Java com Spring Boot e PostgreSQL, frontend em React, aplicando na prática os fundamentos do curso Técnico em Desenvolvimento de Sistemas do SENAI CIMATEC para gerenciar meu próprio serviço como educador musical.',
+    href: '/backend/pedro-canuto-musico',
   },
   {
     id: 'galeria-digital-artes',

@@ -13,6 +13,7 @@ interface ProjectCardProps {
   slug: string;
   areaSlug: string;
   icon?: React.ReactNode;
+  href?: string;
 }
 
 export default function ProjectAreaCard({
@@ -23,8 +24,9 @@ export default function ProjectAreaCard({
   slug,
   areaSlug,
   icon,
+  href,
 }: ProjectCardProps) {
-  const projectUrl = `/${areaSlug}/${slug}`;
+  const projectUrl = href || `/${areaSlug}/${slug}`;
 
   return (
     <motion.div

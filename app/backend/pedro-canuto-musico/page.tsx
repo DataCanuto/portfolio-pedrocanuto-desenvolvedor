@@ -26,8 +26,8 @@ export default function PedroCanutoMusicoPage() {
       <ProjectHeader
         projectTitle="Pedro Canuto Música"
         sections={projectSections}
-        areaSlug="sistemas-cadastro"
-        backUrl="/sistemas-cadastro"
+        areaSlug="backend"
+        backUrl="/backend"
       />
 
       {/* Hero Section */}
