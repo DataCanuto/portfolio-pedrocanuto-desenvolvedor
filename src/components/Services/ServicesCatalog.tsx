@@ -17,7 +17,7 @@ const services: Service[] = [
   {
     id: 1,
     title: 'Backend',
-    description: 'Desenvolvimento e Consumo de API com Spring Boot (JPA, WEB, PostgreSQL). Foco em arquitetura e segurança.',
+    description: 'Desenvolvimento e Consumo de API com Spring Boot Java (JPA, WEB, PostgreSQL, Security, SpringBootAI). Foco em arquitetura e segurança.',
     icon: <Code2 size={40} />,
     href: '/backend',
     color: 'from-blue-600 to-blue-400',
@@ -25,7 +25,7 @@ const services: Service[] = [
   {
     id: 2,
     title: 'Engenharia de Dados',
-    description: 'Pipelines de ETL, processamento de dados em larga escala e análise estruturada com Python e SQL.',
+    description: 'Pipelines de ETL, processamento de dados em larga escala, Machine Learning Methods com Python (tensorflow, scikit-learn, XGBoost e OpenCV).',
     icon: <Settings size={40} />,
     href: '/engenharia-dados',
     color: 'from-purple-600 to-purple-400',
@@ -33,7 +33,7 @@ const services: Service[] = [
   {
     id: 3,
     title: 'Dashboards',
-    description: 'Visualizações interativas com Power BI, Tableau e soluções customizadas em React para insights acionáveis.',
+    description: 'Visualizações interativas com Python (Pandas, Numpy, Matplot, Seaborn), Power BI e soluções customizadas em React para insights acionáveis.',
     icon: <BarChart3 size={40} />,
     href: '/dashboards',
     color: 'from-green-600 to-green-400',

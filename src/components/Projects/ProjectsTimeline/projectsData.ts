@@ -42,16 +42,6 @@ export const projectsTimeline: ProjectTimelineEntry[] = [
     href: '/landing-pages/galeria-digital',
   },
   {
-    id: 'springboot-ai-budgeting',
-    title: 'Spring Boot AI Budgeting',
-    year: 2025,
-    context: 'Certificação Spring Boot — DIO',
-    language: { name: 'Java', color: LANGUAGE_COLORS.Java },
-    resume:
-      'API de orçamento pessoal com Spring AI: comandos de voz são transcritos, interpretados por tool calling e executados como casos de uso em uma arquitetura DDD em camadas (domain, application, infrastructure).',
-    href: '/budgetting',
-  },
-  {
     id: 'data-streaming-project',
     title: 'Data Streaming Pipeline',
     year: 2025,
@@ -60,6 +50,26 @@ export const projectsTimeline: ProjectTimelineEntry[] = [
     resume:
       'Pipeline automatizado para extração, consolidação e análise de dados de múltiplos tipos de documentos PDF (notas fiscais, planilhas, prestações) com OCR via Tesseract e exportação estruturada em Excel.',
     href: '/engenharia-dados/data-streaming-project',
+  },
+  {
+    id: 'machine-learning',
+    title: 'Machine Learning',
+    year: 2025,
+    context: 'Curso SENAI — IA na Indústria 4.0',
+    language: { name: 'Python', color: LANGUAGE_COLORS.Python },
+    resume:
+      'Notebooks Jupyter em Python cobrindo o fluxo de ciência de dados (limpeza, EDA, feature engineering), algoritmos de ML supervisionados e não supervisionados (regressão, KNN, random forest, K-Means, PCA, XGBoost) e uma introdução a visão computacional com OpenCV.',
+    href: '/engenharia-dados/machine-learning',
+  },
+  {
+    id: 'springboot-ai-budgeting',
+    title: 'Spring Boot AI Budgeting',
+    year: 2025,
+    context: 'Certificação Spring Boot — DIO',
+    language: { name: 'Java', color: LANGUAGE_COLORS.Java },
+    resume:
+      'API de orçamento pessoal com Spring AI: comandos de voz são transcritos, interpretados por tool calling e executados como casos de uso em uma arquitetura DDD em camadas (domain, application, infrastructure).',
+    href: '/budgetting',
   },
   {
     id: 'google-data-analytics-capstone',

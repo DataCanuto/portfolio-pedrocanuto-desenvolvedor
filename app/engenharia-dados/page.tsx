@@ -29,6 +29,16 @@ export default function EngenhariaDados() {
       technologies: ['Python', 'OCR', 'Pandas', 'ETL', 'PyMuPDF'],
       icon: '🔄',
     },
+    {
+      id: 'machine-learning',
+      title: 'Machine Learning',
+      slug: 'machine-learning',
+      description:
+        'Notebooks Jupyter de ciência de dados e machine learning com Python: limpeza e EDA, algoritmos supervisionados/não supervisionados, PCA, XGBoost e introdução à visão computacional.',
+      company: 'Curso SENAI — IA na Indústria 4.0',
+      technologies: ['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'OpenCV'],
+      icon: '🧠',
+    },
   ];
 
   return (
