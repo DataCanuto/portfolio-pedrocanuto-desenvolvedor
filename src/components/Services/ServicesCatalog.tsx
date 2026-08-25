@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Code2, Settings, BarChart3, Palette } from 'lucide-react';
+import { ArrowRight, Code2, Settings, BarChart3, Monitor } from 'lucide-react';
 
 interface Service {
   id: number;
@@ -16,10 +16,10 @@ interface Service {
 const services: Service[] = [
   {
     id: 1,
-    title: 'Desenvolvimento e Consumo de API',
-    description: 'Spring Boot (JPA, WEB, PostgreSQL). Formação em Desenvolvimento de Sistemas com foco em arquitetura e segurança.',
+    title: 'Backend',
+    description: 'Desenvolvimento e Consumo de API com Spring Boot (JPA, WEB, PostgreSQL). Foco em arquitetura e segurança.',
     icon: <Code2 size={40} />,
-    href: '/sistemas-cadastro',
+    href: '/backend',
     color: 'from-blue-600 to-blue-400',
   },
   {
@@ -40,9 +40,9 @@ const services: Service[] = [
   },
   {
     id: 4,
-    title: 'Landing Pages',
-    description: 'Páginas de conversão otimizadas com design responsivo, performance alta e melhores práticas de UX/UI.',
-    icon: <Palette size={40} />,
+    title: 'Frontend',
+    description: 'Interfaces em React com design responsivo, performance alta e melhores práticas de UX/UI, de landing pages a aplicações completas.',
+    icon: <Monitor size={40} />,
     href: '/landing-pages',
     color: 'from-orange-600 to-orange-400',
   },

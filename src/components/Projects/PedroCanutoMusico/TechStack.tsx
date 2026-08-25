@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Lock, Layers } from 'lucide-react';
+import { Code, Database, Lock, Layers, Monitor } from 'lucide-react';
 
 export default function TechStack() {
   const technologies = [
@@ -23,10 +23,23 @@ export default function TechStack() {
       items: [
         { name: 'Spring Data JPA', description: 'Camada de acesso a dados', badge: 'Core' },
         { name: 'Hibernate', description: 'Mapeamento objeto-relacional (ORM)', badge: '★★★★★' },
-        { name: 'MySQL', description: 'Banco de dados relacional', badge: 'Database' },
+        { name: 'PostgreSQL', description: 'Banco de dados relacional', badge: 'Database' },
+        { name: 'Flyway', description: 'Versionamento e migração do schema', badge: 'Migration' },
       ],
       color: 'from-purple-500/20 to-purple-600/20',
       borderColor: 'border-purple-500/30',
+    },
+    {
+      category: 'Frontend',
+      icon: Monitor,
+      items: [
+        { name: 'React', description: 'Biblioteca para construção da interface', badge: 'Core' },
+        { name: 'TypeScript', description: 'Tipagem estática no client-side', badge: 'Language' },
+        { name: 'Node.js', description: 'Ambiente de execução do tooling e build', badge: 'Runtime' },
+        { name: 'Vite', description: 'Bundler e servidor de desenvolvimento', badge: 'Build' },
+      ],
+      color: 'from-cyan-500/20 to-cyan-600/20',
+      borderColor: 'border-cyan-500/30',
     },
     {
       category: 'Segurança & Validação',
