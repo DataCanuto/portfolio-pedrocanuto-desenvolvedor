@@ -12,6 +12,7 @@ const navItems = [
   { id: 'formation', label: 'Formação' },
   { id: 'certifications', label: 'Certificados' },
   { id: 'projetos-area', label: 'Projetos' },
+  { id: 'githubArea', label: 'Meu Repositório' },
   { id: 'contact', label: 'Contato' },
 ];
 

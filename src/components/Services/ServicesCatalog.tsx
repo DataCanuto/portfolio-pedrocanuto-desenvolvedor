@@ -16,8 +16,8 @@ interface Service {
 const services: Service[] = [
   {
     id: 1,
-    title: 'Sistemas de Cadastro',
-    description: 'Projetos CRUD com Java e Spring Boot. Formação em Desenvolvimento de Sistemas com foco em arquitetura e segurança.',
+    title: 'Desenvolvimento e Consumo de API',
+    description: 'Spring Boot (JPA, WEB, PostgreSQL). Formação em Desenvolvimento de Sistemas com foco em arquitetura e segurança.',
     icon: <Code2 size={40} />,
     href: '/sistemas-cadastro',
     color: 'from-blue-600 to-blue-400',
