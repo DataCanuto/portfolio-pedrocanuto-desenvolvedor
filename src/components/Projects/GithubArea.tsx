@@ -128,7 +128,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
             <div className="flex gap-3">
               <a
-                href={project.url}
+                href={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-accent-orange-light transition-all duration-300"
