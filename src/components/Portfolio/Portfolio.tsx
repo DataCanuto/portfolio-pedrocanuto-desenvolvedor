@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 
 const competencias = [
@@ -70,6 +71,7 @@ export const Portfolio = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        id="portfolio-print-area"
         className="max-w-[800px] mx-auto bg-white text-[#1a1a1a] rounded-lg shadow-2xl px-6 py-10 md:px-14 md:py-14"
         style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontSize: 14, lineHeight: 1.45 }}
       >
@@ -129,11 +131,14 @@ export const Portfolio = () => {
         {/* Competências Técnicas */}
         <section>
           <SectionTitle>Competências Técnicas</SectionTitle>
-          {competencias.map((c) => (
-            <div key={c.label} className="my-1 text-[14px]">
-              <strong className="inline-block min-w-[150px]">{c.label}:</strong> {c.valor}
-            </div>
-          ))}
+          <div className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1 text-[14px] mb-2">
+            {competencias.map((c) => (
+              <Fragment key={c.label}>
+                <strong className="whitespace-nowrap">{c.label}:</strong>
+                <span className="text-justify">{c.valor}</span>
+              </Fragment>
+            ))}
+          </div>
         </section>
 
         {/* Experiência Profissional */}

@@ -29,14 +29,14 @@ export default function PortfolioPage() {
               </h1>
             </div>
 
-            <a
-              href="/assets/documents/Pedro_Canuto_Curriculo.pdf"
-              download="Pedro_Canuto_Curriculo.pdf"
+            <button
+              type="button"
+              onClick={() => window.print()}
               className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-accent-orange text-black hover:bg-accent-orange-light transition-colors"
             >
               <Download size={18} />
               Baixar PDF
-            </a>
+            </button>
           </div>
         </div>
       </motion.header>
