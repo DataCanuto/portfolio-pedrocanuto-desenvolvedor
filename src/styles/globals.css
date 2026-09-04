@@ -39,6 +39,10 @@ body {
   color: #F1F5F9;
   line-height: 1.6;
   overflow-x: hidden;
+  /* Prevents mobile browsers from "scroll anchoring" the page to a far-away
+     element when an accordion/box expands or collapses (height 0 -> auto).
+     Without this, tapping a box on mobile can jump the page to the bottom. */
+  overflow-anchor: none;
 }
 
 /* Animations */

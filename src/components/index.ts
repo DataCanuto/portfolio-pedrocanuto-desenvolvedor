@@ -13,6 +13,7 @@ export { CertificateViewer } from './Certificates/CertificateViewer';
 export { CertificateGallery } from './Certificates/CertificateGallery';
 export { Contact } from './Contact/ContactSection';
 export { Footer } from './Footer/Footer';
+export { Portfolio } from './Portfolio/Portfolio';
 export { Button } from './UI/Button';
 export { Badge } from './UI/Badge';
 
