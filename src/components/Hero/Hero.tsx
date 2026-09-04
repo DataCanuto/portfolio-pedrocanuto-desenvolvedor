@@ -72,15 +72,15 @@ export const Hero = () => {
           </motion.div>
 
           {/* Languages/Technologies */}
-          <div className="flex justify-center mb-12">
-            <div className="grid grid-cols-4 gap-3">
+          <div className="flex justify-center mb-12 px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-md sm:max-w-none">
               {languages.map((lang, index) => (
                 <motion.div
                   key={lang.name}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.8 + index * 0.05 }}
-                  className={`${lang.color} px-4 py-2 rounded-lg text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all hover:scale-110`}
+                  className={`${lang.color} px-3 py-2 sm:px-4 rounded-lg text-white font-semibold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all hover:scale-110 text-center whitespace-nowrap`}
                 >
                   {lang.name}
                 </motion.div>

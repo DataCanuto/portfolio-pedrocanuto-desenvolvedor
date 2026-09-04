@@ -5,10 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const tabs = [
   {
+    id: 'developer',
+    label: 'Desenvolvedor Full-Stack',
+    content: (      <>
+        Desenvolvedor Full-Stack em formação, com foco em: Java e Spring Boot para construção de APIs REST e aplicações orientadas a regras de negócio. Aplico Programação Orientada a Objetos, persistência com JPA/PostgreSQL e conteinerização com Docker em projetos completos, do banco de dados à entrega. Complemento o perfil com projetos em Python aplicado a dados e machine learning, e com repertório de UX/UI, o que amplia minha capacidade de dialogar com times de produto e dados.
+        
+      </>
+    ),
+  },
+  {
     id: 'journey',
     label: 'Músico a Desenvolvedor',
-    content: (
-      <>
+    content: (      <>
         Minha trajetória profissional não é convencional, e é exatamente isso que considero minha maior força. Construí minha base como Arte-educador, educador musical bilíngue e Musicoterapeuta, trabalhando com desenvolvimento humano. Clique{' '}
         <a
           href="https://pedrocanutomusico.vercel.app/"
@@ -51,7 +59,7 @@ Idiomas: Inglês Fluente.`,
 ];
 
 export const About = () => {
-  const [activeTab, setActiveTab] = useState('journey');
+  const [activeTab, setActiveTab] = useState('developer');
 
   return (
     <section id="about" className="py-20 bg-dark-bg">
