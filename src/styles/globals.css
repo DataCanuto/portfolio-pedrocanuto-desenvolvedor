@@ -97,6 +97,32 @@ button {
   outline-offset: 2px;
 }
 
+/* Print (currículo em PDF): esconde tudo exceto o cartão do Portfolio,
+   preservando o alinhamento justificado usado na tela. */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #portfolio-print-area,
+  #portfolio-print-area * {
+    visibility: visible;
+  }
+
+  #portfolio-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}
+
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
