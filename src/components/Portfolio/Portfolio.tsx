@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 const competencias = [
   { label: 'Back-End', valor: 'Java, Spring Web, Spring Boot, JPA/Hibernate, APIs REST, CRUD, Programação Orientada a Objetos, UML' },
+  { label: 'Front-End', valor: 'React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS' },
   { label: 'Banco de Dados / Infra', valor: 'PostgreSQL, H2, Docker' },
-  { label: 'Front-End', valor: 'React, JavaScript, HTML5, CSS3' },
-  { label: 'Dados / Machine Learning', valor: 'Python, Pandas, NumPy, Scikit-learn, TensorFlow, Regex, OpenCV' },
+  { label: 'Dados / Machine Learning', valor: 'Python, Pandas, NumPy, Scikit-learn, TensorFlow, OpenCV, Regex' },
   { label: 'Design de Produto', valor: 'UX/UI Design, Figma' },
   { label: 'Idiomas', valor: 'Português (nativo), Inglês (fluente)' },
 ];
@@ -22,18 +22,37 @@ const projetosFreelance = [
       'Desenvolvimento full stack, sob demanda de cliente, de aplicação web para gerenciamento de agendamentos de aulas e serviços, publicada em produção.',
   },
   {
+    titulo: 'Galeria Digital de Artes',
+    subtitulo: 'Dezembro/2025 · Freelance',
+    linkLabel: 'ver projeto',
+    href: 'https://datacanuto.github.io/galeria-digital-artes/catalog_mobile/',
+    descricao: 'Desenvolvimento, para cliente, de landing page front-end responsiva para exposição de artes, com filtros por categoria e acesso via QR Code.',
+  },
+  {
     titulo: 'Pipeline de Dados — Data Flow Pipeline',
     subtitulo: 'Janeiro/2025 · Freelance',
     linkLabel: 'ver projeto',
     href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/engenharia-dados/data-streaming-project',
     descricao: 'Construção, para cliente, de pipeline em Python para análise de fluxo e gerenciamento de dados.',
   },
+];
+
+const projetosDados = [
   {
-    titulo: 'Galeria Digital de Artes',
-    subtitulo: 'Dezembro/2025 · Freelance',
+    titulo: 'Análise de Dados — Google Data Analytics Capstone',
+    subtitulo: '2024 · Projeto de Certificação',
     linkLabel: 'ver projeto',
-    href: 'https://datacanuto.github.io/galeria-digital-artes/catalog_mobile/',
-    descricao: 'Desenvolvimento, para cliente, de vitrine front-end responsiva para exposição de artes, com acesso via QR Code.',
+    href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/dashboards/googledataanalyticscapstone',
+    descricao:
+      'Projeto completo de ciência de dados sobre hábitos de atividade física (30 usuários Fitbit): limpeza e análise exploratória em Python (Pandas, NumPy, Matplotlib, Seaborn, Plotly) e recomendações de negócio orientadas a dados.',
+  },
+  {
+    titulo: 'Machine Learning & Visão Computacional',
+    subtitulo: '2025 · SENAI — IA na Indústria 4.0 (200h)',
+    linkLabel: 'ver projeto',
+    href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/engenharia-dados/machine-learning',
+    descricao:
+      'Conjunto de 20 notebooks cobrindo todo o fluxo de ciência de dados: limpeza e EDA, aprendizado supervisionado e não supervisionado, PCA e XGBoost, além de introdução à visão computacional com OpenCV (detecção facial via Haar Cascade).',
   },
 ];
 
@@ -63,6 +82,36 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
+type Projeto = {
+  titulo: string;
+  subtitulo: string;
+  linkLabel: string;
+  href: string;
+  descricao: string;
+};
+
+function ProjetoItem({ projeto }: { projeto: Projeto }) {
+  return (
+    <div>
+      <h3 className="text-[14px] font-bold mt-2.5 mb-0.5">{projeto.titulo}</h3>
+      <p className="text-[12.5px] italic text-[#333] m-0 mb-1">
+        {projeto.subtitulo} —{' '}
+        <a
+          href={projeto.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="not-italic text-inherit no-underline hover:text-accent-orange"
+        >
+          {projeto.linkLabel}
+        </a>
+      </p>
+      <ul className="my-1 mb-2.5 pl-[18px] list-disc">
+        <li className="mb-0.5">{projeto.descricao}</li>
+      </ul>
+    </div>
+  );
+}
+
 export const Portfolio = () => {
   return (
     <section className="bg-dark-bg py-16 px-4 md:px-8">
@@ -78,7 +127,7 @@ export const Portfolio = () => {
         {/* Cabeçalho */}
         <header className="text-center mb-4">
           <h1 className="text-2xl font-bold tracking-wide m-0 mb-0.5">Pedro Canuto</h1>
-          <p className="text-[13px] m-0.5">Desenvolvedor Back-End Java | Spring Boot</p>
+          <p className="text-[13px] m-0.5">Desenvolvedor Full Stack | Java, React &amp; Dados</p>
           <p className="text-[12.5px] m-0.5">
             Salvador/BA &nbsp;|&nbsp; (71) 99958-8950 &nbsp;|&nbsp;{' '}
             <a href="mailto:data.canuto@gmail.com" className="text-inherit no-underline hover:text-accent-orange">
@@ -118,13 +167,13 @@ export const Portfolio = () => {
         <section>
           <SectionTitle>Resumo Profissional</SectionTitle>
           <p className="my-1">
-            Desenvolvedor Back-End em formação, com foco em Java e Spring Boot para construção de APIs REST e
-            aplicações orientadas a regras de negócio. Aplico Programação Orientada a Objetos, persistência com
-            JPA/PostgreSQL e conteinerização com Docker em projetos completos, do banco de dados à entrega. Antes da
-            tecnologia, geri negócio próprio por 8 anos em educação musical e eventos — trago desse período a
-            prática de traduzir problema real em solução, não só código. Complemento o perfil com Python aplicado a
-            dados e machine learning, e com repertório de UX/UI, o que amplia minha capacidade de dialogar com times
-            de produto e dados.
+            Desenvolvedor Full Stack em formação, com atuação do back-end (Java, Spring Boot, APIs REST,
+            JPA/PostgreSQL, Docker) ao front-end (React, Next.js, TypeScript), incluindo o desenvolvimento de landing
+            pages e sistemas completos para clientes reais, do banco de dados à entrega. Complemento o perfil com
+            Python aplicado a análise de dados e machine learning (Pandas, Scikit-learn, OpenCV), o que amplia minha
+            capacidade de atuar tanto em produto quanto em dados. Antes da tecnologia, geri negócio próprio por 8
+            anos em educação musical e eventos — trago desse período a prática de traduzir problema real em solução,
+            não só código.
           </p>
         </section>
 
@@ -164,23 +213,15 @@ export const Portfolio = () => {
         <section>
           <SectionTitle>Experiência Freelance — Projetos Técnicos</SectionTitle>
           {projetosFreelance.map((p) => (
-            <div key={p.titulo}>
-              <h3 className="text-[14px] font-bold mt-2.5 mb-0.5">{p.titulo}</h3>
-              <p className="text-[12.5px] italic text-[#333] m-0 mb-1">
-                {p.subtitulo} —{' '}
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="not-italic text-inherit no-underline hover:text-accent-orange"
-                >
-                  {p.linkLabel}
-                </a>
-              </p>
-              <ul className="my-1 mb-2.5 pl-[18px] list-disc">
-                <li className="mb-0.5">{p.descricao}</li>
-              </ul>
-            </div>
+            <ProjetoItem key={p.titulo} projeto={p} />
+          ))}
+        </section>
+
+        {/* Projetos Pessoais — Dados & Machine Learning */}
+        <section>
+          <SectionTitle>Projetos Pessoais — Dados &amp; Machine Learning</SectionTitle>
+          {projetosDados.map((p) => (
+            <ProjetoItem key={p.titulo} projeto={p} />
           ))}
         </section>
 
