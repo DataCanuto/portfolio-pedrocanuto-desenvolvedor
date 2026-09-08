@@ -29,7 +29,7 @@ export const projectsTimeline: ProjectTimelineEntry[] = [
     language: { name: 'TypeScript', color: LANGUAGE_COLORS.TypeScript },
     resume:
       'Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados ao case study Flora Hub: pesquisa com usuários, personas, mapa de empatia, auditoria de concorrentes, wireframes e testes de usabilidade.',
-    href: '/design/google-ux-designer',
+    href: '/frontend/google-ux-designer',
   },
   {
     id: 'pedro-canuto-musico',
@@ -49,7 +49,7 @@ export const projectsTimeline: ProjectTimelineEntry[] = [
     language: { name: 'TypeScript', color: LANGUAGE_COLORS.TypeScript },
     resume:
       'Landing page de galeria digital para exposição e curadoria de obras de arte, com filtro por categoria e navegação responsiva construída em Next.js e TypeScript.',
-    href: '/landing-pages/galeria-digital',
+    href: '/frontend/galeria-digital',
   },
   {
     id: 'data-streaming-project',

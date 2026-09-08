@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora Hub — Competitive Audit Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4285F4;
+    --blue-dark:#3367D6;
+    --red:#EA4335;
+    --orange:#F29900;
+    --green:#34A853;
+    --gray:#5F6368;
+    --ink:#3C4043;
+    --body:#5F6368;
+    --paper:#FFFFFF;
+    --panel:#EFF1F3;
+    --panel-line:#E3E6E8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Roboto', sans-serif;
+    color:var(--body);
+    background:#DADCE0;
+  }
+  h1,h2,h3,h4{
+    font-family:'Poppins', sans-serif;
+    margin:0;
+    color:var(--ink);
+  }
+  a{ color:var(--blue); }
+
+  .topnav{
+    position:sticky; top:0; z-index:20;
+    background:#fff; border-bottom:1px solid var(--panel-line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 32px;
+    font-family:'Poppins', sans-serif; font-size:14px;
+  }
+  .topnav a{ color:var(--body); text-decoration:none; font-weight:500; }
+  .topnav a:hover{ color:var(--blue); }
+  .topnav .brand{ font-weight:700; color:var(--ink); letter-spacing:.3px; }
+
+  .section{
+    padding:80px 24px;
+    background:var(--paper);
+    border-bottom:1px solid #c9ccd1;
+  }
+  .section-inner{ max-width:1140px; margin:0 auto; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color:#fff;
+    padding:96px 24px 84px;
+  }
+  .hero .kicker{ text-transform:uppercase; letter-spacing:2px; font-size:13px; font-weight:600; color:rgba(255,255,255,.8); margin-bottom:14px; }
+  .hero h1{ color:#fff; font-size:46px; line-height:1.2; font-weight:700; max-width:820px; }
+  .hero .rule{ width:120px; height:3px; background:rgba(255,255,255,.8); margin:26px 0; }
+  .hero p.lede{ font-size:18px; line-height:1.7; max-width:720px; color:rgba(255,255,255,.94); }
+  .hero .meta{ margin-top:28px; font-size:14px; color:rgba(255,255,255,.85); }
+
+  .heading-row{ display:flex; align-items:center; gap:16px; margin-bottom:22px; }
+  .heading-row .bar{ width:5px; height:34px; border-radius:2px; flex-shrink:0; }
+  h2.title{ font-size:30px; font-weight:500; }
+  .subtitle{ margin-top:12px; font-size:16.5px; line-height:1.7; max-width:820px; }
+
+  /* ---------- Goal ---------- */
+  .goal-panel{
+    background:var(--panel); border-radius:10px; padding:34px 40px; margin-top:8px;
+    font-size:16.5px; line-height:1.75; color:var(--ink);
+  }
+
+  /* ---------- Competitor overview cards ---------- */
+  .comp-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:36px; }
+  .comp-card{
+    border:1px solid var(--panel-line); border-radius:10px; padding:24px; display:flex; flex-direction:column; gap:10px;
+  }
+  .comp-card .tag{ align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; padding:3px 10px; border-radius:12px; }
+  .tag.direct{ background:#FCE8E6; color:var(--red); }
+  .tag.indirect{ background:#FEF7E0; color:#B06000; }
+  .comp-card h3{ font-size:18px; }
+  .comp-card .url{ font-size:12.5px; color:#9AA0A6; word-break:break-all; }
+  .comp-card p{ font-size:14px; line-height:1.6; margin:0; }
+  .comp-card .fact{ font-size:13px; color:var(--body); }
+  .comp-card .fact strong{ color:var(--ink); }
+
+  /* ---------- Two column narrative ---------- */
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:8px; }
+  .cols2 h4{ font-size:16px; margin-bottom:10px; }
+  .cols2 h4.blue{ color:var(--blue); }
+  .cols2 p{ font-size:15.5px; line-height:1.75; margin:0; }
+
+  /* ---------- Audit table ---------- */
+  .audit-wrap{ overflow-x:auto; margin-top:36px; border:1px solid var(--panel-line); border-radius:10px; }
+  table.audit{ width:100%; border-collapse:collapse; min-width:1500px; font-size:13px; }
+  table.audit thead tr.group th{ background:var(--blue-dark); color:#fff; text-align:center; font-size:11px; text-transform:uppercase; letter-spacing:.5px; padding:8px 10px; }
+  table.audit thead tr.cols th{ background:var(--blue); color:#fff; text-align:left; padding:10px 12px; font-weight:600; font-size:12.5px; }
+  table.audit td{ padding:12px; border-bottom:1px solid var(--panel-line); vertical-align:top; line-height:1.5; }
+  table.audit tr:nth-child(even) td{ background:#FAFAFB; }
+  table.audit td.name{ font-weight:700; color:var(--ink); white-space:nowrap; }
+  .rating{ font-weight:700; display:block; margin-bottom:4px; }
+  .rating.outstanding{ color:var(--green); }
+  .rating.good{ color:var(--blue); }
+  .rating.okay{ color:var(--orange); }
+  .rating.needs-work{ color:var(--red); }
+  .plusmin{ font-size:12px; line-height:1.5; margin:0; }
+  .plusmin .plus{ color:var(--green); }
+  .plusmin .minus{ color:var(--red); }
+
+  /* ---------- Insight lists ---------- */
+  .insight-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:16px; }
+  .insight-card{ background:var(--panel); border-radius:10px; padding:28px 30px; }
+  .insight-card h4{ font-size:17px; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .insight-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .insight-card ul{ margin:0; padding-left:20px; font-size:14.5px; line-height:1.75; }
+  .insight-card li{ margin-bottom:8px; }
+  .insight-card li:last-child{ margin-bottom:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top:8px; font-size:13px; line-height:2; color:var(--body); }
+  .sources li{ margin-bottom:4px; }
+
+  .footer{
+    background:var(--gray); color:#fff; text-align:center; padding:40px 24px; font-size:14px;
+  }
+  .footer a{ color:#fff; text-decoration:underline; }
+
+  @media (max-width: 980px){
+    .comp-grid{ grid-template-columns:repeat(2,1fr); }
+    .insight-grid, .cols2{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 600px){
+    .comp-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <span class="brand">FLORA HUB</span>
+  <a href="flora-hub-case-study.html">&larr; Back to case study</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="section-inner">
+    <div class="kicker">Competitive Audit Report</div>
+    <h1>Understanding the plant-care app landscape to sharpen Flora Hub's value proposition</h1>
+    <div class="rule"></div>
+    <p class="lede">A structured review of the products plant lovers already use today, conducted to validate where Flora Hub can offer something genuinely new rather than one more plant app.</p>
+    <div class="meta">Prepared by Pedro Canuto &nbsp;&middot;&nbsp; Google UX Design Certificate, Portfolio Project 1 &nbsp;&middot;&nbsp; September 2026</div>
+  </div>
+</section>
+
+<!-- 1. Audit goal -->
+<section class="section">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">1. Competitive audit goal</h2></div>
+    <div class="goal-panel">
+      This audit evaluates how existing plant-identification and plant-care apps serve &mdash; or fail to serve &mdash; plant lovers, in order to confirm that Flora Hub's combination of scientific care data, a trusted peer community, and clear pet-and-child safety information addresses a real, unmet need in the market rather than duplicating an existing product.
+    </div>
+  </div>
+</section>
+
+<!-- 2. Key competitors -->
+<section class="section" style="background:var(--panel);">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">2. Who are the key competitors?</h2></div>
+    <p class="subtitle">Two direct competitors identify and/or care for plants the same way Flora Hub intends to. Two indirect competitors solve one adjacent half of the problem &mdash; scientific identification or community &mdash; without combining both.</p>
+    <div class="comp-grid">
+      <div class="comp-card" style="background:#fff;">
+        <span class="tag direct">Direct</span>
+        <h3>PictureThis</h3>
+        <div class="url">picturethisai.com</div>
+        <p>AI plant identification and disease diagnosis covering 400,000+ species, built by Glority LLC.</p>
+        <div class="fact"><strong>Price:</strong> $$$ &mdash; $39.99/yr premium, free tier capped at 5 IDs/day</div>
+        <div class="fact"><strong>Size:</strong> Large, global</div>
+      </div>
+      <div class="comp-card" style="background:#fff;">
+        <span class="tag direct">Direct</span>
+        <h3>Planta</h3>
+        <div class="url">getplanta.com</div>
+        <p>Personalized watering, light, and fertilizing schedules generated per plant, pot, and location.</p>
+        <div class="fact"><strong>Price:</strong> $$$ &mdash; $35.99/yr, or $7.99/mo</div>
+        <div class="fact"><strong>Size:</strong> Small&ndash;medium, Stockholm-based</div>
+      </div>
+      <div class="comp-card" style="background:#fff;">
+        <span class="tag indirect">Indirect</span>
+        <h3>PlantNet</h3>
+        <div class="url">plantnet.org</div>
+        <p>Free citizen-science identification tool backed by a consortium of research institutions (CIRAD, INRAE, IRD, INRIA).</p>
+        <div class="fact"><strong>Price:</strong> $ &mdash; Free, no subscription</div>
+        <div class="fact"><strong>Size:</strong> Large, nonprofit consortium</div>
+      </div>
+      <div class="comp-card" style="background:#fff;">
+        <span class="tag indirect">Indirect</span>
+        <h3>GrowIt!</h3>
+        <div class="url">growitmobile.com</div>
+        <p>Photo-first social feed where backyard and vegetable gardeners share harvests and local tips.</p>
+        <div class="fact"><strong>Price:</strong> $ &mdash; Free</div>
+        <div class="fact"><strong>Size:</strong> Small, US-based</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Product quality & positioning -->
+<section class="section">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">3&ndash;4. Product quality and market positioning</h2></div>
+    <div class="cols2">
+      <div>
+        <h4 class="blue">Type and quality of competitors' products</h4>
+        <p>All four competitors are polished, native mobile apps with clear onboarding, produced by well-resourced teams &mdash; a commercial studio (Glority, for PictureThis), a funded startup (Planta), a multi-institution research consortium (PlantNet), and an established indie team (GrowIt!). Quality is highest within a single narrow feature: identification accuracy for PictureThis and PlantNet, or scheduling precision for Planta. None combine identification, safety information, and community in one connected flow.</p>
+      </div>
+      <div>
+        <h4 class="blue">How competitors position themselves</h4>
+        <p>PictureThis positions itself as the fastest, most accurate identification tool, monetized through an annual subscription. Planta positions itself as a premium personal plant-care assistant for busy urban plant parents. PlantNet positions itself as a free, scientifically rigorous public good maintained by researchers. GrowIt! positions itself as a social, photo-driven community for backyard and vegetable gardeners.</p>
+      </div>
+    </div>
+    <div class="cols2" style="margin-top:36px;">
+      <div>
+        <h4 class="blue">5. How competitors talk about themselves</h4>
+        <p>PictureThis and Planta lean confident and benefit-driven &mdash; promising to help users "never kill a plant again" &mdash; aimed at reassuring anxious beginners. PlantNet uses a more academic, matter-of-fact voice built around accuracy scores and species citations. GrowIt! is casual and community-driven, framed around growers "sharing" and "showing off" their gardens rather than expert instruction.</p>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Full audit table -->
+<section class="section" style="background:var(--panel);">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">Audit at a glance</h2></div>
+    <p class="subtitle">General information and UX ratings for each competitor, scored as <em>needs work</em>, <em>okay</em>, <em>good</em>, or <em>outstanding</em>, following the course's competitive-audit template.</p>
+    <div class="audit-wrap">
+      <table class="audit">
+        <thead>
+          <tr class="group">
+            <th colspan="9">General information</th>
+            <th colspan="9">UX</th>
+          </tr>
+          <tr class="cols">
+            <th>Competitor</th>
+            <th>Type</th>
+            <th>Location(s)</th>
+            <th>Product offering</th>
+            <th>Price</th>
+            <th>Website</th>
+            <th>Business size</th>
+            <th>Target audience</th>
+            <th>Unique value proposition</th>
+            <th>Desktop experience</th>
+            <th>Mobile experience</th>
+            <th>Features</th>
+            <th>Accessibility</th>
+            <th>User flow</th>
+            <th>Navigation</th>
+            <th>Brand identity</th>
+            <th>Tone</th>
+            <th>Descriptiveness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">PictureThis</td>
+            <td>Direct</td>
+            <td>Global (HQ: Shenzhen / San Francisco)</td>
+            <td>AI plant &amp; disease identification, care guides</td>
+            <td>$$$</td>
+            <td>picturethisai.com</td>
+            <td>Large</td>
+            <td>General plant owners &amp; gardening beginners</td>
+            <td>Instant, 98%-accurate ID across 400,000+ species with disease diagnosis</td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Polished marketing site<br><span class="minus">&minus;</span> No functional desktop ID tool</p></td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Near-instant camera identification<br><span class="minus">&minus;</span> Aggressive upsells interrupt use</p></td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Diagnosis, guides, collection tracking<br><span class="minus">&minus;</span> No community or safety badge</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Clear icon-first layout<br><span class="minus">&minus;</span> No stated screen-reader support</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Snap-and-identify is nearly instant<br><span class="minus">&minus;</span> Free tier capped at 5 IDs/day</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Bottom tabs keep core tools close<br><span class="minus">&minus;</span> Full-screen ads interrupt flow</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Consistent plant-forward palette<br><span class="minus">&minus;</span> Similar to other ID apps</p></td>
+            <td>Friendly and direct</td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Care basics shown at a glance<br><span class="minus">&minus;</span> Toxicity detail gated behind paywall</p></td>
+          </tr>
+          <tr>
+            <td class="name">Planta</td>
+            <td>Direct</td>
+            <td>Global (HQ: Stockholm, Sweden)</td>
+            <td>Personalized care schedules &amp; reminders</td>
+            <td>$$$</td>
+            <td>getplanta.com</td>
+            <td>Small&ndash;medium</td>
+            <td>Urban millennial &amp; Gen Z houseplant owners</td>
+            <td>Watering, light &amp; fertilizing plans tailored to species, pot size, and local climate</td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Attractive marketing site<br><span class="minus">&minus;</span> All tools live only in the app</p></td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Deep personalization per plant<br><span class="minus">&minus;</span> ID &amp; diagnosis require subscription</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Light meter, journal, reminders<br><span class="minus">&minus;</span> No community or marketplace</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Legible, high-contrast cards<br><span class="minus">&minus;</span> Some icons lack text labels</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Onboarding tailors the plan<br><span class="minus">&minus;</span> Several screens before first reminder</p></td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Simple "my plants" home base<br><span class="minus">&minus;</span> Advanced tools buried a few taps deep</p></td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Distinctive illustrated characters<br><span class="minus">&minus;</span> &mdash;</p></td>
+            <td>Warm and encouraging</td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Plain-language instructions<br><span class="minus">&minus;</span> Over-explains for experienced users</p></td>
+          </tr>
+          <tr>
+            <td class="name">PlantNet</td>
+            <td>Indirect</td>
+            <td>Global (consortium based in France)</td>
+            <td>Free crowd-verified plant identification</td>
+            <td>$</td>
+            <td>plantnet.org</td>
+            <td>Large (nonprofit)</td>
+            <td>Botanists, researchers &amp; citizen scientists</td>
+            <td>Scientifically validated identification across 46,000+ species, entirely free</td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Full web tool at identify.plantnet.org<br><span class="minus">&minus;</span> Feels dense and academic</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Fast, offline-capable ID<br><span class="minus">&minus;</span> No care reminders or tracking</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Massive verified species database<br><span class="minus">&minus;</span> No safety info, no care tools</p></td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Simple, uncluttered layout<br><span class="minus">&minus;</span> No visible screen-reader labels</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> One clear action: shoot &amp; confirm<br><span class="minus">&minus;</span> Assumes some botanical literacy</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Minimal, focused menu<br><span class="minus">&minus;</span> Community "Projects" hard to find</p></td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Clean, scientific aesthetic<br><span class="minus">&minus;</span> Little lifestyle appeal</p></td>
+            <td>Serious and academic</td>
+            <td><span class="rating outstanding">Outstanding</span><p class="plusmin"><span class="plus">+</span> Confidence scores &amp; source citations<br><span class="minus">&minus;</span> Minimal context for non-experts</p></td>
+          </tr>
+          <tr>
+            <td class="name">GrowIt!</td>
+            <td>Indirect</td>
+            <td>United States (used globally)</td>
+            <td>Social photo feed for gardeners</td>
+            <td>$</td>
+            <td>growitmobile.com</td>
+            <td>Small</td>
+            <td>Hobbyist backyard &amp; vegetable gardeners</td>
+            <td>A social, photo-first community for sharing harvests and swapping local tips</td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Basic brand web presence<br><span class="minus">&minus;</span> No functional desktop app</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Fun, Instagram-style feed<br><span class="minus">&minus;</span> Weak on indoor-plant support</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Local challenges drive engagement<br><span class="minus">&minus;</span> No ID or personalized care</p></td>
+            <td><span class="rating needs-work">Needs work</span><p class="plusmin"><span class="plus">+</span> Large, tappable photo tiles<br><span class="minus">&minus;</span> Little visible accessibility investment</p></td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Easy to post &amp; browse<br><span class="minus">&minus;</span> Advice requires scrolling, not asking</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Familiar social-feed pattern<br><span class="minus">&minus;</span> Limited species/symptom search</p></td>
+            <td><span class="rating good">Good</span><p class="plusmin"><span class="plus">+</span> Playful, community-first look<br><span class="minus">&minus;</span> Feels like a general social app</p></td>
+            <td>Friendly and casual</td>
+            <td><span class="rating okay">Okay</span><p class="plusmin"><span class="plus">+</span> Captions add real-world context<br><span class="minus">&minus;</span> Unvetted, user-generated reliability</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Strengths / Weaknesses -->
+<section class="section">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">6&ndash;7. Strengths and weaknesses</h2></div>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h4><span class="insight-dot" style="background:var(--green);"></span>Competitors' strengths</h4>
+        <ul>
+          <li>High identification accuracy at scale &mdash; PictureThis claims 98% across 400,000+ species; PlantNet's database is verified by research institutions.</li>
+          <li>Deep personalization of care schedules based on species, pot size, and local climate (Planta).</li>
+          <li>Zero-cost access removes adoption friction for beginners (PlantNet, GrowIt!).</li>
+          <li>Established, engaged communities and strong brand recognition within their niche.</li>
+          <li>Polished native mobile experiences with clear, guided onboarding.</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <h4><span class="insight-dot" style="background:var(--red);"></span>Competitors' weaknesses</h4>
+        <ul>
+          <li>No competitor combines identification, personalized care, and a trusted peer community in one product.</li>
+          <li>None surface pet or child safety/toxicity information prominently &mdash; if at all.</li>
+          <li>Subscription apps (PictureThis, Planta) gate core features behind paywalls, frustrating first-time users.</li>
+          <li>Accessibility appears to be an afterthought across the category &mdash; no stated screen-reader support or accessibility statements were found.</li>
+          <li>Desktop experiences are weak or nonexistent; all meaningful functionality lives in the mobile app.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Gaps / Opportunities -->
+<section class="section" style="background:var(--panel);">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">8&ndash;9. Gaps and opportunities for Flora Hub</h2></div>
+    <div class="insight-grid">
+      <div class="insight-card" style="background:#fff;">
+        <h4><span class="insight-dot" style="background:var(--orange);"></span>Gaps in the market</h4>
+        <ul>
+          <li>No app clearly and immediately answers, "is this plant safe for my kids or pets?"</li>
+          <li>No product blends scientific-grade identification with a local, trustworthy peer community.</li>
+          <li>Local buying, selling, and trading of plants between neighbors is largely unmet &mdash; a need Candide left behind when it shut down in 2023.</li>
+          <li>Accessibility features (screen-reader support, alt text, WCAG-compliant contrast and touch targets) are largely unaddressed across the category.</li>
+          <li>Beginners who don't yet own a plant get little encouragement or guidance to start.</li>
+        </ul>
+      </div>
+      <div class="insight-card" style="background:#fff;">
+        <h4><span class="insight-dot" style="background:var(--blue);"></span>Opportunities for Flora Hub</h4>
+        <ul>
+          <li>Lead with a pet/child-safety badge as Flora Hub's signature first-impression feature.</li>
+          <li>Combine PlantNet-level scientific credibility with a Planta-style personalized care experience.</li>
+          <li>Rebuild the community-plus-local-marketplace niche left vacant since Candide's shutdown.</li>
+          <li>Differentiate on accessibility as a genuine strength, not an afterthought, per the case study's accessibility considerations.</li>
+          <li>Offer a generous free tier that removes the paywall anxiety beginners encounter elsewhere in the category.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sources -->
+<section class="section">
+  <div class="section-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--gray)"></span><h2 class="title">Sources &amp; methodology</h2></div>
+    <p class="subtitle">Pricing, feature, and positioning claims were verified against publicly available sources in September 2026. UX ratings reflect the author's evaluation against the pain points and personas identified in user research.</p>
+    <ul class="sources">
+      <li><a href="https://picturethisplantidentifier.com/" target="_blank" rel="noopener">PictureThis &mdash; official product site</a></li>
+      <li><a href="https://identifythis.app/picture-this-app-review" target="_blank" rel="noopener">PictureThis App Review 2026 &mdash; identifythis.app</a></li>
+      <li><a href="https://fueled.com/blog/planta/" target="_blank" rel="noopener">Planta plant-care app overview &mdash; Fueled</a></li>
+      <li><a href="https://www.imore.com/apps/planta-is-a-pricey-but-detailed-houseplant-care-iphone-app-for-indoor-gardeners" target="_blank" rel="noopener">Planta review &mdash; iMore</a></li>
+      <li><a href="https://www.imore.com/apps/plantnet-is-a-super-accurate-plant-identification-iphone-app-that-doesnt-charge-a-subscription-fee" target="_blank" rel="noopener">PlantNet overview &mdash; iMore</a></li>
+      <li><a href="https://my.plantnet.org/pricing" target="_blank" rel="noopener">Pl@ntNet API pricing &amp; conditions</a></li>
+      <li><a href="https://www.greenhousegrower.com/management/new-gardening-app-growit-connects-community-of-gardeners-in-local-areas/" target="_blank" rel="noopener">GrowIt! launch coverage &mdash; Greenhouse Grower</a></li>
+      <li><a href="https://www.community-gardening.org/community-gardening-apps-and-digital-platforms/" target="_blank" rel="noopener">Community gardening apps roundup, 2026</a></li>
+      <li><a href="https://garden.help/News:Candide-Gardening-App-Closes" target="_blank" rel="noopener">Candide gardening app closure, 2023</a></li>
+    </ul>
+  </div>
+</section>
+
+<div class="footer">
+  Flora Hub &mdash; Competitive Audit Report &nbsp;&middot;&nbsp; Pedro Canuto &nbsp;&middot;&nbsp; <a href="flora-hub-case-study.html">Back to the full case study</a>
+</div>
+
+</body>
+</html>

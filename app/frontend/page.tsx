@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Target, Smartphone } from 'lucide-react';
+import { Zap, Target, Smartphone, Heart } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
 import { Footer } from '@/components';
 
-export default function LandingPages() {
-  const areaTitle = 'Frontend';
+export default function Frontend() {
+  const areaTitle = 'Frontend & UX Design';
   const areaIcon = '💻';
 
   const navItems = [
@@ -29,22 +29,24 @@ export default function LandingPages() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-gray-200">Interfaces Frontend que</span>
+              <span className="text-gray-200">Interfaces que Encantam,</span>
               <br />
-              <span className="text-accent-orange">Encantam e Convertem</span>
+              <span className="text-accent-orange">Design que Resolve</span>
             </h2>
 
             <p className="text-xl text-gray-400 mb-8 max-w-3xl">
-              Desenvolvemos interfaces frontend em React — de landing pages otimizadas para
-              conversão a aplicações completas — com design moderno, performance excepcional e
-              estratégias de UX comprovadas.
+              Frontend e UX Design caminham juntos: interfaces em React construídas com performance e
+              boas práticas, apoiadas em um processo de design centrado no usuário — pesquisa, personas,
+              wireframes e testes de usabilidade — para transformar necessidades reais em produtos digitais
+              usáveis.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { icon: Zap, title: 'Performance', description: 'Carregamento ultra rápido' },
                 { icon: Target, title: 'Conversão', description: 'Otimizado para ação' },
                 { icon: Smartphone, title: 'Responsivo', description: 'Funciona em todos os dispositivos' },
+                { icon: Heart, title: 'UX Research', description: 'Decisões guiadas pelo usuário' },
               ].map((benefit, index) => {
                 const Icon = benefit.icon;
                 return (
@@ -84,7 +86,7 @@ export default function LandingPages() {
           </motion.div>
 
           <div className="grid md:grid-cols-1 gap-8">
-            {/* Galeria Digital */}
+            {/* 1. Galeria Digital — Dezembro/2025 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -95,17 +97,17 @@ export default function LandingPages() {
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/2 p-8">
                   <div className="mb-4">
-                    <span className="text-accent-orange text-sm font-semibold">🎨 Galeria Digital</span>
+                    <span className="text-accent-orange text-sm font-semibold">🎨 Galeria Digital · Dezembro/2025</span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                     Galeria Digital de Paulo Canuto
                   </h3>
                   <p className="text-gray-300 mb-6 leading-relaxed">
-                    Landing page moderna e responsiva para exposição digital de obras de arte. 
-                    Featuring 58 obras catalogadas em 5 categorias diferentes, integração com WhatsApp, 
+                    Landing page moderna e responsiva para exposição digital de obras de arte.
+                    Featuring 58 obras catalogadas em 5 categorias diferentes, integração com WhatsApp,
                     filtros dinâmicos e design otimizado para conversão.
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-6">
                     {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech) => (
                       <span
@@ -131,7 +133,7 @@ export default function LandingPages() {
 
                   <div className="flex gap-4">
                     <motion.a
-                      href="/landing-pages/galeria-digital"
+                      href="/frontend/galeria-digital"
                       className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -161,7 +163,7 @@ export default function LandingPages() {
               </div>
             </motion.div>
 
-            {/* Pedro Canuto Música - Frontend */}
+            {/* 2. Pedro Canuto Música — Junho/2026 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -172,7 +174,7 @@ export default function LandingPages() {
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/2 p-8">
                   <div className="mb-4">
-                    <span className="text-accent-orange text-sm font-semibold">🎵 Pedro Canuto Música</span>
+                    <span className="text-accent-orange text-sm font-semibold">🎵 Pedro Canuto Música · Junho/2026</span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                     Pedro Canuto Música — Frontend
@@ -233,6 +235,83 @@ export default function LandingPages() {
                     <p className="text-6xl mb-4">🎵</p>
                     <p className="text-gray-400">Pedro Canuto Música</p>
                     <p className="text-gray-500 text-sm mt-2">Fullstack: React + Spring Boot + PostgreSQL</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 3. UX Designer — 2026 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden hover:border-accent-orange/50 transition-all group"
+            >
+              <div className="flex flex-col md:flex-row">
+                <div className="md:w-1/2 p-8">
+                  <div className="mb-4">
+                    <span className="text-accent-orange text-sm font-semibold">🌱 UX Designer · 2026</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    UX Designer — Google UX Design Certificate
+                  </h3>
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados
+                    ao case study Flora Hub: pesquisa com usuários, mapa de empatia, mapa da jornada,
+                    auditoria de concorrentes e testes de usabilidade.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {['UX Research', 'Empathy Map', 'Journey Map', 'Wireframing', 'Usability Testing'].map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-dark-bg text-accent-orange text-sm rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    <div>
+                      <p className="text-gray-400 text-sm mb-1">Características</p>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>✅ Mapa de empatia e mapa da jornada do usuário</li>
+                        <li>✅ Auditoria de concorrentes</li>
+                        <li>✅ Wireframes e protótipos de baixa e alta fidelidade</li>
+                        <li>✅ Case study completo — Flora Hub</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <motion.a
+                      href="/frontend/google-ux-designer"
+                      className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Ver Detalhes do Projeto
+                    </motion.a>
+                    <motion.a
+                      href="/assets/documents/case-studies/flora-hub-case-study.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Case Study Flora Hub
+                    </motion.a>
+                  </div>
+                </div>
+
+                <div className="md:w-1/2 bg-dark-bg h-64 md:h-auto flex items-center justify-center p-8">
+                  <div className="text-center">
+                    <p className="text-6xl mb-4">🌱</p>
+                    <p className="text-gray-400">Flora Hub</p>
+                    <p className="text-gray-500 text-sm mt-2">Google UX Design Professional Certificate</p>
                   </div>
                 </div>
               </div>
