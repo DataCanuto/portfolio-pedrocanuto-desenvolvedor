@@ -20,8 +20,8 @@ export default function GoogleUXDesignerPage() {
       <ProjectHeader
         projectTitle="Google UX Designer"
         sections={projectSections}
-        areaSlug="design"
-        backUrl="/design"
+        areaSlug="frontend"
+        backUrl="/frontend"
       />
 
       {/* Hero Section */}
@@ -55,6 +55,15 @@ export default function GoogleUXDesignerPage() {
             >
               <ExternalLink size={20} />
               Ver Case Study Flora Hub
+            </a>
+            <a
+              href="/assets/documents/case-studies/flora-hub-competitive-audit.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300 flex items-center gap-2"
+            >
+              <ExternalLink size={20} />
+              Ver Auditoria Competitiva
             </a>
             <button
               onClick={() => document.getElementById('foundations')?.scrollIntoView({ behavior: 'smooth' })}
