@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Code2, Settings, BarChart3, Monitor } from 'lucide-react';
+import { ArrowRight, Code2, Settings, BarChart3, Monitor, Palette } from 'lucide-react';
 
 interface Service {
   id: number;
@@ -45,6 +45,14 @@ const services: Service[] = [
     icon: <Monitor size={40} />,
     href: '/landing-pages',
     color: 'from-orange-600 to-orange-400',
+  },
+  {
+    id: 5,
+    title: 'Design',
+    description: 'UX Design centrado no usuário: pesquisa, personas, wireframes e prototipação, com certificação Google UX Design.',
+    icon: <Palette size={40} />,
+    href: '/design',
+    color: 'from-pink-600 to-pink-400',
   },
 ];
 

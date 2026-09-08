@@ -22,6 +22,16 @@ export const LANGUAGE_COLORS: Record<string, string> = {
 
 export const projectsTimeline: ProjectTimelineEntry[] = [
   {
+    id: 'google-ux-designer',
+    title: 'UX Designer',
+    year: 2026,
+    context: 'Certificação Google UX Design',
+    language: { name: 'TypeScript', color: LANGUAGE_COLORS.TypeScript },
+    resume:
+      'Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados ao case study Flora Hub: pesquisa com usuários, personas, mapa de empatia, auditoria de concorrentes, wireframes e testes de usabilidade.',
+    href: '/design/google-ux-designer',
+  },
+  {
     id: 'pedro-canuto-musico',
     title: 'Pedro Canuto Música',
     year: 2026,
