@@ -190,6 +190,23 @@ export const Portfolio = () => {
           </div>
         </section>
 
+        
+
+        {/* Experiência Freelance */}
+        <section>
+          <SectionTitle>Experiência Freelance — Projetos Técnicos</SectionTitle>
+          {projetosFreelance.map((p) => (
+            <ProjetoItem key={p.titulo} projeto={p} />
+          ))}
+        </section>
+
+        {/* Projetos Pessoais — Dados & Machine Learning */}
+        <section>
+          <SectionTitle>Projetos Pessoais — Dados &amp; Machine Learning</SectionTitle>
+          {projetosDados.map((p) => (
+            <ProjetoItem key={p.titulo} projeto={p} />
+          ))}
+        </section>
         {/* Experiência Profissional */}
         <section>
           <SectionTitle>Experiência Profissional</SectionTitle>
@@ -207,22 +224,6 @@ export const Portfolio = () => {
               propor a solução técnica.
             </li>
           </ul>
-        </section>
-
-        {/* Experiência Freelance */}
-        <section>
-          <SectionTitle>Experiência Freelance — Projetos Técnicos</SectionTitle>
-          {projetosFreelance.map((p) => (
-            <ProjetoItem key={p.titulo} projeto={p} />
-          ))}
-        </section>
-
-        {/* Projetos Pessoais — Dados & Machine Learning */}
-        <section>
-          <SectionTitle>Projetos Pessoais — Dados &amp; Machine Learning</SectionTitle>
-          {projetosDados.map((p) => (
-            <ProjetoItem key={p.titulo} projeto={p} />
-          ))}
         </section>
 
         {/* Formação Acadêmica */}

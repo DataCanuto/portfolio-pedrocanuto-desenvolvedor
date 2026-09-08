@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora Hub — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4285F4;
+    --blue-dark:#3367D6;
+    --red:#EA4335;
+    --orange:#F29900;
+    --green:#34A853;
+    --gray:#5F6368;
+    --ink:#3C4043;
+    --body:#5F6368;
+    --paper:#FFFFFF;
+    --panel:#EFF1F3;
+    --panel-line:#E3E6E8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Roboto', sans-serif;
+    color:var(--body);
+    background:#DADCE0;
+  }
+  h1,h2,h3{
+    font-family:'Poppins', sans-serif;
+    margin:0;
+    color:var(--ink);
+  }
+  .slide{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:80px 24px;
+    background:var(--paper);
+    border-bottom:1px solid #c9ccd1;
+  }
+  .slide-inner{
+    width:100%;
+    max-width:1140px;
+  }
+  .brand{
+    position:absolute;
+    bottom:28px;
+    right:40px;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    letter-spacing:.5px;
+    font-size:14px;
+    color:rgba(255,255,255,.85);
+  }
+  .slide--content .brand{ color:#9AA0A6; }
+
+  /* ---------- Cover ---------- */
+  .slide--cover{
+    background:linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color:#fff;
+    text-align:left;
+  }
+  .slide--cover h1{
+    color:#fff;
+    font-size:56px;
+    line-height:1.15;
+    font-weight:700;
+  }
+  .slide--cover .rule{
+    width:120px;
+    height:3px;
+    background:rgba(255,255,255,.8);
+    margin:28px 0;
+  }
+  .slide--cover .byline{
+    font-size:22px;
+    color:rgba(255,255,255,.92);
+  }
+
+  /* ---------- Divider slides ---------- */
+  .slide--divider{ color:#fff; }
+  .slide--divider .slide-inner{ display:flex; gap:56px; align-items:center; }
+  .slide--divider h2{ color:#fff; font-size:42px; line-height:1.25; flex:0 0 300px; font-weight:600; }
+  .slide--divider .rule-v{ width:2px; align-self:stretch; background:rgba(255,255,255,.6); }
+  .slide--divider ul{ list-style:none; margin:0; padding:0; font-size:20px; }
+  .slide--divider li{ margin-bottom:14px; padding-left:22px; position:relative; }
+  .slide--divider li::before{
+    content:"";
+    position:absolute; left:0; top:9px;
+    width:8px; height:8px; border-radius:50%;
+    background:#fff;
+  }
+  .div-red{ background:var(--red); }
+  .div-orange{ background:var(--orange); }
+  .div-green{ background:var(--green); }
+  .div-gray{ background:var(--gray); }
+
+  /* ---------- Content slide header ---------- */
+  .accent-bar{
+    width:5px; height:1.1em; display:inline-block; vertical-align:middle;
+  }
+  .heading-row{ display:flex; align-items:center; gap:16px; margin-bottom:8px; }
+  .heading-row .bar{ width:5px; height:34px; border-radius:2px; }
+  .kicker{ font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:#9AA0A6; font-weight:500; margin-bottom:6px; }
+  .slide h2.title{ font-size:34px; font-weight:500; }
+  .subtitle{ margin-top:14px; font-size:17px; line-height:1.6; max-width:760px; }
+
+  /* ---------- Generic two column ---------- */
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:44px; }
+  .cols2.narrowgap{ gap:60px; }
+  .item{ display:flex; flex-direction:column; gap:14px; }
+  .icon-circle{
+    width:52px; height:52px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; flex-shrink:0;
+  }
+  .icon-circle svg{ width:24px; height:24px; }
+  .item h3{ font-size:19px; font-weight:600; }
+  .item h3.blue{ color:var(--blue); }
+  .item h3.red{ color:var(--red); }
+  .item h3.orange{ color:var(--orange); }
+  .item h3.green{ color:var(--green); }
+  .item p{ font-size:16px; line-height:1.65; margin:0; }
+  .item ul{ margin:0; padding-left:20px; font-size:16px; line-height:1.65; }
+
+  .panel{
+    background:var(--panel);
+    border-radius:10px;
+    padding:36px 40px;
+    color:#80868B;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:180px;
+  }
+
+  /* ---------- Split layout (text left, panel right) ---------- */
+  .split{ display:grid; grid-template-columns:1.05fr 1fr; gap:56px; margin-top:40px; align-items:start; }
+  .split .panel{ min-height:340px; }
+
+  /* ---------- Numbered pain points ---------- */
+  .numbered-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:48px; }
+  .num-card{ text-align:center; }
+  .num-badge{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--red); color:#fff; font-weight:700; font-size:18px;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 16px;
+  }
+  .num-card h4{ margin:0 0 10px; font-size:16px; font-weight:700; color:var(--red); }
+  .num-card p{ margin:0; font-size:14.5px; line-height:1.6; }
+
+  /* ---------- Persona card ---------- */
+  .persona-card{
+    border:1px solid var(--panel-line); border-radius:10px; padding:28px;
+    display:grid; grid-template-columns:200px 1fr; gap:26px;
+  }
+  .persona-photo{
+    width:100%; aspect-ratio:1/1; border-radius:8px; background:var(--panel);
+    display:flex; align-items:center; justify-content:center; color:#9AA0A6; font-size:14px; text-align:center;
+    overflow:hidden;
+  }
+  .persona-photo svg{ width:64px; height:64px; opacity:.5; }
+  .persona-name{ color:var(--green); font-weight:700; font-size:19px; margin-top:14px; text-align:center; }
+  .persona-facts{ font-size:14.5px; line-height:1.9; margin-top:10px; text-align:center; }
+  .persona-quote{ font-style:italic; font-size:17px; color:var(--ink); margin-bottom:18px; }
+  .persona-goals{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:18px; }
+  .persona-goals h5{ margin:0 0 8px; font-size:15px; }
+  .persona-goals h5.g{ color:var(--blue); }
+  .persona-goals h5.f{ color:var(--red); }
+  .persona-goals ul{ margin:0; padding-left:18px; font-size:14.5px; line-height:1.6; }
+  .persona-story{
+    border:1px solid #F4B942; background:#FFF8E6; border-radius:6px; padding:16px 18px; font-size:14.5px; line-height:1.65;
+  }
+
+  /* ---------- Journey table ---------- */
+  .journey-wrap{ overflow-x:auto; margin-top:40px; border-radius:10px; }
+  table.journey{ width:100%; border-collapse:collapse; min-width:760px; }
+  table.journey th{ background:var(--red); color:#fff; text-align:left; padding:14px 18px; font-size:14px; font-weight:600; }
+  table.journey td{ padding:16px 18px; font-size:14.5px; line-height:1.55; border-bottom:1px solid var(--panel-line); vertical-align:top; }
+  table.journey tr:nth-child(even) td{ background:#FAFAFB; }
+  table.journey td.stage{ font-weight:600; color:var(--ink); white-space:nowrap; }
+
+  /* ---------- Wireframe annotated ---------- */
+  .wf-annotated{ display:grid; grid-template-columns:220px 1fr 220px; gap:0; align-items:center; margin-top:40px; }
+  .wf-note{ font-size:14px; line-height:1.55; color:var(--ink); padding:0 16px; }
+  .wf-note.left{ text-align:right; }
+  .arrow{ height:2px; background:var(--orange); position:relative; }
+  .arrow::after{
+    content:""; position:absolute; right:-1px; top:-5px;
+    border:6px solid transparent; border-left-color:var(--orange);
+  }
+  .arrow.reverse::after{ left:-1px; right:auto; border-left-color:transparent; border-right-color:var(--orange); }
+  .wf-panel{ background:var(--panel); border-radius:10px; min-height:260px; margin:0 16px; display:flex; align-items:center; justify-content:center; color:#80868B; text-align:center; padding:20px; font-size:14.5px; }
+
+  /* ---------- Findings ---------- */
+  .findings2{ display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:36px; }
+  .findings-col h4{ color:var(--orange); font-size:17px; margin-bottom:16px; }
+  .finding-box{ background:var(--panel); border-radius:8px; padding:20px; }
+  .finding-row{ display:flex; gap:14px; margin-bottom:16px; }
+  .finding-row:last-child{ margin-bottom:0; }
+  .finding-badge{
+    width:28px; height:28px; border-radius:50%; background:var(--orange); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;
+  }
+  .finding-row p{ margin:0; font-size:14.5px; line-height:1.55; padding-top:3px; }
+
+  /* ---------- Mockups grid ---------- */
+  .mock-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:44px; }
+  .mock-card{ aspect-ratio:9/16; background:var(--panel); border-radius:14px; display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; color:#80868B; font-size:13.5px; }
+
+  /* ---------- Accessibility cards ---------- */
+  .a11y-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:50px; }
+  .a11y-card{ background:var(--panel); border-radius:8px; padding:34px 22px 24px; text-align:center; position:relative; }
+  .a11y-badge{
+    width:44px; height:44px; border-radius:50%; background:var(--green); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+  }
+  .a11y-card p{ margin-top:10px; font-size:14.5px; line-height:1.6; }
+
+  /* ---------- Next steps ---------- */
+  .steps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:48px; }
+  .step-card{ background:var(--panel); border-radius:8px; padding:34px 22px 24px; text-align:center; position:relative; }
+  .step-badge{
+    width:44px; height:44px; border-radius:50%; background:var(--gray); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+  }
+  .step-card p{ margin-top:10px; font-size:14.5px; line-height:1.6; }
+
+  /* ---------- Competitor audit table ---------- */
+  .audit-wrap{ overflow-x:auto; margin-top:40px; border:1px solid var(--panel-line); border-radius:10px; }
+  table.audit{ width:100%; border-collapse:collapse; min-width:980px; font-size:13.5px; }
+  table.audit thead th{ background:var(--blue); color:#fff; text-align:left; padding:12px 16px; font-weight:600; position:sticky; top:0; }
+  table.audit td{ padding:14px 16px; border-bottom:1px solid var(--panel-line); vertical-align:top; line-height:1.5; }
+  table.audit tr.us td{ background:#EAF1FE; font-weight:500; }
+  table.audit tr:nth-child(even):not(.us) td{ background:#FAFAFB; }
+  .tag{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; padding:2px 8px; border-radius:10px; }
+  .tag.direct{ background:#FCE8E6; color:var(--red); }
+  .tag.indirect{ background:#FEF7E0; color:#B06000; }
+  .tag.us{ background:#E8F0FE; color:var(--blue-dark); }
+
+  /* ---------- Connect ---------- */
+  .connect-panel{ background:var(--panel); border-radius:10px; padding:44px; text-align:center; margin-top:44px; }
+  .connect-panel .icon-circle{ margin:0 auto 20px; }
+  .connect-panel p{ font-size:16px; line-height:1.7; margin:0 0 10px; }
+  .connect-panel .contact{ font-weight:600; color:var(--ink); }
+
+  @media (max-width: 900px){
+    .cols2, .split, .persona-card, .findings2 { grid-template-columns:1fr; }
+    .numbered-grid, .a11y-grid, .steps-grid, .mock-grid{ grid-template-columns:repeat(2,1fr); }
+    .wf-annotated{ grid-template-columns:1fr; }
+    .arrow{ display:none; }
+    .wf-note.left{ text-align:left; }
+    .slide--divider .slide-inner{ flex-direction:column; align-items:flex-start; }
+    .slide--divider .rule-v{ display:none; }
+    .slide--cover h1{ font-size:38px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover -->
+<section class="slide slide--cover">
+  <div class="slide-inner">
+    <h1>Flora Hub<br>All in One for Plant Lovers</h1>
+    <div class="rule"></div>
+    <div class="byline">Pedro Canuto</div>
+  </div>
+</section>
+
+<!-- 2. Project overview: product / duration -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">Project overview</h2></div>
+
+        <div class="cols2" style="grid-template-columns:1fr; margin-top:36px; gap:36px;">
+          <div class="item" style="flex-direction:row; align-items:flex-start; gap:18px;">
+            <div class="icon-circle" style="background:var(--blue)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="14" height="10" rx="1"/><path d="M8 20h6M11 14v6"/></svg>
+            </div>
+            <div>
+              <h3 class="blue">The product</h3>
+              <p>Flora Hub is a mobile app built to connect and inform plant lovers on a single platform &mdash; combining verified care knowledge with a trusted peer community.</p>
+            </div>
+          </div>
+          <div class="item" style="flex-direction:row; align-items:flex-start; gap:18px;">
+            <div class="icon-circle" style="background:var(--blue)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <div>
+              <h3 class="blue">Project duration</h3>
+              <p>07 September 2026 &ndash; 10 September 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">Preview of selected polished designs.<br><span style="font-size:13px;">(see Mockups &amp; High-fidelity prototype)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Problem / Goal -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">Project overview</h2></div>
+    <div class="cols2">
+      <div class="item">
+        <div class="icon-circle" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        </div>
+        <h3 class="blue">The problem</h3>
+        <p>Information and access points are scattered across WhatsApp groups, YouTube channels, browser searches, identification apps, databases, and marketplaces. Users just don't trust the information they find.</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.5L21 9.3l-5 4.6L17.4 21 12 17.6 6.6 21 8 13.9 3 9.3l6.1-.8z"/></svg>
+        </div>
+        <h3 class="blue">The goal</h3>
+        <p>Develop an app where users can share experience and compare it with scientific knowledge about plants. Users can identify plants by photographing them and connect with other users who share the same interests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Role / Responsibilities -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--blue)"></span><h2 class="title">Project overview</h2></div>
+    <div class="cols2">
+      <div class="item">
+        <div class="icon-circle" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg>
+        </div>
+        <h3 class="blue">My role</h3>
+        <p>Full Stack UX Designer.</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        </div>
+        <h3 class="blue">Responsibilities</h3>
+        <ul>
+          <li>Conduct interviews with a diverse population</li>
+          <li>Compare results with personas</li>
+          <li>Competitor audit: research plant-care apps and map direct and indirect competitors</li>
+          <li>Map goals and gaps in each competing app</li>
+          <li>Design a happy user journey that solves personas' challenges</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Divider: Understanding the user -->
+<section class="slide slide--divider div-red">
+  <div class="slide-inner">
+    <h2>Understanding<br>the user</h2>
+    <div class="rule-v"></div>
+    <ul>
+      <li>User research</li>
+      <li>Competitive audit</li>
+      <li>Personas</li>
+      <li>Problem statements</li>
+      <li>User journey maps</li>
+    </ul>
+  </div>
+  <div class="brand">FLORA HUB</div>
+</section>
+
+<!-- 6. User research summary -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">User research: summary</h2></div>
+    <div class="panel" style="align-items:flex-start; text-align:left; margin-top:36px; padding:34px 40px;">
+      <div class="icon-circle" style="background:var(--red); margin-bottom:18px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      </div>
+      <p style="margin:0 0 14px;">A Google Forms survey split respondents into two groups: people who currently take care of plants, and people who do not.</p>
+      <p style="margin:0 0 8px; font-weight:600; color:var(--ink);">Results:</p>
+      <ul style="margin:0; padding-left:20px; line-height:1.7;">
+        <li>The group that <strong>does</strong> take care of plants shows strong interest in connecting with other plant lovers who share the hobby, and would like to buy and sell plants with neighbors.</li>
+        <li>The group that does <strong>not</strong> take care of plants reveals genuine interest in starting &mdash; they simply don't know where to begin, and fear making a mistake that harms a pet or family member.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6b. Competitive audit table -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">Competitive audit</h2></div>
+    <p class="subtitle">Direct and indirect competitors in the plant-care space were mapped to identify gaps Flora Hub could fill &mdash; following the same audit structure used for the course's Food Trucks example.</p>
+    <div class="audit-wrap">
+      <table class="audit">
+        <thead>
+          <tr>
+            <th>Competitor</th>
+            <th>Type</th>
+            <th>Target audience</th>
+            <th>Price</th>
+            <th>Unique value proposition</th>
+            <th>Strengths</th>
+            <th>Gaps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="us">
+            <td><strong>Flora Hub</strong><br><span class="tag us">our company</span></td>
+            <td>&mdash;</td>
+            <td>Millennial &amp; Gen Z hobbyist gardeners, plus total beginners</td>
+            <td>Free / $2.99 mo premium (planned)</td>
+            <td>Only app combining verified scientific care data, peer community trust, and clear pet/child safety information in one place.</td>
+            <td>Concept validated through prototype usability testing (see Usability study findings).</td>
+            <td>Not yet launched; no real usage data yet.</td>
+          </tr>
+          <tr>
+            <td>PlantNet</td>
+            <td><span class="tag direct">Direct</span></td>
+            <td>Botanists &amp; nature enthusiasts</td>
+            <td>Free</td>
+            <td>Crowd-sourced species identification backed by scientific institutions.</td>
+            <td>Large, accurate species database; fast camera-based identification.</td>
+            <td>No safety/toxicity info, no personal care tracking, no community feed for casual users.</td>
+          </tr>
+          <tr>
+            <td>Planta</td>
+            <td><span class="tag direct">Direct</span></td>
+            <td>Urban plant parents</td>
+            <td>Free / $$ premium</td>
+            <td>Personalized care reminders tailored to each plant and location.</td>
+            <td>Polished UI; reliable watering/light schedules.</td>
+            <td>No peer community, no photo identification, no pet/child safety warnings.</td>
+          </tr>
+          <tr>
+            <td>Vera: Plant Care</td>
+            <td><span class="tag direct">Direct</span></td>
+            <td>Beginner plant owners</td>
+            <td>Free / $ premium</td>
+            <td>AI-powered plant health diagnosis from photos.</td>
+            <td>Quick, approachable diagnosis feature for sick plants.</td>
+            <td>Weak community features, limited language support.</td>
+          </tr>
+          <tr>
+            <td>Blossom (Candide)</td>
+            <td><span class="tag indirect">Indirect</span></td>
+            <td>Gardening hobbyists</td>
+            <td>Free</td>
+            <td>Social feed for sharing garden progress and buying plants.</td>
+            <td>Strong community and marketplace features.</td>
+            <td>General gardening focus, not plant-specific; no scientific safety data.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Pain points -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">User research: pain points</h2></div>
+    <div class="numbered-grid">
+      <div class="num-card">
+        <div class="num-badge">1</div>
+        <h4>Pain point</h4>
+        <p>Users look to apps to learn about plant care, but advice often fails because it doesn't account for local weather and climate differences.</p>
+      </div>
+      <div class="num-card">
+        <div class="num-badge">2</div>
+        <h4>Pain point</h4>
+        <p>The design must be responsive to different intents &mdash; users may be searching for specific information or simply browsing.</p>
+      </div>
+      <div class="num-card">
+        <div class="num-badge">3</div>
+        <h4>Pain point</h4>
+        <p>The main screen must use large, recognizable icons with alt text to represent every action a user can perform in the app.</p>
+      </div>
+      <div class="num-card">
+        <div class="num-badge">4</div>
+        <h4>Pain point</h4>
+        <p>The design must work for a wide range of ages, from young first-time plant owners to older, less tech-familiar users.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Persona -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">Persona: <span style="font-weight:700;">Lucia</span></h2></div>
+        <p style="font-weight:600; color:var(--red); margin-top:28px;">Problem statement:</p>
+        <p style="margin-top:8px; line-height:1.7;">Lucia is a 38-year-old woman who lives with her son and their dog. She wants to care for houseplants without putting her family at risk, but she doesn't trust information she finds online unless she can talk to a real person &mdash; so she drives to the local plant store instead.</p>
+      </div>
+      <div class="persona-card">
+        <div>
+          <div class="persona-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-5 5-7 8-7s6.5 2 8 7"/></svg>
+          </div>
+          <div class="persona-name">Lucia</div>
+          <div class="persona-facts">
+            <strong>Age:</strong> 38<br>
+            <strong>Education:</strong> BA, Business Administration<br>
+            <strong>Hometown:</strong> Recife, Brazil<br>
+            <strong>Family:</strong> Married, one son (10), one dog<br>
+            <strong>Occupation:</strong> Small business owner
+          </div>
+        </div>
+        <div>
+          <p class="persona-quote">&ldquo;I want to take care of my plants without accidentally putting my family or pet at risk.&rdquo;</p>
+          <div class="persona-goals">
+            <div>
+              <h5 class="g">Goals</h5>
+              <ul>
+                <li>Quickly confirm a plant is safe around kids and pets</li>
+                <li>Get advice from real, trustworthy people</li>
+                <li>Track watering and care schedules with minimal effort</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="f">Frustrations</h5>
+              <ul>
+                <li>Contradictory care information online</li>
+                <li>No easy way to verify plant toxicity before buying</li>
+                <li>Generic apps that ignore her local climate</li>
+              </ul>
+            </div>
+          </div>
+          <div class="persona-story">Lucia bought a new plant for her living room but worried it might be dangerous for her dog. Every website she checked disagreed, so she drove to a plant store just to ask in person &mdash; losing an afternoon for information that should have been instant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. User journey map -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--red)"></span><h2 class="title">User journey map</h2></div>
+    <p class="subtitle">Mapping Lucia's journey highlighted how much friction exists between spotting a new plant and feeling confident it's safe to keep.</p>
+    <div class="journey-wrap">
+      <table class="journey">
+        <thead><tr><th>Stage</th><th>Action</th><th>Feeling</th><th>Opportunity</th></tr></thead>
+        <tbody>
+          <tr><td class="stage">Discover</td><td>Notices an appealing plant at a store or a friend's home.</td><td>Curious, excited</td><td>Let her identify it instantly with the camera, on the spot.</td></tr>
+          <tr><td class="stage">Research safety</td><td>Searches multiple sites to check if it's safe for her dog and son.</td><td>Anxious, distrustful</td><td>Surface a clear pet/child-safety badge before any other detail.</td></tr>
+          <tr><td class="stage">Decide</td><td>Weighs conflicting advice and often gives up or asks in-store.</td><td>Frustrated, unsure</td><td>Show one trusted, science-backed answer instead of ten opinions.</td></tr>
+          <tr><td class="stage">Set up care</td><td>Tries to remember watering and light needs on her own.</td><td>Hopeful, a little overwhelmed</td><td>Auto-generate a simple care schedule from the identified species.</td></tr>
+          <tr><td class="stage">Get support</td><td>Runs into a problem weeks later and doesn't know who to ask.</td><td>Alone</td><td>Connect her with nearby plant lovers who own the same species.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Divider: Starting the design -->
+<section class="slide slide--divider div-orange">
+  <div class="slide-inner">
+    <h2>Starting<br>the design</h2>
+    <div class="rule-v"></div>
+    <ul>
+      <li>Paper wireframes</li>
+      <li>Digital wireframes</li>
+      <li>Low-fidelity prototype</li>
+      <li>Usability studies</li>
+    </ul>
+  </div>
+  <div class="brand">FLORA HUB</div>
+</section>
+
+<!-- 11. Paper wireframes -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Paper wireframes</h2></div>
+        <p style="margin-top:26px; line-height:1.7;">Five hand-drawn iterations of the home screen were sketched to test icon clarity and information density with pain points 3 and 4 in mind. The refined version led with one large, unmistakable &ldquo;Identify a plant&rdquo; camera action, cutting competing calls-to-action from five down to two.</p>
+      </div>
+      <div class="panel">Sketches of five home-screen variations, narrowed down to one refined paper wireframe.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Digital wireframes 1 -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Digital wireframes</h2></div>
+    <p style="margin-top:16px;">Home screen &mdash; translating the paper sketch into a digital wireframe.</p>
+    <div class="wf-annotated">
+      <div class="wf-note left">A large camera action lets users of any age identify a plant in a single tap, addressing the icon-clarity pain point.</div>
+      <div class="arrow"></div>
+      <div class="wf-panel">Home screen digital wireframe</div>
+      <div class="arrow reverse"></div>
+      <div class="wf-note">Bottom navigation keeps care reminders, community, and profile one thumb-reach away on mobile.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Digital wireframes 2 -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Digital wireframes</h2></div>
+    <p style="margin-top:16px;">Plant detail screen &mdash; direct response to Lucia's top frustration.</p>
+    <div class="wf-annotated">
+      <div class="wf-note left">A pet/child-safety badge appears before any other detail, answering the most common research-driven question first.</div>
+      <div class="arrow"></div>
+      <div class="wf-panel">Plant detail digital wireframe</div>
+      <div class="arrow reverse"></div>
+      <div class="wf-note">A community tab surfaces nearby owners of the same species, supporting the peer-trust goal from research.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Low-fi prototype -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Low-fidelity prototype</h2></div>
+        <p style="margin-top:26px; line-height:1.7;"><a href="#" style="color:var(--blue);">View the low-fidelity prototype</a><br><br>The prototype connects the home screen, plant identification flow, and plant detail page, letting a user photograph a plant and immediately see its safety status and basic care tips.</p>
+      </div>
+      <div class="panel">Screenshot of low-fidelity prototype with connections</div>
+    </div>
+  </div>
+</section>
+
+<!-- 15. Usability findings -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Usability study: findings</h2></div>
+    <p class="subtitle">Two rounds of moderated usability studies were run with five participants each, mixing plant hobbyists and complete beginners.</p>
+    <div class="findings2">
+      <div class="findings-col">
+        <h4>Round 1 findings</h4>
+        <div class="finding-box">
+          <div class="finding-row"><div class="finding-badge">1</div><p>Participants didn't notice the safety badge because it sat below the fold.</p></div>
+          <div class="finding-row"><div class="finding-badge">2</div><p>Several users tried to swipe between plant photos, expecting gallery-style browsing.</p></div>
+          <div class="finding-row"><div class="finding-badge">3</div><p>The &ldquo;Identify&rdquo; icon was confused with a generic camera or settings button.</p></div>
+        </div>
+      </div>
+      <div class="findings-col">
+        <h4>Round 2 findings</h4>
+        <div class="finding-box">
+          <div class="finding-row"><div class="finding-badge">1</div><p>Moving the safety badge directly under the plant name resolved the visibility issue.</p></div>
+          <div class="finding-row"><div class="finding-badge">2</div><p>Adding swipe gestures to the photo carousel matched participants' expectations.</p></div>
+          <div class="finding-row"><div class="finding-badge">3</div><p>Relabeling the button &ldquo;Identify a plant&rdquo; with a leaf-and-camera icon removed the confusion.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16. Divider: Refining the design -->
+<section class="slide slide--divider div-green">
+  <div class="slide-inner">
+    <h2>Refining<br>the design</h2>
+    <div class="rule-v"></div>
+    <ul>
+      <li>Mockups</li>
+      <li>High-fidelity prototype</li>
+      <li>Accessibility</li>
+    </ul>
+  </div>
+  <div class="brand">FLORA HUB</div>
+</section>
+
+<!-- 17. Mockups before/after -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Mockups</h2></div>
+    <p style="margin-top:16px; line-height:1.7;">The plant detail screen changed the most after usability testing: the safety badge moved above the fold, type size increased, and a single clear &ldquo;Add to my garden&rdquo; call-to-action replaced three competing buttons.</p>
+    <div class="cols2 narrowgap" style="margin-top:30px;">
+      <div>
+        <p style="text-align:center; color:var(--green); font-weight:600; margin-bottom:14px;">Before usability study</p>
+        <div class="panel" style="min-height:280px;">Plant detail screen &mdash; before</div>
+      </div>
+      <div>
+        <p style="text-align:center; color:var(--green); font-weight:600; margin-bottom:14px;">After usability study</p>
+        <div class="panel" style="min-height:280px;">Plant detail screen &mdash; after</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19. Mockups grid -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Mockups</h2></div>
+    <div class="mock-grid">
+      <div class="mock-card">Home screen</div>
+      <div class="mock-card">Plant identification camera</div>
+      <div class="mock-card">Plant detail &amp; care guide</div>
+      <div class="mock-card">Community feed</div>
+    </div>
+  </div>
+</section>
+
+<!-- 20. High-fidelity prototype -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">High-fidelity prototype</h2></div>
+        <p style="margin-top:26px; line-height:1.7;"><a href="#" style="color:var(--blue);">View the high-fidelity prototype</a><br><br>Explore the full clickable prototype covering onboarding, plant identification, care tracking, and community interaction.</p>
+      </div>
+      <div class="panel">Screenshot of high-fidelity prototype with connections</div>
+    </div>
+  </div>
+</section>
+
+<!-- 21. Accessibility -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Accessibility considerations</h2></div>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <div class="a11y-badge">1</div>
+        <p>Every primary action pairs an icon with a text label, and each icon carries descriptive alt text for screen reader users.</p>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-badge">2</div>
+        <p>Color is never the only signal &mdash; the pet/child safety badge uses an icon and text label alongside color, so it stays clear for users with color vision deficiencies.</p>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-badge">3</div>
+        <p>Text and touch targets follow WCAG AA sizing (16px minimum body text, 44&times;44px tap targets) so older adults and users with limited dexterity can navigate comfortably.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 22. Divider: Going forward -->
+<section class="slide slide--divider div-gray">
+  <div class="slide-inner">
+    <h2>Going<br>forward</h2>
+    <div class="rule-v"></div>
+    <ul>
+      <li>Takeaways</li>
+      <li>Next steps</li>
+    </ul>
+  </div>
+  <div class="brand">FLORA HUB</div>
+</section>
+
+<!-- 23. Takeaways -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--gray)"></span><h2 class="title">Takeaways</h2></div>
+    <div class="cols2">
+      <div class="item">
+        <div class="icon-circle" style="background:var(--gray)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9l2 2 4-4"/></svg>
+        </div>
+        <h3 style="color:var(--gray);">Impact</h3>
+        <p>Peers who tested the prototype said Flora Hub finally answered the one question every plant app skipped: &ldquo;Is it safe for my family?&rdquo; One participant said, &ldquo;I would actually trust this over a random blog.&rdquo;</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--gray)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h11l3 3v13a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </div>
+        <h3 style="color:var(--gray);">What I learned</h3>
+        <p>Building Flora Hub reinforced that trust, not features, is the real currency for plant lovers. Small changes &mdash; like moving a safety badge above the fold &mdash; mattered more to users than adding new functionality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 24. Next steps -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--gray)"></span><h2 class="title">Next steps</h2></div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <p>Run a wider competitive benchmark against more plant-care apps to validate pricing and confirm the safety-badge gap holds at scale.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <p>Conduct a diary study with the &ldquo;don't currently care for plants&rdquo; segment to see whether onboarding content actually builds their confidence over time.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">3</div>
+        <p>Prototype a lightweight marketplace flow so neighbors can buy, sell, or trade plants &mdash; a feature requested directly in user research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 25. Connect -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--gray)"></span><h2 class="title">Let's connect!</h2></div>
+    <div class="connect-panel">
+      <div class="icon-circle" style="background:var(--gray)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 20l1.5-4.5A8 8 0 1112 20a7.9 7.9 0 01-4.5-1.4z"/></svg>
+      </div>
+      <p>Thanks for reading the Flora Hub case study! I'd love to hear your feedback or talk more about the project.</p>
+      <p class="contact">Pedro Canuto &nbsp;&middot;&nbsp; data.canuto@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
