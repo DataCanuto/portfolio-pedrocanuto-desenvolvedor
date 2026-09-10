@@ -147,6 +147,20 @@
   .split{ display:grid; grid-template-columns:1.05fr 1fr; gap:56px; margin-top:40px; align-items:start; }
   .split .panel{ min-height:340px; }
 
+  /* ---------- Clickable panel image + lightbox ---------- */
+  .panel{ overflow:hidden; }
+  .panel-img{
+    width:100%; height:100%; max-height:100%; object-fit:contain;
+    border-radius:6px; cursor:zoom-in;
+  }
+  .lightbox{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,.85);
+    z-index:1000; align-items:center; justify-content:center; padding:40px;
+    cursor:zoom-out;
+  }
+  .lightbox.is-open{ display:flex; }
+  .lightbox img{ max-width:100%; max-height:100%; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+
   /* ---------- Numbered pain points ---------- */
   .numbered-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:48px; }
   .num-card{ text-align:center; }
@@ -511,7 +525,7 @@
       <div class="persona-card">
         <div>
           <div class="persona-photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-5 5-7 8-7s6.5 2 8 7"/></svg>
+            <img src="persona-lucia.png" alt="Lucia, persona photo" style="width:100%; height:100%; object-fit:cover;">
           </div>
           <div class="persona-name">Lucia</div>
           <div class="persona-facts">
@@ -592,7 +606,7 @@
         <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Paper wireframes</h2></div>
         <p style="margin-top:26px; line-height:1.7;">Five hand-drawn iterations of the home screen were sketched to test icon clarity and information density with pain points 3 and 4 in mind. The refined version led with one large, unmistakable &ldquo;Identify a plant&rdquo; camera action, cutting competing calls-to-action from five down to two.</p>
       </div>
-      <div class="panel">Sketches of five home-screen variations, narrowed down to one refined paper wireframe.</div>
+      <div class="panel"><img class="panel-img" src="wireframes/home-screen-wireframes.png" alt="Sketches of five home-screen variations, narrowed down to one refined paper wireframe." onclick="openLightbox(this.src, this.alt)"></div>
     </div>
   </div>
 </section>
@@ -816,5 +830,23 @@
   </div>
 </section>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+  function openLightbox(src, alt){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('is-open');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('is-open');
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
 </body>
 </html>
