@@ -1,17 +1,33 @@
 'use client';
 
 import React from 'react';
-import { ProjectOverview, Foundations, UserJourney } from '@/components/Projects/GoogleUXDesigner';
+import {
+  ProjectOverview,
+  Foundations,
+  ResearchPlan,
+  UserJourney,
+  WireframesCarousel,
+} from '@/components/Projects/GoogleUXDesigner';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
-import { Palette, TrendingUp, BookOpen, Compass, ExternalLink } from 'lucide-react';
+import {
+  Palette,
+  TrendingUp,
+  BookOpen,
+  ClipboardList,
+  Compass,
+  Layers,
+  ExternalLink,
+} from 'lucide-react';
 
 export default function GoogleUXDesignerPage() {
   const projectSections = [
     { id: 'hero', label: 'Projeto', icon: <Palette size={16} /> },
     { id: 'overview', label: 'Visão Geral', icon: <TrendingUp size={16} /> },
     { id: 'foundations', label: 'Fundamentos', icon: <BookOpen size={16} /> },
+    { id: 'research', label: 'Pesquisa', icon: <ClipboardList size={16} /> },
     { id: 'user-journey', label: 'Jornada do Usuário', icon: <Compass size={16} /> },
+    { id: 'wireframes', label: 'Wireframes', icon: <Layers size={16} /> },
   ];
 
   return (
@@ -102,10 +118,16 @@ export default function GoogleUXDesignerPage() {
         <Foundations />
       </section>
 
+      {/* Research Plan */}
+      <ResearchPlan />
+
       {/* User Journey */}
       <section id="user-journey">
         <UserJourney />
       </section>
+
+      {/* Wireframes & Prototyping */}
+      <WireframesCarousel />
 
       {/* Footer */}
       <Footer />
