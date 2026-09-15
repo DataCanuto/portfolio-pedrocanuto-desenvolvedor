@@ -204,8 +204,8 @@
   table.journey td.stage{ font-weight:600; color:var(--ink); white-space:nowrap; }
 
   /* ---------- Wireframe annotated ---------- */
-  .wf-annotated{ display:grid; grid-template-columns:220px 1fr 220px; gap:0; align-items:center; margin-top:40px; }
-  .wf-note{ font-size:14px; line-height:1.55; color:var(--ink); padding:0 16px; }
+  .wf-annotated{ display:grid; grid-template-columns:200px 32px 1fr 1fr 32px 200px; gap:14px; align-items:center; margin-top:40px; }
+  .wf-note{ font-size:14px; line-height:1.55; color:var(--ink); padding:0 2px; }
   .wf-note.left{ text-align:right; }
   .arrow{ height:2px; background:var(--orange); position:relative; }
   .arrow::after{
@@ -213,7 +213,7 @@
     border:6px solid transparent; border-left-color:var(--orange);
   }
   .arrow.reverse::after{ left:-1px; right:auto; border-left-color:transparent; border-right-color:var(--orange); }
-  .wf-panel{ background:var(--panel); border-radius:10px; min-height:260px; margin:0 16px; display:flex; align-items:center; justify-content:center; color:#80868B; text-align:center; padding:20px; font-size:14.5px; }
+  .wf-panel{ background:var(--panel); border-radius:10px; height:300px; display:flex; align-items:center; justify-content:center; color:#80868B; text-align:center; padding:12px; font-size:14.5px; overflow:hidden; }
 
   /* ---------- Findings ---------- */
   .findings2{ display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:36px; }
@@ -611,7 +611,20 @@
   </div>
 </section>
 
-<!-- 12. Digital wireframes 1 -->
+<!-- 12. Digital wireframes: overview -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="split">
+      <div>
+        <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Digital wireframes</h2></div>
+        <p style="margin-top:26px; line-height:1.7;">The refined paper sketch was translated into a full digital flow &mdash; 14 screens covering onboarding, authentication, the home feed, plant identification, identification results, community, and profile, wired together to prepare for the low-fidelity prototype.</p>
+      </div>
+      <div class="panel"><img class="panel-img" src="wireframes/digital-wireframe.png" alt="Full set of Flora Hub digital wireframe screens: landing, onboarding, login, register, home, identify, identification success and fail, new post, community feed, profile, inbox and contacts." onclick="openLightbox(this.src, this.alt)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12b. Digital wireframes 1 -->
 <section class="slide slide--content">
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Digital wireframes</h2></div>
@@ -619,14 +632,15 @@
     <div class="wf-annotated">
       <div class="wf-note left">A large camera action lets users of any age identify a plant in a single tap, addressing the icon-clarity pain point.</div>
       <div class="arrow"></div>
-      <div class="wf-panel">Home screen digital wireframe</div>
+      <div class="wf-panel"><img class="panel-img" src="wireframes/identify-screen.png" alt="Identify plant digital wireframe with a large camera capture action." onclick="openLightbox(this.src, this.alt)"></div>
+      <div class="wf-panel"><img class="panel-img" src="wireframes/home-login-logoff.png" alt="Home screen digital wireframes, logged-out and logged-in states, showing bottom navigation." onclick="openLightbox(this.src, this.alt)"></div>
       <div class="arrow reverse"></div>
       <div class="wf-note">Bottom navigation keeps care reminders, community, and profile one thumb-reach away on mobile.</div>
     </div>
   </div>
 </section>
 
-<!-- 13. Digital wireframes 2 -->
+<!-- 12c. Digital wireframes 2 -->
 <section class="slide slide--content">
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Digital wireframes</h2></div>
@@ -634,7 +648,8 @@
     <div class="wf-annotated">
       <div class="wf-note left">A pet/child-safety badge appears before any other detail, answering the most common research-driven question first.</div>
       <div class="arrow"></div>
-      <div class="wf-panel">Plant detail digital wireframe</div>
+      <div class="wf-panel"><img class="panel-img" src="wireframes/identify-succes.png" alt="Identification success digital wireframe showing plant detail content with save and share actions." onclick="openLightbox(this.src, this.alt)"></div>
+      <div class="wf-panel"><img class="panel-img" src="wireframes/social.png" alt="Community digital wireframes: inbox and contacts screens surfacing nearby plant owners." onclick="openLightbox(this.src, this.alt)"></div>
       <div class="arrow reverse"></div>
       <div class="wf-note">A community tab surfaces nearby owners of the same species, supporting the peer-trust goal from research.</div>
     </div>
@@ -644,13 +659,9 @@
 <!-- 14. Low-fi prototype -->
 <section class="slide slide--content">
   <div class="slide-inner">
-    <div class="split">
-      <div>
-        <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Low-fidelity prototype</h2></div>
-        <p style="margin-top:26px; line-height:1.7;"><a href="#" style="color:var(--blue);">View the low-fidelity prototype</a><br><br>The prototype connects the home screen, plant identification flow, and plant detail page, letting a user photograph a plant and immediately see its safety status and basic care tips.</p>
-      </div>
-      <div class="panel">Screenshot of low-fidelity prototype with connections</div>
-    </div>
+    <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Low-fidelity prototype</h2></div>
+    <p style="margin-top:16px; line-height:1.7;"><a href="https://www.figma.com/proto/Z9ti5hkQhXKvoyD1NjFLLS/UX-DESIGN---GOOGLE-PROJECT?node-id=20-5&amp;p=f&amp;t=1ghFkNSFQzDJtrt5-1&amp;scaling=scale-down&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;starting-point-node-id=20%3A5&amp;show-proto-sidebar=1" target="_blank" rel="noopener" style="color:var(--blue);">View the low-fidelity prototype on Figma &rarr;</a><br><br>The prototype connects every screen &mdash; onboarding, home, plant identification, identification results, community, and profile &mdash; letting a user photograph a plant and immediately see its safety status and basic care tips.</p>
+    <div class="panel" style="margin-top:28px; min-height:420px;"><img class="panel-img" src="wireframes/low-fidelity-prototype.png" alt="Low-fidelity prototype screenshot showing all Flora Hub screens connected end to end in Figma." onclick="openLightbox(this.src, this.alt)"></div>
   </div>
 </section>
 
