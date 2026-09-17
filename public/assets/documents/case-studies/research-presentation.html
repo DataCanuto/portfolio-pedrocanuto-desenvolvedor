@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora Hub — Usability Study Research Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4285F4;
+    --blue-dark:#3367D6;
+    --red:#EA4335;
+    --orange:#F29900;
+    --green:#34A853;
+    --gray:#5F6368;
+    --ink:#3C4043;
+    --body:#5F6368;
+    --paper:#FFFFFF;
+    --panel:#EFF1F3;
+    --panel-line:#E3E6E8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Roboto', sans-serif;
+    color:var(--body);
+    background:#DADCE0;
+  }
+  h1,h2,h3{
+    font-family:'Poppins', sans-serif;
+    margin:0;
+    color:var(--ink);
+  }
+  a{ color:var(--blue); }
+
+  .topnav{
+    position:sticky; top:0; z-index:20;
+    background:#fff; border-bottom:1px solid var(--panel-line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 32px;
+    font-family:'Poppins', sans-serif; font-size:14px;
+  }
+  .topnav a{ color:var(--body); text-decoration:none; font-weight:500; }
+  .topnav a:hover{ color:var(--blue); }
+  .topnav .brand{ font-weight:700; color:var(--ink); letter-spacing:.3px; }
+
+  .slide{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:80px 24px;
+    background:var(--paper);
+    border-bottom:1px solid #c9ccd1;
+  }
+  .slide-inner{ width:100%; max-width:1140px; }
+  .brand-tag{
+    position:absolute; bottom:28px; right:40px;
+    font-family:'Poppins', sans-serif; font-weight:600; letter-spacing:.5px; font-size:14px;
+    color:#9AA0A6;
+  }
+  .slide--cover .brand-tag, .slide--divider .brand-tag{ color:rgba(255,255,255,.85); }
+
+  /* ---------- Cover ---------- */
+  .slide--cover{ background:linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); color:#fff; }
+  .slide--cover h1{ color:#fff; font-size:52px; line-height:1.18; font-weight:700; max-width:820px; }
+  .slide--cover .rule{ width:120px; height:3px; background:rgba(255,255,255,.8); margin:28px 0; }
+  .slide--cover .byline{ font-size:20px; color:rgba(255,255,255,.92); }
+  .slide--cover .meta{ margin-top:10px; font-size:14.5px; color:rgba(255,255,255,.8); }
+
+  /* ---------- Table of contents ---------- */
+  .toc-list{ list-style:none; margin:0; padding:0; max-width:640px; margin:44px auto 0; }
+  .toc-list li{ display:flex; align-items:baseline; gap:18px; padding:16px 0; border-bottom:1px solid var(--panel-line); font-size:19px; }
+  .toc-list li:last-child{ border-bottom:none; }
+  .toc-list .num{ font-weight:700; color:var(--blue); font-family:'Poppins',sans-serif; }
+  .toc-list .lbl{ color:var(--ink); }
+
+  /* ---------- Section divider (template style: solid color, centered) ---------- */
+  .slide--divider{ background:var(--blue); color:#fff; text-align:center; }
+  .slide--divider h2{ color:#fff; font-size:44px; font-weight:500; }
+  .slide--divider p{ color:rgba(255,255,255,.9); font-size:17px; margin-top:16px; max-width:640px; margin-left:auto; margin-right:auto; line-height:1.6; }
+
+  /* ---------- Content header ---------- */
+  .heading-row{ display:flex; align-items:center; gap:16px; margin-bottom:8px; }
+  .heading-row .bar{ width:5px; height:34px; border-radius:2px; background:var(--blue); }
+  .slide h2.title{ font-size:32px; font-weight:500; }
+  .subtitle{ margin-top:14px; font-size:16.5px; line-height:1.65; max-width:800px; }
+
+  /* ---------- Study details 3-col ---------- */
+  .study-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:40px; }
+  .study-col{ background:var(--panel); border-radius:10px; padding:26px 26px 30px; }
+  .study-col h4{ color:var(--blue); font-size:16px; font-weight:600; margin-bottom:14px; }
+  .study-col ul{ margin:0; padding-left:18px; font-size:14.5px; line-height:1.75; }
+  .study-col p{ margin:0; font-size:14.5px; line-height:1.75; }
+
+  /* ---------- Participant grid ---------- */
+  .participant-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:40px; }
+  .p-card{ border:1px solid var(--panel-line); border-radius:10px; padding:18px 16px; text-align:center; }
+  .p-avatar{
+    width:56px; height:56px; border-radius:50%; background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px;
+    margin:0 auto 12px; font-family:'Poppins',sans-serif;
+  }
+  .p-card h4{ font-size:15px; margin-bottom:2px; }
+  .p-card .role{ font-size:12px; color:var(--blue); font-weight:600; margin-bottom:10px; }
+  .p-card .fact{ font-size:12px; line-height:1.65; color:var(--body); text-align:left; }
+
+  /* ---------- Priority table ---------- */
+  .priority-wrap{ overflow-x:auto; margin-top:36px; border:1px solid var(--panel-line); border-radius:10px; }
+  table.priority{ width:100%; border-collapse:collapse; min-width:760px; font-size:13.5px; }
+  table.priority thead th{ background:var(--blue); color:#fff; text-align:left; padding:12px 16px; font-weight:600; }
+  table.priority td{ padding:13px 16px; border-bottom:1px solid var(--panel-line); vertical-align:top; line-height:1.5; }
+  table.priority tr:nth-child(even) td{ background:#FAFAFB; }
+  table.priority td.name{ font-weight:600; color:var(--ink); white-space:nowrap; }
+  .tag{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; padding:3px 10px; border-radius:12px; }
+  .tag.p0{ background:#FCE8E6; color:var(--red); }
+  .tag.p1{ background:#FEF7E0; color:#B06000; }
+  .tag.p2{ background:#F1F3F4; color:var(--gray); }
+
+  /* ---------- Split (text left / panel right) ---------- */
+  .split{ display:grid; grid-template-columns:1.05fr 1fr; gap:56px; margin-top:40px; align-items:start; }
+  .panel{ background:var(--panel); border-radius:10px; padding:30px; overflow:hidden; }
+  .panel-img{ width:100%; height:auto; border-radius:6px; cursor:zoom-in; display:block; }
+  .lightbox{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:1000; align-items:center; justify-content:center; padding:40px; cursor:zoom-out; }
+  .lightbox.is-open{ display:flex; }
+  .lightbox img{ max-width:100%; max-height:100%; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+
+  /* ---------- Task list ---------- */
+  .task-script{ background:var(--panel); border-radius:10px; padding:32px 36px; margin-top:36px; }
+  .task-script .intro{ font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:18px; }
+  .task-script ol{ margin:0; padding-left:22px; font-size:15.5px; line-height:1.9; color:var(--ink); }
+  .task-script li strong{ color:var(--blue-dark); }
+  .task-script .tagrow{ margin-top:2px; }
+
+  /* ---------- Success matrix ---------- */
+  .matrix-wrap{ overflow-x:auto; margin-top:36px; border:1px solid var(--panel-line); border-radius:10px; }
+  table.matrix{ width:100%; border-collapse:collapse; min-width:760px; font-size:13.5px; text-align:center; }
+  table.matrix thead th{ background:var(--blue-dark); color:#fff; padding:12px 10px; font-weight:600; }
+  table.matrix thead th:first-child{ text-align:left; padding-left:16px; }
+  table.matrix td{ padding:12px 10px; border-bottom:1px solid var(--panel-line); }
+  table.matrix td:first-child{ text-align:left; padding-left:16px; font-weight:600; color:var(--ink); white-space:nowrap; }
+  table.matrix tr:nth-child(even) td{ background:#FAFAFB; }
+  table.matrix tr.rate td{ background:var(--panel); font-weight:700; color:var(--ink); }
+  .ok{ color:var(--green); font-weight:700; }
+  .no{ color:var(--red); font-weight:700; }
+
+  /* ---------- Theme slides ---------- */
+  .theme-evidence{ font-size:15px; line-height:1.7; }
+  .theme-evidence ul{ margin:0 0 18px; padding-left:20px; }
+  .theme-evidence li{ margin-bottom:8px; }
+  blockquote.q{
+    margin:14px 0; padding:12px 18px; border-left:3px solid var(--blue);
+    font-style:italic; color:var(--ink); font-size:14.5px; background:#F5F8FE; border-radius:0 6px 6px 0;
+  }
+  blockquote.q cite{ display:block; margin-top:6px; font-style:normal; font-size:12.5px; color:var(--blue-dark); font-weight:600; }
+  .stat-chip{
+    display:inline-flex; align-items:center; gap:8px; background:var(--panel); border-radius:20px;
+    padding:8px 16px; font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:18px;
+  }
+  .stat-chip .dot{ width:9px; height:9px; border-radius:50%; }
+  .mock-screen{
+    aspect-ratio:9/16; max-height:380px; background:#fff; border-radius:16px; border:1px solid var(--panel-line);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; color:#80868B; font-size:13.5px;
+    margin:0 auto; position:relative;
+  }
+  .badge-flag{
+    position:absolute; top:-14px; right:-14px; width:34px; height:34px; border-radius:50%;
+    background:var(--orange); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,.2);
+  }
+
+  /* ---------- Research insights (numbered flow) ---------- */
+  .insight-flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; margin-top:48px; }
+  .insight-item{ text-align:center; }
+  .insight-badge{
+    width:52px; height:52px; border-radius:50%; background:var(--blue); color:#fff; font-weight:700; font-size:19px;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-family:'Poppins',sans-serif;
+  }
+  .insight-panel{ background:var(--panel); border-radius:10px; padding:20px 16px; min-height:150px; }
+  .insight-panel p{ margin:0; font-size:13.5px; line-height:1.65; }
+
+  /* ---------- Recommendations ---------- */
+  .reco-panel{ background:var(--panel); border-radius:10px; padding:38px 44px; margin-top:40px; }
+  .reco-item{ display:flex; gap:18px; padding:18px 0; border-bottom:1px solid var(--panel-line); }
+  .reco-item:last-child{ border-bottom:none; }
+  .reco-num{
+    flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;
+  }
+  .reco-item p{ margin:0; font-size:15.5px; line-height:1.65; color:var(--ink); }
+  .reco-item .theme-ref{ display:block; margin-top:4px; font-size:12px; color:var(--blue-dark); font-weight:600; }
+
+  /* ---------- Thank you ---------- */
+  .connect-panel{ background:var(--panel); border-radius:10px; padding:44px; text-align:center; margin-top:40px; max-width:640px; margin-left:auto; margin-right:auto; }
+  .connect-panel p{ font-size:16px; line-height:1.7; margin:0 0 10px; }
+  .connect-panel .contact{ font-weight:600; color:var(--ink); }
+
+  @media (max-width: 980px){
+    .study-cols{ grid-template-columns:1fr; }
+    .participant-grid{ grid-template-columns:repeat(2,1fr); }
+    .insight-flow{ grid-template-columns:repeat(2,1fr); }
+    .split{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 600px){
+    .slide--cover h1{ font-size:34px; }
+    .participant-grid{ grid-template-columns:1fr; }
+    .insight-flow{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <span class="brand">FLORA HUB</span>
+  <a href="flora-hub-case-study.html">&larr; Back to case study</a>
+</div>
+
+<!-- 1. Cover -->
+<section class="slide slide--cover">
+  <div class="slide-inner">
+    <h1>Flora Hub<br>Usability Study — Research Presentation</h1>
+    <div class="rule"></div>
+    <div class="byline">Unmoderated remote study &middot; 5 participants</div>
+    <div class="meta">Pedro Canuto &nbsp;&middot;&nbsp; Google UX Design Certificate, Portfolio Project 1 &nbsp;&middot;&nbsp; September 2026</div>
+  </div>
+</section>
+
+<!-- 2. Table of contents -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row" style="justify-content:center;"><h2 class="title">Table of Contents</h2></div>
+    <ul class="toc-list">
+      <li><span class="num">Section 1</span><span class="lbl">Study Details</span></li>
+      <li><span class="num">Section 2</span><span class="lbl">Themes</span></li>
+      <li><span class="num">Section 3</span><span class="lbl">Insights &amp; Recommendations</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. Divider: Study Details -->
+<section class="slide slide--divider">
+  <div class="slide-inner">
+    <h2>Study Details</h2>
+    <p>Why this round of testing happened, who took part, and how it was run.</p>
+  </div>
+  <div class="brand-tag">FLORA HUB</div>
+</section>
+
+<!-- 4. Project background -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Project background</h2></div>
+    <p class="subtitle">
+      By the end of the design-refinement phase, Flora Hub's mid-fidelity prototype had grown to 10 core screens.
+      Before investing further design time in secondary flows &mdash; messaging, notifications, account settings &mdash;
+      the team needed evidence that first-time users could complete the four actions the product depends on most,
+      entirely on their own. Real users will never have a moderator sitting next to them either, so this round
+      deliberately removed the facilitator to see how the design held up under realistic conditions.
+    </p>
+    <p class="subtitle" style="margin-top:18px;">
+      The four actions under test, in priority order: <strong>identify a plant</strong>, <strong>read its care
+      recommendations</strong>, get <strong>guided toward the community feed</strong>, and feel <strong>nudged
+      to create an account or log in</strong>. Lower-priority screens (messages, contacts, account settings) were
+      deliberately excluded from this round.
+    </p>
+  </div>
+</section>
+
+<!-- 5. Study details columns -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Study details</h2></div>
+    <div class="study-cols">
+      <div class="study-col">
+        <h4>Research questions</h4>
+        <ul>
+          <li>Can first-time users identify a plant and reach its care recommendations without any moderator guidance?</li>
+          <li>Do users notice and correctly interpret the difference between recommendations for a healthy plant and an unhealthy one?</li>
+          <li>After viewing recommendations, does the flow naturally lead users toward the community/news feed?</li>
+          <li>Does the same flow successfully nudge an unauthenticated user to sign up or log in?</li>
+        </ul>
+      </div>
+      <div class="study-col">
+        <h4>Participants</h4>
+        <p><strong>5 participants</strong>, a mix of plant hobbyists and complete beginners, ages 24&ndash;52, across
+        four Brazilian cities. Tech comfort ranged from high (daily app users) to low (first time downloading a
+        plant-related app). None had seen Flora Hub before this session.</p>
+      </div>
+      <div class="study-col">
+        <h4>Methodology</h4>
+        <ul>
+          <li>~12&ndash;15 minutes, self-recorded (screen + think-aloud audio)</li>
+          <li>Remote, on each participant's own device</li>
+          <li>Format: unmoderated usability study, no facilitator present</li>
+          <li>Clickable mid-fidelity prototype + written task script sent in advance; participants completed tasks and submitted their recording plus a short after-task survey</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Participants -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Who took part</h2></div>
+    <p class="subtitle">Five participants, recruited to mirror both survey segments from earlier research: people who already care for plants and people who don't yet, but are curious.</p>
+    <div class="participant-grid">
+      <div class="p-card">
+        <div class="p-avatar">M</div>
+        <h4>Marina</h4>
+        <div class="role">P1 &middot; 29, S&atilde;o Paulo</div>
+        <div class="fact">Plant hobbyist, 12+ plants at home. iPhone. High tech comfort.</div>
+      </div>
+      <div class="p-card">
+        <div class="p-avatar">D</div>
+        <h4>Diego</h4>
+        <div class="role">P2 &middot; 45, Fortaleza</div>
+        <div class="fact">Beginner, owns 1 plant. Android. Moderate tech comfort.</div>
+      </div>
+      <div class="p-card">
+        <div class="p-avatar">A</div>
+        <h4>Aline</h4>
+        <div class="role">P3 &middot; 34, Curitiba</div>
+        <div class="fact">Hobbyist, sells cuttings on the side. iPhone. High tech comfort.</div>
+      </div>
+      <div class="p-card">
+        <div class="p-avatar">C</div>
+        <h4>Carlos</h4>
+        <div class="role">P4 &middot; 52, Belo Horizonte</div>
+        <div class="fact">Beginner, first plant app ever downloaded. Android tablet. Low tech comfort.</div>
+      </div>
+      <div class="p-card">
+        <div class="p-avatar">S</div>
+        <h4>Sofia</h4>
+        <div class="role">P5 &middot; 24, Recife</div>
+        <div class="fact">Plant-curious, doesn't own one yet. iPhone. High tech comfort.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Prototype / design tested -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Prototype tested &amp; screen priority</h2></div>
+    <p class="subtitle">
+      Flora Hub's prototype spans 14 screens end to end, but not all of them carry equal weight. To keep this round
+      focused, the 10 screens that matter most to a first-time, unauthenticated user were ranked into three tiers &mdash;
+      messaging and account settings were pushed to a later round on purpose.
+    </p>
+    <div class="priority-wrap">
+      <table class="priority">
+        <thead>
+          <tr><th>Screen</th><th>Priority</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Identify a plant (camera capture)</td><td><span class="tag p0">P0 &middot; Must work</span></td><td>The single action the whole product is built around.</td></tr>
+          <tr><td class="name">Identification result &amp; recommendations</td><td><span class="tag p0">P0 &middot; Must work</span></td><td>Where users decide whether the app's advice is worth trusting.</td></tr>
+          <tr><td class="name">Home feed (logged out)</td><td><span class="tag p0">P0 &middot; Must work</span></td><td>Where every unauthenticated session lands and the login nudge lives.</td></tr>
+          <tr><td class="name">Login</td><td><span class="tag p0">P0 &middot; Must work</span></td><td>Required to save results and unlock the full experience.</td></tr>
+          <tr><td class="name">Register</td><td><span class="tag p0">P0 &middot; Must work</span></td><td>The main conversion goal for a first-time visitor.</td></tr>
+          <tr><td class="name">Community / news feed</td><td><span class="tag p1">P1 &middot; Important</span></td><td>Reinforces trust and keeps users engaged after their first result.</td></tr>
+          <tr><td class="name">Onboarding / welcome</td><td><span class="tag p1">P1 &middot; Important</span></td><td>Sets expectations before the camera flow, but is skippable.</td></tr>
+          <tr><td class="name">Home feed (logged in)</td><td><span class="tag p1">P1 &middot; Important</span></td><td>Only relevant once conversion has already happened.</td></tr>
+          <tr><td class="name">Messages / inbox</td><td><span class="tag p2">P2 &middot; Later</span></td><td>Not needed to prove the core value loop; deferred to a future round.</td></tr>
+          <tr><td class="name">Profile &amp; account settings</td><td><span class="tag p2">P2 &middot; Later</span></td><td>Same reasoning &mdash; useful, but not on the path to first value.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="split" style="margin-top:44px;">
+      <div>
+        <p style="line-height:1.7;">
+          The task script below was built to exercise every P0 screen and check whether the P1 community feed gets
+          reached naturally along the way. See the full wireframe set that the prototype was built from.
+        </p>
+      </div>
+      <div class="panel">
+        <img class="panel-img" src="wireframes/wireframe-figma.png" alt="Flora Hub's 14 wireframe screens: splash, onboarding, login, register, home (logged out and in), identify-plant camera flow, identification result, error state, create post, community feed, profile, inbox, and contacts." onclick="openLightbox(this.src, this.alt)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Task list -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Task script</h2></div>
+    <p class="subtitle">Each participant received this script by message, opened the prototype link on their own, and worked through it alone with think-aloud audio recording &mdash; no interviewer present, no hints given.</p>
+    <div class="task-script">
+      <p class="intro">"Imagine you're out and you spot a houseplant you don't recognize. Talk through what you're thinking as you go, and try each step yourself before giving up."</p>
+      <ol>
+        <li><strong>Identify a plant.</strong> Use the app to find out what it is. <div class="tagrow"><span class="tag p0">P0</span></div></li>
+        <li><strong>Pick a healthy one.</strong> From the 10 plants the app can recognize, choose one that looks healthy to you and open its care recommendations. <div class="tagrow"><span class="tag p0">P0</span></div></li>
+        <li><strong>Pick an unhealthy one.</strong> Now choose one that looks unhealthy or wilted, open its recommendations, and tell us what's different from the first one. <div class="tagrow"><span class="tag p0">P0</span></div></li>
+        <li><strong>Keep going.</strong> After reading the recommendations, do whatever feels natural to you next &mdash; there's no wrong answer. <em>(open-ended, to observe unprompted navigation toward the feed)</em> <div class="tagrow"><span class="tag p1">P1</span></div></li>
+        <li><strong>Save it.</strong> If the app asks you to save or track this plant, go ahead and try to do that. <div class="tagrow"><span class="tag p0">P0</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Task success matrix -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Task success, at a glance</h2></div>
+    <p class="subtitle">Success is marked when a participant completed the task unaided, without backtracking to ask "what do I do now?" out loud more than once.</p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr><th>Participant</th><th>1. Identify</th><th>2. Healthy plant</th><th>3. Unhealthy plant</th><th>4. Reach the feed</th><th>5. Save / sign up</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>P1 &middot; Marina</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td></tr>
+          <tr><td>P2 &middot; Diego</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="no">&#10007;</td><td class="no">&#10007;</td><td class="ok">&#10003;</td></tr>
+          <tr><td>P3 &middot; Aline</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="no">&#10007;</td></tr>
+          <tr><td>P4 &middot; Carlos</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="no">&#10007;</td><td class="no">&#10007;</td></tr>
+          <tr><td>P5 &middot; Sofia</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td><td class="ok">&#10003;</td></tr>
+          <tr class="rate"><td>Success rate</td><td>5/5 &middot; 100%</td><td>5/5 &middot; 100%</td><td>4/5 &middot; 80%</td><td>3/5 &middot; 60%</td><td>3/5 &middot; 60%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Divider: Themes -->
+<section class="slide slide--divider">
+  <div class="slide-inner">
+    <h2>Themes</h2>
+    <p>Four patterns that emerged across all five unmoderated sessions.</p>
+  </div>
+  <div class="brand-tag">FLORA HUB</div>
+</section>
+
+<!-- 11. Theme 1 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Theme #1 &middot; Camera-first identification works, even alone</h2></div>
+    <div class="split">
+      <div class="theme-evidence">
+        <div class="stat-chip"><span class="dot" style="background:var(--green);"></span>5 of 5 completed Task 1 unaided</div>
+        <ul>
+          <li>Every participant found the "Identify" action and completed a photo capture without any moderator support.</li>
+          <li>Only one moment of hesitation across all five sessions: Carlos briefly tapped "Search" before self-correcting to "Identify" on the bottom bar.</li>
+        </ul>
+        <blockquote class="q">"It's just like taking a photo for a plant-ID app I've used before, I knew right away."<cite>P5 &middot; Sofia</cite></blockquote>
+        <blockquote class="q">"I almost pressed the wrong icon, but I saw 'Identify' at the bottom and got it."<cite>P4 &middot; Carlos</cite></blockquote>
+      </div>
+      <div class="mock-screen">
+        Identify Plant screen — camera capture, upload &amp; URL options
+        <div class="badge-flag">1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Theme 2 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Theme #2 &middot; The healthy/unhealthy distinction isn't always noticed</h2></div>
+    <div class="split">
+      <div class="theme-evidence">
+        <div class="stat-chip"><span class="dot" style="background:var(--orange);"></span>4 of 5 correctly described the difference in guidance</div>
+        <ul>
+          <li>Most participants could compare a maintenance-style recommendation against an urgent, action-oriented one for a stressed plant.</li>
+          <li>Diego picked two plants that both looked fine to him, so he never triggered the "at-risk" version of the recommendation and couldn't complete the comparison.</li>
+          <li>The distinction lives almost entirely in the copy &mdash; nothing in the layout itself signals severity at a glance.</li>
+        </ul>
+        <blockquote class="q">"This one just says 'keep doing what you're doing,' but the other one told me exactly what was wrong with the leaves &mdash; that's helpful."<cite>P3 &middot; Aline</cite></blockquote>
+        <blockquote class="q">"Honestly they looked kind of the same to me, I wasn't sure which one was supposed to be sick."<cite>P2 &middot; Diego</cite></blockquote>
+      </div>
+      <div class="mock-screen">
+        Recommendation card — care tips + Save/Share
+        <div class="badge-flag">2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Theme 3 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Theme #3 &middot; The path to the feed exists, but no one takes it unprompted</h2></div>
+    <div class="split">
+      <div class="theme-evidence">
+        <div class="stat-chip"><span class="dot" style="background:var(--orange);"></span>Only 3 of 5 reached the community feed on their own</div>
+        <ul>
+          <li>After reading recommendations, two participants closed the flow entirely &mdash; the recommendation screen read as a finished answer, not a step in a longer journey.</li>
+          <li>The link to the feed reads as promotional rather than as more of the content the user just asked for.</li>
+        </ul>
+        <blockquote class="q">"I got my answer, so I just closed it &mdash; I didn't think there was anything else to check."<cite>P4 &middot; Carlos</cite></blockquote>
+        <blockquote class="q">"I saw 'see more in the feed' but it looked like an ad, so I skipped it at first."<cite>P2 &middot; Diego</cite></blockquote>
+      </div>
+      <div class="mock-screen">
+        Community feed — posts from other plant owners
+        <div class="badge-flag">3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Theme 4 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Theme #4 &middot; The sign-up nudge converts about half the time</h2></div>
+    <div class="split">
+      <div class="theme-evidence">
+        <div class="stat-chip"><span class="dot" style="background:var(--orange);"></span>3 of 5 completed sign-up/login when prompted to save</div>
+        <ul>
+          <li>Drop-off had two distinct causes, not one: wanting to browse more before committing, and expecting a shortcut that wasn't there.</li>
+          <li>Aline delayed sign-up on purpose, wanting to explore more of the app first before creating an account.</li>
+          <li>Carlos expected a one-tap Google option, like he uses elsewhere, and didn't find one on the register screen he landed on.</li>
+        </ul>
+        <blockquote class="q">"I'd sign up, but let me look around a little more before typing my email."<cite>P3 &middot; Aline</cite></blockquote>
+        <blockquote class="q">"Where's the button to just use Google? I don't want to make a new password."<cite>P4 &middot; Carlos</cite></blockquote>
+      </div>
+      <div class="mock-screen">
+        Register / Login screens — logged-out Home CTA
+        <div class="badge-flag">4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15. Divider: Insights & Recommendations -->
+<section class="slide slide--divider">
+  <div class="slide-inner">
+    <h2>Insights &amp; Recommendations</h2>
+    <p>What the four themes mean for the next iteration of Flora Hub.</p>
+  </div>
+  <div class="brand-tag">FLORA HUB</div>
+</section>
+
+<!-- 16. Research insights -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Research insights</h2></div>
+    <div class="insight-flow">
+      <div class="insight-item">
+        <div class="insight-badge">1</div>
+        <div class="insight-panel"><p>The priority-screen strategy is validated &mdash; 100% of participants completed the two highest-priority actions, identify and view recommendations, with zero moderator support.</p></div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-badge">2</div>
+        <div class="insight-panel"><p>Differentiated guidance needs a clearer visual signal &mdash; the healthy/unhealthy distinction currently relies on reading body copy alone.</p></div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-badge">3</div>
+        <div class="insight-panel"><p>The recommendation screen reads as an endpoint. Without an explicit next step, most participants have no reason to continue into the feed.</p></div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-badge">4</div>
+        <div class="insight-panel"><p>Account-creation friction is uneven &mdash; sign-up works for confident users but stalls for those wanting a Google shortcut or more time browsing first.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17. Recommendations -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar"></span><h2 class="title">Recommendations</h2></div>
+    <div class="reco-panel">
+      <div class="reco-item">
+        <div class="reco-num">1</div>
+        <p>Add a visual severity indicator &mdash; an icon and color, not just copy &mdash; to the recommendation card, so healthy vs. at-risk is obvious before reading a word.<span class="theme-ref">Addresses Theme #2</span></p>
+      </div>
+      <div class="reco-item">
+        <div class="reco-num">2</div>
+        <p>Replace the plain "see more in the feed" text link with a content-preview card directly under the recommendation, so continuing into the feed feels like more of what the user just asked for, not an ad.<span class="theme-ref">Addresses Theme #3</span></p>
+      </div>
+      <div class="reco-item">
+        <div class="reco-num">3</div>
+        <p>Give every unauthenticated screen a one-tap Google sign-in option (already present on Login, missing on Register), and add a lightweight "save for later" affordance that doesn't force immediate account creation.<span class="theme-ref">Addresses Theme #4</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18. Thank you -->
+<section class="slide">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="heading-row" style="justify-content:center;"><h2 class="title">Thank you!</h2></div>
+    <div class="connect-panel">
+      <p>Thanks for reading the Flora Hub usability study research presentation. I'd love to hear your feedback or talk more about the project.</p>
+      <p class="contact">Pedro Canuto &nbsp;&middot;&nbsp; data.canuto@gmail.com</p>
+      <p style="margin-top:18px;"><a href="flora-hub-case-study.html">&larr; Back to the full case study</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+  function openLightbox(src, alt){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('is-open');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('is-open');
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>

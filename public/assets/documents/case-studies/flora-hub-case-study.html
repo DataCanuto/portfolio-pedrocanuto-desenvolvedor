@@ -219,6 +219,8 @@
   .findings2{ display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:36px; }
   .findings-col h4{ color:var(--orange); font-size:17px; margin-bottom:16px; }
   .finding-box{ background:var(--panel); border-radius:8px; padding:20px; }
+  .finding-box.pending{ background:transparent; border:1.5px dashed var(--panel-line); display:flex; align-items:center; justify-content:center; min-height:140px; text-align:center; }
+  .finding-box.pending p{ margin:0; font-size:14px; font-style:italic; color:#9AA0A6; line-height:1.6; }
   .finding-row{ display:flex; gap:14px; margin-bottom:16px; }
   .finding-row:last-child{ margin-bottom:0; }
   .finding-badge{
@@ -658,25 +660,27 @@
 <section class="slide slide--content">
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--orange)"></span><h2 class="title">Usability study: findings</h2></div>
-    <p class="subtitle">Two rounds of moderated usability studies were run with five participants each, mixing plant hobbyists and complete beginners.</p>
+    <p class="subtitle">The first round was an unmoderated remote study with five participants &mdash; a mix of plant hobbyists and complete beginners &mdash; testing whether people could complete Flora Hub's highest-priority actions with no facilitator present.</p>
     <div class="findings2">
       <div class="findings-col">
         <h4>Round 1 findings</h4>
         <div class="finding-box">
-          <div class="finding-row"><div class="finding-badge">1</div><p>Participants didn't notice the safety badge because it sat below the fold.</p></div>
-          <div class="finding-row"><div class="finding-badge">2</div><p>Several users tried to swipe between plant photos, expecting gallery-style browsing.</p></div>
-          <div class="finding-row"><div class="finding-badge">3</div><p>The &ldquo;Identify&rdquo; icon was confused with a generic camera or settings button.</p></div>
+          <div class="finding-row"><div class="finding-badge">1</div><p>All 5 participants identified a plant and opened its recommendations unaided &mdash; the core action holds up with zero moderator support.</p></div>
+          <div class="finding-row"><div class="finding-badge">2</div><p>The healthy-vs-unhealthy distinction is easy to miss: it lives entirely in the body copy, with no visual severity cue on the card itself.</p></div>
+          <div class="finding-row"><div class="finding-badge">3</div><p>The recommendation screen reads as a dead end &mdash; only 3 of 5 participants continued on to the community feed without being asked to.</p></div>
+          <div class="finding-row"><div class="finding-badge">4</div><p>The sign-up nudge converted for only 3 of 5: some wanted to browse more before creating an account, others expected a one-tap Google option that wasn't there.</p></div>
         </div>
       </div>
       <div class="findings-col">
         <h4>Round 2 findings</h4>
-        <div class="finding-box">
-          <div class="finding-row"><div class="finding-badge">1</div><p>Moving the safety badge directly under the plant name resolved the visibility issue.</p></div>
-          <div class="finding-row"><div class="finding-badge">2</div><p>Adding swipe gestures to the photo carousel matched participants' expectations.</p></div>
-          <div class="finding-row"><div class="finding-badge">3</div><p>Relabeling the button &ldquo;Identify a plant&rdquo; with a leaf-and-camera icon removed the confusion.</p></div>
+        <div class="finding-box pending">
+          <p>To be completed after the second usability study, planned for the next course in this certificate program.</p>
         </div>
       </div>
     </div>
+    <p class="subtitle" style="margin-top:24px;">
+      <a href="research-presentation.html" target="_blank" rel="noopener">View the full unmoderated usability study research presentation &rarr;</a>
+    </p>
   </div>
 </section>
 
