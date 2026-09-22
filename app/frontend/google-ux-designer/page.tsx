@@ -7,6 +7,7 @@ import {
   ResearchPlan,
   UserJourney,
   WireframesCarousel,
+  MockupsShowcase,
 } from '@/components/Projects/GoogleUXDesigner';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
@@ -17,6 +18,7 @@ import {
   ClipboardList,
   Compass,
   Layers,
+  Sparkles,
   ExternalLink,
 } from 'lucide-react';
 
@@ -28,6 +30,7 @@ export default function GoogleUXDesignerPage() {
     { id: 'research', label: 'Pesquisa', icon: <ClipboardList size={16} /> },
     { id: 'user-journey', label: 'Jornada do Usuário', icon: <Compass size={16} /> },
     { id: 'wireframes', label: 'Wireframes', icon: <Layers size={16} /> },
+    { id: 'mockups', label: 'Mockups', icon: <Sparkles size={16} /> },
   ];
 
   return (
@@ -128,6 +131,9 @@ export default function GoogleUXDesignerPage() {
 
       {/* Wireframes & Prototyping */}
       <WireframesCarousel />
+
+      {/* Mockups & High-Fidelity Prototype */}
+      <MockupsShowcase />
 
       {/* Footer */}
       <Footer />
