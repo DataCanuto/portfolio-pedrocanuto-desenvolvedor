@@ -229,9 +229,40 @@
   }
   .finding-row p{ margin:0; font-size:14.5px; line-height:1.55; padding-top:3px; }
 
+  /* ---------- Placeholder note (AI-generated / pending team Figma asset) ---------- */
+  .placeholder-note{
+    display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-size:12.5px;
+    font-style:italic; color:#9AA0A6;
+  }
+  .placeholder-note::before{ content:"\26A0"; font-style:normal; }
+  .panel.pending{ border:1.5px dashed var(--panel-line); background:transparent; color:#9AA0A6; }
+  .panel.pending p{ margin:0 0 4px; font-size:14.5px; line-height:1.6; }
+
   /* ---------- Mockups grid ---------- */
   .mock-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:44px; }
-  .mock-card{ aspect-ratio:9/16; background:var(--panel); border-radius:14px; display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; color:#80868B; font-size:13.5px; }
+  .mock-card{ aspect-ratio:9/16; background:var(--panel); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
+  .mock-card img{ width:100%; flex:1 1 auto; min-height:0; object-fit:cover; cursor:zoom-in; }
+  .mock-card span{ text-align:center; padding:10px 8px; font-size:13px; font-weight:600; color:var(--ink); background:#fff; }
+
+  /* ---------- Figma workflow (tutorial) ---------- */
+  .flow-steps{ counter-reset:flow; margin-top:44px; display:flex; flex-direction:column; gap:0; }
+  .flow-step{ display:grid; grid-template-columns:56px 1fr; gap:20px; padding:22px 0; border-bottom:1px solid var(--panel-line); }
+  .flow-step:last-child{ border-bottom:none; }
+  .flow-num{
+    counter-increment:flow; width:40px; height:40px; border-radius:50%; background:var(--green); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px;
+  }
+  .flow-num::before{ content: counter(flow); }
+  .flow-step h4{ margin:0 0 6px; font-size:17px; color:var(--ink); font-weight:600; }
+  .flow-step p{ margin:0; font-size:14.5px; line-height:1.65; }
+  .flow-step ul{ margin:8px 0 0; padding-left:18px; font-size:14.5px; line-height:1.6; }
+  .flow-tag{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; padding:2px 8px; border-radius:10px; background:#E6F4EA; color:var(--green); margin-left:10px; vertical-align:middle; }
+  .checklist{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:14px 32px; margin-top:36px; }
+  .checklist li{ position:relative; padding-left:32px; font-size:15px; line-height:1.55; color:var(--ink); }
+  .checklist li::before{
+    content:"\2713"; position:absolute; left:0; top:0; width:22px; height:22px; border-radius:6px;
+    background:var(--green); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
 
   /* ---------- Accessibility cards ---------- */
   .a11y-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:50px; }
@@ -717,13 +748,17 @@
     <div class="cols2 narrowgap" style="margin-top:30px;">
       <div>
         <p style="text-align:center; color:var(--green); font-weight:600; margin-bottom:14px;">Before usability study</p>
-        <div class="panel" style="min-height:280px;">Plant detail screen &mdash; before</div>
+        <div class="panel pending" style="min-height:280px;">
+          <p>Early high-fidelity mockup &mdash; safety badge below the fold, smaller type, three competing buttons.</p>
+          <p class="placeholder-note">pending image &mdash; see visual-assets list</p>
+        </div>
       </div>
       <div>
         <p style="text-align:center; color:var(--green); font-weight:600; margin-bottom:14px;">After usability study</p>
-        <div class="panel" style="min-height:280px;">Plant detail screen &mdash; after</div>
+        <div class="panel" style="min-height:280px;"><img class="panel-img" src="digital-mockups/plant-detail.png" alt="Refined plant detail and care guide mockup showing the safety badge above the fold and a single Save call-to-action." onclick="openLightbox(this.src, this.alt)"></div>
       </div>
     </div>
+    <p class="placeholder-note">Screens shown are AI-generated placeholders standing in for the team's Figma file (see the note at the end of this case study) &mdash; they will be swapped for the final Figma exports under the same file names.</p>
   </div>
 </section>
 
@@ -732,11 +767,152 @@
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Mockups</h2></div>
     <div class="mock-grid">
-      <div class="mock-card">Home screen</div>
-      <div class="mock-card">Plant identification camera</div>
-      <div class="mock-card">Plant detail &amp; care guide</div>
-      <div class="mock-card">Community feed</div>
+      <div class="mock-card"><img src="digital-mockups/home-screen.png" alt="Home screen mockup, login and logoff states." onclick="openLightbox(this.src, this.alt)"><span>Home screen</span></div>
+      <div class="mock-card"><img src="digital-mockups/identify-camera.png" alt="Plant identification camera mockup." onclick="openLightbox(this.src, this.alt)"><span>Plant identification camera</span></div>
+      <div class="mock-card"><img src="digital-mockups/plant-detail.png" alt="Plant detail and care guide mockup." onclick="openLightbox(this.src, this.alt)"><span>Plant detail &amp; care guide</span></div>
+      <div class="mock-card"><img src="digital-mockups/community-feed.png" alt="Community feed mockup." onclick="openLightbox(this.src, this.alt)"><span>Community feed</span></div>
     </div>
+  </div>
+</section>
+
+<!-- 19b. Divider: Figma workflow -->
+<section class="slide slide--divider div-green">
+  <div class="slide-inner">
+    <h2>From wireframe<br>to mockup</h2>
+    <div class="rule-v"></div>
+    <ul>
+      <li>Preparing the Figma file</li>
+      <li>Visual design decisions</li>
+      <li>Refining with design principles</li>
+      <li>Building the high-fidelity prototype</li>
+    </ul>
+  </div>
+  <div class="brand">FLORA HUB</div>
+</section>
+
+<!-- 19c. Figma workflow: preparing the file -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Figma workflow: preparing the file<span class="flow-tag">Course 5 recap</span></h2></div>
+    <p class="subtitle">Before drawing a single high-fidelity screen, the low-fidelity prototype and wireframes were reviewed one more time, and the Figma file was set up so the mockup work could move fast and stay consistent. This is the sequence the team can reuse for every new screen.</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num"></div>
+        <div>
+          <h4>Create a page and frames</h4>
+          <p>A dedicated <strong>Mockups</strong> page was added to the Figma file, with one frame per screen, named to match its wireframe (e.g. &ldquo;Home &ndash; logged in&rdquo;, &ldquo;Identify &ndash; camera&rdquo;). Low creative-energy setup work like this is a good task to save for a break between harder design decisions.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num"></div>
+        <div>
+          <h4>Build a sticker sheet (design system)</h4>
+          <p>A separate page holds the reusable design elements &mdash; typography scale, color palette, buttons and icons &mdash; each saved as a Figma <strong>component</strong>. Assets get copied from the sticker sheet into screens, shared with the team, and updated everywhere at once whenever the original changes.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num"></div>
+        <div>
+          <h4>Add grids</h4>
+          <p>Layout grids and auto layout keep text, icons, and components aligned consistently across every frame &mdash; precise spacing and alignment choices were left for the final refinement pass, after the main elements were placed.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num"></div>
+        <div>
+          <h4>Review the earlier design phases</h4>
+          <p>Business requirements, Lucia's persona and problem statement, and the Round 1 usability findings were revisited before making new design decisions &mdash; keeping the mockups aligned with real user needs instead of drifting, like a game of telephone, away from the original research.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19d. Figma workflow: visual design decisions -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Figma workflow: visual design decisions<span class="flow-tag">Course 5 recap</span></h2></div>
+    <div class="cols2" style="margin-top:36px;">
+      <div class="item">
+        <div class="icon-circle" style="background:var(--green)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        </div>
+        <h3 class="green">Typography</h3>
+        <p>Poppins for headings and Roboto for body text create a clear hierarchy: bold display type for plant names and calls-to-action, smaller regular weight for care instructions &mdash; legible, consistent, and saved as text styles so every screen reuses the same scale.</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--green)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2a10 10 0 100 20 3 3 0 003-3c0-.6-.2-1.1-.5-1.5-.3-.4-.5-.9-.5-1.5a2 2 0 012-2h1.5a3.5 3.5 0 003.5-3.5A9.9 9.9 0 0012 2z"/></svg>
+        </div>
+        <h3 class="green">Color (60-30-10 rule)</h3>
+        <p>Warm off-white as the neutral (60%), Flora Hub green for complementary elements like cards and icons (30%), and a single accent color reserved for the safety badge and primary buttons (10%) &mdash; so attention lands exactly where it should.</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--green)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M8 7l1.5-3h5L16 7"/></svg>
+        </div>
+        <h3 class="green">Buttons &amp; icons</h3>
+        <p>Headers and calls-to-action were condensed into simple, recognizable icons wherever possible, using Material Design's standard shapes for common actions (camera, save, share) so custom icons were reserved for Flora Hub-specific actions, like the safety badge.</p>
+      </div>
+      <div class="item">
+        <div class="icon-circle" style="background:var(--green)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 20V9"/></svg>
+        </div>
+        <h3 class="green">Containment &amp; negative space</h3>
+        <p>Fill and rounded corners group each care-info row (light, water, temperature), dividers separate feed posts, and generous margins and line-height keep the plant-detail screen readable at a glance instead of overwhelming.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19e. Figma workflow: refining -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Figma workflow: refining the mockups<span class="flow-tag">Course 5 recap</span></h2></div>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <div class="a11y-badge" style="background:var(--green)">1</div>
+        <p><strong>Visual design principles.</strong> Emphasis, hierarchy, scale, and proportion were used to make the safety badge and &ldquo;Save&rdquo; button the most prominent elements on the plant detail screen &mdash; answering Lucia's most urgent question first.</p>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-badge" style="background:var(--green)">2</div>
+        <p><strong>Gestalt principles.</strong> Common region groups each care-info row into its own card; proximity keeps the badge next to the plant name; similarity gives every action icon the same visual weight so users learn the pattern once.</p>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-badge" style="background:var(--green)">3</div>
+        <p><strong>Gestures, motion &amp; navigation.</strong> A tap opens the camera, a swipe browses plant photos, and a fixed bottom tab bar keeps identify, community, and profile one thumb-reach away &mdash; the same navigation hub tested in the low-fidelity prototype.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19f. Figma workflow: high-fidelity prototype build -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Figma workflow: building the prototype<span class="flow-tag">Course 5 recap</span></h2></div>
+    <p class="subtitle">With every screen mocked up, the final step connects them into a clickable prototype the team can test and share.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-badge" style="background:var(--green)">1</div>
+        <p>Organize the mockup frames in the same navigation order as Lucia's user journey map.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge" style="background:var(--green)">2</div>
+        <p>Connect screens in Figma's Prototype panel &mdash; each interaction starts at a trigger element and ends at its destination frame.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge" style="background:var(--green)">3</div>
+        <p>Preview with Present, confirm every gesture feels clear and natural, then share the prototype link with view access.</p>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>Frames created for every screen in the prototype</li>
+      <li>Typography, color, containment, and other core elements applied</li>
+      <li>Visual design and Gestalt principles used to refine each screen</li>
+      <li>Navigation and interactive affordances (buttons, icons, menus) added</li>
+      <li>Screens connected in a logical, user-tested order</li>
+      <li>Animations added to simulate real interactions</li>
+    </ul>
   </div>
 </section>
 
@@ -746,9 +922,20 @@
     <div class="split">
       <div>
         <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">High-fidelity prototype</h2></div>
-        <p style="margin-top:26px; line-height:1.7;"><a href="#" style="color:var(--blue);">View the high-fidelity prototype</a><br><br>Explore the full clickable prototype covering onboarding, plant identification, care tracking, and community interaction.</p>
+        <p style="margin-top:26px; line-height:1.7;">The team is finishing the connected click-through in Figma; the link below will be updated once it's shared.<br><br>Explore the full clickable prototype covering onboarding, plant identification, care tracking, and community interaction.</p>
+        <p class="placeholder-note">Figma prototype link pending</p>
       </div>
-      <div class="panel">Screenshot of high-fidelity prototype with connections</div>
+      <div class="panel"><img class="panel-img" src="digital-mockups/refined-designs.png" alt="All four Flora Hub high-fidelity mockups shown side by side: home screen, plant identification camera, plant detail and care guide, and community feed." onclick="openLightbox(this.src, this.alt)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20b. Note on placeholder visuals -->
+<section class="slide slide--content" style="min-height:auto; padding:56px 24px;">
+  <div class="slide-inner">
+    <div class="panel pending" style="text-align:left; align-items:flex-start; padding:28px 32px;">
+      <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">A note on the mockups shown above</p>
+      <p>The Figma file for Flora Hub is being built collaboratively by the TCC team, so the mockup and prototype screens on this page are AI-generated placeholders standing in for that work. They will be replaced by the team's real Figma exports once ready, keeping the same file names (<code>home-screen.png</code>, <code>identify-camera.png</code>, <code>plant-detail.png</code>, <code>community-feed.png</code>) so this page updates automatically.</p>
     </div>
   </div>
 </section>
