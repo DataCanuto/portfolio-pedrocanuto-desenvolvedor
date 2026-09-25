@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { id: 'certifications', label: 'Certificados' },
   { id: 'projetos-area', label: 'Projetos' },
   { id: 'githubArea', label: 'Git-hub' },
-  { href: '/portfolio', label: 'Portfólio' },
+  { href: '/portfolio', label: 'Currículo' },
   { id: 'contact', label: 'Contato' },
 ];
 

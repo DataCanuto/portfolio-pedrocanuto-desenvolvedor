@@ -22,6 +22,16 @@ export const LANGUAGE_COLORS: Record<string, string> = {
 
 export const projectsTimeline: ProjectTimelineEntry[] = [
   {
+    id: 'flora-hub-backend',
+    title: 'Flora Hub Backend',
+    year: 2026,
+    context: 'Projeto Pessoal',
+    language: { name: 'Java', color: LANGUAGE_COLORS.Java },
+    resume:
+      'Backend em Spring Boot com Spring AI: a foto de uma planta é enviada ao GPT-4o para identificação, e um motor de regras cruza os cuidados da espécie com o clima da OpenWeather para gerar recomendações. Evolução do projeto Spring AI Budgeting (DIO).',
+    href: '/backend/flora-hub',
+  },
+  {
     id: 'google-ux-designer',
     title: 'UX Designer',
     year: 2026,
