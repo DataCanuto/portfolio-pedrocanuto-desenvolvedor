@@ -20,6 +20,16 @@ export default function Backend() {
 
   const projects = [
     {
+      id: 'flora-hub',
+      title: 'Flora Hub Backend',
+      slug: 'flora-hub',
+      description:
+        'Backend com Spring AI e GPT-4o: recebe a foto de uma planta, identifica a espécie e cruza os cuidados ideais com o clima da OpenWeather em um motor de regras que gera recomendações.',
+      company: 'Projeto Pessoal',
+      technologies: ['Java', 'Spring Boot', 'Spring AI', 'OpenAI', 'PostgreSQL'],
+      icon: '🌿',
+    },
+    {
       id: 'pedro-canuto-musico',
       title: 'Pedro Canuto Música',
       slug: 'pedro-canuto-musico',
