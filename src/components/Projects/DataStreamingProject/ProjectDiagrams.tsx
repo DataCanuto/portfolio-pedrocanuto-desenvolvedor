@@ -116,7 +116,7 @@ export default function ProjectDiagrams() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-dark-bg border border-dark-border rounded-xl p-8 overflow-x-auto"
+            className="bg-dark-bg border border-dark-border rounded-xl p-5 md:p-8 overflow-x-auto"
           >
             <div className="mb-4">
               <h3 className="text-2xl font-bold text-accent-orange mb-2">
@@ -138,13 +138,14 @@ export default function ProjectDiagrams() {
             </div>
 
             {/* Botões de Navegação */}
-            <div className="flex justify-between items-center mt-8 pt-8 border-t border-dark-border">
+            <div className="flex justify-between items-center gap-3 mt-8 pt-8 border-t border-dark-border">
               <button
                 onClick={handlePrev}
-                className="flex items-center gap-2 px-6 py-3 bg-dark-bg-secondary border border-accent-orange text-accent-orange rounded-lg font-semibold hover:bg-accent-orange hover:text-black transition-all duration-300 group"
+                aria-label="Anterior"
+                className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-dark-bg-secondary border border-accent-orange text-accent-orange rounded-lg font-semibold hover:bg-accent-orange hover:text-black transition-all duration-300 group"
               >
                 <ChevronLeft size={20} className="group-hover:translate-x-1 transition-transform" />
-                Anterior
+                <span className="hidden sm:inline">Anterior</span>
               </button>
 
               <div className="flex gap-2">
@@ -162,9 +163,10 @@ export default function ProjectDiagrams() {
 
               <button
                 onClick={handleNext}
-                className="flex items-center gap-2 px-6 py-3 bg-accent-orange text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group"
+                aria-label="Próximo"
+                className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-accent-orange text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group"
               >
-                Próximo
+                <span className="hidden sm:inline">Próximo</span>
                 <ChevronRight size={20} className="group-hover:-translate-x-1 transition-transform" />
               </button>
             </div>

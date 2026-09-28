@@ -74,7 +74,7 @@ export default function Dashboard({
               <Calendar className="inline mr-2" size={16} />
               Período de Análise
             </label>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {(Object.keys(timeFrameLabels) as Array<keyof typeof timeFrameLabels>).map((tf) => (
                 <button
                   key={tf}

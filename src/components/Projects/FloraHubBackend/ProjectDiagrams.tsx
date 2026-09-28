@@ -57,7 +57,7 @@ export default function ProjectDiagrams() {
               <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
                 {idx + 1}
               </div>
-              <div className="flex-grow">
+              <div className="flex-grow min-w-0 break-words">
                 <div className="flex flex-wrap items-center gap-2">
                   <h4 className="text-lg font-bold text-dark-header-text">{step.title}</h4>
                   <span
@@ -243,20 +243,21 @@ export default function ProjectDiagrams() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="bg-dark-bg border border-dark-border rounded-xl p-8 mb-8"
+          className="bg-dark-bg border border-dark-border rounded-xl p-5 md:p-8 mb-8"
         >
           <h3 className="text-2xl font-bold text-dark-header-text mb-2">{currentDiagram?.name}</h3>
           <p className="text-gray-400 text-sm mb-6">{currentDiagram?.description}</p>
           {currentDiagram?.content}
         </motion.div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-3">
           <button
             onClick={handlePrev}
-            className="flex items-center gap-2 px-6 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-300 hover:border-accent-orange hover:text-accent-orange transition-all duration-300"
+            aria-label="Anterior"
+            className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-300 hover:border-accent-orange hover:text-accent-orange transition-all duration-300"
           >
             <ChevronLeft size={20} />
-            Anterior
+            <span className="hidden sm:inline">Anterior</span>
           </button>
 
           <div className="flex gap-2">
@@ -272,9 +273,10 @@ export default function ProjectDiagrams() {
 
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-6 py-3 bg-accent-orange rounded-lg text-black font-bold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
+            aria-label="Próximo"
+            className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-accent-orange rounded-lg text-black font-bold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
           >
-            Próximo
+            <span className="hidden sm:inline">Próximo</span>
             <ChevronRight size={20} />
           </button>
         </div>
