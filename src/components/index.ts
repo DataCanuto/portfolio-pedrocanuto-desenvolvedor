@@ -10,7 +10,6 @@ export { FeaturedProject } from './Projects/FeaturedProject';
 export { ServicesCatalog } from './Services/ServicesCatalog';
 export { Certifications } from './Certificates/Certifications';
 export { CertificateViewer } from './Certificates/CertificateViewer';
-export { CertificateGallery } from './Certificates/CertificateGallery';
 export { Contact } from './Contact/ContactSection';
 export { Footer } from './Footer/Footer';
 export { Portfolio } from './Portfolio/Portfolio';
