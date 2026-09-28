@@ -74,15 +74,15 @@ export default function ProjectOverview() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12"
         >
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-dark-bg-secondary border border-dark-border rounded-xl p-6 hover:border-accent-orange/50 transition-all duration-300"
+              className="bg-dark-bg-secondary border border-dark-border rounded-xl p-4 md:p-6 hover:border-accent-orange/50 transition-all duration-300"
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3">
                 <div className="p-2 bg-accent-orange/10 rounded-lg">{stat.icon}</div>
                 <p className="text-gray-400 text-sm font-semibold">{stat.label}</p>
               </div>

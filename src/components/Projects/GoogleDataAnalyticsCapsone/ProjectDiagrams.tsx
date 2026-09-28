@@ -19,7 +19,7 @@ export default function ProjectDiagrams() {
             <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
               1
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0 break-words">
               <h4 className="text-lg font-bold text-dark-header-text">Importação de Dados</h4>
               <p className="text-gray-400 text-sm">Leitura de 6 arquivos CSV de atividade horária</p>
             </div>
@@ -29,7 +29,7 @@ export default function ProjectDiagrams() {
             <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
               2
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0 break-words">
               <h4 className="text-lg font-bold text-dark-header-text">Limpeza & Transformação</h4>
               <p className="text-gray-400 text-sm">Remoção de duplicatas, tratamento de nulos, conversão de tipos</p>
             </div>
@@ -39,7 +39,7 @@ export default function ProjectDiagrams() {
             <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
               3
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0 break-words">
               <h4 className="text-lg font-bold text-dark-header-text">Análise Exploratória (EDA)</h4>
               <p className="text-gray-400 text-sm">Distribuição de dados, correlações, padrões horários e semanais</p>
             </div>
@@ -49,7 +49,7 @@ export default function ProjectDiagrams() {
             <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
               4
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0 break-words">
               <h4 className="text-lg font-bold text-dark-header-text">Segmentação de Usuários</h4>
               <p className="text-gray-400 text-sm">Classificação por padrões de atividade e engajamento</p>
             </div>
@@ -59,7 +59,7 @@ export default function ProjectDiagrams() {
             <div className="flex-shrink-0 w-12 h-12 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange">
               5
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0 break-words">
               <h4 className="text-lg font-bold text-dark-header-text">Insights & Recomendações</h4>
               <p className="text-gray-400 text-sm">Descoberta de padrões para estratégias de gamificação</p>
             </div>
@@ -208,7 +208,7 @@ export default function ProjectDiagrams() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className="bg-dark-bg border border-dark-border rounded-xl p-8 mb-8"
+          className="bg-dark-bg border border-dark-border rounded-xl p-5 md:p-8 mb-8"
         >
           <h3 className="text-2xl font-bold text-dark-header-text mb-2">
             {currentDiagram?.name}
@@ -223,14 +223,15 @@ export default function ProjectDiagrams() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center gap-3"
         >
           <button
             onClick={handlePrev}
-            className="flex items-center gap-2 px-6 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-300 hover:border-accent-orange hover:text-accent-orange transition-all duration-300"
+            aria-label="Anterior"
+            className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-300 hover:border-accent-orange hover:text-accent-orange transition-all duration-300"
           >
             <ChevronLeft size={20} />
-            Anterior
+            <span className="hidden sm:inline">Anterior</span>
           </button>
 
           <div className="flex gap-2">
@@ -248,9 +249,10 @@ export default function ProjectDiagrams() {
 
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-6 py-3 bg-accent-orange rounded-lg text-black font-bold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
+            aria-label="Próximo"
+            className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-accent-orange rounded-lg text-black font-bold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
           >
-            Próximo
+            <span className="hidden sm:inline">Próximo</span>
             <ChevronRight size={20} />
           </button>
         </motion.div>

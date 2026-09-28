@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
@@ -26,7 +26,7 @@ export const Navbar = () => {
   const scrollSpyItems = navItems.filter(
     (item): item is { id: string; label: string } => 'id' in item
   );
-  const activeId = useScrollSpy(scrollSpyItems, 80);
+  const activeId = useScrollSpy(scrollSpyItems, 100);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,50 +104,62 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden text-dark-header-text"
+            className="md:hidden p-2 -mr-2 text-dark-header-text"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
             whileTap={{ scale: 0.95 }}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
-        <motion.div
-          className="md:hidden"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: isMobileMenuOpen ? 1 : 0, height: isMobileMenuOpen ? 'auto' : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="flex flex-col gap-4 py-4 border-t border-dark-border mt-4">
-            {navItems.map((item) =>
-              item.href ? (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-left px-4 py-2 rounded-md font-medium transition-all duration-300 text-dark-header-text hover:text-accent-orange hover:bg-dark-header-btn/10"
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id!)}
-                  className={cn(
-                    'text-left px-4 py-2 rounded-md font-medium transition-all duration-300',
-                    activeId === item.id
-                      ? 'text-accent-orange bg-dark-header-btn/30 shadow-md shadow-accent-orange/20 border-l-4 border-accent-orange'
-                      : 'text-dark-header-text hover:text-accent-orange hover:bg-dark-header-btn/10'
-                  )}
-                  whileHover={{ x: 4 }}
-                >
-                  {item.label}
-                </motion.button>
-              )
-            )}
-          </div>
-        </motion.div>
+        {/* Mobile Menu — desmontado quando fechado: com height 0 os botões
+            invisíveis continuavam sobre a página e capturavam os toques.
+            Anima só opacity/y: animar height 'auto' faz o framer-motion chamar
+            window.scrollTo ao medir, o que cancelava o scroll até a seção. */}
+        <AnimatePresence initial={false}>
+          {isMobileMenuOpen && (
+            <motion.div
+              id="mobile-menu"
+              className="md:hidden"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex flex-col gap-1 py-3 border-t border-dark-border mt-4 max-h-[calc(100dvh-5rem)] overflow-y-auto">
+                {navItems.map((item) =>
+                  item.href ? (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-left px-4 py-3 rounded-md font-medium transition-all duration-300 text-dark-header-text hover:text-accent-orange hover:bg-dark-header-btn/10"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <motion.button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id!)}
+                      className={cn(
+                        'text-left px-4 py-3 rounded-md font-medium transition-all duration-300',
+                        activeId === item.id
+                          ? 'text-accent-orange bg-dark-header-btn/30 shadow-md shadow-accent-orange/20 border-l-4 border-accent-orange'
+                          : 'text-dark-header-text hover:text-accent-orange hover:bg-dark-header-btn/10'
+                      )}
+                      whileHover={{ x: 4 }}
+                    >
+                      {item.label}
+                    </motion.button>
+                  )
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   );

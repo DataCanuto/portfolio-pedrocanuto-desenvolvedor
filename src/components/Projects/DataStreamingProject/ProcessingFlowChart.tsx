@@ -255,7 +255,7 @@ export default function ProcessingFlowChart({
                     <div className="flex-shrink-0 w-8 h-8 bg-accent-orange/20 rounded-full flex items-center justify-center font-bold text-accent-orange group-hover:bg-accent-orange group-hover:text-black transition-all duration-300">
                       {index + 1}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0 break-words">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="text-lg font-bold text-dark-header-text">
                           {stage.stage}

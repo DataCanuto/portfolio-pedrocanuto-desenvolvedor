@@ -105,7 +105,7 @@ export default function WireframesCarousel() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-dark-bg border border-dark-border rounded-xl p-8"
+          className="bg-dark-bg border border-dark-border rounded-xl p-5 md:p-8"
         >
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
             <div>
@@ -139,13 +139,14 @@ export default function WireframesCarousel() {
           </div>
 
           {/* Navegação */}
-          <div className="flex justify-between items-center mt-8 pt-8 border-t border-dark-border">
+          <div className="flex justify-between items-center gap-3 mt-8 pt-8 border-t border-dark-border">
             <button
               onClick={handlePrev}
-              className="flex items-center gap-2 px-6 py-3 bg-dark-bg-secondary border border-accent-orange text-accent-orange rounded-lg font-semibold hover:bg-accent-orange hover:text-black transition-all duration-300 group"
+              aria-label="Anterior"
+              className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-dark-bg-secondary border border-accent-orange text-accent-orange rounded-lg font-semibold hover:bg-accent-orange hover:text-black transition-all duration-300 group"
             >
               <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-              Anterior
+              <span className="hidden sm:inline">Anterior</span>
             </button>
 
             <div className="flex gap-2">
@@ -163,9 +164,10 @@ export default function WireframesCarousel() {
 
             <button
               onClick={handleNext}
-              className="flex items-center gap-2 px-6 py-3 bg-accent-orange text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group"
+              aria-label="Próximo"
+              className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-accent-orange text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group"
             >
-              Próximo
+              <span className="hidden sm:inline">Próximo</span>
               <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

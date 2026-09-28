@@ -213,7 +213,7 @@ export default function CustomizableFlowChart({
 
                   <div className="flex items-start gap-3 mb-3">
                     <span className="text-3xl">{m.icon}</span>
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0 break-words">
                       <h3 className="text-lg font-bold text-dark-header-text">
                         {m.name}
                       </h3>

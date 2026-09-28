@@ -228,7 +228,7 @@ export default function ArchitectureVisualization({
                     </div>
 
                     {/* Conteúdo */}
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0 break-words">
                       <h4 className="text-lg font-bold text-dark-header-text mb-1">
                         {step.title}
                       </h4>

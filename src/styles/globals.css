@@ -12,6 +12,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Headers fixos/sticky: rolagens para âncoras param abaixo do header */
+  scroll-padding-top: 5rem;
   scrollbar-width: thin;
   scrollbar-color: #FF8C00 #0F172A;
 }
