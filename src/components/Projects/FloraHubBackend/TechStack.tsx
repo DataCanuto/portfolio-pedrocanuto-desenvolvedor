@@ -47,7 +47,7 @@ export default function TechStack() {
         { name: 'OpenWeather API', description: 'Temperatura, umidade, vento e chuva por coordenada', badge: 'API' },
         { name: 'RestClient / HttpClient', description: 'Chamadas externas com timeout e sem redirects', badge: 'HTTP' },
         { name: 'JUnit 5', description: 'Testes do motor de regras e do fluxo de análise', badge: 'Testing' },
-        { name: 'React + Vite', description: 'Frontend de testes usado na simulação', badge: 'Frontend' },
+        { name: 'Preact + Vite', description: 'Frontend de testes usado na simulação', badge: 'Frontend' },
       ],
       color: 'from-orange-500/20 to-orange-600/20',
       borderColor: 'border-orange-500/30',

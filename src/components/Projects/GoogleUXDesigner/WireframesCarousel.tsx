@@ -3,12 +3,33 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PenLine, Smartphone, Workflow, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import {
+  PenLine,
+  Smartphone,
+  Workflow,
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  LucideIcon,
+} from 'lucide-react';
 
 const FIGMA_PROTOTYPE_URL =
   'https://www.figma.com/proto/Z9ti5hkQhXKvoyD1NjFLLS/UX-DESIGN---GOOGLE-PROJECT?node-id=20-5&p=f&t=1ghFkNSFQzDJtrt5-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=20%3A5&show-proto-sidebar=1';
 
-const stages = [
+const HIGH_FIDELITY_PROTOTYPE_URL = '/assets/documents/case-studies/high-fidelity-prototype.pdf';
+
+interface Stage {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+  description: string;
+  imagePath: string;
+  link?: string;
+  linkLabel?: string;
+}
+
+const stages: Stage[] = [
   {
     id: 'paper',
     name: 'Wireframe de Papel',
@@ -33,6 +54,16 @@ const stages = [
       'Todas as telas conectadas ponta a ponta no Figma, simulando o fluxo real de identificar uma planta, checar o selo de segurança e explorar a comunidade.',
     imagePath: '/assets/documents/case-studies/wireframes/low-fidelity-prototype.png',
     link: FIGMA_PROTOTYPE_URL,
+  },
+  {
+    id: 'hifi',
+    name: 'Protótipo de Alta Fidelidade',
+    icon: Sparkles,
+    description:
+      'MVP navegável com tipografia, cor e componentes finais aplicados — pronto para teste de usabilidade e compartilhamento como protótipo funcional do Flora Hub.',
+    imagePath: '/assets/documents/case-studies/digital-mockups/high-fidelity-prototype-flow.png',
+    link: HIGH_FIDELITY_PROTOTYPE_URL,
+    linkLabel: 'Abrir protótipo de alta fidelidade (PDF)',
   },
 ];
 
@@ -119,7 +150,7 @@ export default function WireframesCarousel() {
                 rel="noopener noreferrer"
                 className="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
               >
-                Ver protótipo no Figma
+                {currentStage.linkLabel ?? 'Ver protótipo no Figma'}
                 <ExternalLink size={18} />
               </a>
             )}
