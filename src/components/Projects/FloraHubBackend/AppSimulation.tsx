@@ -48,7 +48,7 @@ export default function AppSimulation() {
           </h2>
           <p className="text-gray-400 text-lg max-w-3xl">
             Resposta real do backend para a foto de uma Rosa do Deserto (
-            <em>Adenium obesum</em>), exibida pelo frontend de testes em React. Cada aba mostra de
+            <em>Adenium obesum</em>), exibida pelo frontend de testes em Preact. Cada aba mostra de
             onde vem cada parte da resposta.
           </p>
         </motion.div>

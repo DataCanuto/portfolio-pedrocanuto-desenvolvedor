@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 
 const CASE_STUDY_URL = '/assets/documents/case-studies/flora-hub-case-study.html';
+const HIGH_FIDELITY_PROTOTYPE_URL = '/assets/documents/case-studies/high-fidelity-prototype.pdf';
 
 const mockups = [
   {
@@ -82,10 +83,20 @@ export default function MockupsShowcase() {
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
             Mockups &amp; Protótipo de Alta Fidelidade
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-gray-400 text-lg max-w-2xl mb-6">
             Do wireframe de baixa fidelidade aos mockups finais do Flora Hub, aplicando tipografia,
             cor, componentes e os achados do estudo de usabilidade.
           </p>
+
+          <a
+            href={HIGH_FIDELITY_PROTOTYPE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
+          >
+            Testar o MVP &mdash; protótipo de alta fidelidade (PDF)
+            <ExternalLink size={18} />
+          </a>
         </motion.div>
 
         {/* Grid de mockups */}
@@ -128,9 +139,11 @@ export default function MockupsShowcase() {
         >
           <AlertTriangle size={18} className="text-accent-orange shrink-0 mt-0.5" />
           <p>
-            As telas acima são imagens geradas por IA, usadas como placeholder enquanto o arquivo
-            Figma do Flora Hub é desenvolvido pela equipe do TCC. Serão substituídas pelos exports
-            finais do Figma mantendo os mesmos nomes de arquivo.
+            As telas em grade acima são imagens geradas por IA, usadas como placeholder enquanto os
+            exports individuais do Figma são finalizados. O protótipo de alta fidelidade completo
+            (fluxo navegável, pronto para teste) já está disponível para download no botão acima —
+            as imagens isoladas serão substituídas pelos exports finais do Figma mantendo os mesmos
+            nomes de arquivo.
           </p>
         </motion.div>
 

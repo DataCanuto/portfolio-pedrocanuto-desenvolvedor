@@ -67,10 +67,19 @@ export default function GoogleUXDesignerPage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href="/assets/documents/case-studies/flora-hub-case-study.html"
+              href="/assets/documents/case-studies/high-fidelity-prototype.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
+            >
+              <ExternalLink size={20} />
+              Testar MVP &mdash; Protótipo de Alta Fidelidade
+            </a>
+            <a
+              href="/assets/documents/case-studies/flora-hub-case-study.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300 flex items-center gap-2"
             >
               <ExternalLink size={20} />
               Ver Case Study Flora Hub
