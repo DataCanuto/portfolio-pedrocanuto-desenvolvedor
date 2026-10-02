@@ -3,37 +3,19 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Github, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/UI/Button';
+import { getContact } from '@/data';
 
-const contactLinks = [
-  {
-    icon: Phone,
-    label: 'WhatsApp',
-    value: '(71) 99958-8950',
-    href: 'https://wa.me/5571999588950',
-    color: 'hover:text-green-400',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'data.canuto@gmail.com',
-    href: 'mailto:data.canuto@gmail.com',
-    color: 'hover:text-red-400',
-  },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    value: '/in/pedro-canuto-408867331',
-    href: 'https://linkedin.com/in/pedro-canuto-408867331',
-    color: 'hover:text-blue-400',
-  },
-  {
-    icon: Github,
-    label: 'GitHub',
-    value: '/DataCanuto',
-    href: 'https://github.com/DataCanuto',
-    color: 'hover:text-gray-300',
-  },
-];
+const CONTACT_STYLE = {
+  whatsapp: { icon: Phone, color: 'hover:text-green-400' },
+  email: { icon: Mail, color: 'hover:text-red-400' },
+  linkedin: { icon: Linkedin, color: 'hover:text-blue-400' },
+  github: { icon: Github, color: 'hover:text-gray-300' },
+} as const;
+
+const contactLinks = (Object.keys(CONTACT_STYLE) as (keyof typeof CONTACT_STYLE)[]).map((id) => {
+  const contact = getContact(id);
+  return { ...CONTACT_STYLE[id], label: contact.label, value: contact.display, href: contact.url };
+});
 
 export const Contact = () => {
   return (
@@ -100,7 +82,7 @@ export const Contact = () => {
           <Button
             size="lg"
             onClick={() => {
-              window.open('https://wa.me/5571999588950', '_blank');
+              window.open(getContact('whatsapp').url, '_blank');
             }}
           >
             Iniciar Conversa no WhatsApp

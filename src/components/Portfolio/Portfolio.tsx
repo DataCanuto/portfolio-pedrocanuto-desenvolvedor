@@ -2,77 +2,58 @@
 
 import { Fragment } from 'react';
 import { motion } from 'framer-motion';
+import {
+  ENGAGEMENT_LABELS,
+  education,
+  experiences,
+  formatPeriod,
+  getCertificationsByDate,
+  getContact,
+  getResumeProjects,
+  profile,
+  resumeSkillGroups,
+  technologyNames,
+  yearOf,
+  type Project,
+} from '@/data';
 
 const competencias = [
-  { label: 'Back-End', valor: 'Java, Spring Web, Spring Boot, JPA/Hibernate, APIs REST, CRUD, Programação Orientada a Objetos, UML' },
-  { label: 'Front-End', valor: 'React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS' },
-  { label: 'Banco de Dados / Infra', valor: 'PostgreSQL, H2, Docker' },
-  { label: 'Dados / Machine Learning', valor: 'Python, Pandas, NumPy, Scikit-learn, TensorFlow, OpenCV, Regex' },
-  { label: 'Design de Produto', valor: 'UX/UI Design, Figma' },
-  { label: 'Idiomas', valor: 'Português (nativo), Inglês (fluente)' },
+  ...resumeSkillGroups.map((g) => ({ label: g.label, valor: technologyNames(g.technologies).join(', ') })),
+  { label: 'Idiomas', valor: profile.languages.map((l) => `${l.name} (${l.level})`).join(', ') },
 ];
 
-const projetosFreelance = [
-  {
-    titulo: 'Sistema de Agendamentos e Vitrine de Serviços',
-    subtitulo: 'Junho/2026 · Freelance',
-    linkLabel: 'pedrocanutomusico.vercel.app',
-    href: 'https://pedrocanutomusico.vercel.app',
-    descricao:
-      'Desenvolvimento full stack, sob demanda de cliente, de aplicação web para gerenciamento de agendamentos de aulas e serviços, publicada em produção.',
-  },
-  {
-    titulo: 'Galeria Digital de Artes',
-    subtitulo: 'Dezembro/2025 · Freelance',
-    linkLabel: 'ver projeto',
-    href: 'https://datacanuto.github.io/galeria-digital-artes/catalog_mobile/',
-    descricao: 'Desenvolvimento, para cliente, de landing page front-end responsiva para exposição de artes, com filtros por categoria e acesso via QR Code.',
-  },
-  {
-    titulo: 'Pipeline de Dados — Data Flow Pipeline',
-    subtitulo: 'Janeiro/2025 · Freelance',
-    linkLabel: 'ver projeto',
-    href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/engenharia-dados/data-streaming-project',
-    descricao: 'Construção, para cliente, de pipeline em Python para análise de fluxo e gerenciamento de dados.',
-  },
-];
+const portfolioUrl = getContact('portfolio').url;
 
-const projetosDados = [
-  {
-    titulo: 'Análise de Dados — Google Data Analytics Capstone',
-    subtitulo: '2024 · Projeto de Certificação',
-    linkLabel: 'ver projeto',
-    href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/dashboards/googledataanalyticscapstone',
-    descricao:
-      'Projeto completo de ciência de dados sobre hábitos de atividade física (30 usuários Fitbit): limpeza e análise exploratória em Python (Pandas, NumPy, Matplotlib, Seaborn, Plotly) e recomendações de negócio orientadas a dados.',
-  },
-  {
-    titulo: 'Machine Learning & Visão Computacional',
-    subtitulo: '2025 · SENAI — IA na Indústria 4.0 (200h)',
-    linkLabel: 'ver projeto',
-    href: 'https://portfolio-pedrocanuto-desenvolvedor.vercel.app/engenharia-dados/machine-learning',
-    descricao:
-      'Conjunto de 20 notebooks cobrindo todo o fluxo de ciência de dados: limpeza e EDA, aprendizado supervisionado e não supervisionado, PCA e XGBoost, além de introdução à visão computacional com OpenCV (detecção facial via Haar Cascade).',
-  },
-];
+const toProjeto = (p: Project): Projeto => ({
+  titulo: p.resumeTitle ?? p.name,
+  subtitulo: [
+    formatPeriod(p.date),
+    p.context.engagement === 'curso'
+      ? [p.context.label, p.context.resumeNote && `(${p.context.resumeNote})`]
+          .filter(Boolean)
+          .join(' ')
+      : ENGAGEMENT_LABELS[p.context.engagement],
+  ].join(' · '),
+  linkLabel: 'ver projeto',
+  href: p.deployment ?? `${portfolioUrl}${p.caseStudy ?? ''}`,
+  descricao: p.resumeDescription ?? p.description ?? p.shortDescription,
+});
 
-const formacaoAcademica = [
-  'Bacharelado em Engenharia de Software — Estácio, 2026–2030 (cursando)',
-  'Técnico em Desenvolvimento de Sistemas — CIMATEC, 2025–2027 (cursando)',
-  'Bacharelado Interdisciplinar em Artes — Universidade Federal da Bahia, 2014–2019',
-  'Pós-graduação em Musicoterapia — Faculdade Alpha, 2020–2022',
-];
+const projetosFreelance = getResumeProjects('freelance').map(toProjeto);
+const projetosPessoais = getResumeProjects('pessoal').map(toProjeto);
+const projetosDados = getResumeProjects('dados').map(toProjeto);
 
-const certificacoes = [
-  'Santander — AI Java Back-End, 2026',
-  'Globant — Java Spring Boot AI, 2026',
-  'SENAI — Inteligência Artificial Industrial, 2025',
-  'Santander — Ciência de Dados com Python, 2025',
-  'Microsoft + LinkedIn — Fundamentos para uma Carreira em IA Generativa, 2025',
-  'Google — Google UX Designer, 2026',
-  'Google — Google Data Analytics, 2024',
-  'Google — Google AI Essentials, 2024',
-];
+const periodoExperiencia = (start: string, end?: string) =>
+  `${formatPeriod(start)} – ${end ? formatPeriod(end) : 'Atual'}`;
+
+const formacaoAcademica = education.map(
+  (e) =>
+    `${e.degree} em ${e.course} — ${e.institution}, ${e.start}–${e.end ?? ''}${e.status === 'cursando' ? ' (cursando)' : ''}`
+);
+
+const certificacoes = getCertificationsByDate()
+  .filter((c) => c.onResume)
+  .map((c) => `${c.issuerShort ?? c.issuer} — ${c.name}, ${yearOf(c.date)}`);
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -126,55 +107,35 @@ export const Portfolio = () => {
       >
         {/* Cabeçalho */}
         <header className="text-center mb-4">
-          <h1 className="text-2xl font-bold tracking-wide m-0 mb-0.5">Pedro Canuto</h1>
-          <p className="text-[13px] m-0.5">Desenvolvedor Full Stack | Java, React &amp; Dados</p>
+          <h1 className="text-2xl font-bold tracking-wide m-0 mb-0.5">{profile.name}</h1>
+          <p className="text-[13px] m-0.5">{profile.title}</p>
           <p className="text-[12.5px] m-0.5">
-            Salvador/BA &nbsp;|&nbsp; (71) 99958-8950 &nbsp;|&nbsp;{' '}
-            <a href="mailto:data.canuto@gmail.com" className="text-inherit no-underline hover:text-accent-orange">
-              data.canuto@gmail.com
+            {profile.location && `${profile.location.city}/${profile.location.state}`} &nbsp;|&nbsp;{' '}
+            {getContact('whatsapp').display} &nbsp;|&nbsp;{' '}
+            <a href={getContact('email').url} className="text-inherit no-underline hover:text-accent-orange">
+              {getContact('email').display}
             </a>
             <br />
-            <a
-              href="https://linkedin.com/in/pedro-canuto-408867331"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-inherit no-underline hover:text-accent-orange"
-            >
-              linkedin.com/in/pedro-canuto-408867331
-            </a>{' '}
-            &nbsp;|&nbsp;{' '}
-            <a
-              href="https://github.com/DataCanuto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-inherit no-underline hover:text-accent-orange"
-            >
-              github.com/DataCanuto
-            </a>{' '}
-            &nbsp;|&nbsp;{' '}
-            <a
-              href="https://portfolio-pedrocanuto-desenvolvedor.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-inherit no-underline hover:text-accent-orange"
-            >
-              portfolio-pedrocanuto-desenvolvedor.vercel.app
-            </a>
+            {(['linkedin', 'github', 'portfolio'] as const).map((id, index) => (
+              <Fragment key={id}>
+                {index > 0 && <>&nbsp;|&nbsp;{' '}</>}
+                <a
+                  href={getContact(id).url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-inherit no-underline hover:text-accent-orange"
+                >
+                  {getContact(id).url.replace(/^https?:\/\//, '')}
+                </a>{' '}
+              </Fragment>
+            ))}
           </p>
         </header>
 
         {/* Resumo Profissional */}
         <section>
           <SectionTitle>Resumo Profissional</SectionTitle>
-          <p className="my-1">
-            Desenvolvedor Full Stack em formação, com atuação do back-end (Java, Spring Boot, APIs REST,
-            JPA/PostgreSQL, Docker) ao front-end (React, Next.js, TypeScript), incluindo o desenvolvimento de landing
-            pages e sistemas completos para clientes reais, do banco de dados à entrega. Complemento o perfil com
-            Python aplicado a análise de dados e machine learning (Pandas, Scikit-learn, OpenCV), o que amplia minha
-            capacidade de atuar tanto em produto quanto em dados. Antes da tecnologia, geri negócio próprio por 8
-            anos em educação musical e eventos — trago desse período a prática de traduzir problema real em solução,
-            não só código.
-          </p>
+          <p className="my-1">{profile.summary}</p>
         </section>
 
         {/* Competências Técnicas */}
@@ -200,6 +161,16 @@ export const Portfolio = () => {
           ))}
         </section>
 
+        {/* Projetos Pessoais — Desenvolvimento */}
+        {projetosPessoais.length > 0 && (
+          <section>
+            <SectionTitle>Projetos Pessoais — Desenvolvimento</SectionTitle>
+            {projetosPessoais.map((p) => (
+              <ProjetoItem key={p.titulo} projeto={p} />
+            ))}
+          </section>
+        )}
+
         {/* Projetos Pessoais — Dados & Machine Learning */}
         <section>
           <SectionTitle>Projetos Pessoais — Dados &amp; Machine Learning</SectionTitle>
@@ -210,20 +181,24 @@ export const Portfolio = () => {
         {/* Experiência Profissional */}
         <section>
           <SectionTitle>Experiência Profissional</SectionTitle>
-          <h3 className="text-[14px] font-bold mt-2.5 mb-0.5">
-            Empreendedor / Educador Musical — Atuação autônoma
-          </h3>
-          <p className="text-[12.5px] italic text-[#333] m-0 mb-1">Junho/2018 – Atual · Salvador/BA</p>
-          <ul className="my-1 mb-2.5 pl-[18px] list-disc">
-            <li className="mb-0.5">
-              Geri negócio próprio de educação musical e prestação de serviços em eventos, respondendo por
-              planejamento financeiro, atendimento a clientes e operação de ponta a ponta.
-            </li>
-            <li className="mb-0.5">
-              Desenvolvi visão de negócio aplicada hoje ao software: identificar o problema do usuário antes de
-              propor a solução técnica.
-            </li>
-          </ul>
+          {experiences.map((exp) => (
+            <div key={exp.id}>
+              <h3 className="text-[14px] font-bold mt-2.5 mb-0.5">
+                {exp.role} — {exp.organization}
+              </h3>
+              <p className="text-[12.5px] italic text-[#333] m-0 mb-1">
+                {periodoExperiencia(exp.start, exp.end)}
+                {exp.location && ` · ${exp.location}`}
+              </p>
+              <ul className="my-1 mb-2.5 pl-[18px] list-disc">
+                {exp.highlights.map((h) => (
+                  <li key={h} className="mb-0.5">
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
 
         {/* Formação Acadêmica */}

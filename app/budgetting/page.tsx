@@ -6,10 +6,11 @@ import TechStack from '@/components/Projects/SpringBootAIBudgeting/TechStack';
 import Endpoints from '@/components/Projects/SpringBootAIBudgeting/Endpoints';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import { Code2, BookOpen, Layers, Wrench, Terminal, GraduationCap } from 'lucide-react';
 
-const REPO_URL =
-  'https://github.com/DataCanuto/SpringBootProjects/tree/main/SpringBootAI-Budgetting-ProjectCertification';
+
+const project = getProject('springboot-ai-budgeting');
 
 export default function BudgettingPage() {
   const projectSections = [
@@ -24,7 +25,7 @@ export default function BudgettingPage() {
   return (
     <main className="w-full bg-dark-bg">
       <ProjectHeader
-        projectTitle="Spring Boot AI Budgeting"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="projetos"
         backUrl="/"
@@ -54,7 +55,7 @@ export default function BudgettingPage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href={REPO_URL}
+              href={project.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
@@ -203,7 +204,7 @@ export default function BudgettingPage() {
             arquitetural ao seu projeto.
           </p>
           <a
-            href={REPO_URL}
+            href={project.repository}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"

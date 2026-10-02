@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "validate:data": "tsc -p scripts/tsconfig.validate.json && node .validate/scripts/validate-data.js"
   },
   "dependencies": {
     "clsx": "^2.0.0",

@@ -5,10 +5,16 @@ import { motion } from 'framer-motion';
 import { Zap, Target, Smartphone, Heart } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
 import { Footer } from '@/components';
+import { formatPeriod, getProjectsByCategory, technologyNames, toDate } from '@/data';
 
 export default function Frontend() {
   const areaTitle = 'Frontend & UX Design';
   const areaIcon = '💻';
+
+  // Ordem cronológica: do mais antigo ao mais recente.
+  const projects = getProjectsByCategory('frontend').sort(
+    (a, b) => toDate(a.date).getTime() - toDate(b.date).getTime()
+  );
 
   const navItems = [
     { label: 'Início', href: '/', isActive: false },
@@ -86,236 +92,100 @@ export default function Frontend() {
           </motion.div>
 
           <div className="grid md:grid-cols-1 gap-8">
-            {/* 1. Galeria Digital — Dezembro/2025 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden hover:border-accent-orange/50 transition-all group"
-            >
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 p-8">
-                  <div className="mb-4">
-                    <span className="text-accent-orange text-sm font-semibold">🎨 Galeria Digital · Dezembro/2025</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Galeria Digital de Paulo Canuto
-                  </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Landing page moderna e responsiva para exposição digital de obras de arte.
-                    Featuring 58 obras catalogadas em 5 categorias diferentes, integração com WhatsApp,
-                    filtros dinâmicos e design otimizado para conversão.
-                  </p>
+            {projects.map((project) => {
+              // Projetos de outra área (ex.: frontend de um sistema fullstack) usam o recorte de frontend.
+              const view = project.perspectives?.frontend;
+              const title = view?.title ?? project.name;
+              const description = view?.description ?? project.description ?? project.shortDescription;
+              const techs = technologyNames(view?.technologies ?? project.technologies);
+              const features = view?.features ?? project.features ?? [];
+              const caseStudyDoc = project.documentation?.find((d) => d.kind === 'case-study');
+              const secondaryLink = project.repository
+                ? { href: project.repository, label: 'GitHub' }
+                : caseStudyDoc
+                  ? { href: caseStudyDoc.url, label: caseStudyDoc.label }
+                  : null;
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-dark-bg text-accent-orange text-sm rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              return (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden hover:border-accent-orange/50 transition-all group"
+                >
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-1/2 p-8">
+                      <div className="mb-4">
+                        <span className="text-accent-orange text-sm font-semibold">
+                          {project.icon} {project.name} · {formatPeriod(project.date)}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{title}</h3>
+                      <p className="text-gray-300 mb-6 leading-relaxed">{description}</p>
 
-                  <div className="space-y-3 mb-6">
-                    <div>
-                      <p className="text-gray-400 text-sm mb-1">Características</p>
-                      <ul className="text-gray-300 text-sm space-y-1">
-                        <li>✅ 58 obras categorizadas</li>
-                        <li>✅ Filtros dinâmicos por categoria</li>
-                        <li>✅ Modal interativo para detalhes</li>
-                        <li>✅ Integração WhatsApp</li>
-                      </ul>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {techs.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 bg-dark-bg text-accent-orange text-sm rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {features.length > 0 && (
+                        <div className="space-y-3 mb-6">
+                          <div>
+                            <p className="text-gray-400 text-sm mb-1">Características</p>
+                            <ul className="text-gray-300 text-sm space-y-1">
+                              {features.map((feature) => (
+                                <li key={feature}>✅ {feature}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="flex gap-4">
+                        {project.caseStudy && (
+                          <motion.a
+                            href={project.caseStudy}
+                            className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            Ver Detalhes do Projeto
+                          </motion.a>
+                        )}
+                        {secondaryLink && (
+                          <motion.a
+                            href={secondaryLink.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            {secondaryLink.label}
+                          </motion.a>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="md:w-1/2 bg-dark-bg h-64 md:h-auto flex items-center justify-center p-8">
+                      <div className="text-center">
+                        <p className="text-6xl mb-4">{project.icon}</p>
+                        <p className="text-gray-400">{project.name}</p>
+                        <p className="text-gray-500 text-sm mt-2">{project.context.organization ?? project.context.label}</p>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex gap-4">
-                    <motion.a
-                      href="/frontend/galeria-digital"
-                      className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Visitar Galeria
-                    </motion.a>
-                    <motion.a
-                      href="https://github.com/DataCanuto/galeria-digital-artes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      GitHub Original
-                    </motion.a>
-                  </div>
-                </div>
-
-                <div className="md:w-1/2 bg-dark-bg h-64 md:h-auto flex items-center justify-center p-8">
-                  <div className="text-center">
-                    <p className="text-6xl mb-4">🎨</p>
-                    <p className="text-gray-400">Paulo Canuto</p>
-                    <p className="text-gray-500 text-sm mt-2">50+ anos de exploração artística</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* 2. Pedro Canuto Música — Junho/2026 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden hover:border-accent-orange/50 transition-all group"
-            >
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 p-8">
-                  <div className="mb-4">
-                    <span className="text-accent-orange text-sm font-semibold">🎵 Pedro Canuto Música · Junho/2026</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Pedro Canuto Música — Frontend
-                  </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Aplicação React que consome a API do sistema de cadastro e agenda de aulas de
-                    música: formulários de matrícula, agendamento de aulas e painel administrativo
-                    integrados ao backend em Spring Boot.
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {['React', 'TypeScript', 'Vite', 'Node.js'].map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-dark-bg text-accent-orange text-sm rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div>
-                      <p className="text-gray-400 text-sm mb-1">Características</p>
-                      <ul className="text-gray-300 text-sm space-y-1">
-                        <li>✅ Agendamento de aulas via API</li>
-                        <li>✅ Cadastro e matrícula de alunos</li>
-                        <li>✅ Painel administrativo autenticado</li>
-                        <li>✅ Consumo de API REST em Spring Boot</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <motion.a
-                      href="/backend/pedro-canuto-musico"
-                      className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Ver Detalhes do Projeto
-                    </motion.a>
-                    <motion.a
-                      href="https://github.com/DataCanuto/pedrocanutomusico"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      GitHub
-                    </motion.a>
-                  </div>
-                </div>
-
-                <div className="md:w-1/2 bg-dark-bg h-64 md:h-auto flex items-center justify-center p-8">
-                  <div className="text-center">
-                    <p className="text-6xl mb-4">🎵</p>
-                    <p className="text-gray-400">Pedro Canuto Música</p>
-                    <p className="text-gray-500 text-sm mt-2">Fullstack: React + Spring Boot + PostgreSQL</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* 3. UX Designer — 2026 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden hover:border-accent-orange/50 transition-all group"
-            >
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 p-8">
-                  <div className="mb-4">
-                    <span className="text-accent-orange text-sm font-semibold">🌱 UX Designer · 2026</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    UX Designer — Google UX Design Certificate
-                  </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados
-                    ao case study Flora Hub: pesquisa com usuários, mapa de empatia, mapa da jornada,
-                    auditoria de concorrentes e testes de usabilidade.
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {['UX Research', 'Empathy Map', 'Journey Map', 'Wireframing', 'Usability Testing'].map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-dark-bg text-accent-orange text-sm rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div>
-                      <p className="text-gray-400 text-sm mb-1">Características</p>
-                      <ul className="text-gray-300 text-sm space-y-1">
-                        <li>✅ Mapa de empatia e mapa da jornada do usuário</li>
-                        <li>✅ Auditoria de concorrentes</li>
-                        <li>✅ Wireframes e protótipos de baixa e alta fidelidade</li>
-                        <li>✅ Case study completo — Flora Hub</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <motion.a
-                      href="/frontend/google-ux-designer"
-                      className="px-6 py-3 bg-accent-orange text-white rounded-lg font-semibold hover:bg-orange-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Ver Detalhes do Projeto
-                    </motion.a>
-                    <motion.a
-                      href="/assets/documents/case-studies/flora-hub-case-study.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Case Study Flora Hub
-                    </motion.a>
-                  </div>
-                </div>
-
-                <div className="md:w-1/2 bg-dark-bg h-64 md:h-auto flex items-center justify-center p-8">
-                  <div className="text-center">
-                    <p className="text-6xl mb-4">🌱</p>
-                    <p className="text-gray-400">Flora Hub</p>
-                    <p className="text-gray-500 text-sm mt-2">Google UX Design Professional Certificate</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

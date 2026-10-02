@@ -6,6 +6,7 @@ import { Database, TrendingUp, BarChart3 } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
 import ProjectAreaCard from '@/components/Projects/ProjectAreaCard';
 import { Footer } from '@/components';
+import { getProjectsByCategory, technologyNames } from '@/data';
 
 export default function EngenhariaDados() {
   const areaSlug = 'engenharia-dados';
@@ -18,28 +19,7 @@ export default function EngenhariaDados() {
     { label: 'Projetos', href: '#projetos', isActive: true },
   ];
 
-  const projects = [
-    {
-      id: 'data-streaming',
-      title: 'Data Streaming Pipeline',
-      slug: 'data-streaming-project',
-      description:
-        'Pipeline completo de extração, processamento e consolidação de dados de múltiplos tipos de documentos (Notas Fiscais, Planilhas, Prestações) com OCR integrado.',
-      company: 'ANDDIAP',
-      technologies: ['Python', 'OCR', 'Pandas', 'ETL', 'PyMuPDF'],
-      icon: '🔄',
-    },
-    {
-      id: 'machine-learning',
-      title: 'Machine Learning',
-      slug: 'machine-learning',
-      description:
-        'Notebooks Jupyter de ciência de dados e machine learning com Python: limpeza e EDA, algoritmos supervisionados/não supervisionados, PCA, XGBoost e introdução à visão computacional.',
-      company: 'Curso SENAI — IA na Indústria 4.0',
-      technologies: ['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'OpenCV'],
-      icon: '🧠',
-    },
-  ];
+  const projects = getProjectsByCategory('engenharia-dados');
 
   return (
     <main className="bg-dark-bg text-dark-text min-h-screen">
@@ -137,13 +117,14 @@ export default function EngenhariaDados() {
             {projects.map((project) => (
               <ProjectAreaCard
                 key={project.id}
-                title={project.title}
-                description={project.description}
-                company={project.company}
-                technologies={project.technologies}
+                title={project.name}
+                description={project.description ?? project.shortDescription}
+                company={project.context.organization ?? project.context.label}
+                technologies={technologyNames(project.technologies)}
                 slug={project.slug}
                 areaSlug={areaSlug}
                 icon={project.icon}
+                href={project.caseStudy}
               />
             ))}
           </div>
