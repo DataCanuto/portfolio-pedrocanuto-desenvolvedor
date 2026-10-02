@@ -240,8 +240,8 @@
 
   /* ---------- Mockups grid ---------- */
   .mock-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:44px; }
-  .mock-card{ aspect-ratio:9/16; background:var(--panel); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
-  .mock-card img{ width:100%; flex:1 1 auto; min-height:0; object-fit:cover; cursor:zoom-in; }
+  .mock-card{ aspect-ratio:9/19.5; background:var(--panel); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
+  .mock-card img{ width:100%; flex:1 1 auto; min-height:0; object-fit:contain; cursor:zoom-in; }
   .mock-card span{ text-align:center; padding:10px 8px; font-size:13px; font-weight:600; color:var(--ink); background:#fff; }
 
   /* ---------- Figma workflow (tutorial) ---------- */
@@ -755,7 +755,7 @@
         <div class="panel" style="min-height:280px;"><img class="panel-img" src="digital-mockups/plant-detail.png" alt="Refined plant detail and care guide mockup showing the safety badge above the fold and a single Save call-to-action." onclick="openLightbox(this.src, this.alt)"></div>
       </div>
     </div>
-    <p class="placeholder-note">Screens shown are AI-generated placeholders standing in for the team's Figma file (see the note at the end of this case study) &mdash; they will be swapped for the final Figma exports under the same file names.</p>
+    <p style="margin-top:14px; font-size:13.5px; color:#9AA0A6;">The &ldquo;before&rdquo; screen is an early draft kept for comparison; the &ldquo;after&rdquo; screen is the final high-fidelity design.</p>
   </div>
 </section>
 
@@ -764,10 +764,10 @@
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Mockups</h2></div>
     <div class="mock-grid">
-      <div class="mock-card"><img src="digital-mockups/home-screen.png" alt="Home screen mockup, login and logoff states." onclick="openLightbox(this.src, this.alt)"><span>Home screen</span></div>
-      <div class="mock-card"><img src="digital-mockups/identify-camera.png" alt="Plant identification camera mockup." onclick="openLightbox(this.src, this.alt)"><span>Plant identification camera</span></div>
-      <div class="mock-card"><img src="digital-mockups/plant-detail.png" alt="Plant detail and care guide mockup." onclick="openLightbox(this.src, this.alt)"><span>Plant detail &amp; care guide</span></div>
-      <div class="mock-card"><img src="digital-mockups/community-feed.png" alt="Community feed mockup." onclick="openLightbox(this.src, this.alt)"><span>Community feed</span></div>
+      <div class="mock-card"><img src="digital-mockups/home-screen.png" alt="Welcome and home screen mockup with the headline 'Descubra se a planta é segura para sua casa', an Identify a plant button and a See the community button." onclick="openLightbox(this.src, this.alt)"><span>Home / welcome</span></div>
+      <div class="mock-card"><img src="digital-mockups/identify-camera.png" alt="Plant identification camera mockup with a framing guide, the Salvador location chip and a free identification badge." onclick="openLightbox(this.src, this.alt)"><span>Plant identification camera</span></div>
+      <div class="mock-card"><img src="digital-mockups/plant-detail.png" alt="Plant detail mockup for Costela-de-adão with a red toxic-to-pets-and-children safety badge above the fold, Dogs, Cats and Children tags, and Save and Similar buttons." onclick="openLightbox(this.src, this.alt)"><span>Plant detail &amp; safety badge</span></div>
+      <div class="mock-card"><img src="digital-mockups/community-feed.png" alt="Community feed mockup filtered to Near you in Salvador, showing posts from neighbors with Toxic and Safe plant badges." onclick="openLightbox(this.src, this.alt)"><span>Community feed</span></div>
     </div>
   </div>
 </section>
@@ -792,19 +792,17 @@
 <section class="slide slide--content">
   <div class="slide-inner">
     <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">High-fidelity prototype</h2></div>
-    <p style="margin-top:16px; line-height:1.7;">The team is finishing the connected click-through in Figma; the link below will be updated once it's shared.<br><br>Explore the full clickable prototype covering onboarding, plant identification, care tracking, and community interaction.</p>
-    <p class="placeholder-note">Figma prototype link pending</p>
-    <div class="panel" style="margin-top:24px; min-height:420px;"><img class="panel-img" src="digital-mockups/high-fidelity-prototype-flow.png" alt="High-fidelity prototype flow: four connected Flora Hub screens showing the path from sign-up, to plant identification, to plant detail, to the community feed." onclick="openLightbox(this.src, this.alt)"></div>
+    <p style="margin-top:16px; line-height:1.7;">The prototype connects 12 screens: welcome, camera, analysis, result with the safety badge, community near you, sign-up, free-identification limit, My garden and new post. Visitors can identify one plant before creating an account, so trust is built before any sign-up.</p>
+    <p style="margin-top:12px;"><a href="high-fidelity-prototype.pdf" target="_blank" rel="noopener" style="color:var(--green); font-weight:600;">Open the full high-fidelity prototype (PDF, 15 pages)</a></p>
+    <div class="panel" style="margin-top:24px; min-height:320px;"><img class="panel-img" src="digital-mockups/high-fidelity-prototype-flow.png" alt="High-fidelity prototype flow: six connected Flora Hub screens from welcome, to camera, to analysis, to the plant result with a toxicity badge, to the community near you, to sign-up." onclick="openLightbox(this.src, this.alt)"></div>
   </div>
 </section>
 
-<!-- 20b. Note on placeholder visuals -->
-<section class="slide slide--content" style="min-height:auto; padding:56px 24px;">
+<!-- 20a. High-fidelity screens -->
+<section class="slide slide--content">
   <div class="slide-inner">
-    <div class="panel pending" style="text-align:left; align-items:flex-start; padding:28px 32px;">
-      <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">A note on the mockups shown above</p>
-      <p>The Figma file for Flora Hub is being built collaboratively by the TCC team, so the mockup and prototype screens on this page are AI-generated placeholders standing in for that work. They will be replaced by the team's real Figma exports once ready, keeping the same file names (<code>home-screen.png</code>, <code>identify-camera.png</code>, <code>plant-detail.png</code>, <code>community-feed.png</code>, <code>plant-detail-before.png</code>, <code>high-fidelity-prototype-flow.png</code>) so this page updates automatically.</p>
-    </div>
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">High-fidelity screens</h2></div>
+    <div class="panel" style="margin-top:28px; min-height:320px;"><img class="panel-img" src="digital-mockups/high-fidelity-screens.png" alt="All 12 high-fidelity Flora Hub screens in a grid: welcome, tips, home, camera, analysis, plant result, plant care, community feed, sign-up, free-identification limit, My garden and new post." onclick="openLightbox(this.src, this.alt)"></div>
   </div>
 </section>
 
