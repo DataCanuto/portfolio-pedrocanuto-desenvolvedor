@@ -1,35 +1,24 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import { profile } from '@/data';
 
 export const metadata: Metadata = {
-  title: 'Pedro Canuto - Desenvolvedor de Sistemas',
-  description:
-    'Portfólio de Pedro Canuto. Estudante de Desenvolvimento de Sistemas com foco em Engenharia de Dados e Dashboards. Transição de Arte-educador e Musicoterapeuta para a área Tech.',
-  keywords: [
-    'Desenvolvedor',
-    'Sistemas',
-    'Dados',
-    'Engenharia de Dados',
-    'Dashboards',
-    'Python',
-    'Java',
-    'SQL',
-  ],
-  authors: [{ name: 'Pedro Canuto' }],
+  title: profile.seo.title,
+  description: profile.seo.description,
+  keywords: profile.seo.keywords,
+  authors: [{ name: profile.name }],
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://pedrocanuto.dev',
-    title: 'Pedro Canuto - Desenvolvedor de Sistemas',
-    description:
-      'Portfólio de Pedro Canuto. Estudante de Desenvolvimento de Sistemas com foco em Engenharia de Dados.',
-    siteName: 'Pedro Canuto',
+    title: profile.seo.title,
+    description: profile.seo.shortDescription,
+    siteName: profile.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pedro Canuto - Desenvolvedor de Sistemas',
-    description:
-      'Portfólio de Pedro Canuto. Estudante de Desenvolvimento de Sistemas com foco em Engenharia de Dados.',
+    title: profile.seo.title,
+    description: profile.seo.shortDescription,
   },
 };
 

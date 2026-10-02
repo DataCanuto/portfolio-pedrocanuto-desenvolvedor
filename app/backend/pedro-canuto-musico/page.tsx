@@ -8,7 +8,10 @@ import TechStack from '@/components/Projects/PedroCanutoMusico/TechStack';
 import AdminAgendaPreview from '@/components/Projects/PedroCanutoMusico/AdminAgendaPreview';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import { Code2, Zap, BookOpen, GraduationCap, CalendarDays } from 'lucide-react';
+
+const project = getProject('pedro-canuto-musico');
 
 export default function PedroCanutoMusicoPage() {
   const projectSections = [
@@ -24,7 +27,7 @@ export default function PedroCanutoMusicoPage() {
     <main className="w-full bg-dark-bg">
       {/* Project Header */}
       <ProjectHeader
-        projectTitle="Pedro Canuto Música"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="backend"
         backUrl="/backend"
@@ -52,7 +55,7 @@ export default function PedroCanutoMusicoPage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href="https://github.com/DataCanuto/pedro-canuto-musico"
+              href={project.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
@@ -159,7 +162,7 @@ export default function PedroCanutoMusicoPage() {
             web, vamos conversar sobre como aplicar essa mesma abordagem ao seu negócio.
           </p>
           <a
-            href="https://github.com/DataCanuto/pedro-canuto-musico"
+            href={project.repository}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"

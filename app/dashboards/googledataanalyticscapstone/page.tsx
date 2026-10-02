@@ -9,7 +9,10 @@ import {
 } from '@/components/Projects/GoogleDataAnalyticsCapsone';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import { BarChart3, Database, Code2, Zap, BookOpen, Activity, TrendingUp } from 'lucide-react';
+
+const project = getProject('google-data-analytics-capstone');
 
 export default function GoogleDataAnalyticsCapstonePage() {
   const projectSections = [
@@ -25,7 +28,7 @@ export default function GoogleDataAnalyticsCapstonePage() {
     <main className="w-full bg-dark-bg">
       {/* Project Header */}
       <ProjectHeader
-        projectTitle="Google Data Analytics Capstone"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="dashboards"
         backUrl="/dashboards"
@@ -54,7 +57,7 @@ export default function GoogleDataAnalyticsCapstonePage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href="https://github.com/DataCanuto/GoogleDataAnalytics"
+              href={project.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"

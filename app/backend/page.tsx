@@ -6,6 +6,7 @@ import { Code, Database, Lock } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
 import ProjectAreaCard from '@/components/Projects/ProjectAreaCard';
 import { Footer } from '@/components';
+import { getProjectsByCategory, technologyNames } from '@/data';
 
 export default function Backend() {
   const areaSlug = 'backend';
@@ -18,39 +19,7 @@ export default function Backend() {
     { label: 'Projetos', href: '#projetos', isActive: true },
   ];
 
-  const projects = [
-    {
-      id: 'flora-hub',
-      title: 'Flora Hub Backend',
-      slug: 'flora-hub',
-      description:
-        'Backend com Spring AI e GPT-4o: recebe a foto de uma planta, identifica a espécie e cruza os cuidados ideais com o clima da OpenWeather em um motor de regras que gera recomendações.',
-      company: 'Projeto Pessoal',
-      technologies: ['Java', 'Spring Boot', 'Spring AI', 'OpenAI', 'PostgreSQL'],
-      icon: '🌿',
-    },
-    {
-      id: 'pedro-canuto-musico',
-      title: 'Pedro Canuto Música',
-      slug: 'pedro-canuto-musico',
-      description:
-        'Sistema fullstack de cadastro de alunos e agenda de aulas de música: backend em Java com Spring Boot e frontend em React, aplicando na prática os conhecimentos do curso Técnico em Desenvolvimento de Sistemas para gerenciar meu próprio serviço profissional.',
-      company: 'Projeto Pessoal',
-      technologies: ['Java', 'Spring Boot', 'React', 'Spring Security', 'PostgreSQL'],
-      icon: '🎵',
-    },
-    {
-      id: 'springboot-ai-budgeting',
-      title: 'Spring Boot AI Budgeting',
-      slug: 'springboot-ai-budgeting',
-      href: '/budgetting',
-      description:
-        'API de orçamento pessoal com Spring AI: comandos de voz são transcritos, interpretados por tool calling e executados como casos de uso em uma arquitetura DDD em camadas.',
-      company: 'Certificação Spring Boot — DIO',
-      technologies: ['Java', 'Spring Boot', 'Spring AI', 'MySQL'],
-      icon: '🤖',
-    },
-  ];
+  const projects = getProjectsByCategory('backend');
 
   return (
     <main className="bg-dark-bg text-dark-text min-h-screen">
@@ -126,14 +95,14 @@ export default function Backend() {
             {projects.map((project) => (
               <ProjectAreaCard
                 key={project.id}
-                title={project.title}
-                description={project.description}
-                company={project.company}
-                technologies={project.technologies}
+                title={project.name}
+                description={project.description ?? project.shortDescription}
+                company={project.context.organization ?? project.context.label}
+                technologies={technologyNames(project.technologies)}
                 slug={project.slug}
                 areaSlug={areaSlug}
                 icon={project.icon}
-                href={project.href}
+                href={project.caseStudy}
               />
             ))}
           </div>
