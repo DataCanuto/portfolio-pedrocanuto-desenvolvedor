@@ -11,6 +11,7 @@ import {
 } from '@/components/Projects/GoogleUXDesigner';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import {
   Palette,
   TrendingUp,
@@ -21,6 +22,8 @@ import {
   Sparkles,
   ExternalLink,
 } from 'lucide-react';
+
+const project = getProject('google-ux-designer');
 
 export default function GoogleUXDesignerPage() {
   const projectSections = [
@@ -37,7 +40,7 @@ export default function GoogleUXDesignerPage() {
     <main className="w-full bg-dark-bg">
       {/* Project Header */}
       <ProjectHeader
-        projectTitle="Google UX Designer"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="frontend"
         backUrl="/frontend"

@@ -5,126 +5,20 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Certificate } from '@/types/certificate';
 import { CertificateViewer } from './CertificateViewer';
+import { certifications, toDate } from '@/data';
 
-// Ordem cronológica: do mais antigo ao mais recente — novos certificados entram no fim.
-// A exibição ordena por data (mais recente primeiro), então a posição aqui não afeta a tela.
-// id: slug estável "emissor-assunto" (kebab-case, sem acentos); não codifica ordem nem categoria.
-const certificationsData: Certificate[] = [
-  {
-    id: 'google-ai-essentials',
-    title: 'Google AI Essentials',
-    issuer: 'Google / Coursera',
-    date: new Date('2024-09-20'),
-    image: '/assets/certificados_img/google ai essentials/Coursera_Google AI Essentials.jpg',
-    logo: '/assets/logo_certificados/google-coursera.png',
+// A galeria mostra as certificações com imagem do certificado (src/data/certifications.ts).
+const certificationsData: Certificate[] = certifications
+  .filter((c): c is typeof c & { image: NonNullable<typeof c.image> } => Boolean(c.image))
+  .map((c) => ({
+    id: c.id,
+    title: c.name,
+    issuer: c.issuer,
+    date: toDate(c.date),
+    image: c.image,
+    logo: c.logo,
     category: 'certification',
-  },
-  {
-    id: 'sql-server-formacao-basica',
-    title: 'SQL Server - Formação Básica',
-    issuer: 'LinkedIn Learning',
-    date: new Date('2024-09-30'),
-    image: '/assets/certificados_img/linkedin learning/CertificadoDeConclusao_SQL Server Formacao Basica.jpg',
-    logo: '/assets/logo_certificados/sql-logo.png',
-    category: 'certification',
-  },
-  {
-    id: 'google-data-analytics',
-    title: 'Google Data Analytics',
-    issuer: 'Google / Coursera',
-    date: new Date('2024-10-15'),
-    image: '/assets/certificados_img/google data analytics/COURSERA_GOOGLE_DATA_ANALYTICS_2024.jpg',
-    logo: '/assets/logo_certificados/google-coursera.png',
-    category: 'certification',
-  },
-  {
-    id: 'linkedin-excel-data-analysis',
-    title: 'Learning Excel Data Analysis',
-    issuer: 'LinkedIn Learning',
-    date: new Date('2024-10-20'),
-    image: '/assets/certificados_img/linkedin learning/CertificadoDeConclusao_Learning Excel Data Analysis.jpg',
-    logo: '/assets/logo_certificados/excel-logo.png',
-    category: 'certification',
-  },
-  {
-    id: 'linkedin-competencias-analise-dados',
-    title: 'Introdução às Competências Essenciais para Análise de Dados',
-    issuer: 'LinkedIn Learning',
-    date: new Date('2024-11-15'),
-    image: '/assets/certificados_img/linkedin learning/CertificadoDeConclusao_Introducao as Competencias Essenciais para a Carreira de Analise de Dados.jpg',
-    logo: '/assets/logo_certificados/linkedin-learning.png',
-    category: 'certification',
-  },
-  {
-    id: 'senac-estrutura-dados-python',
-    title: 'Estrutura de Dados - Python',
-    issuer: 'SENAC',
-    date: new Date('2024-11-20'),
-    image: {
-      front: '/assets/certificados_img/estrutura de dados python/CERTIFICADO_PYTHON_SENAC_2024_pag1.jpg',
-      back: '/assets/certificados_img/estrutura de dados python/CERTIFICADO_PYTHON_SENAC_2024_pag2.jpg',
-    },
-    logo: '/assets/logo_certificados/python-logo.png',
-    category: 'certification',
-  },
-  {
-    id: 'linkedin-microsoft-carreira-ia-generativa',
-    title: 'Carreira em IA Generativa por Microsoft e LinkedIn',
-    issuer: 'LinkedIn Learning / Microsoft',
-    date: new Date('2024-11-30'),
-    image: '/assets/certificados_img/linkedin learning/CertificadoDeConclusao_Fundamentos para uma Carreira em IA Generativa por Microsoft e LinkedIn.jpg',
-    logo: '/assets/logo_certificados/linkedin-microssoft.jpg',
-    category: 'certification',
-  },
-  {
-    id: 'linkedin-deep-learning-getting-started',
-    title: 'Deep Learning - Getting Started',
-    issuer: 'LinkedIn Learning',
-    date: new Date('2024-12-05'),
-    image: '/assets/certificados_img/linkedin learning/CertificadoDeConclusao_Deep Learning Getting Started.jpg',
-    logo: '/assets/logo_certificados/linkedin-learning.png',
-    category: 'certification',
-  },
-  {
-    id: 'senai-inteligencia-artificial-industrial',
-    title: 'Inteligência Artificial Industrial 4.0',
-    issuer: 'Senai',
-    date: new Date('2024-12-10'),
-    image: {
-      front: '/assets/certificados_img/inteligencia artificial industrial/Inteligência_Artificial_Industrial-Certificado_48670 (1)_pag1.jpg',
-      back: '/assets/certificados_img/inteligencia artificial industrial/Inteligência_Artificial_Industrial-Certificado_48670 (1)_pag2.jpg',
-    },
-    logo: '/assets/logo_certificados/SENAI_logo_2024.png',
-    category: 'certification',
-  },
-  {
-    id: 'santander-ciencia-dados-python',
-    title: 'Santander - Ciência de Dados com Python',
-    issuer: 'Santander / DIO',
-    date: new Date('2025-01-15'),
-    image: '/assets/certificados_img/santander ciencia de dados python/Santander 2025 - Ciência de Dados com Python.jpg',
-    logo: '/assets/logo_certificados/santander-bootcamp-2025.png',
-    category: 'certification',
-  },
-  {
-    id: 'globant-java-spring-boot-ai',
-    title: 'Globant - Java Spring Boot AI',
-    issuer: 'Globant / DIO',
-    date: new Date('2025-05-24'),
-    image: '/assets/certificados_img/globant java spring boot ai/certificado java spring boot.png',
-    logo: '/assets/logo_certificados/javaSpringBootLogoCertificado.jpg',
-    category: 'certification',
-  },
-  {
-    id: 'google-ux-design',
-    title: 'Google - UX Design',
-    issuer: 'Google / Coursera',
-    date: new Date('2026-09-28'),
-    image: '/assets/certificados_img/google ux design/COURSERA_GOOGLE_UX_DESIGN_2026.jpg',
-    logo: '/assets/logo_certificados/google-coursera.png',
-    category: 'certification',
-  },
-];
+  }));
 
 interface CertificateCardProps {
   certificate: Certificate;

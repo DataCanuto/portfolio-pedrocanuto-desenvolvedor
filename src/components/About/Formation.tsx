@@ -3,45 +3,11 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/UI/Badge';
+import { education } from '@/data';
 
-interface Education {
-  year: string;
-  title: string;
-  institution: string;
-  description: string;
-  logo: string;
-}
-
-const education: Education[] = [
-  {
-    year: '2026-2030',
-    title: 'Engenharia de Software',
-    institution: 'Estácio',
-    description: 'Curso de ensino superior',
-    logo: '/assets/logo_formacoes/logo-estacio.png',
-  },
-  {
-    year: '2025-2027',
-    title: 'Desenvolvimento de Sistemas',
-    institution: 'SENAI CIMATEC',
-    description: 'Curso técnico em desenvolvimento de sistemas',
-    logo: '/assets/logo_formacoes/logo-senai.png',
-  },
-  {
-    year: '2022',
-    title: 'Especialização em Musicoterapia',
-    institution: 'ALPHA Faculdade',
-    description: 'Pós-Graduação em Musicoterapia',
-    logo: '/assets/logo_formacoes/logo-alpha.png',
-  },
-  {
-    year: '2019',
-    title: 'Bacharelado Interdisciplinar em Artes',
-    institution: 'Universidade Federal da Bahia',
-    description: 'Formação em artes com ênfase em música popular',
-    logo: '/assets/logo_formacoes/logo-ufba.png',
-  },
-];
+/** Concluído mostra o ano de conclusão; em curso mostra o período. */
+const periodLabel = (edu: (typeof education)[number]) =>
+  edu.status === 'concluido' ? edu.end ?? edu.start : `${edu.start}-${edu.end ?? ''}`;
 
 export const Formation = () => {
   return (
@@ -67,7 +33,7 @@ export const Formation = () => {
         <div className="space-y-6">
           {education.map((edu, index) => (
             <motion.div
-              key={index}
+              key={edu.id}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -76,12 +42,14 @@ export const Formation = () => {
             >
               {/* Logo */}
               <div className="w-20 h-20 flex-shrink-0 bg-dark-bg rounded-lg p-2 border border-dark-border flex items-center justify-center relative">
+                {edu.logo && (
                 <Image
                   src={edu.logo}
                   alt={edu.institution}
                   fill
                   className="object-contain p-2"
                 />
+                )}
               </div>
 
               {/* Content */}
@@ -89,10 +57,10 @@ export const Formation = () => {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <Badge variant="primary">{edu.year}</Badge>
+                      <Badge variant="primary">{periodLabel(edu)}</Badge>
                     </div>
                     <h3 className="text-xl font-bold text-accent-orange">
-                      {edu.title}
+                      {edu.degree} em {edu.course}
                     </h3>
                     <p className="text-dark-header-text font-semibold">{edu.institution}</p>
                     <p className="text-gray-400 mt-1">{edu.description}</p>

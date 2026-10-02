@@ -7,7 +7,10 @@ import TechStack from '@/components/Projects/DataStreamingProject/TechStack';
 import ClientInfo from '@/components/Projects/DataStreamingProject/ClientInfo';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import { Code2, Database, Zap, Users, BookOpen } from 'lucide-react';
+
+const project = getProject('data-streaming-project');
 
 export default function DataStreamingProjectPage() {
   const projectSections = [
@@ -24,7 +27,7 @@ export default function DataStreamingProjectPage() {
     <main className="w-full bg-dark-bg">
       {/* Project Header */}
       <ProjectHeader
-        projectTitle="Data Streaming Pipeline"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="engenharia-dados"
         backUrl="/engenharia-dados"
@@ -49,7 +52,7 @@ export default function DataStreamingProjectPage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href="https://github.com/DataCanuto/data-streaming-project"
+              href={project.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
@@ -91,7 +94,7 @@ export default function DataStreamingProjectPage() {
             🎯 <span className="text-accent-orange">Objetivo Principal</span>
           </h2>
           <p className="text-xl text-gray-300 leading-relaxed max-w-3xl">
-            Automatizar a extração e consolidação de dados de documentos PDF (NFs, Planilhas, Prestações) com suporte para PDFs escaneados via OCR, gerando relatórios estruturados e consolidados para análise.
+            {project.objective}
           </p>
         </div>
       </section>
@@ -169,7 +172,7 @@ export default function DataStreamingProjectPage() {
             Se você possui documentos para processar ou precisa de um pipeline customizado, entre em contato para uma consulta.
           </p>
           <a
-            href="https://github.com/DataCanuto/data-streaming-project"
+            href={project.repository}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
