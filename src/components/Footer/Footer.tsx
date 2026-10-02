@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { getContact, profile } from '@/data';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,7 +18,7 @@ export const Footer = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-2 text-dark-header-text">
-            <span>© {currentYear} Pedro Canuto. Feito com</span>
+            <span>© {currentYear} {profile.name}. Feito com</span>
             <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
               <Heart className="text-accent-orange" size={16} />
             </motion.div>
@@ -27,7 +28,7 @@ export const Footer = () => {
 
           <div className="flex gap-6 text-dark-header-text text-sm">
             <a
-              href="https://github.com/DataCanuto"
+              href={getContact('github').url}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-accent-orange transition-colors"
@@ -35,7 +36,7 @@ export const Footer = () => {
               GitHub
             </a>
             <a
-              href="https://linkedin.com/in/pedro-canuto-408867331"
+              href={getContact('linkedin').url}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-accent-orange transition-colors"
@@ -43,7 +44,7 @@ export const Footer = () => {
               LinkedIn
             </a>
             <a
-              href="mailto:data.canuto@gmail.com"
+              href={getContact('email').url}
               className="hover:text-accent-orange transition-colors"
             >
               Email

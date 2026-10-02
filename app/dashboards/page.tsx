@@ -6,6 +6,7 @@ import { PieChart, TrendingUp, Eye } from 'lucide-react';
 import AreaHeader from '@/components/Projects/AreaHeader';
 import ProjectAreaCard from '@/components/Projects/ProjectAreaCard';
 import { Footer } from '@/components';
+import { getProjectsByCategory, technologyNames } from '@/data';
 
 export default function Dashboards() {
   const areaSlug = 'dashboards';
@@ -18,18 +19,7 @@ export default function Dashboards() {
     { label: 'Projetos', href: '#projetos', isActive: true },
   ];
 
-  const projects = [
-    {
-      id: 'google-data-analytics-capstone',
-      title: 'Bella Beat Fitness Track',
-      slug: 'googledataanalyticscapstone',
-      description:
-        'Dashboard interativo com análise completa de dados de fitness tracking de 30 usuários FitBit, insights baseados em dados e recomendações para estratégias de gamificação e engajamento.',
-      company: 'Google Data Analytics Specialization',
-      technologies: ['Python', 'Pandas', 'Data Analysis', 'EDA', 'Machine Learning'],
-      icon: '💪',
-    },
-  ];
+  const projects = getProjectsByCategory('dashboards');
 
   return (
     <main className="bg-dark-bg text-dark-text min-h-screen">
@@ -110,13 +100,14 @@ export default function Dashboards() {
             {projects.map((project) => (
               <ProjectAreaCard
                 key={project.id}
-                title={project.title}
-                description={project.description}
-                company={project.company}
-                technologies={project.technologies}
+                title={project.name}
+                description={project.description ?? project.shortDescription}
+                company={project.context.organization ?? project.context.label}
+                technologies={technologyNames(project.technologies)}
                 slug={project.slug}
                 areaSlug={areaSlug}
                 icon={project.icon}
+                href={project.caseStudy}
               />
             ))}
           </div>

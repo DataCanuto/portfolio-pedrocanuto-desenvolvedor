@@ -1,0 +1,53 @@
+import type { Education } from './types';
+
+// Ordem de exibição: da formação atual para a mais antiga.
+export const education: Education[] = [
+  {
+    id: 'estacio-engenharia-software',
+    degree: 'Bacharelado',
+    course: 'Engenharia de Software',
+    institution: 'Estácio',
+    start: '2026',
+    end: '2030',
+    status: 'cursando',
+    description: 'Curso de ensino superior',
+    logo: '/assets/logo_formacoes/logo-estacio.png',
+    relevance: 'tech',
+  },
+  {
+    id: 'senai-cimatec-desenvolvimento-sistemas',
+    degree: 'Técnico',
+    course: 'Desenvolvimento de Sistemas',
+    institution: 'SENAI CIMATEC',
+    start: '2025',
+    end: '2027',
+    status: 'cursando',
+    description: 'Curso técnico em desenvolvimento de sistemas',
+    logo: '/assets/logo_formacoes/logo-senai.png',
+    relevance: 'tech',
+  },
+  {
+    id: 'alpha-musicoterapia',
+    degree: 'Pós-graduação',
+    course: 'Musicoterapia',
+    institution: 'Faculdade Alpha',
+    start: '2020',
+    end: '2022',
+    status: 'concluido',
+    description: 'Pós-Graduação em Musicoterapia',
+    logo: '/assets/logo_formacoes/logo-alpha.png',
+    relevance: 'complementar',
+  },
+  {
+    id: 'ufba-artes',
+    degree: 'Bacharelado Interdisciplinar',
+    course: 'Artes',
+    institution: 'Universidade Federal da Bahia',
+    start: '2014',
+    end: '2019',
+    status: 'concluido',
+    description: 'Formação em artes com ênfase em música popular',
+    logo: '/assets/logo_formacoes/logo-ufba.png',
+    relevance: 'complementar',
+  },
+];

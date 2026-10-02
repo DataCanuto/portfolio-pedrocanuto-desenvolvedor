@@ -5,9 +5,11 @@ import ProjectOverview from '@/components/Projects/MachineLearning/ProjectOvervi
 import FoldersAccordion from '@/components/Projects/MachineLearning/FoldersAccordion';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import { Code2, BookOpen, FolderTree, GraduationCap } from 'lucide-react';
 
-const REPO_URL = 'https://github.com/DataCanuto/MachineLearning';
+
+const project = getProject('machine-learning');
 
 export default function MachineLearningPage() {
   const projectSections = [
@@ -19,7 +21,7 @@ export default function MachineLearningPage() {
   return (
     <main className="w-full bg-dark-bg">
       <ProjectHeader
-        projectTitle="Machine Learning"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="engenharia-dados"
         backUrl="/engenharia-dados"
@@ -49,7 +51,7 @@ export default function MachineLearningPage() {
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <a
-              href={REPO_URL}
+              href={project.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
@@ -129,7 +131,7 @@ export default function MachineLearningPage() {
             acionáveis, vamos conversar sobre como aplicar essas ferramentas ao seu problema.
           </p>
           <a
-            href={REPO_URL}
+            href={project.repository}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"

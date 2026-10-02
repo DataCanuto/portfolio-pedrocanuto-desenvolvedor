@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { projectsTimeline, ProjectTimelineEntry } from './projectsData';
+import { getFeaturedProjects, primaryTechnology, yearOf, type Project } from '@/data';
+
+const DEFAULT_DOT_COLOR = '#6b7280';
 
 interface AccordionItemProps {
-  project: ProjectTimelineEntry;
+  project: Project;
   isExpanded: boolean;
   onToggle: () => void;
 }
 
 const AccordionItem = ({ project, isExpanded, onToggle }: AccordionItemProps) => {
+  const language = primaryTechnology(project);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -28,13 +32,13 @@ const AccordionItem = ({ project, isExpanded, onToggle }: AccordionItemProps) =>
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <span
             className="w-3 h-3 rounded-full flex-shrink-0"
-            style={{ backgroundColor: project.language.color }}
-            title={project.language.name}
+            style={{ backgroundColor: language.color ?? DEFAULT_DOT_COLOR }}
+            title={language.name}
           />
           <div className="min-w-0">
-            <h3 className="text-lg font-bold text-dark-header-text truncate">{project.title}</h3>
+            <h3 className="text-lg font-bold text-dark-header-text truncate">{project.name}</h3>
             <p className="text-xs text-gray-400">
-              {project.language.name} · {project.context}
+              {language.name} · {project.context.label}
             </p>
           </div>
         </div>
@@ -58,9 +62,9 @@ const AccordionItem = ({ project, isExpanded, onToggle }: AccordionItemProps) =>
             className="border-t border-dark-border overflow-hidden"
           >
             <div className="p-5 space-y-4">
-              <p className="text-gray-300 leading-relaxed">{project.resume}</p>
+              <p className="text-gray-300 leading-relaxed">{project.shortDescription}</p>
               <Link
-                href={project.href}
+                href={project.caseStudy ?? '/projetos'}
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group/btn"
               >
                 Ver Projeto
@@ -77,7 +81,8 @@ const AccordionItem = ({ project, isExpanded, onToggle }: AccordionItemProps) =>
 export const ProjectsTimeline = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const years = Array.from(new Set(projectsTimeline.map((p) => p.year))).sort((a, b) => b - a);
+  const featured = getFeaturedProjects();
+  const years = Array.from(new Set(featured.map((p) => yearOf(p.date)))).sort((a, b) => b - a);
 
   return (
     <section id="projetos-area" className="py-20 bg-dark-bg">
@@ -108,8 +113,8 @@ export const ProjectsTimeline = () => {
               </div>
 
               <div className="space-y-3">
-                {projectsTimeline
-                  .filter((p) => p.year === year)
+                {featured
+                  .filter((p) => yearOf(p.date) === year)
                   .map((project) => (
                     <AccordionItem
                       key={project.id}
@@ -121,6 +126,16 @@ export const ProjectsTimeline = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/projetos"
+            className="inline-flex items-center gap-2 text-accent-orange font-semibold hover:gap-3 transition-all"
+          >
+            Ver todos os projetos
+            <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
     </section>

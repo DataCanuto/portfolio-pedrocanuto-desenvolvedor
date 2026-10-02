@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Github, BookOpen, Sparkles, CheckCircle2 } from 'lucide-react';
+import { getProject } from '@/data';
 
 interface NotebookEntry {
   name: string;
@@ -21,7 +22,7 @@ interface FolderData {
   conclusions: string[];
 }
 
-const REPO_URL = 'https://github.com/DataCanuto/MachineLearning';
+const REPO_URL = getProject('machine-learning').repository;
 
 const folders: FolderData[] = [
   {

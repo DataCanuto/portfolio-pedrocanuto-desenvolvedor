@@ -3,89 +3,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import { getProject } from '@/data';
 
-interface Challenge {
-  id: number;
-  title: string;
-  description: string;
-  solution: string;
-  impact: string;
-  difficulty: 'low' | 'medium' | 'high';
-}
-
-const challenges: Challenge[] = [
-  {
-    id: 1,
-    title: 'Do Zero ao Deploy: Primeira Aplicação Full Stack em Java',
-    description:
-      'Este foi o primeiro projeto aplicando de ponta a ponta os conceitos de Spring Boot vistos em sala de aula, unindo backend Java a uma interface web funcional para um caso de uso real.',
-    solution:
-      'Estruturação da aplicação em camadas (Controller, Service, Repository), seguindo as boas práticas de arquitetura MVC ensinadas no curso técnico do SENAI CIMATEC.',
-    impact:
-      'Consolidação prática dos fundamentos de Spring Boot, servindo de base para os próximos sistemas de cadastro do portfólio.',
-    difficulty: 'high',
-  },
-  {
-    id: 2,
-    title: 'Conflito de Horários na Agenda',
-    description:
-      'Duas aulas não podem ocupar o mesmo horário. Era preciso impedir que um novo agendamento sobrepusesse um compromisso já existente na agenda do professor.',
-    solution:
-      'Implementação de uma regra de negócio na camada de serviço que valida a sobreposição de intervalos de horário antes de persistir uma nova aula, comparando data e hora de início/fim.',
-    impact:
-      'Eliminação de conflitos de agenda, garantindo que cada horário tenha no máximo uma aula vinculada.',
-    difficulty: 'high',
-  },
-  {
-    id: 3,
-    title: 'Modelagem do Relacionamento Aluno–Aula',
-    description:
-      'Um aluno pode ter várias aulas ao longo do tempo, e cada aula pertence a um único aluno. Era preciso representar corretamente essa relação no banco de dados.',
-    solution:
-      'Uso das anotações @OneToMany e @ManyToOne do Spring Data JPA entre as entidades Aluno e Aula, com chave estrangeira e carregamento otimizado das relações.',
-    impact:
-      'Estrutura de dados normalizada, permitindo consultar rapidamente o histórico completo de aulas de cada aluno.',
-    difficulty: 'medium',
-  },
-  {
-    id: 4,
-    title: 'Autenticação e Separação de Papéis (Admin x Público)',
-    description:
-      'A área administrativa — agenda e cadastro de alunos — precisa ficar protegida, enquanto a página pública de apresentação do serviço deve permanecer aberta a qualquer visitante.',
-    solution:
-      'Configuração do Spring Security restringindo as rotas administrativas a usuários autenticados, mantendo as rotas públicas de apresentação liberadas.',
-    impact:
-      'Separação clara entre a experiência do visitante/aluno e o painel de controle do administrador.',
-    difficulty: 'high',
-  },
-  {
-    id: 5,
-    title: 'Validação de Dados de Cadastro',
-    description:
-      'Os formulários de cadastro de alunos e agendamento de aulas precisavam impedir dados inválidos: e-mails malformados, horários inconsistentes e campos obrigatórios em branco.',
-    solution:
-      'Aplicação de Bean Validation (@NotBlank, @Email, @Future) diretamente nas entidades e DTOs, com tratamento centralizado de exceções para retornar mensagens claras ao usuário.',
-    impact:
-      'Redução de erros de cadastro e maior confiabilidade dos dados armazenados no sistema.',
-    difficulty: 'medium',
-  },
-  {
-    id: 6,
-    title: 'Persistência e Organização do Schema do Banco',
-    description:
-      'Era necessário manter a estrutura do banco relacional consistente entre o ambiente de desenvolvimento e as evoluções do código ao longo do curso.',
-    solution:
-      'Uso do Spring Data JPA com Hibernate para geração e controle do schema, junto de dados iniciais de teste para validar os fluxos de cadastro e agendamento.',
-    impact:
-      'Ambiente de desenvolvimento reproduzível, com o schema do banco sempre sincronizado ao modelo de entidades.',
-    difficulty: 'medium',
-  },
-];
+// Desafios vêm da fonte única de dados (src/data/projects).
+const challenges = (getProject('pedro-canuto-musico').challenges ?? []).map((c, index) => ({ ...c, id: index + 1 }));
 
 export default function ProjectChallenges() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const getDifficultyColor = (difficulty: string) => {
+  const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case 'low':
         return 'bg-green-500/20 text-green-400 border-green-500/50';
@@ -98,7 +24,7 @@ export default function ProjectChallenges() {
     }
   };
 
-  const getDifficultyLabel = (difficulty: string) => {
+  const getDifficultyLabel = (difficulty?: string) => {
     const labels = { low: 'Baixa', medium: 'Média', high: 'Alta' };
     return labels[difficulty as keyof typeof labels] || difficulty;
   };

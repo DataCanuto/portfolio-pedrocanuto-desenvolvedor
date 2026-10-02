@@ -3,89 +3,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import { getProject } from '@/data';
 
-interface Challenge {
-  id: number;
-  title: string;
-  description: string;
-  solution: string;
-  impact: string;
-  difficulty: 'low' | 'medium' | 'high';
-}
-
-const challenges: Challenge[] = [
-  {
-    id: 1,
-    title: 'Processamento de PDFs Escaneados',
-    description:
-      'Muitos documentos eram imagens de PDF (scans), impossibilitando extração de texto direta. Necessário implementar OCR para reconhecer caracteres em imagens.',
-    solution:
-      'Integração com Tesseract OCR com configuração otimizada para documentos financeiros em português. Implementação de pré-processamento de imagens com Pillow para aumentar acurácia.',
-    impact:
-      'Capacidade de processar 100% dos documentos, incluindo scans antigos de baixa qualidade.',
-    difficulty: 'high',
-  },
-  {
-    id: 2,
-    title: 'Normalização de Nomes de Clientes',
-    description:
-      'Nomes inconsistentes entre fontes diferentes: abreviações, prefixos (Sr., Sra.), sobrenomes em diferentes ordens. Dificultava matching cross-referência.',
-    solution:
-      'Desenvolvimento de algoritmo customizado de processamento de nomes com regras específicas para nomes brasileiros. Remoção de prefixos, tratamento de casos especiais (herança, empresa).',
-    impact:
-      'Redução de 95% em inconsistências de nomes, melhorando precisão do matching de clientes.',
-    difficulty: 'medium',
-  },
-  {
-    id: 3,
-    title: 'Extração Precisa de Datas em Português',
-    description:
-      'Variações no formato de datas brasileiras (dd/mm/yyyy), diferentes labels e formatos de texto. Regex simples falhava em casos edge.',
-    solution:
-      'Implementação de regex robusto com múltiplos padrões e tratamento de exceções. Validação com biblioteca `dateutil` para garantir datas válidas.',
-    impact:
-      'Taxa de sucesso de 99% na extração de datas, eliminando erros de parsing.',
-    difficulty: 'medium',
-  },
-  {
-    id: 4,
-    title: 'Consolidação de Múltiplos Documentos por Cliente',
-    description:
-      'Clientes possuem múltiplas NFs, Prestações e Planilhas. Full Outer Join complexo para manter integridade de dados sem perder informações.',
-    solution:
-      'Implementação de pandas merge com chaves compostas e validação pós-merge. Estrutura de dados com listas para armazenar múltiplas origens.',
-    impact:
-      'Consolidação perfeita de dados com 100% de integridade, documentação de clientes com arquivos faltantes.',
-    difficulty: 'high',
-  },
-  {
-    id: 5,
-    title: 'Performance com Grandes Volumes',
-    description:
-      'Pipeline processando centenas de arquivos PDF. Operações de file I/O e OCR são lentas. Necessidade de otimização para execução eficiente.',
-    solution:
-      'Implementação de processamento em chunks, cache de resultados OCR, e otimização de regex. Uso de pandas operations vetorizadas em vez de loops.',
-    impact:
-      'Redução de 60% no tempo de processamento mantendo qualidade dos resultados.',
-    difficulty: 'high',
-  },
-  {
-    id: 6,
-    title: 'Validação e Relatório de Qualidade',
-    description:
-      'Necessidade de identificar documentos faltantes, duplicatas e inconsistências. Rastreamento de qualidade crítico para análise posterior.',
-    solution:
-      'Desenvolvimento de sistema de validação multi-camadas com métricas de qualidade. Geração automática de relatório de arquivos faltantes em Excel.',
-    impact:
-      'Visibilidade total da qualidade dos dados com documentação de gaps e inconsistências.',
-    difficulty: 'medium',
-  },
-];
+// Desafios vêm da fonte única de dados (src/data/projects).
+const challenges = (getProject('data-streaming-project').challenges ?? []).map((c, index) => ({ ...c, id: index + 1 }));
 
 export default function ProjectChallenges() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const getDifficultyColor = (difficulty: string) => {
+  const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case 'low':
         return 'bg-green-500/20 text-green-400 border-green-500/50';
@@ -98,7 +24,7 @@ export default function ProjectChallenges() {
     }
   };
 
-  const getDifficultyLabel = (difficulty: string) => {
+  const getDifficultyLabel = (difficulty?: string) => {
     const labels = { low: 'Baixa', medium: 'Média', high: 'Alta' };
     return labels[difficulty as keyof typeof labels] || difficulty;
   };

@@ -2,59 +2,50 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { profile } from '@/data';
+
+const { about } = profile;
 
 const tabs = [
   {
     id: 'developer',
     label: 'Desenvolvedor Full-Stack',
-    content: (      <>
-        Desenvolvedor Full-Stack em formação, com foco em: Java e Spring Boot para construção de APIs REST e aplicações orientadas a regras de negócio. Aplico Programação Orientada a Objetos, persistência com JPA/PostgreSQL e conteinerização com Docker em projetos completos, do banco de dados à entrega. Complemento o perfil com projetos em Python aplicado a dados e machine learning, e com repertório de UX/UI, o que amplia minha capacidade de dialogar com times de produto e dados.
-        
-      </>
-    ),
+    content: about.developer,
   },
   {
     id: 'journey',
     label: 'Músico a Desenvolvedor',
-    content: (      <>
-        Minha trajetória profissional não é convencional, e é exatamente isso que considero minha maior força. Construí minha base como Arte-educador, educador musical bilíngue e Musicoterapeuta, trabalhando com desenvolvimento humano. Clique{' '}
+    content: (
+      <>
+        {about.journey.paragraphs[0]} Clique{' '}
         <a
-          href="https://pedrocanutomusico.vercel.app/"
+          href={about.journey.link.url}
           target="_blank"
           rel="noopener noreferrer"
           className="text-accent-orange underline"
         >
-          aqui
+          {about.journey.link.label}
         </a>{' '}
         para mais informações.
-
-        <br />
-        <br />
-        Hoje, como estudante no SENAI CIMATEC, trago essa bagagem para a tecnologia. Aprender novas linguagens ou arquitetar bancos de dados exige o mesmo que um instrumento musical: foco, prática, lógica e a capacidade de conectar elementos para criar algo em harmonia.
+        {about.journey.paragraphs.slice(1).map((paragraph) => (
+          <span key={paragraph}>
+            <br />
+            <br />
+            {paragraph}
+          </span>
+        ))}
       </>
     ),
   },
   {
     id: 'skills',
     label: 'O Diferencial Humano - Soft Skills',
-    content: `Empatia e Foco no Usuário (User-Centric): escuta ativa para entender necessidades reais.
-
-Comunicação Clara: traduzir conceitos técnicos para diversos públicos.
-
-Resolução Criativa: visão fora da caixa para problemas difíceis.
-
-Aprender a Aprender: agilidade para dominar novas tecnologias rapidamente.`,
+    content: profile.softSkills.map((s) => `${s.name}: ${s.description}`).join('\n\n'),
   },
   {
     id: 'arsenal',
     label: 'Meu Arsenal Técnico',
-    content: `Linguagens: Python, Java, C++, UML.
-
-Dados: SQL, ETL, Matplotlib, Seaborn.
-
-Negócios: Excel Avançado, Dashboards.
-
-Idiomas: Inglês Fluente.`,
+    content: about.arsenal.join('\n\n'),
   },
 ];
 

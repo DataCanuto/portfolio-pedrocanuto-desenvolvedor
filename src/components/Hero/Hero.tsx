@@ -3,17 +3,24 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { getTechnology, profile } from '@/data';
 
-const languages = [
-  { name: 'Java', color: 'bg-red-600' },
-  { name: 'JavaScript', color: 'bg-yellow-500' },
-  { name: 'HTML5', color: 'bg-orange-600' },
-  { name: 'CSS3', color: 'bg-blue-600' },
-  { name: 'Python', color: 'bg-blue-500' },
-  { name: 'SQL', color: 'bg-gray-700' },
-  { name: 'Power BI', color: 'bg-yellow-600' },
-  { name: 'Excel', color: 'bg-green-600' },
-];
+// Cores dos chips de tecnologia (apresentação). A lista vem de profile.priorityTechnologies.
+const CHIP_COLORS: Record<string, string> = {
+  java: 'bg-red-600',
+  javascript: 'bg-yellow-500',
+  html5: 'bg-orange-600',
+  css3: 'bg-blue-600',
+  python: 'bg-blue-500',
+  sql: 'bg-gray-700',
+  'power-bi': 'bg-yellow-600',
+  excel: 'bg-green-600',
+};
+
+const languages = profile.priorityTechnologies.map((id) => ({
+  name: getTechnology(id).name,
+  color: CHIP_COLORS[id] ?? 'bg-gray-700',
+}));
 
 export const Hero = () => {
   const scrollToServices = () => {
@@ -40,7 +47,8 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Pedro <span className="text-accent-orange">Canuto</span>
+            {profile.name.split(' ')[0]}{' '}
+            <span className="text-accent-orange">{profile.name.split(' ').slice(1).join(' ')}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -50,7 +58,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            Desenvolvedor de Soluções em Tecnologia
+            {profile.tagline}
           </motion.p>
 
           {/* Profile Image */}
@@ -62,8 +70,8 @@ export const Hero = () => {
           >
             <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-accent-orange shadow-lg shadow-accent-orange/30">
               <Image
-                src="/img/profile.png"
-                alt="Pedro Canuto"
+                src={profile.photo}
+                alt={profile.name}
                 fill
                 className="object-cover"
                 priority

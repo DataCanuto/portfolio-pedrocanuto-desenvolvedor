@@ -8,6 +8,7 @@ import TechStack from '@/components/Projects/FloraHubBackend/TechStack';
 import Endpoints from '@/components/Projects/FloraHubBackend/Endpoints';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
+import { getProject } from '@/data';
 import {
   BookOpen,
   Layers,
@@ -18,6 +19,8 @@ import {
   GraduationCap,
   ArrowRight,
 } from 'lucide-react';
+
+const project = getProject('flora-hub-backend');
 
 export default function FloraHubBackendPage() {
   const projectSections = [
@@ -61,7 +64,7 @@ export default function FloraHubBackendPage() {
   return (
     <main className="w-full bg-dark-bg">
       <ProjectHeader
-        projectTitle="Flora Hub Backend"
+        projectTitle={project.name}
         sections={projectSections}
         areaSlug="backend"
         backUrl="/backend"
@@ -110,7 +113,7 @@ export default function FloraHubBackendPage() {
               Saiba Mais
             </button>
             <Link
-              href="/frontend/google-ux-designer"
+              href={getProject('google-ux-designer').caseStudy ?? '/projetos'}
               className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
             >
               Ver Case Study de UX
@@ -177,7 +180,7 @@ export default function FloraHubBackendPage() {
           </div>
 
           <Link
-            href="/budgetting"
+            href={getProject('springboot-ai-budgeting').caseStudy ?? '/projetos'}
             className="inline-flex items-center gap-2 mt-6 text-accent-orange font-semibold hover:underline"
           >
             Ver o projeto Spring Boot AI Budgeting
