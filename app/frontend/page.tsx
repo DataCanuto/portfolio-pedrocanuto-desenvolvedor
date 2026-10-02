@@ -11,9 +11,9 @@ export default function Frontend() {
   const areaTitle = 'Frontend & UX Design';
   const areaIcon = '💻';
 
-  // Ordem cronológica: do mais antigo ao mais recente.
+  // Ordem cronológica: do mais recente ao mais antigo.
   const projects = getProjectsByCategory('frontend').sort(
-    (a, b) => toDate(a.date).getTime() - toDate(b.date).getTime()
+    (a, b) => toDate(b.date).getTime() - toDate(a.date).getTime()
   );
 
   const navItems = [
