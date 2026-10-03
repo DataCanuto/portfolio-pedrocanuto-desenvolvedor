@@ -4,7 +4,6 @@ import React from 'react';
 import ProjectDiagrams from '@/components/Projects/DataStreamingProject/ProjectDiagrams';
 import ProjectChallenges from '@/components/Projects/DataStreamingProject/ProjectChallenges';
 import TechStack from '@/components/Projects/DataStreamingProject/TechStack';
-import ClientInfo from '@/components/Projects/DataStreamingProject/ClientInfo';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
@@ -15,11 +14,11 @@ const project = getProject('data-streaming-project');
 export default function DataStreamingProjectPage() {
   const projectSections = [
     { id: 'objetivo', label: 'Objetivo', icon: <BookOpen size={16} /> },
+    { id: 'wireframes', label: 'Telas do MVP', icon: <Users size={16} /> },
     { id: 'tipos', label: 'Tipos de Documentos', icon: <Database size={16} /> },
     { id: 'challenges', label: 'Desafios e Soluções', icon: <Zap size={16} /> },
     { id: 'diagrams', label: 'Arquitetura', icon: <Code2 size={16} /> },
     { id: 'stack', label: 'Stack', icon: <Code2 size={16} /> },
-    { id: 'client', label: 'Empresa Contratante', icon: <Users size={16} /> },
     { id: 'skills', label: 'Skills Desenvolvidas', icon: <BookOpen size={16} /> },
   ];
 
@@ -34,20 +33,23 @@ export default function DataStreamingProjectPage() {
       />
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg">
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-8">
             <span className="inline-block px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-accent-orange text-sm font-semibold mb-6">
-              📊 PROJETO DE ENGENHARIA DE DADOS
+              🧩 APLICAÇÃO FULL STACK · ENGENHARIA DE DADOS
             </span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-6">
-            <span className="text-accent-orange">PDF</span> Data Extraction Pipeline
+            {project.name}
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Pipeline automatizado para extração, consolidação e análise de dados de múltiplos tipos de documentos PDF com integração OCR
+            {project.shortDescription}
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-12">
@@ -61,7 +63,9 @@ export default function DataStreamingProjectPage() {
               Ver no GitHub
             </a>
             <button
-              onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
+              }
               className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
             >
               Saiba Mais
@@ -93,9 +97,37 @@ export default function DataStreamingProjectPage() {
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-8">
             🎯 <span className="text-accent-orange">Objetivo Principal</span>
           </h2>
-          <p className="text-xl text-gray-300 leading-relaxed max-w-3xl">
-            {project.objective}
+          <p className="text-xl text-gray-300 leading-relaxed max-w-3xl">{project.objective}</p>
+        </div>
+      </section>
+
+      {/* Telas do MVP (wireframes anonimizados) */}
+      <section id="wireframes" className="py-16 px-4 md:px-8 bg-dark-bg">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
+            🖥️ Telas do <span className="text-accent-orange">MVP</span>
+          </h2>
+          <p className="text-gray-400 mb-10 max-w-3xl">
+            Wireframes que representam as telas da aplicação. Os dados são fictícios: nenhum dado
+            real de clientes ou da empresa contratante é exibido.
           </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {project.images?.map((image) => (
+              <figure
+                key={image.src}
+                className="bg-dark-bg-secondary border border-dark-border rounded-lg overflow-hidden"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-auto bg-white"
+                  loading="lazy"
+                />
+                <figcaption className="p-4 text-sm text-gray-400">{image.alt}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -112,18 +144,6 @@ export default function DataStreamingProjectPage() {
       {/* Stack Tecnológico */}
       <section id="stack">
         <TechStack />
-      </section>
-
-      {/* Empresa Contratante */}
-      <section id="client">
-        <ClientInfo
-          clientName="cliente"
-          clientFullName="Cliente (nome removido)"
-          branch="Filial Bahia"
-          website="https://example.com/"
-          contact="Contato removido"
-          description="Informação removida."
-        />
       </section>
 
       {/* Skills Desenvolvidas */}
@@ -169,7 +189,8 @@ export default function DataStreamingProjectPage() {
             🤝 Interessado em <span className="text-accent-orange">Soluções</span>?
           </h2>
           <p className="text-gray-400 text-lg mb-8">
-            Se você possui documentos para processar ou precisa de um pipeline customizado, entre em contato para uma consulta.
+            Se você possui documentos para processar ou precisa de um pipeline customizado, entre em
+            contato para uma consulta.
           </p>
           <a
             href={project.repository}
