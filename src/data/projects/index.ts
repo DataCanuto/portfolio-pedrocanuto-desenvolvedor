@@ -8,13 +8,13 @@ import { springBootAiBudgeting } from './springboot-ai-budgeting';
 import { googleDataAnalyticsCapstone } from './google-data-analytics-capstone';
 
 // Um arquivo por projeto. Para adicionar um projeto: crie o arquivo e inclua-o aqui.
-// A ordem desta lista é a ordem de exibição dentro de cada ano.
+// A ordem desta lista é a ordem dos destaques na Home e de exibição dentro de cada ano.
 export const projects: Project[] = [
   floraHubBackend,
-  floraHubUx,
-  pedroCanutoMusico,
-  galeriaDigital,
   dataStreamingProject,
+  pedroCanutoMusico,
+  floraHubUx,
+  galeriaDigital,
   machineLearning,
   springBootAiBudgeting,
   googleDataAnalyticsCapstone,
