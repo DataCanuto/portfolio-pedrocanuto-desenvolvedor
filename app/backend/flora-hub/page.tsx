@@ -7,6 +7,7 @@ import AppSimulation from '@/components/Projects/FloraHubBackend/AppSimulation';
 import TechStack from '@/components/Projects/FloraHubBackend/TechStack';
 import Endpoints from '@/components/Projects/FloraHubBackend/Endpoints';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
+import { ProjectCaseHero } from '@/components/Projects/ProjectCaseHero';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
 import {
@@ -70,63 +71,7 @@ export default function FloraHubBackendPage() {
         backUrl="/backend"
       />
 
-      {/* Hero */}
-      <section
-        id="hero"
-        className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg"
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
-            <span className="inline-block px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-accent-orange text-sm font-semibold mb-6">
-              🌿 SPRING AI + OPENAI — BACKEND COM CHAMADAS DE IA
-            </span>
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-6">
-            Flora Hub <span className="text-accent-orange">Backend</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            API em Java com Spring Boot e Spring AI que recebe a foto de uma planta, usa o GPT-4o
-            para identificá-la e cruza os cuidados ideais da espécie com o clima local da
-            OpenWeather para gerar recomendações.
-          </p>
-
-          <div className="flex flex-wrap justify-center items-center gap-3 mb-10 text-sm md:text-base">
-            {['Request: imagem', 'Backend: regras de negócio', 'Response: gerada pelo GPT'].map(
-              (step, idx, arr) => (
-                <span key={step} className="flex items-center gap-3">
-                  <span className="px-4 py-2 bg-dark-bg-secondary border border-dark-border rounded-lg text-gray-200 font-semibold">
-                    {step}
-                  </span>
-                  {idx < arr.length - 1 && <ArrowRight className="text-accent-orange" size={18} />}
-                </span>
-              )
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            <button
-              onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
-            >
-              Saiba Mais
-            </button>
-            <Link
-              href={getProject('google-ux-designer').caseStudy ?? '/projetos'}
-              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
-            >
-              Ver Case Study de UX
-            </Link>
-          </div>
-
-          <div className="flex justify-center animate-bounce">
-            <svg className="w-6 h-6 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div>
-      </section>
+      <ProjectCaseHero project={project} detailsId="overview" />
 
       {/* Visão Geral */}
       <section id="overview">
