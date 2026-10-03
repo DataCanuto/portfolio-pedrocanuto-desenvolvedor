@@ -91,24 +91,19 @@ export const projectsWithDeployment = (): Project[] =>
   projects.filter((p) => Boolean(p.deployment));
 export const projectsWithCaseStudy = (): Project[] => projects.filter((p) => Boolean(p.caseStudy));
 
-/** Evidências de uma competência: projetos que a declaram ou usam suas tecnologias, e certificações. */
+/** Evidências de uma competência: projetos que a declaram e certificações com suas tecnologias. */
 export const evidenceFor = (competency: Competency) => ({
-  projects: projects.filter(
-    (p) =>
-      p.skills.includes(competency.id) ||
-      p.technologies.some((t) => competency.technologies.includes(t))
-  ),
+  // Só a competência declarada no projeto conta como evidência: inferir pela tecnologia
+  // ligava, por exemplo, um backend em FastAPI a "Backend (Java/Spring)" só por usar REST.
+  projects: projects.filter((p) => p.skills.includes(competency.id)),
   certifications: certifications.filter((c) =>
     c.technologies?.some((t) => competency.technologies.includes(t))
   ),
 });
 
-/** Competências demonstradas por um projeto (declaradas + inferidas pelas tecnologias). */
+/** Competências demonstradas por um projeto (as declaradas em `skills`). */
 export const competenciesOf = (project: Project): Competency[] =>
-  competencies.filter(
-    (c) =>
-      project.skills.includes(c.id) || project.technologies.some((t) => c.technologies.includes(t))
-  );
+  competencies.filter((c) => project.skills.includes(c.id));
 
 /** Competências sem nenhum projeto como evidência. */
 export const competenciesWithoutEvidence = (): Competency[] =>
