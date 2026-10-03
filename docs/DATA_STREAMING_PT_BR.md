@@ -175,5 +175,4 @@ Este projeto é de código aberto e disponível para fins educacionais e de port
 **Autor**: Pedro Canuto
 **Propósito**: Projeto de Portfólio em Engenharia de Dados
 **Ano**: 2025
-**Cliente**: ANDDIAP (Associação Nacional de Defesa do Direito dos Idosos, Aposentados e Pencionistas)
-**Filial**: Bahia - Corretor: Saul Freitas Figueiredo
+**Cliente**: organização do terceiro setor (nome omitido por confidencialidade)
