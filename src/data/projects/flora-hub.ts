@@ -8,7 +8,15 @@ import type { Project } from '../types';
 const FLORA_HUB = {
   product: 'flora-hub',
   domain: 'Cuidado de plantas — app conceitual para amantes de plantas',
-} as const;
+  // Concebido em julho/2025, no 1º semestre do Técnico em Desenvolvimento de Sistemas,
+  // e desenvolvido ao longo do curso (informado pelo Pedro, out/2026).
+  milestones: [
+    { date: '2025-07', label: 'Concepção do projeto (1º semestre de Desenvolvimento de Sistemas)' },
+    { date: '2025', label: 'Spring Boot AI (certificação DIO)' },
+    { date: '2026-08', label: 'UX Design' },
+    { date: '2026-09', label: 'Prototipagem de UX e implementação do backend com Claude Code' },
+  ],
+};
 
 export const floraHubUx: Project = {
   id: 'google-ux-designer',
@@ -19,10 +27,15 @@ export const floraHubUx: Project = {
     'Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados ao case study Flora Hub: pesquisa com usuários, personas, mapa de empatia, auditoria de concorrentes, wireframes e testes de usabilidade.',
   description:
     'Fundamentos e métodos de UX Design (empatia, ideação, prototipação e teste) aplicados ao case study Flora Hub: pesquisa com usuários, mapa de empatia, mapa da jornada, auditoria de concorrentes e testes de usabilidade.',
+  problem:
+    'Quem quer cuidar de plantas depende de grupos de WhatsApp, vídeos e buscas soltas na internet: informação fragmentada e pouco confiável, principalmente sobre a segurança das plantas para crianças e pets.',
+  objective:
+    'Projetar, seguindo o processo de UX do Google (empatia, definição, ideação, prototipação e teste), um app que reúna identificação de plantas, cuidados confiáveis e comunidade, validado em testes com usuários.',
+  draftFields: ['problem', 'objective'],
   status: 'concluido',
   category: 'frontend',
   featured: true,
-  date: '2026',
+  date: '2026-08',
   context: {
     engagement: 'certificacao',
     label: 'Certificação Google UX Design',
@@ -106,10 +119,20 @@ export const floraHubBackend: Project = {
     'Backend em Spring Boot com Spring AI: a foto de uma planta é enviada ao GPT-4o para identificação, e um motor de regras cruza os cuidados da espécie com o clima da OpenWeather para gerar recomendações. Evolução do projeto Spring AI Budgeting (DIO).',
   description:
     'Backend com Spring AI e GPT-4o: recebe a foto de uma planta, identifica a espécie e cruza os cuidados ideais com o clima da OpenWeather em um motor de regras que gera recomendações.',
+  problem:
+    'Saber como cuidar de uma planta exige primeiro identificar a espécie e depois adaptar os cuidados ao clima local, juntando fontes diferentes; e uma resposta de IA sozinha não é confiável para decidir esses cuidados.',
+  objective:
+    'Implementar o backend do Flora Hub: receber a foto da planta, identificar a espécie com GPT-4o via Spring AI e gerar recomendações de cuidado em um motor de regras em Java que cruza a espécie com o clima da OpenWeather.',
+  draftFields: ['problem', 'objective'],
+  status: 'em-andamento',
   category: 'backend',
   featured: true,
-  date: '2026',
-  context: { engagement: 'pessoal', label: 'Projeto Pessoal' },
+  date: '2026-09',
+  context: {
+    engagement: 'curso',
+    label: 'Projeto do curso Técnico em Desenvolvimento de Sistemas',
+    organization: 'SENAI CIMATEC',
+  },
   technologies: [
     'java',
     'spring-boot',

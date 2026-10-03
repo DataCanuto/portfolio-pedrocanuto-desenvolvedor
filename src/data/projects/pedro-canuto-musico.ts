@@ -10,6 +10,8 @@ export const pedroCanutoMusico: Project = {
     'Sistema fullstack de cadastro de alunos e agenda de aulas de música: backend em Java com Spring Boot e frontend em React, aplicando na prática os conhecimentos do curso Técnico em Desenvolvimento de Sistemas para gerenciar meu próprio serviço profissional.',
   problem:
     'Organizar o cadastro de alunos e a agenda de aulas do meu próprio serviço como educador musical.',
+  objective:
+    'Aplicar, em um problema real do meu dia a dia como educador musical, os fundamentos de Spring Boot aprendidos em sala de aula: modelagem de entidades, persistência com Spring Data JPA, regras de negócio na camada de serviço e autenticação de uma área administrativa.',
   resumeTitle: 'Sistema de Agendamentos e Vitrine de Serviços',
   resumeDescription:
     'Desenvolvimento full stack de aplicação web para gerenciamento de agendamentos de aulas e serviços, publicada em produção.',
