@@ -70,8 +70,8 @@ export const pedroCanutoMusico: Project = {
   backend: ['Java 17', 'Spring Boot', 'Spring Security', 'Bean Validation'],
   frontend: ['React', 'TypeScript', 'Vite'],
   database: ['PostgreSQL', 'Spring Data JPA / Hibernate', 'Flyway'],
-  repository: 'https://github.com/DataCanuto/pedro-canuto-musico',
-  deployment: 'https://pedrocanutomusico.vercel.app',
+  repository: 'https://github.com/DataCanuto/pedrocanutomusico',
+  deployment: 'https://pedrocanutomusico.app',
   caseStudy: '/backend/pedro-canuto-musico',
   challenges: [
     {
@@ -136,7 +136,4 @@ export const pedroCanutoMusico: Project = {
     },
   ],
   icon: '🎵',
-  reviewNotes: [
-    'URL do repositório conflitante: a página Frontend usava github.com/DataCanuto/pedrocanutomusico; o case study usa github.com/DataCanuto/pedro-canuto-musico (mantido).',
-  ],
 };

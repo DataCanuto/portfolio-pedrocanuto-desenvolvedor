@@ -14,7 +14,7 @@ export const galeriaDigital: Project = {
     'Um artista local precisava de um espaço digital para expor o acervo e receber contatos de interessados, acessível pelo celular e por QR Code.',
   objective:
     'Criar uma landing page responsiva que apresente as 58 obras em 5 categorias, com filtros, detalhes de cada obra e contato direto pelo WhatsApp.',
-  draftFields: ['problem', 'objective'],
+  status: 'concluido',
   category: 'frontend',
   featured: true,
   onResume: 'freelance',
@@ -23,6 +23,10 @@ export const galeriaDigital: Project = {
   domain: 'Arte — exposição e venda de obras',
   technologies: ['typescript', 'nextjs', 'react', 'tailwind', 'framer-motion'],
   skills: ['frontend-react'],
+  results: [
+    'Galeria publicada para a exposição Divercidadade (concluída).',
+    'Próxima etapa em desenvolvimento: página do artista com e-commerce.',
+  ],
   features: [
     '58 obras categorizadas',
     'Filtros dinâmicos por categoria',

@@ -31,7 +31,6 @@ export const floraHubUx: Project = {
     'Quem quer cuidar de plantas depende de grupos de WhatsApp, vídeos e buscas soltas na internet: informação fragmentada e pouco confiável, principalmente sobre a segurança das plantas para crianças e pets.',
   objective:
     'Projetar, seguindo o processo de UX do Google (empatia, definição, ideação, prototipação e teste), um app que reúna identificação de plantas, cuidados confiáveis e comunidade, validado em testes com usuários.',
-  draftFields: ['problem', 'objective'],
   status: 'concluido',
   category: 'frontend',
   featured: true,
@@ -123,7 +122,6 @@ export const floraHubBackend: Project = {
     'Saber como cuidar de uma planta exige primeiro identificar a espécie e depois adaptar os cuidados ao clima local, juntando fontes diferentes; e uma resposta de IA sozinha não é confiável para decidir esses cuidados.',
   objective:
     'Implementar o backend do Flora Hub: receber a foto da planta, identificar a espécie com GPT-4o via Spring AI e gerar recomendações de cuidado em um motor de regras em Java que cruza a espécie com o clima da OpenWeather.',
-  draftFields: ['problem', 'objective'],
   status: 'em-andamento',
   category: 'backend',
   featured: true,
@@ -198,6 +196,6 @@ export const floraHubBackend: Project = {
   ],
   icon: '🌿',
   reviewNotes: [
-    'Repositório GitHub do backend não está linkado no portfólio (o código citado é de um repositório local).',
+    'Repositório GitHub do backend ainda é privado; Pedro vai publicá-lo (out/2026). Linkar em `repository` quando estiver público.',
   ],
 };
