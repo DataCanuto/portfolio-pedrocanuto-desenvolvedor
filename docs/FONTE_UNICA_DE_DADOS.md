@@ -36,6 +36,12 @@ src/data ─────┼── Case studies (título, GitHub, objetivo, desaf
 - **Currículo:** `onResume` ('freelance' | 'pessoal' | 'dados') define a seção; `resumeTitle` e
   `resumeDescription` ajustam o texto. Certificações entram com `onResume: true`.
 - **Nunca inventar:** campo desconhecido fica ausente. O validador mostra o que falta.
+- **Texto ainda não revisado:** `draftFields` lista os campos (`problem`, `objective`) redigidos a
+  partir do código e dos dados que o Pedro ainda não revisou. Quando ele confirma ou reescreve o
+  texto, o campo sai da lista. Uso interno: aparece no validador, nunca no site.
+- **Marcos do projeto:** `milestones` guarda datas e etapas em ordem cronológica.
+- **Números de resultado:** só entram nos desafios (`challenges[].impact`) números medidos, com a
+  origem registrada na documentação do projeto; o que não pode ser medido vira frase sem número.
 
 ## Validação
 
@@ -78,6 +84,14 @@ para visitantes.
 - **SEO:** Open Graph aponta para `https://pedrocanuto.dev`; o portfólio publicado está na Vercel.
 - **Galeria Digital (conteúdo do cliente):** dois números de WhatsApp diferentes em `GaleriaHero`
   e `GaleriaAbout`/`GaleriaArtwork`. Não alterado (dados do cliente, fora do perfil).
+
+### Projeto renomeado (outubro/2026)
+
+O antigo "Data Streaming Pipeline" (`data-streaming-project`) passou a ser apresentado como
+**Sistema de Gestão de Clientes e Documentos**, a aplicação full stack que substituiu o notebook.
+O `id`, o `slug` e a rota do case (`/engenharia-dados/data-streaming-project`) foram mantidos para
+não quebrar links. O nome do cliente e da empresa contratante não aparece em nenhum dado, texto ou
+imagem; as telas são wireframes com dados fictícios em `public/assets/gestao-clientes-wireframes/`.
 
 ### Fora do escopo desta etapa
 

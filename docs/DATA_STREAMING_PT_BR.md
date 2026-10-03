@@ -1,4 +1,69 @@
-# Pipeline de Extração de Dados de PDFs
+# Sistema de Gestão de Clientes e Documentos
+
+Aplicação web full stack, desenvolvida para um cliente (freelance), que organiza a documentação
+dos clientes de um escritório: lê lotes de PDFs, consolida os documentos por cliente, mostra o que
+falta e permite revisar, corrigir e exportar a base. Status: **em produção** (roda na máquina da
+empresa). Nenhum dado real de clientes ou da empresa contratante é publicado aqui; as telas do
+portfólio são wireframes com dados fictícios.
+
+- **Problema:** organizar os arquivos dos clientes.
+- **Objetivo:** projetar um software para gestão e controle de arquivos e versões.
+
+## Arquitetura
+
+```text
+React + Vite ──HTTP/JSON──► FastAPI ──SQL──► PostgreSQL (migrations com Alembic)
+                              │
+                              ├─ api/routes     só HTTP
+                              ├─ services       regras de aplicação
+                              ├─ repositories   todo o SQL (SQLAlchemy)
+                              ├─ extraction     PDF → objetos (Strategy Pattern por tipo)
+                              └─ domain         regras puras: consolidação, nomes, relatório
+```
+
+- **Extração:** um extractor por tipo de documento (nota fiscal, planilha de comissão, prestação
+  de contas). Texto com PyPDF2, tabelas com PyMuPDF e OCR com Tesseract só quando necessário,
+  com cache por hash do arquivo.
+- **Processamento em segundo plano:** o upload responde `202 Accepted` e o frontend acompanha o
+  progresso do lote.
+- **Consolidação:** a chave do cliente é o nome lido de dentro do documento, normalizado; erros
+  de OCR são reconciliados com a camada de texto; casos em dúvida vão para revisão.
+- **Comparação antes de importar:** cada documento do lote é classificado como novo, igual,
+  alterado, conflito ou erro; o usuário escolhe o que entra no banco.
+- **Correção manual com histórico:** atribuição de documentos a clientes, correção de campos,
+  união de fichas e correção de nomes.
+- **Saídas:** planilha-relatório `.xlsx` e organização dos PDFs em pastas por cliente.
+- **Testes:** suíte com pytest no backend e testes de utilitários no frontend.
+
+## Números (dados agregados do sistema em produção, outubro/2026)
+
+| Indicador | Valor | Origem |
+| --- | --- | --- |
+| Clientes | 169 | painel (`GET /dashboard`) |
+| Documentos | 502 (191 notas fiscais, 151 planilhas, 160 prestações) | painel |
+| Documentos sem cliente | 0 (100% atribuídos) | painel |
+| Clientes completos (os três tipos) | 116 (69%) | painel |
+| Clientes sem nenhum campo pendente após a extração | 151 de 169 (89%) | `GET /documentos?a_verificar=true` |
+| Documentos com campo a verificar | 21, de 18 clientes, resolvidos por correção manual | idem |
+| Primeiro lote real | 507 arquivos, 0 com erro, cerca de 3 minutos | registro do processamento |
+| Ajustes de OCR / possíveis duplicidades no 1º lote | 31 / 29 enviadas para revisão | verificações do lote |
+
+Os clientes com documentos faltantes (14 sem nota fiscal, 34 sem planilha, 28 sem prestação) são
+documentos ainda não entregues; o sistema os torna visíveis no painel.
+
+## Stack
+
+Python, FastAPI, Pydantic, SQLAlchemy, Alembic, PostgreSQL, PyMuPDF, PyPDF2, Tesseract OCR,
+OpenPyXL, pytest, React, Vite e JavaScript.
+
+---
+
+## Origem: versão em notebook (2025)
+
+O sistema começou como um pipeline em Jupyter Notebook. A documentação abaixo descreve essa
+primeira versão e fica como histórico.
+
+### Pipeline de Extração de Dados de PDFs
 
 Um pipeline completo de processamento de dados em Python para extração, consolidação e análise de informações de múltiplos tipos de documentos PDF usando tecnologias OCR e pattern matching.
 
