@@ -175,5 +175,4 @@ Este projeto é de código aberto e disponível para fins educacionais e de port
 **Autor**: Pedro Canuto
 **Propósito**: Projeto de Portfólio em Engenharia de Dados
 **Ano**: 2025
-**Cliente**: cliente (Cliente (nome removido))
-**Filial**: Bahia - Corretor: Contato removido
+**Cliente**: organização do terceiro setor (nome omitido por confidencialidade)

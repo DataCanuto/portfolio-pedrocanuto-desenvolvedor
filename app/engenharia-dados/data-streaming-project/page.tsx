@@ -4,11 +4,10 @@ import React from 'react';
 import ProjectDiagrams from '@/components/Projects/DataStreamingProject/ProjectDiagrams';
 import ProjectChallenges from '@/components/Projects/DataStreamingProject/ProjectChallenges';
 import TechStack from '@/components/Projects/DataStreamingProject/TechStack';
-import ClientInfo from '@/components/Projects/DataStreamingProject/ClientInfo';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
-import { Code2, Database, Zap, Users, BookOpen } from 'lucide-react';
+import { Code2, Database, Zap, BookOpen } from 'lucide-react';
 
 const project = getProject('data-streaming-project');
 
@@ -19,7 +18,6 @@ export default function DataStreamingProjectPage() {
     { id: 'challenges', label: 'Desafios e Soluções', icon: <Zap size={16} /> },
     { id: 'diagrams', label: 'Arquitetura', icon: <Code2 size={16} /> },
     { id: 'stack', label: 'Stack', icon: <Code2 size={16} /> },
-    { id: 'client', label: 'Empresa Contratante', icon: <Users size={16} /> },
     { id: 'skills', label: 'Skills Desenvolvidas', icon: <BookOpen size={16} /> },
   ];
 
@@ -114,17 +112,6 @@ export default function DataStreamingProjectPage() {
         <TechStack />
       </section>
 
-      {/* Empresa Contratante */}
-      <section id="client">
-        <ClientInfo
-          clientName="cliente"
-          clientFullName="Cliente (nome removido)"
-          branch="Filial Bahia"
-          website="https://example.com/"
-          contact="Contato removido"
-          description="Informação removida."
-        />
-      </section>
 
       {/* Skills Desenvolvidas */}
       <section id="skills" className="py-16 px-4 md:px-8 bg-dark-bg-secondary">
