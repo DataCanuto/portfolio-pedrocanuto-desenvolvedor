@@ -8,11 +8,8 @@ export const dataStreamingProject: Project = {
     'Pipeline automatizado para extração, consolidação e análise de dados de múltiplos tipos de documentos PDF (notas fiscais, planilhas, prestações) com OCR via Tesseract e exportação estruturada em Excel.',
   description:
     'Pipeline completo de extração, processamento e consolidação de dados de múltiplos tipos de documentos (Notas Fiscais, Planilhas, Prestações) com OCR integrado.',
-  problem:
-    'A conferência de documentos de clientes (notas fiscais, planilhas e prestações de contas em PDF, muitos escaneados) era manual e lenta, sujeita a erros e sem uma visão clara de quais documentos faltavam.',
   objective:
     'Automatizar a extração e consolidação de dados de documentos PDF (NFs, Planilhas, Prestações) com suporte para PDFs escaneados via OCR, gerando relatórios estruturados e consolidados para análise.',
-  draftFields: ['problem'],
   resumeTitle: 'Pipeline de Dados — Data Flow Pipeline',
   resumeDescription:
     'Construção, para cliente, de pipeline em Python para análise de fluxo e gerenciamento de dados.',
