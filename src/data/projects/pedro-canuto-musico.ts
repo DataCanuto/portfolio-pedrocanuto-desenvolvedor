@@ -15,7 +15,7 @@ export const pedroCanutoMusico: Project = {
   resumeTitle: 'Sistema de Agendamentos e Vitrine de Serviços',
   resumeDescription:
     'Desenvolvimento full stack de aplicação web para gerenciamento de agendamentos de aulas e serviços, publicada em produção.',
-  status: 'em-producao',
+  status: 'concluido',
   category: 'backend',
   secondaryCategories: ['frontend'],
   perspectives: {

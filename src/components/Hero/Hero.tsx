@@ -1,12 +1,70 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown, FileText, MessageCircle } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  ChevronDown,
+  Database,
+  FileSpreadsheet,
+  FileText,
+  MessageCircle,
+  type LucideIcon,
+} from 'lucide-react';
+import type { IconType } from 'react-icons';
+import { DiJava } from 'react-icons/di';
+import {
+  SiCss,
+  SiFastapi,
+  SiHtml5,
+  SiJavascript,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiVite,
+} from 'react-icons/si';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getTechnology, profile } from '@/data';
 
-const technologies = profile.priorityTechnologies.map((id) => getTechnology(id).name);
+const TECH_ICONS: Record<string, IconType | LucideIcon> = {
+  java: DiJava,
+  javascript: SiJavascript,
+  html5: SiHtml5,
+  css3: SiCss,
+  python: SiPython,
+  sql: Database,
+  'power-bi': BarChart3,
+  excel: FileSpreadsheet,
+  fastapi: SiFastapi,
+  postgresql: SiPostgresql,
+  react: SiReact,
+  vite: SiVite,
+};
+
+// Cores oficiais das marcas (simple-icons). Ícones genéricos (sql, power-bi, excel)
+// usam a cor de marca do produto mesmo sem um logo de marca disponível.
+const TECH_COLORS: Record<string, string> = {
+  java: '#ED8B00',
+  javascript: '#F7DF1E',
+  html5: '#E34F26',
+  css3: '#1572B6',
+  python: '#3776AB',
+  sql: '#4479A1',
+  'power-bi': '#F2C811',
+  excel: '#217346',
+  fastapi: '#009688',
+  postgresql: '#4169E1',
+  react: '#61DAFB',
+  vite: '#646CFF',
+};
+
+const technologies = profile.priorityTechnologies.map((id) => ({
+  id,
+  name: getTechnology(id).name,
+  Icon: TECH_ICONS[id],
+  color: TECH_COLORS[id],
+}));
 
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -70,12 +128,21 @@ export const Hero = () => {
           </div>
 
           <ul className="flex flex-wrap justify-center gap-2 max-w-xl" aria-label="Tecnologias principais">
-            {technologies.map((name) => (
-              <li
-                key={name}
-                className="px-3 py-1 rounded-full border border-dark-border bg-dark-bg-secondary text-gray-300 text-xs sm:text-sm"
-              >
-                {name}
+            {technologies.map(({ id, name, Icon, color }) => (
+              <li key={id} className="group relative">
+                <span
+                  className="flex items-center justify-center w-10 h-10 rounded-[10px] border border-dark-border bg-transparent transition-colors hover:border-accent-orange"
+                  style={color ? { color } : undefined}
+                >
+                  {Icon ? <Icon size={18} aria-hidden /> : null}
+                  <span className="sr-only">{name}</span>
+                </span>
+                <span
+                  role="tooltip"
+                  className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 whitespace-nowrap rounded-md border border-dark-border bg-dark-bg-secondary px-2 py-1 text-xs text-gray-200 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+                >
+                  {name}
+                </span>
               </li>
             ))}
           </ul>
