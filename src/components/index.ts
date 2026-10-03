@@ -17,7 +17,7 @@ export { Button } from './UI/Button';
 export { Badge } from './UI/Badge';
 
 // Data Streaming Project Components
-export { ProjectOverview, ProjectDiagrams, ProjectChallenges, TechStack, ClientInfo } from './Projects/DataStreamingProject';
+export { ProjectOverview, ProjectDiagrams, ProjectChallenges, TechStack } from './Projects/DataStreamingProject';
 
 // Pedro Canuto Música Project Components
 export {

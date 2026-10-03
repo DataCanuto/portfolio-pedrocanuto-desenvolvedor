@@ -17,7 +17,7 @@ export const dataStreamingProject: Project = {
   featured: true,
   onResume: 'freelance',
   date: '2025-01',
-  context: { engagement: 'freelance', label: 'Projeto para Cliente', organization: 'cliente' },
+  context: { engagement: 'freelance', label: 'Projeto para Cliente' },
   technologies: [
     'python',
     'tesseract',
