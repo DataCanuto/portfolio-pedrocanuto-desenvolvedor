@@ -21,6 +21,8 @@ if (process.argv.includes('--json')) {
       console.log(`  ${mark} ${c.label}${!c.ok && c.required ? ' (obrigatório)' : ''}`);
     }
     for (const note of p.reviewNotes) console.log(`  ⚑ Revisar: ${note}`);
+    if (p.draftFields.length)
+      console.log(`  ✎ Texto do Claude, revisar: ${p.draftFields.join(', ')}`);
   }
 
   console.log('\nPerfil, competências e certificações');

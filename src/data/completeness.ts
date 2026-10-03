@@ -25,6 +25,8 @@ export interface ProjectReport {
   name: string;
   checks: FieldCheck[];
   reviewNotes: string[];
+  /** Campos redigidos pelo Claude que o Pedro ainda não revisou (não bloqueiam a publicação). */
+  draftFields: string[];
   /** Todos os obrigatórios preenchidos e nenhuma pendência de revisão. */
   readyToPublish: boolean;
   /** Percentual de campos preenchidos (obrigatórios + recomendados). */
@@ -64,6 +66,9 @@ export const checkProject = (project: Project): ProjectReport => {
     name: project.name,
     checks,
     reviewNotes,
+    draftFields: (project.draftFields ?? []).map((f) =>
+      f === 'problem' ? 'Problema' : 'Objetivo'
+    ),
     readyToPublish: checks.every((c) => c.ok || !c.required) && reviewNotes.length === 0,
     score: Math.round((checks.filter((c) => c.ok).length / checks.length) * 100),
   };

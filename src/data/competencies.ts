@@ -3,15 +3,15 @@ import type { Competency } from './types';
 /**
  * Competências profissionais e as tecnologias que as sustentam.
  *
- * `level` fica 'nao-avaliado' até o Pedro declarar o nível real. O validador lista
- * competências sem nível e sem evidência em projetos.
+ * `level` é o nível declarado pelo Pedro (out/2026: Intermediário em todas). O validador
+ * lista competências sem nível e sem evidência em projetos.
  */
 export const competencies: Competency[] = [
   {
     id: 'backend-java',
     name: 'Desenvolvimento Backend (Java/Spring)',
     area: 'backend',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: [
       'java',
       'spring-boot',
@@ -27,21 +27,21 @@ export const competencies: Competency[] = [
     id: 'api-design',
     name: 'Design de APIs REST',
     area: 'backend',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['rest-api', 'spring-web', 'bean-validation'],
   },
   {
     id: 'arquitetura-software',
     name: 'Arquitetura de Software',
     area: 'arquitetura',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['ddd', 'uml', 'poo'],
   },
   {
     id: 'frontend-react',
     name: 'Desenvolvimento Frontend (React)',
     area: 'frontend',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: [
       'react',
       'nextjs',
@@ -58,70 +58,70 @@ export const competencies: Competency[] = [
     id: 'banco-de-dados',
     name: 'Banco de Dados Relacional',
     area: 'banco-de-dados',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['postgresql', 'mysql', 'h2', 'sql', 'flyway'],
   },
   {
     id: 'devops-containers',
     name: 'Containers e Deploy',
     area: 'cloud-devops',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['docker', 'vercel'],
   },
   {
     id: 'testes-automatizados',
     name: 'Testes Automatizados',
     area: 'testes',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['junit'],
   },
   {
     id: 'seguranca-aplicacoes',
     name: 'Segurança de Aplicações',
     area: 'seguranca',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['spring-security'],
   },
   {
     id: 'ia-aplicada',
     name: 'IA Aplicada a Sistemas (LLMs)',
     area: 'ia-ml',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['spring-ai', 'openai', 'gpt-4o', 'whisper'],
   },
   {
     id: 'machine-learning',
     name: 'Machine Learning e Visão Computacional',
     area: 'ia-ml',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['scikit-learn', 'tensorflow', 'xgboost', 'opencv'],
   },
   {
     id: 'analise-dados',
     name: 'Análise de Dados',
     area: 'dados',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['python', 'pandas', 'numpy', 'scipy', 'eda', 'sql', 'excel', 'jupyter'],
   },
   {
     id: 'visualizacao-dados',
     name: 'Visualização de Dados e Dashboards',
     area: 'dados',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['matplotlib', 'seaborn', 'plotly', 'power-bi'],
   },
   {
     id: 'engenharia-dados',
     name: 'Engenharia de Dados (ETL)',
     area: 'dados',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: ['etl', 'pymupdf', 'pypdf2', 'tesseract', 'openpyxl', 'regex', 'pandas'],
   },
   {
     id: 'ux-design',
     name: 'UX/UI Design',
     area: 'ux-ui',
-    level: 'nao-avaliado',
+    level: 'intermediario',
     technologies: [
       'ux-ui-design',
       'figma',
