@@ -15,7 +15,7 @@ export const dataStreamingProject: Project = {
   resumeDescription:
     'Desenvolvimento, para cliente, de aplicação full stack (Python/FastAPI, PostgreSQL e React) que extrai dados de PDFs com OCR e consolida a documentação por cliente.',
   category: 'engenharia-dados',
-  secondaryCategories: ['backend', 'frontend'],
+  secondaryCategories: ['backend', 'frontend', 'dashboards'],
   perspectives: {
     backend: {
       title: 'Sistema de Gestão de Clientes e Documentos — Backend',
