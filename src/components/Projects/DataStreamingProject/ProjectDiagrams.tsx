@@ -6,9 +6,7 @@ import { motion } from 'framer-motion';
 import { Code2, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ProjectDiagrams() {
-  const [activeDiagram, setActiveDiagram] = useState<'classes' | 'flow' | 'uml'>(
-    'uml'
-  );
+  const [activeDiagram, setActiveDiagram] = useState<'classes' | 'flow' | 'uml'>('uml');
 
   const diagrams = [
     {
@@ -74,10 +72,11 @@ export default function ProjectDiagrams() {
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-dark-header-text mb-4">
-            <span className="text-accent-orange">Arquitetura</span> & Diagramas
+            Diagramas da <span className="text-accent-orange">v1</span> (notebook)
           </h2>
           <p className="text-gray-400 text-lg">
-            Visualização completa da estrutura e fluxo de dados do projeto
+            Estrutura e fluxo do pipeline original em Jupyter Notebook, que deu origem ao sistema
+            atual
           </p>
         </motion.div>
 
@@ -119,9 +118,7 @@ export default function ProjectDiagrams() {
             className="bg-dark-bg border border-dark-border rounded-xl p-5 md:p-8 overflow-x-auto"
           >
             <div className="mb-4">
-              <h3 className="text-2xl font-bold text-accent-orange mb-2">
-                {currentDiagram.name}
-              </h3>
+              <h3 className="text-2xl font-bold text-accent-orange mb-2">{currentDiagram.name}</h3>
               <p className="text-gray-400">{currentDiagram.description}</p>
             </div>
 
@@ -153,9 +150,7 @@ export default function ProjectDiagrams() {
                   <div
                     key={index}
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      index === getCurrentIndex()
-                        ? 'w-8 bg-accent-orange'
-                        : 'w-2 bg-dark-border'
+                      index === getCurrentIndex() ? 'w-8 bg-accent-orange' : 'w-2 bg-dark-border'
                     }`}
                   />
                 ))}
@@ -167,7 +162,10 @@ export default function ProjectDiagrams() {
                 className="flex items-center gap-2 px-4 sm:px-6 py-3 bg-accent-orange text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 group"
               >
                 <span className="hidden sm:inline">Próximo</span>
-                <ChevronRight size={20} className="group-hover:-translate-x-1 transition-transform" />
+                <ChevronRight
+                  size={20}
+                  className="group-hover:-translate-x-1 transition-transform"
+                />
               </button>
             </div>
           </motion.div>

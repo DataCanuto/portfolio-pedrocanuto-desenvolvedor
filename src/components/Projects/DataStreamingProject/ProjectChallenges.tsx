@@ -139,7 +139,7 @@ export default function ProjectChallenges() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           <div className="bg-dark-bg-secondary border border-dark-border rounded-lg p-6 text-center">
             <div className="text-3xl font-bold text-accent-orange mb-2">
@@ -152,10 +152,6 @@ export default function ProjectChallenges() {
               {challenges.filter((c) => c.difficulty === 'medium').length}
             </div>
             <p className="text-gray-400">Desafios Moderados (Média Dificuldade)</p>
-          </div>
-          <div className="bg-dark-bg-secondary border border-dark-border rounded-lg p-6 text-center">
-            <div className="text-3xl font-bold text-accent-orange mb-2">100%</div>
-            <p className="text-gray-400">Taxa de Resolução</p>
           </div>
         </motion.div>
       </div>
