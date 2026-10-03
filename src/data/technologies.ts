@@ -31,6 +31,11 @@ export const technologies: Technology[] = [
   { id: 'poo', name: 'Programação Orientada a Objetos', kind: 'practice' },
   { id: 'ddd', name: 'DDD (arquitetura em camadas)', kind: 'practice' },
   { id: 'crud', name: 'CRUD', kind: 'practice' },
+  { id: 'fastapi', name: 'FastAPI', kind: 'framework' },
+  { id: 'pydantic', name: 'Pydantic', kind: 'library' },
+  { id: 'sqlalchemy', name: 'SQLAlchemy', kind: 'library' },
+  { id: 'alembic', name: 'Alembic', kind: 'tool' },
+  { id: 'pytest', name: 'pytest', kind: 'tool' },
 
   // Frontend
   { id: 'react', name: 'React', kind: 'framework' },
