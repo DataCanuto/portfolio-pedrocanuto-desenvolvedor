@@ -10,12 +10,12 @@ export const dataStreamingProject: Project = {
     'Evolução de um pipeline de extração em notebook para uma aplicação full stack de gestão de clientes. O backend em FastAPI recebe lotes de PDFs (notas fiscais, planilhas de comissão e prestações de contas), extrai os dados com PyMuPDF, PyPDF2 e Tesseract OCR em segundo plano, consolida os documentos por cliente e compara o lote com o que já está no banco (PostgreSQL, com migrations no Alembic) antes de importar. O frontend em React mostra o painel de pendências, a ficha de cada cliente, a revisão de duplicidades e as correções manuais com histórico, e exporta a base em planilha .xlsx e em pastas organizadas.',
   problem: 'Organizar os arquivos dos clientes.',
   objective: 'Projetar um software para gestão e controle de arquivos e versões.',
-  status: 'em-producao',
+  status: 'concluido',
   resumeTitle: 'Sistema de Gestão de Clientes e Documentos',
   resumeDescription:
     'Desenvolvimento, para cliente, de aplicação full stack (Python/FastAPI, PostgreSQL e React) que extrai dados de PDFs com OCR e consolida a documentação por cliente.',
   category: 'engenharia-dados',
-  secondaryCategories: ['backend', 'frontend'],
+  secondaryCategories: ['backend', 'frontend', 'dashboards'],
   perspectives: {
     backend: {
       title: 'Sistema de Gestão de Clientes e Documentos — Backend',
