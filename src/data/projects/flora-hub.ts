@@ -127,8 +127,8 @@ export const floraHubBackend: Project = {
   category: 'backend',
   featured: true,
   cover: {
-    src: '/assets/flora-hub-wireframes/01-identificacao-e-cuidados.svg',
-    alt: 'Wireframe do Flora Hub: identificar planta, cuidados e recomendações pelo clima atual',
+    src: '/assets/florahub-wireframes/01-backend-fluxo-analise.svg',
+    alt: 'Wireframe do fluxo da análise: foto e localização, validação, identificação com GPT-4o, clima da OpenWeather e motor de regras',
   },
   date: '2026-09',
   context: {
