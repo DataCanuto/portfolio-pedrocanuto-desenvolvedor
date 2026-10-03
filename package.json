@@ -13,6 +13,7 @@
     "validate:data": "tsc -p scripts/tsconfig.validate.json && node .validate/scripts/validate-data.js"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.0",
     "lucide-react": "^0.292.0",
