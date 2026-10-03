@@ -135,7 +135,6 @@ export const pedroCanutoMusico: Project = {
   ],
   icon: '🎵',
   reviewNotes: [
-    'Contexto conflitante: o currículo dizia "Freelance, sob demanda de cliente"; as demais páginas dizem "meu próprio serviço". Mantido como Projeto Pessoal até confirmação.',
     'URL do repositório conflitante: a página Frontend usava github.com/DataCanuto/pedrocanutomusico; o case study usa github.com/DataCanuto/pedro-canuto-musico (mantido).',
   ],
 };

@@ -28,7 +28,4 @@ export const galeriaDigital: Project = {
   deployment: 'https://datacanuto.github.io/galeria-digital-artes/catalog_mobile/',
   caseStudy: '/frontend/galeria-digital',
   icon: '🎨',
-  reviewNotes: [
-    'Data e contexto conflitantes: a timeline dizia 2026 / Projeto Pessoal; currículo e página Frontend dizem Dezembro/2025 / Freelance (mantido).',
-  ],
 };
