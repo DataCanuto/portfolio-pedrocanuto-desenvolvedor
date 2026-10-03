@@ -55,5 +55,9 @@ export const springBootAiBudgeting: Project = {
   repository:
     'https://github.com/DataCanuto/SpringBootProjects/tree/main/SpringBootAI-Budgetting-ProjectCertification',
   caseStudy: '/budgetting',
+  cover: {
+    src: '/assets/budgeting-wireframes/01-fluxo-por-voz.svg',
+    alt: 'Wireframe do fluxo por voz da API: áudio, transcrição, tool calling, caso de uso e resposta em áudio',
+  },
   icon: '🤖',
 };
