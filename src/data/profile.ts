@@ -2,27 +2,28 @@ import type { Profile } from './types';
 
 export const profile: Profile = {
   name: 'Pedro Canuto',
-  title: 'Desenvolvedor Full Stack | Java, React & Dados',
+  title: 'Desenvolvedor Back-end Java/Spring | Dados com Python',
   tagline: 'Desenvolvedor de Soluções em Tecnologia',
   seo: {
-    title: 'Pedro Canuto - Desenvolvedor de Sistemas',
+    title: 'Pedro Canuto - Desenvolvedor Back-end Java/Spring',
     description:
-      'Portfólio de Pedro Canuto. Estudante de Desenvolvimento de Sistemas com foco em Engenharia de Dados e Dashboards. Transição de Arte-educador e Musicoterapeuta para a área Tech.',
+      'Portfólio de Pedro Canuto, desenvolvedor back-end Java/Spring em início de carreira, com dados e Python como segundo foco. Sistemas em produção para clientes, APIs com Spring Boot e Spring AI, e automação de documentos com FastAPI.',
     shortDescription:
-      'Portfólio de Pedro Canuto. Estudante de Desenvolvimento de Sistemas com foco em Engenharia de Dados.',
+      'Desenvolvedor back-end Java/Spring em início de carreira, com dados e Python como segundo foco.',
     keywords: [
-      'Desenvolvedor',
-      'Sistemas',
-      'Dados',
-      'Engenharia de Dados',
-      'Dashboards',
-      'Python',
+      'Desenvolvedor Back-end',
       'Java',
-      'SQL',
+      'Spring Boot',
+      'Desenvolvedor Júnior',
+      'APIs REST',
+      'PostgreSQL',
+      'Python',
+      'Dados',
+      'Salvador',
     ],
   },
   summary:
-    'Desenvolvedor Full Stack em formação, com atuação do back-end (Java, Spring Boot, APIs REST, JPA/PostgreSQL, Docker) ao front-end (React, Next.js, TypeScript), incluindo o desenvolvimento de landing pages e sistemas completos para clientes reais, do banco de dados à entrega. Complemento o perfil com Python aplicado a análise de dados e machine learning (Pandas, Scikit-learn, OpenCV), o que amplia minha capacidade de atuar tanto em produto quanto em dados. Antes da tecnologia, construí uma trajetória na música: bandas desde 2016, aulas para crianças desde 2018 e negócio próprio em educação musical e eventos desde 2020. Trago desse período a prática de traduzir problema real em solução, não só código.',
+    'Desenvolvedor back-end Java/Spring em formação (Java, Spring Boot, APIs REST, JPA/PostgreSQL, Docker), com sistemas completos entregues para clientes reais, do banco de dados à entrega. Meu segundo foco é dados com Python: automação e extração de documentos com FastAPI, análise de dados e machine learning (Pandas, Scikit-learn, OpenCV). Front-end com React e Next.js e repertório de UX completam o perfil e me ajudam a dialogar com produto. Antes da tecnologia, construí uma trajetória na música: bandas desde 2016, aulas para crianças desde 2018 e negócio próprio em educação musical e eventos desde 2020. Trago desse período a prática de traduzir problema real em solução, não só código.',
   careerObjective:
     'Em transição de carreira, busco uma oportunidade de nível inicial (entry level) em desenvolvimento e análise, usando tecnologia para criar soluções para empresas e clientes. Também atendo como freelancer nos tipos de projeto apresentados neste portfólio.',
   location: { city: 'Salvador', state: 'BA' },
@@ -56,24 +57,26 @@ export const profile: Profile = {
   ],
   priorityTechnologies: [
     'java',
+    'spring-boot',
+    'postgresql',
+    'python',
+    'fastapi',
+    'sql',
+    'react',
     'javascript',
+    'vite',
     'html5',
     'css3',
-    'python',
-    'sql',
     'power-bi',
     'excel',
-    'fastapi',
-    'postgresql',
-    'react',
-    'vite',
   ],
   mainCompetencies: [
     'backend-java',
-    'frontend-react',
+    'api-design',
     'banco-de-dados',
     'analise-dados',
-    'machine-learning',
+    'engenharia-dados',
+    'frontend-react',
     'ux-design',
   ],
   softSkills: [
@@ -97,7 +100,7 @@ export const profile: Profile = {
   ],
   about: {
     developer:
-      'Desenvolvedor Full-Stack em formação, com foco em: Java e Spring Boot para construção de APIs REST e aplicações orientadas a regras de negócio. Aplico Programação Orientada a Objetos, persistência com JPA/PostgreSQL e conteinerização com Docker em projetos completos, do banco de dados à entrega. Complemento o perfil com projetos em Python aplicado a dados e machine learning, e com repertório de UX/UI, o que amplia minha capacidade de dialogar com times de produto e dados.',
+      'Desenvolvedor back-end em formação, com foco em Java e Spring Boot para construção de APIs REST e aplicações orientadas a regras de negócio. Aplico Programação Orientada a Objetos, persistência com JPA/PostgreSQL e conteinerização com Docker em projetos completos, do banco de dados à entrega. Complemento o perfil com projetos em Python aplicado a dados e machine learning, e com repertório de UX/UI, o que amplia minha capacidade de dialogar com times de produto e dados.',
     journey: {
       paragraphs: [
         'Minha trajetória profissional não é convencional, e é exatamente isso que considero minha maior força. Construí minha base como Arte-educador, educador musical bilíngue e Musicoterapeuta, trabalhando com desenvolvimento humano.',

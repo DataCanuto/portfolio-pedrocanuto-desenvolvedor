@@ -8,6 +8,7 @@ import {
   Dashboard,
 } from '@/components/Projects/GoogleDataAnalyticsCapsone';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
+import { ProjectCaseHero } from '@/components/Projects/ProjectCaseHero';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
 import { BarChart3, Database, Code2, Zap, BookOpen, Activity, TrendingUp } from 'lucide-react';
@@ -34,63 +35,7 @@ export default function GoogleDataAnalyticsCapstonePage() {
         backUrl="/dashboards"
       />
 
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
-            <span className="inline-block px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-accent-orange text-sm font-semibold mb-6">
-              📊 ANÁLISE DE DADOS & DASHBOARD
-            </span>
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-6">
-            <span className="text-accent-orange">Bella Beat</span> Fitness Track
-          </h1>
-
-          <h2 className="text-2xl md:text-3xl text-accent-orange font-semibold mb-8">
-            Google Data Analytics Specialization Capstone
-          </h2>
-
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Dashboard interativo com análise completa de dados de fitness tracking de 30 usuários FitBit, insights baseados em dados e recomendações para estratégias de gamificação e engajamento.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            <a
-              href={project.repository}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
-            >
-              <Code2 size={20} />
-              Ver Análise no GitHub
-            </a>
-            <button
-              onClick={() => document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
-            >
-              Explorar Dashboard
-            </button>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="flex justify-center animate-bounce">
-            <svg
-              className="w-6 h-6 text-accent-orange"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
-        </div>
-      </section>
+      <ProjectCaseHero project={project} detailsId="overview" />
 
       {/* Overview */}
       <section id="overview">
