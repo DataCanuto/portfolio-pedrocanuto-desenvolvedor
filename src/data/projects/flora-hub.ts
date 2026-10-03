@@ -126,7 +126,10 @@ export const floraHubBackend: Project = {
   status: 'em-andamento',
   category: 'backend',
   featured: true,
-  cover: { src: '/assets/covers/flora-hub-backend.jpg', alt: 'Simulação do app Flora Hub identificando uma planta' },
+  cover: {
+    src: '/assets/flora-hub-wireframes/01-identificacao-e-cuidados.svg',
+    alt: 'Wireframe do Flora Hub: identificar planta, cuidados e recomendações pelo clima atual',
+  },
   date: '2026-09',
   context: {
     engagement: 'curso',
