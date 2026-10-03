@@ -17,6 +17,7 @@ export const galeriaDigital: Project = {
   status: 'concluido',
   category: 'frontend',
   featured: true,
+  cover: { src: '/assets/covers/galeria-digital.jpg', alt: 'Catálogo da Galeria Digital de Artes' },
   onResume: 'freelance',
   date: '2025-12',
   context: { engagement: 'freelance', label: 'Freelance', organization: 'Paulo Canuto (artista)' },

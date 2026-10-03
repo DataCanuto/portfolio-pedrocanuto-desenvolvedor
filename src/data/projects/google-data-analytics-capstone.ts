@@ -17,7 +17,7 @@ export const googleDataAnalyticsCapstone: Project = {
     'Explorar, limpar e analisar dados de fitness tracker para compreender padrões de engajamento do usuário e fornecer recomendações baseadas em dados para melhorar a experiência e impulsionar o engajamento na plataforma Bellabeat.',
   status: 'concluido',
   category: 'dashboards',
-  featured: true,
+  featured: false,
   onResume: 'dados',
   date: '2024',
   context: {

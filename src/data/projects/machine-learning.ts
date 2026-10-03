@@ -17,7 +17,7 @@ export const machineLearning: Project = {
     'Praticar, em 20 notebooks, o fluxo completo de ciência de dados (limpeza, EDA e feature engineering), algoritmos supervisionados e não supervisionados e uma introdução à visão computacional com OpenCV.',
   status: 'concluido',
   category: 'engenharia-dados',
-  featured: true,
+  featured: false,
   onResume: 'dados',
   date: '2024',
   context: {

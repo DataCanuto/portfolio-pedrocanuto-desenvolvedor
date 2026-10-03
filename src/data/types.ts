@@ -296,6 +296,8 @@ export interface Project {
   deployment?: string;
   /** Rota interna do case study. */
   caseStudy?: string;
+  /** Imagem de capa usada nos cards da Home e de /projetos. */
+  cover?: ProjectImage;
   images?: ProjectImage[];
   documentation?: ProjectDocument[];
   challenges?: ChallengeSolution[];

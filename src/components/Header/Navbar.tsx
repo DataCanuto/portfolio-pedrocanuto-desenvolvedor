@@ -11,11 +11,10 @@ type NavItem = { id: string; label: string; href?: never } | { href: string; lab
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Início' },
+  { id: 'projetos', label: 'Projetos' },
+  { id: 'services', label: 'Serviços' },
   { id: 'about', label: 'Sobre' },
   { id: 'formation', label: 'Formação' },
-  { id: 'certifications', label: 'Certificados' },
-  { id: 'projetos-area', label: 'Projetos' },
-  { id: 'githubArea', label: 'Git-hub' },
   { href: '/portfolio', label: 'Currículo' },
   { id: 'contact', label: 'Contato' },
 ];
