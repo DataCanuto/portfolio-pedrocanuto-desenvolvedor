@@ -15,7 +15,6 @@ export const googleDataAnalyticsCapstone: Project = {
     'A Bellabeat queria entender como as pessoas usam dispositivos de fitness no dia a dia para orientar suas estratégias de engajamento.',
   objective:
     'Explorar, limpar e analisar dados de fitness tracker para compreender padrões de engajamento do usuário e fornecer recomendações baseadas em dados para melhorar a experiência e impulsionar o engajamento na plataforma Bellabeat.',
-  draftFields: ['problem'],
   status: 'concluido',
   category: 'dashboards',
   featured: true,

@@ -99,7 +99,7 @@ export const profile: Profile = {
         'Minha trajetória profissional não é convencional, e é exatamente isso que considero minha maior força. Construí minha base como Arte-educador, educador musical bilíngue e Musicoterapeuta, trabalhando com desenvolvimento humano.',
         'Hoje, como estudante no SENAI CIMATEC, trago essa bagagem para a tecnologia. Aprender novas linguagens ou arquitetar bancos de dados exige o mesmo que um instrumento musical: foco, prática, lógica e a capacidade de conectar elementos para criar algo em harmonia.',
       ],
-      link: { label: 'aqui', url: 'https://pedrocanutomusico.vercel.app/' },
+      link: { label: 'aqui', url: 'https://pedrocanutomusico.app/' },
     },
     arsenal: [
       'Linguagens: Python, Java, C++, UML.',

@@ -71,7 +71,7 @@ export const pedroCanutoMusico: Project = {
   frontend: ['React', 'TypeScript', 'Vite'],
   database: ['PostgreSQL', 'Spring Data JPA / Hibernate', 'Flyway'],
   repository: 'https://github.com/DataCanuto/pedro-canuto-musico',
-  deployment: 'https://pedrocanutomusico.vercel.app',
+  deployment: 'https://pedrocanutomusico.app',
   caseStudy: '/backend/pedro-canuto-musico',
   challenges: [
     {

@@ -15,12 +15,11 @@ export const machineLearning: Project = {
     'Dominar ciência de dados e machine learning exige prática com dados reais, do tratamento ao modelo, e não só teoria.',
   objective:
     'Praticar, em 20 notebooks, o fluxo completo de ciência de dados (limpeza, EDA e feature engineering), algoritmos supervisionados e não supervisionados e uma introdução à visão computacional com OpenCV.',
-  draftFields: ['problem', 'objective'],
   status: 'concluido',
   category: 'engenharia-dados',
   featured: true,
   onResume: 'dados',
-  date: '2025',
+  date: '2024',
   context: {
     engagement: 'curso',
     label: 'Curso SENAI — IA na Indústria 4.0',
@@ -45,7 +44,4 @@ export const machineLearning: Project = {
   repository: 'https://github.com/DataCanuto/MachineLearning',
   caseStudy: '/engenharia-dados/machine-learning',
   icon: '🧠',
-  reviewNotes: [
-    'O certificado "Inteligência Artificial Industrial 4.0" (SENAI) está datado de 2024-12-10, mas o curso aparece como 2025 aqui e no currículo.',
-  ],
 };
