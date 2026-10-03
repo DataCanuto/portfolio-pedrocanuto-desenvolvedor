@@ -281,6 +281,13 @@ export interface Project {
   challenges?: ChallengeSolution[];
   results?: string[];
   learning?: string[];
+  /** Marcos do projeto, em ordem cronológica. */
+  milestones?: { date: PartialDate; label: string }[];
+  /**
+   * Campos com texto redigido pelo Claude a partir do código e dos dados, ainda não revisados
+   * pelo Pedro. Uso interno: aparecem no validador, nunca na interface.
+   */
+  draftFields?: ('problem' | 'objective')[];
   /** Ícone (emoji) usado nos cards de área. */
   icon?: string;
   /**

@@ -10,6 +10,11 @@ export const galeriaDigital: Project = {
     'Landing page moderna e responsiva para exposição digital de obras de arte do artista Paulo Canuto. Featuring 58 obras catalogadas em 5 categorias diferentes, integração com WhatsApp, filtros dinâmicos e design otimizado para conversão.',
   resumeDescription:
     'Desenvolvimento, para cliente, de landing page front-end responsiva para exposição de artes, com filtros por categoria e acesso via QR Code.',
+  problem:
+    'Um artista local precisava de um espaço digital para expor o acervo e receber contatos de interessados, acessível pelo celular e por QR Code.',
+  objective:
+    'Criar uma landing page responsiva que apresente as 58 obras em 5 categorias, com filtros, detalhes de cada obra e contato direto pelo WhatsApp.',
+  draftFields: ['problem', 'objective'],
   category: 'frontend',
   featured: true,
   onResume: 'freelance',

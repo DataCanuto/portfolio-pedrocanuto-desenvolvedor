@@ -11,6 +11,11 @@ export const googleDataAnalyticsCapstone: Project = {
   resumeTitle: 'Análise de Dados — Google Data Analytics Capstone',
   resumeDescription:
     'Projeto completo de ciência de dados sobre hábitos de atividade física (30 usuários Fitbit): limpeza e análise exploratória em Python (Pandas, NumPy, Matplotlib, Seaborn, Plotly) e recomendações de negócio orientadas a dados.',
+  problem:
+    'A Bellabeat queria entender como as pessoas usam dispositivos de fitness no dia a dia para orientar suas estratégias de engajamento.',
+  objective:
+    'Explorar, limpar e analisar dados de fitness tracker para compreender padrões de engajamento do usuário e fornecer recomendações baseadas em dados para melhorar a experiência e impulsionar o engajamento na plataforma Bellabeat.',
+  draftFields: ['problem'],
   status: 'concluido',
   category: 'dashboards',
   featured: true,
