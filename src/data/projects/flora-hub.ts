@@ -33,7 +33,7 @@ export const floraHubUx: Project = {
     'Projetar, seguindo o processo de UX do Google (empatia, definição, ideação, prototipação e teste), um app que reúna identificação de plantas, cuidados confiáveis e comunidade, validado em testes com usuários.',
   status: 'concluido',
   category: 'frontend',
-  featured: true,
+  featured: false,
   cover: { src: '/assets/covers/flora-hub-ux.jpg', alt: 'Wireframes do Flora Hub no Figma' },
   date: '2026-08',
   context: {

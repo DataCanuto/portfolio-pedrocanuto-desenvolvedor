@@ -21,6 +21,7 @@ import {
   SiPostgresql,
   SiPython,
   SiReact,
+  SiSpringboot,
   SiVite,
 } from 'react-icons/si';
 import Image from 'next/image';
@@ -29,6 +30,7 @@ import { getTechnology, profile } from '@/data';
 
 const TECH_ICONS: Record<string, IconType | LucideIcon> = {
   java: DiJava,
+  'spring-boot': SiSpringboot,
   javascript: SiJavascript,
   html5: SiHtml5,
   css3: SiCss,
@@ -46,6 +48,7 @@ const TECH_ICONS: Record<string, IconType | LucideIcon> = {
 // usam a cor de marca do produto mesmo sem um logo de marca disponível.
 const TECH_COLORS: Record<string, string> = {
   java: '#ED8B00',
+  'spring-boot': '#6DB33F',
   javascript: '#F7DF1E',
   html5: '#E34F26',
   css3: '#1572B6',

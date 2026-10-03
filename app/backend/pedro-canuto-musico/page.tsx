@@ -7,6 +7,7 @@ import ProjectChallenges from '@/components/Projects/PedroCanutoMusico/ProjectCh
 import TechStack from '@/components/Projects/PedroCanutoMusico/TechStack';
 import AdminAgendaPreview from '@/components/Projects/PedroCanutoMusico/AdminAgendaPreview';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
+import { ProjectCaseHero } from '@/components/Projects/ProjectCaseHero';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
 import { Code2, Zap, BookOpen, GraduationCap, CalendarDays } from 'lucide-react';
@@ -33,62 +34,7 @@ export default function PedroCanutoMusicoPage() {
         backUrl="/backend"
       />
 
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
-            <span className="inline-block px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-accent-orange text-sm font-semibold mb-6">
-              📋 SISTEMA DE CADASTRO — APLICAÇÃO PRÁTICA DO CURSO
-            </span>
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-6">
-            Pedro Canuto <span className="text-accent-orange">Música</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Sistema de cadastro de alunos e agenda de aulas de música, construído em Java com
-            Spring Boot para aplicar na prática os conhecimentos do curso Técnico em
-            Desenvolvimento de Sistemas do SENAI CIMATEC em um problema real do meu dia a dia
-            como educador musical.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            <a
-              href={project.repository}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300 flex items-center gap-2"
-            >
-              <Code2 size={20} />
-              Ver no GitHub
-            </a>
-            <button
-              onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
-            >
-              Saiba Mais
-            </button>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="flex justify-center animate-bounce">
-            <svg
-              className="w-6 h-6 text-accent-orange"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
-        </div>
-      </section>
+      <ProjectCaseHero project={project} detailsId="overview" />
 
       {/* Visão Geral */}
       <section id="overview">
