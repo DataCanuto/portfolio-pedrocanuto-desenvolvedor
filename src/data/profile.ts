@@ -63,6 +63,10 @@ export const profile: Profile = {
     'sql',
     'power-bi',
     'excel',
+    'fastapi',
+    'postgresql',
+    'react',
+    'vite',
   ],
   mainCompetencies: [
     'backend-java',
