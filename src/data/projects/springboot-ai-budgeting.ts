@@ -8,6 +8,11 @@ export const springBootAiBudgeting: Project = {
     'API de orçamento pessoal com Spring AI: comandos de voz são transcritos, interpretados por tool calling e executados como casos de uso em uma arquitetura DDD em camadas (domain, application, infrastructure).',
   description:
     'API de orçamento pessoal com Spring AI: comandos de voz são transcritos, interpretados por tool calling e executados como casos de uso em uma arquitetura DDD em camadas.',
+  problem:
+    'Registrar gastos e consultar o orçamento pessoal costuma exigir formulários e vários cliques, o que desestimula manter o controle em dia.',
+  objective:
+    'Processar comandos de voz para criar e consultar transações financeiras: o áudio é transcrito, o modelo de IA escolhe o caso de uso certo da aplicação, que persiste ou consulta as transações, e a resposta volta em áudio.',
+  draftFields: ['problem'],
   status: 'concluido',
   category: 'backend',
   featured: true,
