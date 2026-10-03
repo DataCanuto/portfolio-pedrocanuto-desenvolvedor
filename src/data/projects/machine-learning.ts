@@ -38,7 +38,7 @@ export const machineLearning: Project = {
     'seaborn',
     'jupyter',
   ],
-  skills: ['machine-learning', 'analise-dados'],
+  skills: ['machine-learning', 'analise-dados', 'visualizacao-dados'],
   aiUsage:
     'Algoritmos clássicos de ML (regressão, KNN, random forest, K-Means, PCA, XGBoost) e visão computacional com OpenCV.',
   repository: 'https://github.com/DataCanuto/MachineLearning',
