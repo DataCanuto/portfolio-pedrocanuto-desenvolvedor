@@ -4,11 +4,10 @@ import React from 'react';
 import ProjectDiagrams from '@/components/Projects/DataStreamingProject/ProjectDiagrams';
 import ProjectChallenges from '@/components/Projects/DataStreamingProject/ProjectChallenges';
 import TechStack from '@/components/Projects/DataStreamingProject/TechStack';
-import ClientInfo from '@/components/Projects/DataStreamingProject/ClientInfo';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
 import { Footer } from '@/components';
 import { getProject } from '@/data';
-import { Code2, Database, Zap, Users, BookOpen } from 'lucide-react';
+import { Code2, Database, Zap, BookOpen } from 'lucide-react';
 
 const project = getProject('data-streaming-project');
 
@@ -19,7 +18,6 @@ export default function DataStreamingProjectPage() {
     { id: 'challenges', label: 'Desafios e Soluções', icon: <Zap size={16} /> },
     { id: 'diagrams', label: 'Arquitetura', icon: <Code2 size={16} /> },
     { id: 'stack', label: 'Stack', icon: <Code2 size={16} /> },
-    { id: 'client', label: 'Empresa Contratante', icon: <Users size={16} /> },
     { id: 'skills', label: 'Skills Desenvolvidas', icon: <BookOpen size={16} /> },
   ];
 
@@ -114,17 +112,6 @@ export default function DataStreamingProjectPage() {
         <TechStack />
       </section>
 
-      {/* Empresa Contratante */}
-      <section id="client">
-        <ClientInfo
-          clientName="ANDDIAP"
-          clientFullName="Associação Nacional de Defesa do Direito dos Idosos, Aposentados e Pencionistas"
-          branch="Filial Bahia"
-          website="https://anddiap.org.br/"
-          contact="Corretor Saul Freitas Figueiredo"
-          description="Organização dedicada à defesa dos direitos e interesses de idosos, aposentados e pensionistas no Brasil, atuando em várias áreas como advocacy, assistência social e educação."
-        />
-      </section>
 
       {/* Skills Desenvolvidas */}
       <section id="skills" className="py-16 px-4 md:px-8 bg-dark-bg-secondary">
