@@ -213,6 +213,26 @@ export interface ProjectDocument {
   kind: 'case-study' | 'pdf' | 'apresentacao' | 'prototipo' | 'readme' | 'outro';
 }
 
+/** Indicador medido no sistema (só números com origem conhecida). */
+export interface ProjectMetric {
+  id: string;
+  label: string;
+  value: number;
+  /** Quando existe, o indicador é exibido como "value de total" com barra de progresso. */
+  total?: number;
+  detail?: string;
+}
+
+/** Versão do projeto ao longo do tempo (ex.: notebook → sistema full stack). */
+export interface ProjectVersion {
+  version: string;
+  title: string;
+  period?: string;
+  description: string;
+  technologies: string[];
+  highlights: string[];
+}
+
 export interface ChallengeSolution {
   title: string;
   /** O desafio em si. */
@@ -280,6 +300,10 @@ export interface Project {
   documentation?: ProjectDocument[];
   challenges?: ChallengeSolution[];
   results?: string[];
+  /** Indicadores reais do sistema e de onde vieram. */
+  metrics?: { source: string; items: ProjectMetric[] };
+  /** Versões do projeto, da mais antiga à atual. */
+  evolution?: ProjectVersion[];
   learning?: string[];
   /** Marcos do projeto, em ordem cronológica. */
   milestones?: { date: PartialDate; label: string }[];
