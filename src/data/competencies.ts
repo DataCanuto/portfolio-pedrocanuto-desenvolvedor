@@ -18,7 +18,6 @@ export const competencies: Competency[] = [
       'spring-web',
       'spring-data-jpa',
       'hibernate',
-      'rest-api',
       'crud',
       'poo',
     ],
@@ -28,7 +27,7 @@ export const competencies: Competency[] = [
     name: 'Design de APIs REST',
     area: 'backend',
     level: 'intermediario',
-    technologies: ['rest-api', 'spring-web', 'bean-validation'],
+    technologies: ['rest-api', 'spring-web', 'bean-validation', 'fastapi', 'pydantic'],
   },
   {
     id: 'arquitetura-software',
@@ -59,7 +58,7 @@ export const competencies: Competency[] = [
     name: 'Banco de Dados Relacional',
     area: 'banco-de-dados',
     level: 'intermediario',
-    technologies: ['postgresql', 'mysql', 'h2', 'sql', 'flyway'],
+    technologies: ['postgresql', 'mysql', 'h2', 'sql', 'flyway', 'sqlalchemy', 'alembic'],
   },
   {
     id: 'devops-containers',
@@ -73,7 +72,7 @@ export const competencies: Competency[] = [
     name: 'Testes Automatizados',
     area: 'testes',
     level: 'intermediario',
-    technologies: ['junit'],
+    technologies: ['junit', 'pytest'],
   },
   {
     id: 'seguranca-aplicacoes',
