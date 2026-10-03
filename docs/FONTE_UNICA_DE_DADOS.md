@@ -81,7 +81,8 @@ para visitantes.
 - **Títulos do perfil:** "Desenvolvedor de Soluções em Tecnologia" (Home), "Desenvolvedor Full Stack |
   Java, React & Dados" (currículo) e "Desenvolvedor de Sistemas" (SEO). Mantidos os três em
   `profile.ts` (`tagline`, `title`, `seo.title`) até definição.
-- **SEO:** Open Graph aponta para `https://pedrocanuto.dev`; o portfólio publicado está na Vercel.
+- **SEO:** resolvido em out/2026. O endereço oficial é o contato `portfolio` de `profile.ts`
+  (`portfolio-pedrocanuto-desenvolvedor.vercel.app`); ver `docs/SEO_E_METRICAS.md`.
 - **Galeria Digital (conteúdo do cliente):** dois números de WhatsApp diferentes em `GaleriaHero`
   e `GaleriaAbout`/`GaleriaArtwork`. Não alterado (dados do cliente, fora do perfil).
 
