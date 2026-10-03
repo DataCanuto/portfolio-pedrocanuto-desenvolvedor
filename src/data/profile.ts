@@ -23,7 +23,8 @@ export const profile: Profile = {
   },
   summary:
     'Desenvolvedor Full Stack em formação, com atuação do back-end (Java, Spring Boot, APIs REST, JPA/PostgreSQL, Docker) ao front-end (React, Next.js, TypeScript), incluindo o desenvolvimento de landing pages e sistemas completos para clientes reais, do banco de dados à entrega. Complemento o perfil com Python aplicado a análise de dados e machine learning (Pandas, Scikit-learn, OpenCV), o que amplia minha capacidade de atuar tanto em produto quanto em dados. Antes da tecnologia, geri negócio próprio por 8 anos em educação musical e eventos — trago desse período a prática de traduzir problema real em solução, não só código.',
-  // careerObjective: ainda não documentado — preencher com o objetivo real de carreira.
+  careerObjective:
+    'Em transição de carreira, busco uma oportunidade de nível inicial (entry level) em desenvolvimento e análise, usando tecnologia para criar soluções para empresas e clientes. Também atendo como freelancer nos tipos de projeto apresentados neste portfólio.',
   location: { city: 'Salvador', state: 'BA' },
   photo: '/img/profile.png',
   contacts: [
