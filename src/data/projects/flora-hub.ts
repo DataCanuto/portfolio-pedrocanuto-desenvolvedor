@@ -34,6 +34,7 @@ export const floraHubUx: Project = {
   status: 'concluido',
   category: 'frontend',
   featured: true,
+  cover: { src: '/assets/covers/flora-hub-ux.jpg', alt: 'Wireframes do Flora Hub no Figma' },
   date: '2026-08',
   context: {
     engagement: 'certificacao',
@@ -125,6 +126,7 @@ export const floraHubBackend: Project = {
   status: 'em-andamento',
   category: 'backend',
   featured: true,
+  cover: { src: '/assets/covers/flora-hub-backend.jpg', alt: 'Simulação do app Flora Hub identificando uma planta' },
   date: '2026-09',
   context: {
     engagement: 'curso',

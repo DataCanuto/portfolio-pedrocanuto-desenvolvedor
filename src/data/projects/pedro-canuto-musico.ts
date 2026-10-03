@@ -33,6 +33,7 @@ export const pedroCanutoMusico: Project = {
     },
   },
   featured: true,
+  cover: { src: '/assets/covers/pedro-canuto-musico.jpg', alt: 'Página inicial do site Pedro Canuto Música' },
   onResume: 'pessoal',
   date: '2026-06',
   context: { engagement: 'pessoal', label: 'Projeto Pessoal' },

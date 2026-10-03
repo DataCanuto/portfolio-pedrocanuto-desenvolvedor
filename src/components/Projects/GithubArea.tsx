@@ -159,6 +159,10 @@ export const GithubArea = () => {
   const [selectedProject, setSelectedProject] = useState<GitHubRepository | null>(null);
   const { projects, isLoading } = useGitHubProjects();
 
+  // Sem repositórios (API indisponível ou limite atingido), a seção some em vez
+  // de mostrar uma mensagem de configuração para o visitante.
+  if (!isLoading && projects.length === 0) return null;
+
   return (
     <section id="githubArea" className="py-20 bg-dark-bg-secondary">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -190,7 +194,7 @@ export const GithubArea = () => {
               </div>
             ))}
           </div>
-        ) : projects.length > 0 ? (
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <ProjectCard
@@ -199,12 +203,6 @@ export const GithubArea = () => {
                 onSelect={setSelectedProject}
               />
             ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">
-              Nenhum projeto encontrado. Verifique sua configuração do GitHub.
-            </p>
           </div>
         )}
       </div>
