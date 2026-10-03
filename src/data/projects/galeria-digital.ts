@@ -16,7 +16,7 @@ export const galeriaDigital: Project = {
     'Criar uma landing page responsiva que apresente as 58 obras em 5 categorias, com filtros, detalhes de cada obra e contato direto pelo WhatsApp.',
   status: 'concluido',
   category: 'frontend',
-  featured: true,
+  featured: false,
   cover: { src: '/assets/covers/galeria-digital.jpg', alt: 'Catálogo da Galeria Digital de Artes' },
   onResume: 'freelance',
   date: '2025-12',

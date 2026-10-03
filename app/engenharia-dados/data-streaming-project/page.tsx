@@ -5,6 +5,7 @@ import ProjectDiagrams from '@/components/Projects/DataStreamingProject/ProjectD
 import ProjectChallenges from '@/components/Projects/DataStreamingProject/ProjectChallenges';
 import TechStack from '@/components/Projects/DataStreamingProject/TechStack';
 import ProjectHeader from '@/components/Projects/ProjectHeader';
+import { ProjectCaseHero } from '@/components/Projects/ProjectCaseHero';
 import { Footer } from '@/components';
 import { competenciesOf, getProject, technologyNames } from '@/data';
 import { BarChart3, BookOpen, Code2, GitBranch, LayoutTemplate, Zap } from 'lucide-react';
@@ -17,7 +18,6 @@ const percent = (value: number, total: number) => Math.round((value / total) * 1
 
 export default function DataStreamingProjectPage() {
   const projectSections = [
-    { id: 'objetivo', label: 'Problema e Objetivo', icon: <BookOpen size={16} /> },
     { id: 'evolucao', label: 'Evolução', icon: <GitBranch size={16} /> },
     { id: 'resultados', label: 'Resultados Reais', icon: <BarChart3 size={16} /> },
     { id: 'wireframes', label: 'Telas do MVP', icon: <LayoutTemplate size={16} /> },
@@ -36,63 +36,7 @@ export default function DataStreamingProjectPage() {
         backUrl="/engenharia-dados"
       />
 
-      {/* Hero */}
-      <section
-        id="hero"
-        className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 pb-16 bg-dark-bg"
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <span className="inline-block px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-accent-orange text-sm font-semibold mb-6">
-            🧩 APLICAÇÃO FULL STACK · EM PRODUÇÃO
-          </span>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-dark-header-text mb-6">
-            {project.name}
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            {project.shortDescription}
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button
-              onClick={() =>
-                document.getElementById('resultados')?.scrollIntoView({ behavior: 'smooth' })
-              }
-              className="px-8 py-4 bg-accent-orange text-black font-bold rounded-lg hover:shadow-lg hover:shadow-accent-orange/50 transition-all duration-300"
-            >
-              Ver resultados reais
-            </button>
-            <button
-              onClick={() =>
-                document.getElementById('evolucao')?.scrollIntoView({ behavior: 'smooth' })
-              }
-              className="px-8 py-4 bg-dark-bg-secondary border border-accent-orange/50 text-accent-orange font-bold rounded-lg hover:border-accent-orange transition-all duration-300"
-            >
-              Do notebook ao sistema
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Problema e Objetivo */}
-      <section id="objetivo" className="py-16 px-4 md:px-8 bg-dark-bg-secondary">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-header-text mb-4">
-              ❓ <span className="text-accent-orange">Problema</span>
-            </h2>
-            <p className="text-xl text-gray-300 leading-relaxed">{project.problem}</p>
-          </div>
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-header-text mb-4">
-              🎯 <span className="text-accent-orange">Objetivo</span>
-            </h2>
-            <p className="text-xl text-gray-300 leading-relaxed">{project.objective}</p>
-          </div>
-          <p className="md:col-span-2 text-gray-400 leading-relaxed">{project.description}</p>
-        </div>
-      </section>
+      <ProjectCaseHero project={project} detailsId="evolucao" />
 
       {/* Evolução: notebook → sistema */}
       <section id="evolucao" className="py-16 px-4 md:px-8 bg-dark-bg">

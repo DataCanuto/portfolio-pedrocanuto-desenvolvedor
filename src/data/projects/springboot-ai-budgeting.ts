@@ -14,7 +14,7 @@ export const springBootAiBudgeting: Project = {
     'Processar comandos de voz para criar e consultar transações financeiras: o áudio é transcrito, o modelo de IA escolhe o caso de uso certo da aplicação, que persiste ou consulta as transações, e a resposta volta em áudio.',
   status: 'concluido',
   category: 'backend',
-  featured: true,
+  featured: false,
   date: '2025',
   context: {
     engagement: 'certificacao',

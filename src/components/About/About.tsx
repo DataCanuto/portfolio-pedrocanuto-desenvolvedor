@@ -9,7 +9,7 @@ const { about } = profile;
 const tabs = [
   {
     id: 'developer',
-    label: 'Desenvolvedor Full-Stack',
+    label: 'Desenvolvedor Back-end',
     content: about.developer,
   },
   {
