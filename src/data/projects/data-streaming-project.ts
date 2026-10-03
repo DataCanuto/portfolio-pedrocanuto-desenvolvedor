@@ -52,6 +52,10 @@ export const dataStreamingProject: Project = {
     },
   },
   featured: true,
+  cover: {
+    src: '/assets/gestao-clientes-wireframes/01-painel.svg',
+    alt: 'Wireframe do painel do sistema, com dados fictícios',
+  },
   onResume: 'freelance',
   date: '2025-01',
   context: { engagement: 'freelance', label: 'Projeto para Cliente' },

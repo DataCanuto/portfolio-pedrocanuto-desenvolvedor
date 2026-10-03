@@ -1,111 +1,94 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, FileText, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTechnology, profile } from '@/data';
 
-// Cores dos chips de tecnologia (apresentação). A lista vem de profile.priorityTechnologies.
-const CHIP_COLORS: Record<string, string> = {
-  java: 'bg-red-600',
-  javascript: 'bg-yellow-500',
-  html5: 'bg-orange-600',
-  css3: 'bg-blue-600',
-  python: 'bg-blue-500',
-  sql: 'bg-gray-700',
-  'power-bi': 'bg-yellow-600',
-  excel: 'bg-green-600',
+const technologies = profile.priorityTechnologies.map((id) => getTechnology(id).name);
+
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
-const languages = profile.priorityTechnologies.map((id) => ({
-  name: getTechnology(id).name,
-  color: CHIP_COLORS[id] ?? 'bg-gray-700',
-}));
-
 export const Hero = () => {
-  const scrollToServices = () => {
-    const element = document.getElementById('services');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section
       id="hero"
       className="min-h-screen bg-gradient-to-b from-dark-bg to-dark-bg-secondary flex items-center justify-center pt-20"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
-          className="text-center"
+          className="flex flex-col items-center text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Main Title */}
-          <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-          >
-            {profile.name.split(' ')[0]}{' '}
-            <span className="text-accent-orange">{profile.name.split(' ').slice(1).join(' ')}</span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="text-xl sm:text-2xl text-gray-400 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
-            {profile.tagline}
-          </motion.p>
-
-          {/* Profile Image */}
           <motion.div
-            className="flex justify-center mb-12"
+            className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-accent-orange shadow-lg shadow-accent-orange/30 mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-accent-orange shadow-lg shadow-accent-orange/30">
-              <Image
-                src={profile.photo}
-                alt={profile.name}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+            <Image src={profile.photo} alt={profile.name} fill className="object-cover" priority />
           </motion.div>
 
-          {/* Languages/Technologies */}
-          <div className="flex justify-center mb-12 px-4">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-md sm:max-w-none">
-              {languages.map((lang, index) => (
-                <motion.div
-                  key={lang.name}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.8 + index * 0.05 }}
-                  className={`${lang.color} px-3 py-2 sm:px-4 rounded-lg text-white font-semibold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all hover:scale-110 text-center whitespace-nowrap`}
-                >
-                  {lang.name}
-                </motion.div>
-              ))}
-            </div>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-dark-header-text mb-4">
+            {profile.name.split(' ')[0]}{' '}
+            <span className="text-accent-orange">{profile.name.split(' ').slice(1).join(' ')}</span>
+          </h1>
+
+          <p className="text-xl sm:text-2xl text-dark-header-text font-semibold mb-4">{profile.title}</p>
+
+          <p className="max-w-2xl text-base sm:text-lg text-gray-400 leading-relaxed mb-8">
+            {profile.careerObjective}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mb-10">
+            <button
+              onClick={() => scrollTo('projetos')}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent-orange text-white font-semibold hover:bg-accent-orange-light transition-colors"
+            >
+              Ver projetos
+              <ArrowRight size={18} />
+            </button>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-accent-orange text-accent-orange font-semibold hover:bg-accent-orange/10 transition-colors"
+            >
+              <FileText size={18} />
+              Currículo
+            </Link>
+            <button
+              onClick={() => scrollTo('contact')}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-dark-border text-dark-header-text font-semibold hover:border-accent-orange hover:text-accent-orange transition-colors"
+            >
+              <MessageCircle size={18} />
+              Contato
+            </button>
           </div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            className="flex flex-col items-center gap-2 mt-12 cursor-pointer"
-            animate={{ y: [0, 10, 0] }}
+          <ul className="flex flex-wrap justify-center gap-2 max-w-xl" aria-label="Tecnologias principais">
+            {technologies.map((name) => (
+              <li
+                key={name}
+                className="px-3 py-1 rounded-full border border-dark-border bg-dark-bg-secondary text-gray-300 text-xs sm:text-sm"
+              >
+                {name}
+              </li>
+            ))}
+          </ul>
+
+          <motion.button
+            className="flex flex-col items-center gap-1 mt-12 text-accent-orange"
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            onClick={scrollToServices}
+            onClick={() => scrollTo('projetos')}
+            aria-label="Ir para os projetos"
           >
-            <p className="text-accent-orange font-semibold hover:text-accent-orange-light transition-colors">Saiba mais</p>
-            <ChevronDown className="text-accent-orange hover:text-accent-orange-light transition-colors" size={32} />
-          </motion.div>
+            <ChevronDown size={28} />
+          </motion.button>
         </motion.div>
       </div>
     </section>
