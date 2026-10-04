@@ -152,6 +152,7 @@ export const floraHubBackend: Project = {
     'junit',
     'preact',
     'vite',
+    'typescript',
   ],
   skills: [
     'backend-java',
@@ -167,10 +168,10 @@ export const floraHubBackend: Project = {
   features: [
     'Identificação da espécie a partir de foto',
     'Recomendações de cuidado cruzadas com o clima local',
-    'Simulação do app (frontend Preact + Vite)',
+    'Interface de identificação integrada à API (Preact + Vite)',
   ],
   backend: ['Java 21', 'Spring Boot 4.1', 'Spring AI 2.0.1', 'Spring Security', 'Maven + Lombok'],
-  frontend: ['Simulação do app em Preact + Vite'],
+  frontend: ['Interface de identificação em Preact + Vite + TypeScript'],
   database: [
     'PostgreSQL',
     'Spring Data JPA',
@@ -180,6 +181,7 @@ export const floraHubBackend: Project = {
   integrations: ['OpenAI GPT-4o (multimodal)', 'OpenWeather API com timeout, cache e fallback'],
   aiUsage:
     'Spring AI ChatClient multimodal envia a imagem ao GPT-4o, com saída estruturada mapeada para records Java (1 a 2 chamadas por análise). A IA fornece dados; as decisões ficam no motor de regras em Java.',
+  repository: 'https://github.com/DataCanuto/FloraHub',
   caseStudy: '/backend/flora-hub',
   images: [
     { src: '/assets/img/florahub-backend/aba-sobre.png', alt: 'Simulação do app — aba Sobre' },
@@ -201,6 +203,6 @@ export const floraHubBackend: Project = {
   ],
   icon: '🌿',
   reviewNotes: [
-    'Repositório GitHub do backend ainda é privado; Pedro vai publicá-lo (out/2026). Linkar em `repository` quando estiver público.',
+    'Deploy do frontend e do backend em andamento (out/2026). Preencher `deployment` quando a URL estiver no ar.',
   ],
 };
