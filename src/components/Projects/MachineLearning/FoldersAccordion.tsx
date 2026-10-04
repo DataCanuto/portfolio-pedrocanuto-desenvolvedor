@@ -13,6 +13,8 @@ interface NotebookEntry {
 interface FolderData {
   id: string;
   folderPath: string;
+  /** Pasta correspondente no repositório atual; sem valor, o link abre a raiz do repositório. */
+  repoPath?: string;
   title: string;
   emoji: string;
   description: string;
@@ -98,6 +100,7 @@ const folders: FolderData[] = [
   {
     id: 'ml-methods',
     folderPath: 'ML_Methods',
+    repoPath: '04_machine_learning',
     title: 'ML_Methods',
     emoji: '🤖',
     description:
@@ -163,6 +166,7 @@ const folders: FolderData[] = [
   {
     id: 'opencv',
     folderPath: 'OpenCV',
+    repoPath: '05_deep_learning_and_computer_vision',
     title: 'OpenCV',
     emoji: '👁️',
     description:
@@ -303,13 +307,13 @@ const FolderAccordionItem = ({
               )}
 
               <a
-                href={`${REPO_URL}/tree/main/${encodeURIComponent(folder.folderPath)}`}
+                href={folder.repoPath ? `${REPO_URL}/tree/main/${folder.repoPath}` : REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-accent-orange transition-colors"
               >
                 <Github size={16} />
-                Ver pasta no GitHub
+                {folder.repoPath ? 'Ver pasta no GitHub' : 'Ver repositório no GitHub'}
               </a>
             </div>
           </motion.div>
