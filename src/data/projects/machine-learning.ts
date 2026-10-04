@@ -41,7 +41,7 @@ export const machineLearning: Project = {
   skills: ['machine-learning', 'analise-dados', 'visualizacao-dados'],
   aiUsage:
     'Algoritmos clássicos de ML (regressão, KNN, random forest, K-Means, PCA, XGBoost) e visão computacional com OpenCV.',
-  repository: 'https://github.com/DataCanuto/MachineLearning',
+  repository: 'https://github.com/DataCanuto/Inteligencia-Artificial-4.0',
   caseStudy: '/engenharia-dados/machine-learning',
   icon: '🧠',
 };
