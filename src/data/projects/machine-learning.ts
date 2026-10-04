@@ -10,11 +10,11 @@ export const machineLearning: Project = {
     'Notebooks Jupyter de ciência de dados e machine learning com Python: limpeza e EDA, algoritmos supervisionados/não supervisionados, PCA, XGBoost e introdução à visão computacional.',
   resumeTitle: 'Machine Learning & Visão Computacional',
   resumeDescription:
-    'Conjunto de 20 notebooks cobrindo todo o fluxo de ciência de dados: limpeza e EDA, aprendizado supervisionado e não supervisionado, PCA e XGBoost, além de introdução à visão computacional com OpenCV (detecção facial via Haar Cascade).',
+    'Conjunto de 23 notebooks, organizados em 5 pastas, cobrindo todo o fluxo de ciência de dados: limpeza e EDA, aprendizado supervisionado e não supervisionado, PCA e XGBoost, além de introdução à visão computacional com OpenCV (detecção facial via Haar Cascade).',
   problem:
     'Dominar ciência de dados e machine learning exige prática com dados reais, do tratamento ao modelo, e não só teoria.',
   objective:
-    'Praticar, em 20 notebooks, o fluxo completo de ciência de dados (limpeza, EDA e feature engineering), algoritmos supervisionados e não supervisionados e uma introdução à visão computacional com OpenCV.',
+    'Praticar, em 23 notebooks, o fluxo completo de ciência de dados (limpeza, EDA e feature engineering), algoritmos supervisionados e não supervisionados e uma introdução à visão computacional com OpenCV.',
   status: 'concluido',
   category: 'engenharia-dados',
   featured: false,
