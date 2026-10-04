@@ -26,66 +26,83 @@ const REPO_URL = getProject('machine-learning').repository;
 
 const folders: FolderData[] = [
   {
-    id: 'data-science',
-    folderPath: 'DataScience',
-    title: 'DataScience',
+    id: 'data-engineering',
+    folderPath: '01_data_engineering',
+    title: 'Engenharia de dados',
     emoji: '🧹',
     description:
-      'Pipeline completo do fluxo de ciência de dados: limpeza, preparação, engenharia de atributos, visualização e dois desafios completos de análise exploratória (EDA). Usa cenários simulados de indústria (sensores, manutenção, maquinário) e datasets públicos (voos, veículos, coluna vertebral).',
-    libraries: ['pandas', 'numpy', 'matplotlib', 'seaborn', 'scikit-learn', 'scipy'],
+      'Limpeza, preparação e modelagem de dados para ML, com cenários simulados de indústria (sensores, manutenção) e o dataset público Automobile.',
+    libraries: ['pandas', 'numpy', 'scikit-learn'],
     methods: [
       'Limpeza e normalização de texto',
-      'Imputação por mediana',
+      'Tratamento de valores ausentes e datas',
       'Detecção de outliers (3σ e IQR)',
-      'One-Hot Encoding',
-      'MinMaxScaler / StandardScaler',
-      'Engenharia de atributos temporais',
+      'Label Encoding / One-Hot Encoding',
     ],
     notebooks: [
       {
-        name: 'DataCleaning_industrySimulation',
+        name: '01_data_cleaning_industry_simulation',
         description:
           'Normalização de texto (remoção de acentos, padronização de caixa/espaços) em dados de manutenção industrial simulada, usando unicodedata.normalize.',
       },
       {
-        name: 'DataPrepare_industrySimulation',
+        name: '02_data_preparation_industry_simulation',
         description:
           'Tratamento de valores ausentes, datas inconsistentes (pd.to_datetime com errors="coerce"), conversão de tipos e detecção de outliers via 3σ e IQR com visualização.',
       },
       {
-        name: 'DataModeling_For_ML_cars',
+        name: '03_data_modeling_for_ml_cars',
         description:
           'Conversão de colunas textuais numéricas do dataset Automobile em inteiros via mapeamento e One-Hot Encoding das colunas categóricas.',
       },
       {
-        name: 'DataVisualisation',
+        name: '04_encoding_techniques',
+        description: 'Técnicas de codificação de variáveis categóricas.',
+      },
+    ],
+    conclusions: [],
+  },
+  {
+    id: 'eda',
+    folderPath: '02_exploratory_data_analysis',
+    title: 'Análise exploratória',
+    emoji: '📊',
+    description:
+      'Fundamentos de pandas e matplotlib, visualização de métricas industriais e análises exploratórias completas sobre datasets públicos (voos e coluna vertebral).',
+    libraries: ['pandas', 'matplotlib', 'seaborn', 'scipy'],
+    methods: [
+      'Imputação por mediana',
+      'Engenharia de atributos temporais',
+      'Matriz de correlação',
+      'Visualizações multivariadas',
+    ],
+    notebooks: [
+      {
+        name: '01_pandas_and_matplotlib_fundamentals',
+        description: 'Fundamentos de DataFrames e gráficos com dados simulados de produção industrial.',
+      },
+      {
+        name: '02_data_visualisation_industry',
         description:
           'Catálogo de tipos de gráfico (linha, dispersão, boxplot, histograma, heatmap) aplicados a métricas industriais simuladas.',
       },
       {
-        name: 'FeaturingEngenearing',
-        description:
-          'Cálculo de atributos derivados de manutenção e normalização com MinMaxScaler (0–1) e StandardScaler.',
+        name: '03_correlation_matrix_analysis',
+        description: 'Visualização de heatmap de correlação entre variáveis.',
       },
       {
-        name: 'PredictiveMethod_tripsRecomender',
-        description:
-          'Recomendador de destinos baseado em regras, comparando critérios do usuário com localidades brasileiras predefinidas.',
-      },
-      {
-        name: 'Desafio_UC2',
-        description:
-          'Fluxo estruturado de 10 etapas de EDA sobre atrasos de voos: imputação por mediana, extração de atributos temporais, categorização de atrasos e visualizações multivariadas.',
-      },
-      {
-        name: 'Report_DataAnalytics_flights_01',
+        name: '04_eda_vertebral_column_dataset',
         description:
           'Análise do dataset Vertebral Column (UCI) com gráficos de densidade, matriz de correlação e matriz de dispersão.',
       },
       {
-        name: 'Report_DataAnalytics_flights_02',
+        name: '05_eda_flights_dataset',
+        description: 'Relatório de EDA com foco em atrasos e desempenho por aeroporto.',
+      },
+      {
+        name: '06_challenge_eda_flights_complete',
         description:
-          'Segundo relatório de EDA espelhando a estrutura do desafio anterior, com foco em atrasos e desempenho por aeroporto.',
+          'Fluxo estruturado de 10 etapas de EDA sobre atrasos de voos: imputação por mediana, extração de atributos temporais, categorização de atrasos e visualizações multivariadas.',
       },
     ],
     conclusions: [
@@ -96,88 +113,111 @@ const folders: FolderData[] = [
     ],
   },
   {
-    id: 'ml-methods',
-    folderPath: 'ML_Methods',
-    title: 'ML_Methods',
+    id: 'feature-engineering',
+    folderPath: '03_feature_engineering',
+    title: 'Feature engineering',
+    emoji: '🛠️',
+    description: 'Criação de atributos derivados, normalização e redução de dimensionalidade com dados industriais simulados.',
+    libraries: ['pandas', 'scikit-learn', 'matplotlib'],
+    methods: ['MinMaxScaler / StandardScaler', 'PCA'],
+    notebooks: [
+      {
+        name: '01_feature_engineering_maintenance',
+        description:
+          'Cálculo de atributos derivados de manutenção e normalização com MinMaxScaler (0–1) e StandardScaler.',
+      },
+      {
+        name: '02_dimensionality_reduction_pca',
+        description: 'Redução de dimensionalidade de 4 variáveis industriais para 2 componentes principais.',
+      },
+    ],
+    conclusions: [
+      'PCA reduziu 4 variáveis industriais (temperatura do motor, pressão, vibração, consumo) a 2 componentes: o primeiro explica ~96,49% da variância e o segundo apenas ~3,37% — a variação do sistema é dominada por um único padrão latente.',
+    ],
+  },
+  {
+    id: 'machine-learning',
+    folderPath: '04_machine_learning',
+    title: 'Machine learning',
     emoji: '🤖',
     description:
-      'Notebooks focados em algoritmos de machine learning supervisionados e não supervisionados, pré-processamento categórico, seleção de atributos, métricas de avaliação, redução de dimensionalidade, tuning de hiperparâmetros e gradient boosting. Usa dados industriais simulados (temperatura, pressão, vibração, ruído) e o dataset clássico Iris.',
+      'Algoritmos supervisionados e não supervisionados, seleção de atributos, métricas de avaliação, tuning de hiperparâmetros e gradient boosting, com dados industriais simulados e datasets clássicos (Iris, Vertebral Column).',
     libraries: ['scikit-learn', 'xgboost', 'pandas', 'seaborn', 'matplotlib'],
     methods: [
-      'K-Means + PCA',
       'Regressão Linear / Logística',
       'KNN, Árvore de Decisão, Random Forest',
+      'K-Means + PCA',
       'SelectKBest',
       'Grid / Random Search',
       'Gradient Boosting (XGBoost)',
     ],
     notebooks: [
       {
-        name: 'AlgoritmosSupervisionados',
+        name: '01_supervised_algorithms',
         description:
           'Exemplos práticos de regressão linear/logística, KNN, árvore de decisão e random forest aplicados a cenários industriais (previsão de vendas, temperatura, falha de motor).',
       },
       {
-        name: 'AlgoritmosNaoSupervisionados',
+        name: '02_unsupervised_algorithms',
         description: 'Clusterização K-Means combinada com análise de PCA.',
       },
       {
-        name: 'CorrelMatrix',
-        description: 'Visualização de heatmap de correlação entre variáveis.',
+        name: '03_scikit_learn_fundamentals',
+        description: 'Primeiro classificador com scikit-learn: divisão treino/teste, árvore de decisão e acurácia.',
       },
       {
-        name: 'LabelEncoding_OneHotEncoding',
-        description: 'Técnicas de codificação de variáveis categóricas.',
+        name: '04_regression_fundamentals',
+        description: 'Seleção de atributos para regressão com SelectKBest e f_regression.',
       },
       {
-        name: 'ML_f_regression',
-        description: 'Seleção de atributos com SelectKBest.',
-      },
-      {
-        name: 'MetricasAvaliacao',
+        name: '05_evaluation_metrics',
         description: 'Métricas de avaliação para tarefas de classificação e regressão.',
       },
       {
-        name: 'PCA',
-        description: 'Redução de dimensionalidade de 4 variáveis industriais para 2 componentes principais.',
-      },
-      {
-        name: 'hyperparametros',
+        name: '06_hyperparameter_tuning',
         description: 'Estratégias de otimização de hiperparâmetros (Grid Search / Random Search).',
       },
       {
-        name: 'xgBoost',
+        name: '07_xgboost_ensemble',
         description: 'Classificador XGBoost aplicado ao dataset Iris, com matriz de correlação das features.',
       },
       {
-        name: 'deepLearning',
-        description: 'Notebook introdutório (esboço) sobre deep learning.',
+        name: '08_rule_based_trip_recommender',
+        description:
+          'Recomendador de destinos baseado em regras, comparando critérios do usuário com localidades brasileiras predefinidas.',
+      },
+      {
+        name: '09_lab_ml_prediction_activity',
+        description: 'Laboratório de predição com o dataset Vertebral Column (UCI), da análise exploratória ao modelo.',
       },
     ],
     conclusions: [
-      'PCA reduziu 4 variáveis industriais (temperatura do motor, pressão, vibração, consumo) a 2 componentes: o primeiro explica ~96,49% da variância e o segundo apenas ~3,37% — a variação do sistema é dominada por um único padrão latente.',
       'O classificador XGBoost atingiu 97% de acurácia na classificação do dataset Iris (split 80/20, eval_metric="mlogloss").',
       'Os notebooks de algoritmos supervisionados priorizam exemplos práticos de previsão (venda de sorvete, falha de motor por vibração) mais do que comparação formal de métricas entre modelos.',
     ],
   },
   {
-    id: 'opencv',
-    folderPath: 'OpenCV',
-    title: 'OpenCV',
+    id: 'deep-learning-cv',
+    folderPath: '05_deep_learning_and_computer_vision',
+    title: 'Deep learning e visão computacional',
     emoji: '👁️',
     description:
-      'Exercício introdutório de visão computacional, aplicando os conceitos do curso "IA na Indústria 4.0" a processamento de imagens.',
+      'Introdução a deep learning e exercício de visão computacional, aplicando os conceitos do curso "IA na Indústria 4.0" a processamento de imagens.',
     libraries: ['opencv-python (cv2)', 'matplotlib'],
     methods: ['Haar Cascade Classifier', 'Conversão para escala de cinza', 'Detecção multi-escala de faces'],
     notebooks: [
       {
-        name: 'opencv_project',
+        name: '01_deep_learning_introduction',
+        description: 'Notebook introdutório (esboço) sobre deep learning.',
+      },
+      {
+        name: '02_computer_vision_opencv_project',
         description:
           'Detecção facial com classificador Haar Cascade pré-treinado: carrega a imagem, converte para escala de cinza (cv2.cvtColor), aplica detectMultiScale (scaleFactor=1.3, minNeighbors=5) e desenha retângulos sobre os rostos detectados.',
       },
     ],
     conclusions: [
-      'Não há conclusões analíticas registradas em markdown — o notebook é uma prova de conceito ponta a ponta do pipeline de detecção facial.',
+      'Não há conclusões analíticas registradas em markdown — o notebook de visão computacional é uma prova de conceito ponta a ponta do pipeline de detecção facial.',
     ],
   },
 ];
@@ -303,7 +343,7 @@ const FolderAccordionItem = ({
               )}
 
               <a
-                href={`${REPO_URL}/tree/main/${encodeURIComponent(folder.folderPath)}`}
+                href={`${REPO_URL}/tree/main/${folder.folderPath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-accent-orange transition-colors"
@@ -320,7 +360,7 @@ const FolderAccordionItem = ({
 };
 
 export default function FoldersAccordion() {
-  const [expandedId, setExpandedId] = useState<string | null>('data-science');
+  const [expandedId, setExpandedId] = useState<string | null>('data-engineering');
 
   return (
     <section className="py-16 px-4 md:px-8 bg-dark-bg">

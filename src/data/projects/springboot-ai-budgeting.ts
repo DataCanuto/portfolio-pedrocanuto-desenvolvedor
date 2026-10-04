@@ -53,7 +53,7 @@ export const springBootAiBudgeting: Project = {
   aiUsage:
     'Comandos de voz são transcritos (Whisper), interpretados por tool calling com GPT-4o-mini e respondidos em áudio (TTS).',
   repository:
-    'https://github.com/DataCanuto/SpringBootProjects/tree/main/SpringBootAI-Budgetting-ProjectCertification',
+    'https://github.com/DataCanuto/bootcamps/tree/main/DIO/SpringBootAI-Budgetting-ProjectCertification',
   caseStudy: '/budgetting',
   cover: {
     src: '/assets/budgeting-wireframes/01-fluxo-por-voz.svg',
