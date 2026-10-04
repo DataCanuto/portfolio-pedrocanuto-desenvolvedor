@@ -93,7 +93,7 @@ export const dataStreamingProject: Project = {
     'Revisão de duplicidades, correções manuais e histórico',
     'Exportação em .xlsx e organização dos arquivos em pastas',
   ],
-  repository: 'https://github.com/DataCanuto/data-streaming-project',
+  repository: 'https://github.com/DataCanuto/gestao-de-clientes',
   caseStudy: '/engenharia-dados/data-streaming-project',
   images: [
     {
