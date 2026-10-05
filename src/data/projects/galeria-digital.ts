@@ -34,8 +34,6 @@ export const galeriaDigital: Project = {
     'Modal interativo para detalhes',
     'Integração WhatsApp',
   ],
-  repository: 'https://github.com/DataCanuto/galeria-digital-artes',
-  deployment: 'https://datacanuto.github.io/galeria-digital-artes/catalog_mobile/',
   caseStudy: '/frontend/galeria-digital',
   icon: '🎨',
 };
