@@ -806,6 +806,44 @@
   </div>
 </section>
 
+<!-- 20b. Information architecture and design system -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Information architecture &amp; design system</h2></div>
+    <p style="margin-top:16px; line-height:1.7;">The prototype ships with its own documentation: the MVP site map with the access rule for each feature, and a style guide with the 60-30-10 color palette, type scale, icons and illustrations.</p>
+    <div class="cols2 narrowgap" style="margin-top:28px;">
+      <div class="panel" style="min-height:280px;"><img class="panel-img" src="digital-mockups/information-architecture.png" alt="Information architecture of the Flora Hub MVP: main navigation of Explore, Identify, My garden, plus a table of which features visitors and signed-in users can access." onclick="openLightbox(this.src, this.alt)"></div>
+      <div class="panel" style="min-height:280px;"><img class="panel-img" src="digital-mockups/design-system.png" alt="Flora Hub style guide with the 60-30-10 color palette, typography, icons and plant illustrations." onclick="openLightbox(this.src, this.alt)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20c. Access decision -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Visitor first: access decision</h2></div>
+    <p style="margin-top:16px; line-height:1.7;">An audit of the prototype led to one rule: visitors can identify one plant for free before creating an account. The result and its safety badge are visible to everyone, and sign-up is offered to save the plant, get care reminders and join the community.</p>
+    <div class="panel" style="margin-top:24px; min-height:320px;"><img class="panel-img" src="digital-mockups/access-rules.png" alt="Prototype audit table listing what was found and the proposed fix, with the Visitor first decision." onclick="openLightbox(this.src, this.alt)"></div>
+  </div>
+</section>
+
+<!-- 20d. Community near you -->
+<section class="slide slide--content">
+  <div class="slide-inner">
+    <div class="heading-row"><span class="bar" style="background:var(--green)"></span><h2 class="title">Community near you, without sharing addresses</h2></div>
+    <div class="cols2" style="margin-top:28px;">
+      <div class="item">
+        <h3 class="green">What users see</h3>
+        <p>After an identification or a post, a signed-in user sees who grows plants nearby: nickname, neighborhood, city and a distance band such as &ldquo;2 to 5 km&rdquo;. Visitors only see the city and how many people are close.</p>
+      </div>
+      <div class="item">
+        <h3 class="green">How privacy is protected</h3>
+        <p>The system stores the full address, encrypted and kept apart from the public profile, but never shows it to another user. Distances are shown in bands calculated between roughly 1 km grid cells, so nobody can triangulate a neighbor&rsquo;s home, and neighbor searches are rate limited.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 21. Accessibility -->
 <section class="slide slide--content">
   <div class="slide-inner">
@@ -878,7 +916,7 @@
       </div>
       <div class="step-card">
         <div class="step-badge">3</div>
-        <p>Prototype a lightweight marketplace flow so neighbors can buy, sell, or trade plants &mdash; a feature requested directly in user research.</p>
+        <p>Build the community near you with seedling swaps between neighbors, using approximate distance bands so addresses stay private, and then prototype a lightweight marketplace flow &mdash; both requested directly in user research.</p>
       </div>
     </div>
   </div>
