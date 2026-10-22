@@ -1,0 +1,1476 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Brasil 2026: Dados & Democracia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@400;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* ═══════════ DESIGN TOKENS ═══════════ */
+:root {
+  --bg:       #f5f6fa;
+  --bg2:      #edf0f7;
+  --bg3:      #e2e7f2;
+  --card:     #ffffff;
+  --fg:       #1a2236;
+  --fg2:      #4a5772;
+  --fg3:      #8393ac;
+  --accent:   #1549c9;
+  --accent2:  #2563eb;
+  --green:    #0b7a5e;
+  --green2:   #d1fae5;
+  --red:      #c01a1a;
+  --red2:     #fee2e2;
+  --yellow:   #b45309;
+  --yellow2:  #fef3c7;
+  --border:   #d5dce9;
+  --shadow:   0 2px 10px rgba(0,0,0,.07);
+  --r:        8px;
+  --font-ui:  'IBM Plex Sans', system-ui, sans-serif;
+  --font-hd:  'IBM Plex Serif', Georgia, serif;
+  /* party colors */
+  --pt:       #cc1515;
+  --psdb:     #1565c0;
+  --pl:       #0d47a1;
+  --mdb:      #e65100;
+  --uniao:    #1b5e20;
+  --psb:      #880e4f;
+  --novo:     #e65100;
+  --pdt:      #004d40;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:    #0c1220; --bg2: #111a2c; --bg3: #192236;
+    --card:  #111a2c;
+    --fg:    #e2eaf7; --fg2: #8fa8cb; --fg3: #4d6a8a;
+    --accent: #5b8df7; --accent2: #7aa6ff;
+    --green: #34d399; --green2: #064e3b;
+    --red:   #f87171; --red2: #450a0a;
+    --yellow: #fbbf24; --yellow2: #451a03;
+    --border: #1e3050; --shadow: 0 2px 10px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:    #0c1220; --bg2: #111a2c; --bg3: #192236;
+  --card:  #111a2c;
+  --fg:    #e2eaf7; --fg2: #8fa8cb; --fg3: #4d6a8a;
+  --accent: #5b8df7; --accent2: #7aa6ff;
+  --green: #34d399; --green2: #064e3b;
+  --red:   #f87171; --red2: #450a0a;
+  --yellow: #fbbf24; --yellow2: #451a03;
+  --border: #1e3050; --shadow: 0 2px 10px rgba(0,0,0,.4);
+  color-scheme: dark;
+}
+
+/* ═══════════ RESET & BASE ═══════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ═══════════ HEADER ═══════════ */
+.site-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 20px max(20px, env(safe-area-inset-left, 0px));
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;
+}
+.header-title h1 { font-family: var(--font-hd); font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+.header-title p { font-size: .85rem; opacity: .85; margin-top: 4px; }
+.header-badge { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 6px; padding: 6px 14px; font-size: .8rem; text-align: center; flex-shrink: 0; }
+.header-badge strong { display: block; font-size: 1.1rem; }
+
+/* ═══════════ NAV TABS ═══════════ */
+.nav-outer {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50;
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  box-shadow: var(--shadow);
+}
+.nav-scroll { overflow-x: auto; scrollbar-width: none; }
+.nav-scroll::-webkit-scrollbar { display: none; }
+.nav-tabs {
+  display: flex; gap: 0;
+  padding: 0 max(20px, env(safe-area-inset-left, 0px));
+  min-width: max-content;
+}
+.nav-tab {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-ui); font-size: .8rem; font-weight: 500;
+  color: var(--fg2); padding: 14px 14px 12px;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s; white-space: nowrap;
+}
+.nav-tab:hover { color: var(--fg); }
+.nav-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+/* ═══════════ SECTIONS ═══════════ */
+.section { display: none; padding-block: 28px; max-width: 1100px; }
+.section.active { display: block; }
+.section-title {
+  font-family: var(--font-hd); font-size: 1.4rem; font-weight: 600;
+  color: var(--fg); text-wrap: balance; margin-bottom: 6px;
+}
+.section-sub { font-size: .85rem; color: var(--fg2); margin-bottom: 22px; line-height: 1.5; max-width: 72ch; }
+
+/* ═══════════ CARDS & GRIDS ═══════════ */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+.kpi-label { font-size: .73rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--fg3); margin-bottom: 6px; }
+.kpi-value { font-size: 1.7rem; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; color: var(--fg); }
+.kpi-note { font-size: .72rem; color: var(--fg2); margin-top: 4px; }
+.kpi.good .kpi-value { color: var(--green); }
+.kpi.bad .kpi-value { color: var(--red); }
+.kpi.warn .kpi-value { color: var(--yellow); }
+
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.card-title { font-weight: 600; font-size: .95rem; margin-bottom: 10px; color: var(--fg); }
+.card-body { font-size: .84rem; color: var(--fg2); line-height: 1.65; }
+.card-body ul { margin: 8px 0 0 14px; }
+.card-body li { margin-bottom: 4px; }
+
+/* ═══════════ TABLES ═══════════ */
+.table-wrap { overflow-x: auto; border-radius: var(--r); border: 1px solid var(--border); margin-bottom: 24px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; }
+thead { background: var(--bg2); }
+th { font-size: .73rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--fg3); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+td { padding: 10px 14px; font-size: .83rem; color: var(--fg2); border-bottom: 1px solid var(--border); vertical-align: top; min-width: 0; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--bg2); }
+.td-gov { font-weight: 600; color: var(--fg); white-space: nowrap; }
+.td-main { color: var(--fg); }
+td.pos { color: var(--green); font-weight: 500; }
+td.neg { color: var(--red); font-weight: 500; }
+td.neutral { color: var(--yellow); font-weight: 500; }
+
+/* ═══════════ CHARTS ═══════════ */
+.chart-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 18px 20px;
+  box-shadow: var(--shadow); margin-bottom: 24px;
+}
+.chart-title { font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
+.chart-sub { font-size: .75rem; color: var(--fg3); margin-bottom: 14px; }
+.chart-container { position: relative; }
+.two-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media (max-width: 640px) { .two-charts { grid-template-columns: 1fr; } }
+
+/* ═══════════ BADGE / TAG ═══════════ */
+.badge { display: inline-block; border-radius: 4px; padding: 2px 7px; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+.badge-green { background: var(--green2); color: var(--green); }
+.badge-red { background: var(--red2); color: var(--red); }
+.badge-yellow { background: var(--yellow2); color: var(--yellow); }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-gray { background: var(--bg3); color: var(--fg2); }
+
+/* ═══════════ ALERT BOXES ═══════════ */
+.alert { border-radius: var(--r); padding: 13px 16px; margin-bottom: 20px; font-size: .84rem; line-height: 1.6; }
+.alert strong { display: block; margin-bottom: 4px; }
+.alert-warn { background: var(--yellow2); border-left: 4px solid var(--yellow); color: var(--yellow); }
+.alert-warn * { color: var(--yellow); }
+.alert-info { background: #dbeafe; border-left: 4px solid #3b82f6; color: #1e3a8a; }
+.alert-info * { color: #1e3a8a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .alert-warn { background: #451a03; border-color: var(--yellow); color: var(--yellow); }
+  :root:not([data-theme="light"]) .alert-warn * { color: var(--yellow); }
+  :root:not([data-theme="light"]) .alert-info { background: #1e3a5f; border-color: #60a5fa; color: #93c5fd; }
+  :root:not([data-theme="light"]) .alert-info * { color: #93c5fd; }
+}
+:root[data-theme="dark"] .alert-warn { background: #451a03; border-color: var(--yellow); color: var(--yellow); }
+:root[data-theme="dark"] .alert-warn * { color: var(--yellow); }
+:root[data-theme="dark"] .alert-info { background: #1e3a5f; border-color: #60a5fa; color: #93c5fd; }
+:root[data-theme="dark"] .alert-info * { color: #93c5fd; }
+
+/* ═══════════ VIOLENCE CHART ═══════════ */
+.viol-state-bar { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+.viol-state-name { font-size: .75rem; font-variant-numeric: tabular-nums; width: 28px; flex-shrink: 0; color: var(--fg); font-weight: 600; }
+.viol-state-fullname { font-size: .75rem; width: 130px; flex-shrink: 0; color: var(--fg2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viol-bar-track { flex: 1; background: var(--bg3); border-radius: 3px; height: 18px; position: relative; min-width: 0; }
+.viol-bar-fill { height: 100%; border-radius: 3px; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; font-size: .68rem; font-weight: 600; color: #fff; min-width: 32px; transition: width .4s; }
+.viol-rate { font-size: .73rem; font-variant-numeric: tabular-nums; width: 36px; text-align: right; flex-shrink: 0; color: var(--fg); font-weight: 500; }
+.viol-party { font-size: .68rem; width: 80px; flex-shrink: 0; color: var(--fg3); white-space: nowrap; }
+@media (max-width: 540px) {
+  .viol-state-fullname { display: none; }
+  .viol-party { display: none; }
+}
+
+/* ═══════════ TIMELINE ═══════════ */
+.timeline { position: relative; padding-left: 24px; margin-bottom: 24px; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 16px; }
+.tl-dot { position: absolute; left: -20px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent2); border: 2px solid var(--bg); }
+.tl-year { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--fg3); margin-bottom: 2px; }
+.tl-text { font-size: .83rem; color: var(--fg2); line-height: 1.55; }
+.tl-text strong { color: var(--fg); }
+
+/* ═══════════ SOURCE NOTES ═══════════ */
+.source-note { font-size: .72rem; color: var(--fg3); margin-top: 8px; font-style: italic; }
+.source-note a { color: var(--accent2); text-decoration: none; }
+.source-note a:hover { text-decoration: underline; }
+
+/* ═══════════ THEME TOGGLE ═══════════ */
+.theme-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 50%; width: 42px; height: 42px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow); z-index: 100; font-size: 1.1rem;
+}
+
+/* ═══════════ TWO-COL ═══════════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ═══════════ COMPARE TABLE ═══════════ */
+.comp-header { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 0; border-radius: var(--r) var(--r) 0 0; overflow: hidden; border: 1px solid var(--border); }
+.comp-col { padding: 12px 16px; font-weight: 600; font-size: .8rem; }
+.comp-col-topic { background: var(--bg2); color: var(--fg3); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+.comp-col-left { background: var(--red); color: #fff; text-align: center; }
+.comp-col-right { background: var(--accent); color: #fff; text-align: center; }
+.comp-row { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 0; border: 1px solid var(--border); border-top: none; }
+.comp-row:last-child { border-radius: 0 0 var(--r) var(--r); }
+.comp-cell { padding: 11px 16px; font-size: .82rem; color: var(--fg2); border-right: 1px solid var(--border); }
+.comp-cell:last-child { border-right: none; }
+.comp-topic { background: var(--bg2); font-weight: 500; color: var(--fg); font-size: .8rem; }
+.comp-table-wrap { margin-bottom: 24px; }
+
+@media (max-width: 560px) {
+  .comp-header, .comp-row { grid-template-columns: 120px 1fr 1fr; }
+  .comp-col, .comp-cell { padding: 9px 10px; font-size: .78rem; }
+}
+
+/* ═══════════ PARTY PILLS ═══════════ */
+.pill-left { display: inline-block; background: #fee2e2; color: #991b1b; border-radius: 4px; padding: 1px 7px; font-size: .7rem; font-weight: 700; }
+.pill-right { display: inline-block; background: #dbeafe; color: #1e40af; border-radius: 4px; padding: 1px 7px; font-size: .7rem; font-weight: 700; }
+.pill-center { display: inline-block; background: var(--bg3); color: var(--fg2); border-radius: 4px; padding: 1px 7px; font-size: .7rem; font-weight: 700; }
+.pill-cright { display: inline-block; background: #e0f2fe; color: #0369a1; border-radius: 4px; padding: 1px 7px; font-size: .7rem; font-weight: 700; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pill-left { background: #450a0a; color: #fca5a5; }
+  :root:not([data-theme="light"]) .pill-right { background: #1e3a5f; color: #93c5fd; }
+  :root:not([data-theme="light"]) .pill-cright { background: #0c4a6e; color: #7dd3fc; }
+  :root:not([data-theme="light"]) .badge-blue { background: #1e3a5f; color: #93c5fd; }
+}
+:root[data-theme="dark"] .pill-left { background: #450a0a; color: #fca5a5; }
+:root[data-theme="dark"] .pill-right { background: #1e3a5f; color: #93c5fd; }
+:root[data-theme="dark"] .pill-cright { background: #0c4a6e; color: #7dd3fc; }
+:root[data-theme="dark"] .badge-blue { background: #1e3a5f; color: #93c5fd; }
+
+.section-divider { height: 1px; background: var(--border); margin: 24px 0; }
+</style>
+
+<!-- ════════════════════════ MARKUP ════════════════════════ -->
+
+<div class="site-header">
+  <div class="header-title">
+    <h1>Brasil 2026: Dados &amp; Democracia</h1>
+    <p>Políticas públicas, economia, violência, candidatos e interferências externas — dados verificados</p>
+  </div>
+  <div class="header-badge">
+    <strong>2º TURNO</strong>
+    25 out. 2026<br>
+    Lula PT × Flávio PL
+  </div>
+</div>
+
+<div class="nav-outer">
+  <div class="nav-scroll">
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" onclick="showTab('panorama')">Panorama</button>
+      <button class="nav-tab" onclick="showTab('politicas')">Políticas</button>
+      <button class="nav-tab" onclick="showTab('economia')">Economia</button>
+      <button class="nav-tab" onclick="showTab('violencia')">Violência</button>
+      <button class="nav-tab" onclick="showTab('bets')">Bets</button>
+      <button class="nav-tab" onclick="showTab('minerais')">Minerais</button>
+      <button class="nav-tab" onclick="showTab('candidatos')">Candidatos</button>
+      <button class="nav-tab" onclick="showTab('interferencia')">Interferência</button>
+      <button class="nav-tab" onclick="showTab('master')">Banco Master</button>
+      <button class="nav-tab" onclick="showTab('taxacao')">Taxação</button>
+      <button class="nav-tab" onclick="showTab('latam')">América Latina</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════════ PANORAMA ══════════════════ -->
+<section class="section active" id="panorama">
+  <h2 class="section-title">Panorama Geral — Brasil 2026</h2>
+  <p class="section-sub">Indicadores-chave comparando os dois mandatos (Bolsonaro 2019–2022 e Lula 2023–2026) e o contexto do 2º turno em 25 de outubro de 2026.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi good">
+      <div class="kpi-label">Desemprego (PNAD Q2/2026)</div>
+      <div class="kpi-value">6,0%</div>
+      <div class="kpi-note">Mínima histórica. Em 2020 atingiu 13,8%</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">PIB 2024</div>
+      <div class="kpi-value">+3,4%</div>
+      <div class="kpi-note">Crescimento real acima do esperado</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">Salário Mínimo 2026</div>
+      <div class="kpi-value">R$1.621</div>
+      <div class="kpi-note">+4,7% real em 2024 vs -1,7% no fim de Bolsonaro</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">SELIC (out/2026)</div>
+      <div class="kpi-value">~13,25%</div>
+      <div class="kpi-note">Juros elevados persistem, pressionando empresas</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">Homicídios/100k (2024)</div>
+      <div class="kpi-value">20,8</div>
+      <div class="kpi-note">Mínima histórica da série. Pico foi 31,2 em 2017</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label">Carga Tributária</div>
+      <div class="kpi-value">33,1%</div>
+      <div class="kpi-note">do PIB. Reforma tributária em implementação</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">Bets — Pico Mensal</div>
+      <div class="kpi-value">R$21B</div>
+      <div class="kpi-note">jan–ago 2024. Proibição: set/2026 (MP 1.394)</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label">Reservas de Terras Raras</div>
+      <div class="kpi-value">2ª maior</div>
+      <div class="kpi-note">do mundo (~23% das reservas conhecidas)</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>ℹ️ Como usar este dashboard</strong>
+    Navegue pelas abas acima. Todos os dados são de fontes verificadas (IBGE, FBSP, Atlas da Violência, Banco Central, IPEA, SSP). Itens sob investigação (sem condenação) estão claramente sinalizados.
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🗳️ 2º Turno — 25 de outubro de 2026</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Luiz Inácio Lula da Silva (PT)</strong> — presidente em exercício, 3º mandato</li>
+          <li><strong>Flávio Bolsonaro (PL)</strong> — senador, filho de Jair Bolsonaro</li>
+          <li>1º turno: Lula 1º lugar; Flávio 2º lugar em disputa apertada</li>
+          <li>Tema central: economia, segurança pública e polarização política</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 O que esta pesquisa cobre</div>
+      <div class="card-body">
+        <ul>
+          <li>Comparativo de políticas 2019–2022 vs 2023–2026</li>
+          <li>Dados econômicos com série histórica</li>
+          <li>Violência por estado × orientação política dos governos estaduais</li>
+          <li>Impacto das bets na economia; proibição e efeitos</li>
+          <li>Minerais críticos e interesses dos EUA no Brasil</li>
+          <li>Interferência externa comprovada nas eleições brasileiras</li>
+          <li>Banco Master e investigações envolvendo Flávio Bolsonaro</li>
+          <li>Direita na América Latina: Argentina, Chile, Colômbia, Peru</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ POLÍTICAS ══════════════════ -->
+<section class="section" id="politicas">
+  <h2 class="section-title">Políticas Públicas: Bolsonaro × Lula</h2>
+  <p class="section-sub">Comparativo das principais políticas entre os governos 2019–2022 (Jair Bolsonaro, PL) e 2023–2026 (Luiz Inácio Lula da Silva, PT). Dados baseados em fontes oficiais, sem análise partidária.</p>
+
+  <div class="comp-table-wrap">
+    <div class="comp-header">
+      <div class="comp-col comp-col-topic">Área</div>
+      <div class="comp-col comp-col-left">Bolsonaro (PL) 2019–2022</div>
+      <div class="comp-col comp-col-right">Lula (PT) 2023–2026</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Economia / PIB</div>
+      <div class="comp-cell">PIB: -3,9% (2020, pandemia); +5,0% (2021, rebote); +2,9% (2022). Média: ~1,2%/ano (ex-pandemia). Teto de gastos mantido.</div>
+      <div class="comp-cell">PIB: +2,9% (2023); +3,4% (2024); est. +3,2% (2025). Arcabouço fiscal substitui teto. Críticas ao déficit primário.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Desemprego</div>
+      <div class="comp-cell">Herdou 11,9% (2019). Pico 13,8% (2020). Ao sair: 9,3% média 2022, 7,9% no 4º tri. Queda acelerou no 2º semestre 2022.</div>
+      <div class="comp-cell">Recebeu ~9%. Chegou a 6,2% (média 2024) e 6,0% (Q2/2026). Série histórica mínima do IBGE.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Salário Mínimo</div>
+      <div class="comp-cell">Sem política de valorização real. Encerrou mandato com primeira perda real acumulada desde o Plano Real: -1,7% de poder de compra.</div>
+      <div class="comp-cell">Política de valorização com reajuste real (+4,69% real em 2024). Mínimo passou de R$1.302 (2023) a R$1.621 (2026).</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Fome / Assistência</div>
+      <div class="comp-cell">Criou Auxílio Brasil (R$400, depois R$600 pré-eleição). Extinguiu o Bolsa Família original; cortou 1,3 mi de famílias no cadastro.</div>
+      <div class="comp-cell">Recriou Bolsa Família com R$600 mínimo + adicionais por criança. ~21 milhões de famílias. Retomada do "Brasil sem Fome".</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Meio Ambiente</div>
+      <div class="comp-cell">Desmatamento Amazônia: +73% acumulado vs governo anterior (INPE). Saída do Acordo de Paris evitada mas participação mínima em COP26. IBAMA enfraquecido.</div>
+      <div class="comp-cell">Desmatamento caiu 50%+ em 2023. Meta desmatamento zero até 2030. Fundo Amazônia reativado (US$1,9B comprometido). Sede da COP30 (Belém, nov/2025).</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Saúde</div>
+      <div class="comp-cell">Gestão criticada na pandemia COVID: demora na compra de vacinas, negacionismo. Mais de 700 mil mortes COVID. Subfinanciamento do SUS.</div>
+      <div class="comp-cell">Plano Nacional de Saúde; vacinação em dia; ampliação do Mais Médicos. Crítica: fila do SUS ainda grande; R$22 bi adicionais ao SUS em 2024.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Educação</div>
+      <div class="comp-cell">Cortes no MEC; extinção de conselhos; polêmicas com BNCC. FIES e ProUni mantidos. Escolas cívico-militares ampliadas.</div>
+      <div class="comp-cell">MEC reestruturado; Pé-de-Meia (poupança do EM); PRONATEC relançado; ampliação IFES. Escola em Tempo Integral (meta: 1 mi alunos). FIES ampliado.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Reforma Tributária</div>
+      <div class="comp-cell">Não realizou reforma estrutural. PEC emergencial aprovada. Desonerações setoriais focalizadas (combustíveis pré-eleição).</div>
+      <div class="comp-cell">EC 132/2023: maior reforma tributária em 30 anos. Unificação de impostos em CBS + IBS. IVA dual previsto para 2033. Isenção IRPF até R$5.000.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Infraestrutura</div>
+      <div class="comp-cell">Programa de Parcerias de Investimentos (PPI) com concessões. NOVO PAC não existia; contratações baixas por contingenciamento.</div>
+      <div class="comp-cell">Novo PAC: R$1,7 trilhão em projetos (2023–2026). Criticado por projetos reembalados. Investimento público aumentou em 2024.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Política Externa</div>
+      <div class="comp-cell">Alinhamento com EUA/Trump; rompimento com China ideológico (revertido depois); saída de organismos internacionais; isolamento diplomático.</div>
+      <div class="comp-cell">Retomada do multilateralismo; presidência do G20 (2024); relação equilibrada China/EUA; aproximação com Mercosul e UE. BRICS+ ativo.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Armamento</div>
+      <div class="comp-cell">23 decretos flexibilizando posse/porte. Importações de armas subiram 135%. Cidadãos comuns com acesso a fuzis.</div>
+      <div class="comp-cell">STF suspendeu decretos; novas restrições ao porte. Desarmamento parcial em andamento. PF apreendeu mais de 1,3 mi de armas (2023–2025).</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Bets / Apostas</div>
+      <div class="comp-cell">Temer legalizou (Lei 13.756/2018). Bolsonaro NÃO regulamentou em 4 anos: mercado cresceu sem controle, sem tributação adequada.</div>
+      <div class="comp-cell">Regulamentou (dez/2023); exigiu licenças; taxou operadoras. Mas crescimento explosivo continuou. MP 1.394 (set/2026): proibição total.</div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: IBGE, INPE, IPEA, MEC, MDS, B3, Banco Central, AGU, Câmara dos Deputados, Senado Federal.</p>
+</section>
+
+<!-- ══════════════════ ECONOMIA ══════════════════ -->
+<section class="section" id="economia">
+  <h2 class="section-title">Economia: Série Histórica</h2>
+  <p class="section-sub">PIB, desemprego, salário mínimo real e juros (SELIC) de 2018 a 2026. Dados: IBGE PNAD Contínua, Banco Central, DIEESE.</p>
+
+  <div class="two-charts">
+    <div class="chart-wrap">
+      <div class="chart-title">PIB Real — Crescimento Anual (%)</div>
+      <div class="chart-sub">Variação do PIB a preços constantes (IBGE/SCN)</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartGDP"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Desemprego Médio Anual (%)</div>
+      <div class="chart-sub">Taxa de desocupação — PNAD Contínua (IBGE)</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartUnemp"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-charts">
+    <div class="chart-wrap">
+      <div class="chart-title">Salário Mínimo Nominal (R$)</div>
+      <div class="chart-sub">Valores nominais de jan de cada ano. Mín. real caiu -1,7% no final de Bolsonaro; subiu +4,7% real em 2024 (Lula).</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartWage"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Taxa SELIC — Meta (% a.a.)</div>
+      <div class="chart-sub">Política monetária do Banco Central. Juros impactam crédito e custo empresarial.</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartSelic"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">💡 Poder de Compra do Mínimo</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Bolsonaro final (2022):</strong> -1,7% real acumulado. Primeira perda real do mínimo desde o Plano Real (DIEESE).</li>
+          <li><strong>Lula 2024:</strong> +4,69% real de ganho. Política de valorização vinculada ao crescimento do PIB.</li>
+          <li>Fórmula 2023+: IPCA + crescimento do PIB dos 2 anos anteriores.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Contexto dos Juros</div>
+      <div class="card-body">
+        <ul>
+          <li>SELIC chegou a 2% em 2020 (mínima histórica) durante Bolsonaro.</li>
+          <li>Subiu para 13,75% em 2022 para conter inflação pós-pandemia + guerra Ucrânia.</li>
+          <li>Lula recebeu juros altos; crítica ao Banco Central "autônomo".</li>
+          <li>Pequenos empreendedores sofrem com crédito caro: taxa média para PJ em 2024 era ~28% a.a.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏭 COFCO — Maior Esmagadora da América Latina</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Local:</strong> Rondonópolis (MT)</li>
+          <li><strong>Atual:</strong> 4.500 ton/dia de soja</li>
+          <li><strong>Expansão:</strong> 10.000 ton/dia (conclusão: início 2028)</li>
+          <li><strong>Investimento:</strong> R$2B+ (empresa estatal chinesa)</li>
+          <li><strong>Produtos:</strong> farelo de soja, óleo, biodiesel</li>
+          <li><strong>Receita COFCO Brasil 2024:</strong> R$54 bilhões</li>
+          <li>Gera empregos diretos e indiretos no complexo sojicultor do MT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: IBGE/SCN (PIB), IBGE/PNAD Contínua (desemprego), MTE (salário mínimo), Banco Central (SELIC), DIEESE (poder de compra).</p>
+</section>
+
+<!-- ══════════════════ VIOLÊNCIA ══════════════════ -->
+<section class="section" id="violencia">
+  <h2 class="section-title">Violência por Estado × Orientação Política</h2>
+  <p class="section-sub">Taxa de mortes violentas intencionais por 100 mil habitantes (2024, Atlas da Violência / FBSP). Cada estado está colorido pela orientação política do governador eleito em 2022. <strong>A correlação não implica causalidade</strong> — fatores regionais e estruturais têm peso maior que o partido do governador.</p>
+
+  <div class="alert alert-warn">
+    <strong>⚠️ Importante antes de interpretar — leia antes de tirar conclusões</strong>
+    <strong>O que o número mede:</strong> mortes violentas intencionais por 100 mil habitantes — é uma <em>taxa</em>, já normalizada pela população. SP ter 8,2 e BA ter 40,6 não é percepção: são ~3.700 mortes em SP (46M hab.) vs ~6.000 na Bahia (14M hab.) — o número absoluto em SP é maior; a proporção é muito menor.
+    <br><br><strong>O que o número NÃO mede:</strong> (1) variação interna — a taxa estadual esconde bairros com 80/100k ao lado de bairros com 2/100k; (2) subnotificação — especialmente em áreas controladas por milícias (RJ), onde corpos somem e famílias não registram por medo; (3) sensação de insegurança, que depende também de roubos, assaltos e presença armada — isso não entra nessa taxa.
+    <br><br>O partido do governador estadual explica pouco; o contexto histórico-estrutural e a qualidade do registro explicam muito.
+  </div>
+
+  <div class="two-col" style="margin-bottom:12px">
+    <div class="card">
+      <div class="card-title">Média por orientação política (governadores 2023–2026)</div>
+      <div class="card-body">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill-left">Esquerda</span>
+            <div style="flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden">
+              <div style="width:72%;background:#dc2626;height:100%;border-radius:3px"></div>
+            </div>
+            <span style="font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums">33,5/100k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill-left" style="background:#fee2e2;color:#9a3412">Centro-Esq.</span>
+            <div style="flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden">
+              <div style="width:57%;background:#f97316;height:100%;border-radius:3px"></div>
+            </div>
+            <span style="font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums">26,6/100k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill-center">Centro</span>
+            <div style="flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden">
+              <div style="width:52%;background:#6b7280;height:100%;border-radius:3px"></div>
+            </div>
+            <span style="font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums">24,2/100k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill-cright">Centro-Dir.</span>
+            <div style="flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden">
+              <div style="width:47%;background:#2563eb;height:100%;border-radius:3px"></div>
+            </div>
+            <span style="font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums">22,1/100k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill-right">Direita</span>
+            <div style="flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden">
+              <div style="width:42%;background:#1d4ed8;height:100%;border-radius:3px"></div>
+            </div>
+            <span style="font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums">19,5/100k</span>
+          </div>
+        </div>
+        <p style="font-size:.73rem;color:var(--fg3);margin-top:10px">⚠️ Média da direita é fortemente puxada para baixo por SP (8,2) e SC (8,5). Sem esses dois: 21,1. Média da esquerda inclui AP (45,1), estado fronteiriço atípico.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📉 Tendência Nacional — Homicídios/100k</div>
+      <div class="card-body">
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2017 (pico)</span><strong style="color:var(--red)">31,2</strong></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2018</span><span>27,8</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2019</span><span>21,7</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2020</span><span>23,7</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2021</span><span>23,2</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2022</span><span>21,7</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2023</span><span>22,0</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>2024 (mínima)</span><strong style="color:var(--green)">20,8</strong></div>
+        </div>
+        <p style="font-size:.73rem;color:var(--fg3);margin-top:8px">Queda de 33% do pico (2017) até 2024. A redução nacional ocorreu sob diferentes governos, sugerindo que políticas de segurança pública têm mais impacto do que o partido federal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Mortes Violentas Intencionais por Estado — 2024 (por 100 mil hab.)</div>
+    <div class="chart-sub">Cores: <span class="pill-left">Esq.</span> <span class="pill-left" style="background:#fee2e2;color:#9a3412">C-Esq.</span> <span class="pill-center">Centro</span> <span class="pill-cright">C-Dir.</span> <span class="pill-right">Dir.</span> — Média nacional: 20,8/100k (linha pontilhada)</div>
+    <div id="violStateChart" style="padding: 8px 0 4px"></div>
+    <p class="source-note">Fonte: <a href="https://sbtnews.sbt.com.br/noticia/brasil/brasil-registra-minima-historica-de-mortes-violentas-em-2024-veja-ranking-dos-estados" target="_blank">FBSP / Anuário Brasileiro de Segurança Pública 2025</a> | Atlas da Violência IPEA/FBSP</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">🔴 Alta violência entre estados esquerdistas</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Bahia (PT):</strong> 40,6/100k. PT governa a Bahia desde 2007 (~18 anos). Fatores: rota de tráfico via Porto de Salvador, Rio São Francisco, fronteira com estados violentos, desigualdade histórica.</li>
+          <li><strong>Amapá (Rede):</strong> 45,1/100k — maior do país. Estado fronteiriço com Suriname/Guiana Francesa, rota estratégica de narcotráfico.</li>
+          <li><strong>Ceará (PT):</strong> 37,5/100k. Pico foi em 2020 (65/100k). Reduziu mais de 40% com políticas de segurança pública, ainda acima da média.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔵 Alta violência entre estados direitistas</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Mato Grosso (União Brasil):</strong> 29,8/100k. Fronteira agrícola, conflitos fundiários, rota de cocaína via Bolívia.</li>
+          <li><strong>Amazonas (União Brasil):</strong> 27,4/100k. Disputas de facções rivais pelo controle do tráfico amazônico.</li>
+          <li><strong>Rondônia (União Brasil):</strong> 26,1/100k. Fronteira com Bolívia, garimpo ilegal, conflito rural.</li>
+          <li><strong>Rio de Janeiro (PL) — 22,1/100k — por que a sensação é pior que o número?</strong> Três fatores: (1) <em>Média estadual dilui a cidade</em> — interior fluminense tem taxas bem menores que a capital; (2) <em>Subnotificação por milícia</em> — em Zona Oeste e Baixada Fluminense, famílias não registram desaparecimentos por medo de represália; o ISP-RJ reconhece o problema; (3) <em>Cobertura midiática</em> — RJ é segunda capital da mídia nacional, cada ocorrência vira notícia. A Bahia tem taxa 2× maior com muito menos cobertura nacional.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔍 O "Mistério de São Paulo" — como caiu tanto?</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Queda documentada:</strong> SP foi de ~50/100k (anos 2000) para 8,2 hoje — redução de 84% em 25 anos. Um dos maiores casos mundiais estudados por criminologistas.</li>
+          <li><strong>PCC como regulador territorial (paradoxal):</strong> pesquisas (Bruno Paes Manso, Camila Nunes Dias/USP) documentam que o PCC suprime violência desorganizada em seu território para evitar intervenção policial. Não é defesa — é constatação empírica aceita academicamente.</li>
+          <li><strong>Envelhecimento da geração de risco:</strong> a explosão dos anos 90 atingiu jovens de 15–24 das periferias — essa geração saiu da faixa etária crítica.</li>
+          <li><strong>Orçamento de segurança:</strong> SP investe ~R$30B/ano — maior da América Latina. Mesmo assim, <em>roubos</em> continuam altos e não entram nessa taxa — daí a sensação de insegurança persistir.</li>
+          <li><strong>Ceará (PT):</strong> caiu de 65/100k (2020) para 37,5 (2024) — queda de 42% em 4 anos.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📌 Fatores reais que explicam a violência</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Rotas de tráfico:</strong> Estados com fronteiras internacionais ou portos costumam ter taxas altas, independente do partido</li>
+          <li><strong>Desigualdade (Gini):</strong> BA, CE, AL têm Gini acima de 0,55. SP tem 0,49</li>
+          <li><strong>Investimento em segurança:</strong> SP gasta ~R$30B/ano em segurança pública; estados nordestinos têm orçamentos muito menores</li>
+          <li><strong>Urbanização desordenada:</strong> Periferias sem infraestrutura amplificam violência</li>
+          <li><strong>Subnotificação:</strong> RJ (milícias), interior do Norte/Nordeste — o dado oficial é piso, não teto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">😟 Percepção × Dado medido</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>A taxa mede só homicídios.</strong> Roubos, assaltos, ameaças, presença armada nas ruas — tudo isso afeta a sensação de insegurança mas não entra aqui</li>
+          <li><strong>SP e RJ têm alta cobertura midiática:</strong> uma ocorrência em SP vira manchete nacional; o mesmo crime no Amapá ou no interior baiano não. Isso distorce a percepção de quem acompanha notícias</li>
+          <li><strong>Bahia:</strong> Salvador é a cidade com mais homicídios do Brasil em números absolutos há vários anos — a taxa alta é real, concentrada na capital e região metropolitana</li>
+          <li><strong>Rio:</strong> a percepção de insegurança é legítima e reflete realidade local, especialmente a violência de milícias que não se traduz integralmente em homicídios registrados. O número de 22,1 provavelmente subestima a violência real</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BETS ══════════════════ -->
+<section class="section" id="bets">
+  <h2 class="section-title">Bets — Do Governo Temer à Proibição em 2026</h2>
+  <p class="section-sub">As apostas esportivas online foram legalizadas no governo Temer, ignoradas por Bolsonaro e finalmente proibidas por Lula em setembro de 2026. O impacto econômico foi significativo — especialmente sobre famílias de baixa renda.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi bad">
+      <div class="kpi-label">Gasto mensal (pico)</div>
+      <div class="kpi-value">R$21B</div>
+      <div class="kpi-note">jan–ago 2024 (Banco Central)</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">De beneficiários</div>
+      <div class="kpi-value">R$3B</div>
+      <div class="kpi-note">Bolsa Família apostado em ago/2024</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">Para sites offshore</div>
+      <div class="kpi-value">R$58B</div>
+      <div class="kpi-note">Dinheiro para fora do país (2024)</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">Varejo após proibição</div>
+      <div class="kpi-value">+8,2%</div>
+      <div class="kpi-note">Aumento em setores básicos (out/2026)</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-size:.9rem;font-weight:600;margin-bottom:12px;color:var(--fg)">📅 Linha do Tempo</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">DEZ 2018 — Temer</div>
+          <div class="tl-text"><strong>Lei 13.756/2018</strong> — Legaliza apostas esportivas de quota fixa. Aprovada no Congresso sem debate amplo, período de lame duck.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2019–2022 — Bolsonaro</div>
+          <div class="tl-text">Governo <strong>não regulamenta</strong> em 4 anos. Mercado cresce sem licenças, sem tributação, sem limite de publicidade. Dezenas de sites operam livremente.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">NOV 2023 — Lula</div>
+          <div class="tl-text">Decreto regulamenta setor: exige licença do Ministério da Fazenda (R$30M), proíbe crédito para apostas, exige identificação de apostadores.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">JAN 2024</div>
+          <div class="tl-text"><strong>Lei 14.790/2023</strong> entra em vigor. Mas mercado ainda cresce explosivamente. Pico de R$21B/mês em agosto 2024.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">AGO 2024</div>
+          <div class="tl-text">Banco Central revela: <strong>R$3B de beneficiários do Bolsa Família</strong> foram a apostas só em agosto. Estudo IPEA aponta queda de consumo em alimentos nas regiões mais afetadas.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--red)"></div>
+          <div class="tl-year">25 SET 2026 — Proibição</div>
+          <div class="tl-text"><strong>MP 1.394/2026</strong> — Lula proíbe operação de sites de apostas esportivas no Brasil. Governo cita impacto sobre renda das famílias e fluxo de divisas.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--green)"></div>
+          <div class="tl-year">OUT 2026</div>
+          <div class="tl-text">Varejo básico (supermercados, farmácias, vestuário popular) reporta <strong>aumento de consumo</strong>. Associações do setor relatam +8,2% em compras de setores básicos.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-title">💸 Efeito Econômico das Bets</div>
+        <div class="card-body">
+          <ul>
+            <li>R$58B enviados a sites offshore em 2024 saíram do circuito econômico brasileiro</li>
+            <li>Pequenos comércios relatavam queda de giro: consumidores gastavam renda em apostas em vez de produtos locais</li>
+            <li>Correlação identificada pelo Banco Central entre aumento de apostas e queda no consumo de alimentos em famílias de baixa renda</li>
+            <li>Crise do "trabalhador apostador": empresas relatavam absenteísmo e endividamento por apostas</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔗 Conexão Temer → Crise Econômica</div>
+        <div class="card-body">
+          <ul>
+            <li>O impeachment de Dilma Rousseff (2016) foi seguido do governo Temer, que aprovou a lei das bets sem debate público</li>
+            <li>Junto com a Reforma Trabalhista (2017) e o Teto de Gastos (EC 95), a legalização das bets contribuiu para descapitalizar famílias de baixa renda</li>
+            <li>Pequenos empreendedores com capital de giro comprometido pela renda dos funcionários indo para apostas</li>
+            <li>Stagnação econômica 2019–2022 combinada com crescimento das bets criou "esponja" de renda — dinheiro que circularia localmente foi absorvido por plataformas digitais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: Banco Central (fluxo de capitais), IPEA (consumo vs apostas), Ministério da Fazenda (regulação), Câmara dos Deputados (Lei 13.756/2018 e Lei 14.790/2023).</p>
+</section>
+
+<!-- ══════════════════ MINERAIS ══════════════════ -->
+<section class="section" id="minerais">
+  <h2 class="section-title">Minerais Críticos e Terras Raras</h2>
+  <p class="section-sub">O Brasil possui as segundas maiores reservas de terras raras e minerais críticos do mundo (~23% das reservas conhecidas). A geopolítica em torno desses recursos envolve EUA, China e o próprio governo brasileiro.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi warn">
+      <div class="kpi-label">Reservas mundiais</div>
+      <div class="kpi-value">2ª lugar</div>
+      <div class="kpi-note">~23% das reservas conhecidas de terras raras</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">Serra Verde — Descoberta</div>
+      <div class="kpi-value">Maior mina</div>
+      <div class="kpi-note">Terras raras fora da China — GO/PA</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🇺🇸 Interesse dos EUA</div>
+      <div class="card-body">
+        <ul>
+          <li>Serra Verde adquirida por empresa com apoio do U.S. International Development Finance Corporation (DFC) — braço financeiro do governo americano</li>
+          <li>Embaixada americana buscou reuniões com governos estaduais de GO, PA e MT sobre mineração de lítio e nióbio</li>
+          <li>Wall Street Journal e Financial Times reportaram pressão por acordos de fornecimento exclusivo de minerais críticos para os EUA</li>
+          <li>Contexto: disputa EUA × China por cadeias de suprimento de baterias (VE), turbinas eólicas, semicondutores</li>
+          <li>Brasil resiste à exclusividade: posição oficial mantém "não nos tornamos exclusivos de ninguém"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🇨🇳 China e Brasil</div>
+      <div class="card-body">
+        <ul>
+          <li>China é hoje a maior processadora de terras raras (>85% do processamento global)</li>
+          <li>COFCO, SINOPEC e outras estatais chinesas têm presença crescente no agronegócio brasileiro</li>
+          <li>China é o maior parceiro comercial do Brasil desde 2009</li>
+          <li>Lula mantém relação equilibrada: visita a Xi Jinping em 2023, mas não aderiu ao BRI (Belt and Road)</li>
+          <li>Tensão: EUA pressiona para que Brasil não venda minerais críticos à China</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">⛏️ O que Bolsonaro fez (2019–2022)</div>
+      <div class="card-body">
+        <ul>
+          <li>PL 191/2020: propôs mineração e hidrelétricas em terras indígenas — não foi votado</li>
+          <li>Fragilizou IBAMA e licenciamento — acelerou exploração informal</li>
+          <li>Garimpo ilegal em terras Yanomami: ouro + contaminação por mercúrio</li>
+          <li>Não criou política estruturada para terras raras</li>
+          <li>Alinhamento com EUA (Trump) mas sem acordo formal sobre minerais</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">⛏️ O que Lula fez (2023–2026)</div>
+      <div class="card-body">
+        <ul>
+          <li>Criou o Programa Nacional de Mineração de Minerais Estratégicos (2023)</li>
+          <li>Operação Yanomami: expulsão de garimpeiros e assistência humanitária</li>
+          <li>Lei de Terras Raras em tramitação: criação de reservas estratégicas</li>
+          <li>Negociação com EUA no âmbito do Critical Minerals Agreement</li>
+          <li>Resistência à exclusividade de fornecimento; posição multilateral</li>
+          <li>Fundo Amazônia: US$1,9B comprometido para proteção ambiental</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔮 Propostas 2027+ (candidatos)</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Flávio Bolsonaro (PL):</strong> Defende mineração em terras indígenas com "aprovação das comunidades"; alinhamento próximo com agenda Trump de minerais críticos; postura favorável a acordo bilateral EUA-Brasil</li>
+          <li><strong>Lula (PT):</strong> Mantém política de soberania sobre recursos; quer industrializar a cadeia (não apenas exportar minério bruto); resistência a exclusividade com qualquer país</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: USGS (reservas mundiais), DFC/governo EUA (Serra Verde), Wall Street Journal, Financial Times, MME/Brasil (programa nacional), IBAMA, ISA (terras indígenas).</p>
+</section>
+
+<!-- ══════════════════ CANDIDATOS ══════════════════ -->
+<section class="section" id="candidatos">
+  <h2 class="section-title">Propostas dos Candidatos para 2027+</h2>
+  <p class="section-sub">O que Lula (PT) e Flávio Bolsonaro (PL) propõem para o próximo mandato. Baseado em programas de governo registrados no TSE e declarações públicas verificadas.</p>
+
+  <div class="comp-table-wrap">
+    <div class="comp-header">
+      <div class="comp-col comp-col-topic">Tema</div>
+      <div class="comp-col comp-col-right">Lula (PT) — Reeleição</div>
+      <div class="comp-col comp-col-left">Flávio Bolsonaro (PL)</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Desenvolvimento Econômico</div>
+      <div class="comp-cell">Continuidade do Novo PAC; Política Industrial (Nova Indústria Brasil); incentivo a semicondutores e energias renováveis; manutenção do arcabouço fiscal com metas de resultado.</div>
+      <div class="comp-cell">Redução do tamanho do Estado; privatizações ampliadas (Petrobras, Correios); reforma fiscal com teto de gastos rígido; corte de subsídios governamentais; pautas de "Estado mínimo".</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Parcerias Internacionais</div>
+      <div class="comp-cell">Continuidade do multilateralismo; reforço do BRICS+; acordo Mercosul-UE; relação equilibrada com China e EUA; liderança em pauta climática.</div>
+      <div class="comp-cell">Aproximação prioritária com EUA (agenda Trump); revisão de acordos com China; postura cética em organismos multilaterais; crítica ao BRICS como alinhamento com ditaduras.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Segurança Pública</div>
+      <div class="comp-cell">PRONASCI 2 (prevenção + repressão qualificada); investimento em inteligência policial; manutenção do desarmamento; programa de reinserção social.</div>
+      <div class="comp-cell">Flexibilização do armamento para cidadãos e propriedades rurais; penas mais duras; PEC da legítima defesa; mais militarização das forças de segurança.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Reforma Tributária</div>
+      <div class="comp-cell">Implementação da EC 132/2023 (IVA dual); isenção IRPF até R$5.000 definitiva; manutenção do imposto mínimo sobre super-ricos (≥R$600k/ano); progressividade do IPTU.</div>
+      <div class="comp-cell">Revisão da reforma tributária aprovada; oposição à taxação de dividendos e de super-ricos; defende redução da carga tributária via corte de gastos, sem imposto sobre riqueza.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Minerais Críticos</div>
+      <div class="comp-cell">Industrialização da cadeia (não exportar apenas minério bruto); política multilateral; resistência à exclusividade EUA; criação de fundo soberano de minerais estratégicos.</div>
+      <div class="comp-cell">Abertura para mineração em terras indígenas; acordo preferencial com EUA; regime mais favorável para mineradoras; alinhamento com agenda de "independência da China".</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Meio Ambiente</div>
+      <div class="comp-cell">Meta desmatamento zero 2030; COP30 em Belém (legado); Fundo Amazônia; transição energética com empregos verdes.</div>
+      <div class="comp-cell">Mineração em TI com "aprovação comunitária"; revisão do licenciamento ambiental; postura cética sobre metas climáticas "impostas de fora"; defesa do agronegócio sem "restrições excessivas".</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Educação</div>
+      <div class="comp-cell">Ampliação do Pé-de-Meia; 1 mi de alunos em tempo integral; expansão de IFETs; revisão do novo ensino médio; valorização do professor.</div>
+      <div class="comp-cell">Escolas cívico-militares; voucher educacional (escola escolhida pelos pais); homeschooling regularizado; revisão da BNCC com viés conservador.</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell comp-topic">Bets / Apostas</div>
+      <div class="comp-cell">Manutenção da proibição (MP 1.394); estudo de possível retorno regulado e mais restritivo.</div>
+      <div class="comp-cell">Revisão da proibição; defende liberação com regulação; crítica à MP de Lula como "intervencionismo".</div>
+    </div>
+  </div>
+  <p class="source-note">Fonte: Programas de governo registrados no TSE, declarações oficiais, entrevistas verificadas. Propostas podem sofrer alterações até o debate final.</p>
+</section>
+
+<!-- ══════════════════ INTERFERÊNCIA ══════════════════ -->
+<section class="section" id="interferencia">
+  <h2 class="section-title">Interferência Externa nas Eleições Brasileiras</h2>
+  <p class="section-sub">Casos comprovados ou sob investigação formal de interferência de Big Techs e atores externos nas eleições brasileiras. Apenas fatos com base em documentos oficiais, declarações das próprias empresas ou investigações formais.</p>
+
+  <div class="alert alert-warn">
+    <strong>⚠️ Nota metodológica</strong>
+    Esta seção distingue: (1) casos comprovados / reconhecidos pelas próprias empresas; (2) casos sob investigação formal com indícios; (3) casos arquivados. "Comprovado" aqui significa admitido pela empresa ou por órgão regulatório, não apenas alegado por partidos.
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">📘 Meta (Facebook/Instagram) — Eleições 2026</div>
+      <div class="card-body">
+        <span class="badge badge-red">Investigado / Admitido</span>
+        <ul style="margin-top:8px">
+          <li>Meta admitiu <strong>"falhas técnicas"</strong> em seus sistemas de anúncios que afetaram campanhas eleitorais brasileiras em 2026, incluindo restrições indevidas a anúncios do campo lulista</li>
+          <li>Mais de 60 ONGs e movimentos sociais enviaram petição à ONU solicitando monitoramento das plataformas nas eleições 2026</li>
+          <li>Ministério da Justiça abriu processo na ANPD e encaminhou ao MPF para investigação das práticas da Meta</li>
+          <li>Meta anunciou suspensão do programa de verificação de fatos nos EUA em jan/2026 — decisão que pesquisadores apontaram como "exportável" ao Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🐦 X (Twitter) / Elon Musk — 2023–2026</div>
+      <div class="card-body">
+        <span class="badge badge-yellow">Investigação Arquivada</span>
+        <ul style="margin-top:8px">
+          <li>STF (Min. Alexandre de Moraes) abriu inquérito sobre Musk por interferência nas eleições brasileiras após publicações em apoio a Jair Bolsonaro e ataques à Justiça Eleitoral</li>
+          <li>X se recusou a cumprir decisões judiciais de remoção de conteúdo e foi bloqueado no Brasil por 39 dias (ago–out 2024)</li>
+          <li>Musk pagou multas (~R$18M) e o X foi desbloqueado após nomear representante legal no Brasil</li>
+          <li>Investigação sobre Musk foi <strong>arquivada em março de 2026</strong> pelo STF</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎵 TikTok / Kwai — Influência Algorítmica</div>
+      <div class="card-body">
+        <span class="badge badge-yellow">Em monitoramento</span>
+        <ul style="margin-top:8px">
+          <li>Kwai (ByteDance/China) foi identificado como plataforma com maior alcance de conteúdo bolsonarista nas periferias urbanas brasileiras (pesquisa NetLab/UFRJ 2024)</li>
+          <li>TSE firmou acordo com TikTok e Kwai para remoção de desinformação eleitoral em 48h</li>
+          <li>Pesquisadores identificaram padrão de "amplificação assimétrica" de conteúdo político de direita no Kwai</li>
+          <li>Empresa não admitiu interferência intencional; atribui ao comportamento orgânico dos usuários</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🤖 Google / YouTube — Desinformação</div>
+      <div class="card-body">
+        <span class="badge badge-blue">Acordo TSE</span>
+        <ul style="margin-top:8px">
+          <li>Google firmou acordo com TSE para remoção de desinformação eleitoral e limitação de microtargeting político</li>
+          <li>YouTube removeu 11.000+ vídeos com desinformação eleitoral brasileira em 2022–2024 (dados da própria empresa)</li>
+          <li>Investigação do CADE sobre práticas anticompetitivas do Google no mercado de anúncios digitais — impacta diretamente o ecossistema político-digital</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🧠 OpenAI / IA Generativa</div>
+      <div class="card-body">
+        <span class="badge badge-yellow">Alerta preventivo</span>
+        <ul style="margin-top:8px">
+          <li>TSE e ANPD emitiram alertas sobre uso de IA generativa para criação de deepfakes e desinformação eleitoral em 2026</li>
+          <li>OpenAI anunciou políticas específicas para eleições globais: proibição de uso do ChatGPT para campanha política</li>
+          <li>Detectados casos de deepfakes de candidatos brasileiros em WhatsApp e Telegram (investigados pela PF)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🇺🇸 Atores Externos Institucionais</div>
+      <div class="card-body">
+        <span class="badge badge-gray">Documentado</span>
+        <ul style="margin-top:8px">
+          <li>National Endowment for Democracy (NED) financia organizações liberais e conservadoras no Brasil — prática reconhecida e declarada, sem segredo</li>
+          <li>Governo Trump: declarações de apoio explícito a Flávio Bolsonaro e "onda azul" no Brasil (Elon Musk e aliados de Trump)</li>
+          <li>Milei (Argentina) recebeu Flávio Bolsonaro em Buenos Aires e pediu publicamente vitória da direita no Brasil</li>
+          <li>Instituto Liberdade (financiado por rede de think tanks liberais americanos) produz conteúdo em prol de candidatos de direita</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: TSE, STF (inquéritos públicos), ANPD, MPF, Meta (comunicado oficial), NetLab/UFRJ, Reuters, Agência Pública, Piauí.</p>
+</section>
+
+<!-- ══════════════════ BANCO MASTER ══════════════════ -->
+<section class="section" id="master">
+  <h2 class="section-title">Banco Master e Flávio Bolsonaro</h2>
+  <p class="section-sub">O Banco Master foi liquidado em novembro de 2025 após crise de insolvência. Daniel Vorcaro, fundador, foi preso. A conexão com Flávio Bolsonaro é objeto de investigação da Polícia Federal — sem condenação até o momento.</p>
+
+  <div class="alert alert-warn">
+    <strong>⚠️ Status das investigações</strong>
+    Os itens abaixo descrevem investigações em andamento e fatos documentados publicamente. Flávio Bolsonaro e Daniel Vorcaro não foram condenados. O princípio da presunção de inocência se aplica. Fontes: PF, BCB, CPI (quando houver), imprensa investigativa verificada.
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🏦 O que aconteceu com o Banco Master</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>18 nov. 2025:</strong> Banco Central decreta liquidação extrajudicial do Banco Master por insolvência</li>
+          <li>Daniel Vorcaro, fundador e principal acionista, <strong>preso</strong> na Operação Compliance Zero (PF)</li>
+          <li>Investigação: manipulação de balanços, emissão de CDBs com promessas de rendimentos insustentáveis, desvio de recursos</li>
+          <li>Depositantes com recursos acima do limite do FGC (R$250k por CPF/CNPJ) tiveram perdas</li>
+          <li>Master captou R$38B em CDBs de investidores pessoa física, muitos atraídos por rendimentos acima da SELIC</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔍 Flávio Bolsonaro e o Master</div>
+      <div class="card-body">
+        <span class="badge badge-yellow">Investigação em andamento — sem condenação</span>
+        <ul style="margin-top:8px">
+          <li>PF investiga contrato de R$134M entre Flávio Bolsonaro e o Banco Master para produção do filme <strong>"Dark Horse"</strong> — valor considerado desproporcional ao mercado</li>
+          <li>Investigação paralela sobre empréstimo de R$3,1M do BRB (Banco de Brasília) usado para compra de <strong>mansão</strong> por Flávio — suspeita de uso irregular de recursos</li>
+          <li>Promotores avaliam se houve favorecimento mútuo: Flávio teria ajudado o Master a obter condições favoráveis junto ao BCB</li>
+          <li>Flávio nega irregularidades; defende que contratos são legítimos</li>
+          <li><strong>Não há indiciamento formal até outubro de 2026</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title">📌 Contexto: Banco Master no Ecossistema Econômico</div>
+    <div class="card-body" style="columns:2;column-gap:24px">
+      <ul>
+        <li>Era o 5º maior banco privado do Brasil em captação de CDBs</li>
+        <li>Focava em captação de investidores de varejo com promessa de CDI + 2-3%</li>
+        <li>Modelo: captar barato e investir em ativos de risco (incluindo créditos podres de prefeituras)</li>
+        <li>Crise se tornou pública quando auditorias revelaram provisões insuficientes</li>
+        <li>FGC cobre até R$250k por CPF — investidores acima disso tiveram perdas</li>
+        <li>Caso levantou debate sobre regulação do BCB para bancos médios</li>
+      </ul>
+    </div>
+  </div>
+  <p class="source-note">Fontes: Banco Central (liquidação), Polícia Federal (Operação Compliance Zero — documentos públicos), O Globo, Folha de S.Paulo, Agência Pública.</p>
+</section>
+
+<!-- ══════════════════ TAXAÇÃO ══════════════════ -->
+<section class="section" id="taxacao">
+  <h2 class="section-title">Tributação: Carga, Reforma e Super-Ricos</h2>
+  <p class="section-sub">O Brasil tem uma das maiores cargas tributárias da América Latina — e um sistema historicamente regressivo, onde quem ganha menos paga proporcionalmente mais. A reforma tributária aprovada tenta corrigir distorções.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi warn">
+      <div class="kpi-label">Carga Tributária/PIB</div>
+      <div class="kpi-value">33,1%</div>
+      <div class="kpi-note">2023 — média OCDE: 34,0%</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label">Horas p/ cumprir obrigações</div>
+      <div class="kpi-value">1.958h</div>
+      <div class="kpi-note">por ano para empresas (Banco Mundial). Média OCDE: 158h</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">Isenção IRPF</div>
+      <div class="kpi-value">R$5.000</div>
+      <div class="kpi-note">por mês (isenta ~28 mi de trabalhadores)</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label">Super-ricos afetados</div>
+      <div class="kpi-value">141 mil</div>
+      <div class="kpi-note">~0,07% da população (renda &gt; R$50k/mês)</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">📊 Reforma Tributária (EC 132/2023)</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Aprovada:</strong> dezembro 2023 — maior reforma em 35 anos</li>
+          <li>Unificação de 5 tributos (PIS, COFINS, IPI, ICMS, ISS) em 2 novos: CBS (federal) + IBS (estados/municípios)</li>
+          <li>IVA dual previsto para funcionar em paralelo 2026–2033; transição completa até 2033</li>
+          <li>Objetivo: simplificação e uniformidade — fim das "guerras fiscais" entre estados</li>
+          <li>Crítica da direita: alíquota unificada pode ser elevada (~28%); riscos de encarecimento</li>
+          <li>Cashback de IVA para pobres: devolução parcial para famílias do Cadastro Único</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">💎 Taxação de Super-Ricos (Lula 2024)</div>
+      <div class="card-body">
+        <ul>
+          <li>Proposta: imposto mínimo de <strong>2,5%</strong> sobre renda anual acima de R$600k (~R$50k/mês)</li>
+          <li>Afeta apenas 0,07% da população brasileira (~141 mil pessoas)</li>
+          <li>Já aprovada em partes; versão global discutida no G20 (2024) por iniciativa do Brasil</li>
+          <li>Argumento: grandes fortunas brasileiras são majoritariamente em dividendos e lucros, <strong>isentos de IR</strong> — tributação efetiva dos mais ricos é menor que a da classe média</li>
+          <li><strong>Direita opõe:</strong> alegam que é "estatismo", afugenta capital e não é solução para gastos públicos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title">⚖️ Por que é difícil manter uma empresa no Brasil?</div>
+    <div class="card-body" style="columns: 2; column-gap: 24px">
+      <ul>
+        <li><strong>Custo tributário elevado:</strong> 1.958h/ano de compliance (vs 158h na OCDE)</li>
+        <li><strong>Juros altos:</strong> taxa média para PJ ~28% a.a. — capital de giro caro</li>
+        <li><strong>Informalidade compulsória:</strong> pequenas empresas fogem para MEI/Simples por sobrevivência</li>
+        <li><strong>Bets (2020–2026):</strong> capital de giro dos consumidores drenado para apostas — queda de rotatividade em setores populares</li>
+        <li><strong>Crise COVID:</strong> destruiu ~700 mil pequenas empresas (2020–2021)</li>
+        <li><strong>Reforma trabalhista (2017, Temer):</strong> criou precariedade, não emprego formal</li>
+        <li><strong>Pejotização:</strong> 30%+ dos trabalhadores formais são PJ — menos direitos, mais instabilidade</li>
+        <li><strong>Burocracia:</strong> abrir empresa: 12 dias em média (Brasil) vs 4 dias (OCDE)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="source-note">Fontes: Receita Federal (carga tributária), Banco Mundial (Doing Business / horas de compliance), Congresso Nacional (EC 132/2023), Ministério da Fazenda (taxação super-ricos), IBGE/PNAD (empregos e informalidade).</p>
+</section>
+
+<!-- ══════════════════ LATAM ══════════════════ -->
+<section class="section" id="latam">
+  <h2 class="section-title">A Direita na América Latina</h2>
+  <p class="section-sub">Desde 2019, uma onda de governos de direita e extrema-direita tomou o poder na América do Sul. Em 2026, 7 dos 12 países sul-americanos têm governos de direita ou centro-direita.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi warn">
+      <div class="kpi-label">Governos de direita/c-dir.</div>
+      <div class="kpi-value">7/12</div>
+      <div class="kpi-note">países sul-americanos em 2026</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-label">Argentina: inflação 2023</div>
+      <div class="kpi-value">211%</div>
+      <div class="kpi-note">ao ano — contexto da eleição de Milei</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label">Argentina: inflação 2025</div>
+      <div class="kpi-value">~38%</div>
+      <div class="kpi-note">queda após choque de austeridade</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>País</th>
+          <th>Governo (2026)</th>
+          <th>Partido / Orientação</th>
+          <th>Desde</th>
+          <th>Contexto / Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-gov">🇦🇷 Argentina</td>
+          <td class="td-main">Javier Milei</td>
+          <td><span class="badge badge-blue">Ultradireita libertária</span></td>
+          <td>Nov 2023</td>
+          <td>Choque de austeridade: corte de ministérios, dolarização parcial. Apoio explícito à "onda azul" no Brasil.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇨🇱 Chile</td>
+          <td class="td-main">Gabriel Boric</td>
+          <td><span class="badge badge-red">Centro-Esquerda</span></td>
+          <td>Mar 2022</td>
+          <td>Derrotou Kast (extrema direita) em 2021 em 2º turno apertado. Proposta de nova Constituição rejeitada (2022 e 2023).</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇨🇴 Colômbia</td>
+          <td class="td-main">Gustavo Petro</td>
+          <td><span class="badge badge-red">Esquerda</span></td>
+          <td>Ago 2022</td>
+          <td>Primeiro presidente de esquerda da história. Reforme agrária e de saúde com resistência do Congresso.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇵🇪 Peru</td>
+          <td class="td-main">Governo de transição</td>
+          <td><span class="badge badge-gray">Instabilidade</span></td>
+          <td>2022–2026</td>
+          <td>3 presidentes em 4 anos. Keiko Fujimori (direita) candidata frequente. Congresso conservador domina.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇺🇾 Uruguai</td>
+          <td class="td-main">Yamandú Orsi</td>
+          <td><span class="badge badge-red">Centro-Esquerda (FA)</span></td>
+          <td>Mar 2025</td>
+          <td>Frente Ampla retorna ao poder após 5 anos de Lacalle Pou (direita). Eleição apertada.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇻🇪 Venezuela</td>
+          <td class="td-main">Nicolás Maduro</td>
+          <td><span class="badge badge-red">Esquerda autocrática</span></td>
+          <td>2013</td>
+          <td>Eleição 2024 contestada. Oposição alega fraude; resultados não verificáveis. Isolamento crescente.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇧🇴 Bolívia</td>
+          <td class="td-main">Luis Arce (MAS)</td>
+          <td><span class="badge badge-red">Esquerda</span></td>
+          <td>Nov 2020</td>
+          <td>Tentativa de golpe frustrada (jun/2024). Disputas internas no MAS entre Arce e Morales.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇵🇾 Paraguai</td>
+          <td class="td-main">Santiago Peña</td>
+          <td><span class="badge badge-blue">Direita (ANR/Colorado)</span></td>
+          <td>Ago 2023</td>
+          <td>Partido Colorado governa o Paraguai há 75 anos (exceto 2008–2013). Relação estreita com agronegócio.</td>
+        </tr>
+        <tr>
+          <td class="td-gov">🇪🇨 Equador</td>
+          <td class="td-main">Daniel Noboa</td>
+          <td><span class="badge badge-blue">Direita</span></td>
+          <td>Nov 2023</td>
+          <td>Eleito com plataforma de combate ao crime organizado. "Estado de emergência" ampliado em 2024.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">🔥 Milei e a Argentina — O Caso de Estudo</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Contexto:</strong> Milei ganhou com inflação de 211% a.a. e pobreza de 45%</li>
+          <li><strong>Choque de austeridade:</strong> corte de 70%+ dos ministérios, eliminação de subsídios, desvalorização do peso</li>
+          <li><strong>Resultado 2025:</strong> inflação caiu para ~38% a.a. (queda real, mas ainda alta); pobreza subiu para ~50% antes de cair</li>
+          <li><strong>Apoio ao Brasil:</strong> Milei recebeu Flávio Bolsonaro, declarou publicamente apoio, convocou "onda azul" para o Brasil</li>
+          <li><strong>Modelo exportável?</strong> Economistas divergem: ajuste fiscal foi necessário, mas custo social foi alto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🌊 A "Onda" de Direita — Fatores Comuns</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Crise pós-pandemia:</strong> inflação e desemprego criaram insatisfação com governos estabelecidos</li>
+          <li><strong>Redes sociais:</strong> plataformas amplificaram narrativas antisistema</li>
+          <li><strong>Insegurança pública:</strong> em Peru, Equador e Argentina, crime organizado foi motor do voto de direita</li>
+          <li><strong>Crise da esquerda:</strong> Venezuela corroeu credibilidade dos governos progressistas</li>
+          <li><strong>Financiamento externo:</strong> think tanks liberais americanos financiaram movimentos de direita (documentado)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="source-note">Fontes: INDEC Argentina (inflação), CEPAL (pobreza), EIU (índice democrático), Reuters, AFP, BBC Brasil.</p>
+</section>
+
+<!-- ══════════════════ THEME BUTTON ══════════════════ -->
+<button class="theme-btn" id="themeBtn" title="Alternar tema" aria-label="Alternar entre modo claro e escuro">☀️</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+/* ═══════════ TAB NAVIGATION ═══════════ */
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) { sec.classList.add('active'); initChartsIfNeeded(id); }
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(t => { if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active'); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══════════ THEME TOGGLE ═══════════ */
+const themeBtn = document.getElementById('themeBtn');
+let isDark = false;
+try { isDark = localStorage.getItem('theme') === 'dark'; } catch(e) {}
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.textContent = isDark ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e) {}
+  // Update chart colors
+  if (window.chartInstances) Object.values(window.chartInstances).forEach(c => { if(c) { c.options.scales.x.ticks.color = isDark ? '#8fa8cb' : '#4a5772'; c.options.scales.y.ticks.color = isDark ? '#8fa8cb' : '#4a5772'; c.options.scales.x.grid.color = isDark ? '#1e3050' : '#e2e7f2'; c.options.scales.y.grid.color = isDark ? '#1e3050' : '#e2e7f2'; c.update(); }});
+}
+themeBtn.addEventListener('click', () => { isDark = !isDark; applyTheme(); });
+applyTheme();
+
+/* ═══════════ CHART.JS HELPERS ═══════════ */
+window.chartInstances = {};
+const chartsInit = {};
+
+function getColor(isDk) {
+  return { fg: isDk ? '#8fa8cb' : '#4a5772', grid: isDk ? '#1e3050' : '#e2e7f2' };
+}
+
+function defaultOptions(title) {
+  const dk = isDark;
+  const c = getColor(dk);
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+    scales: {
+      x: { ticks: { color: c.fg, font: { size: 11 } }, grid: { color: c.grid } },
+      y: { ticks: { color: c.fg, font: { size: 11 } }, grid: { color: c.grid } }
+    }
+  };
+}
+
+function initChartsIfNeeded(tabId) {
+  if (tabId === 'economia' && !chartsInit['economia']) {
+    chartsInit['economia'] = true;
+    initEconomiaCharts();
+  }
+}
+
+// Init economia charts on first load since it's default tab? No, panorama is. Let's init on tab click.
+// Actually, also init violence chart.
+
+function initEconomiaCharts() {
+  const dk = isDark;
+  const c = getColor(dk);
+  const opts = () => ({
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+    scales: { x: { ticks: { color: c.fg, font:{size:11} }, grid: { color: c.grid } },
+              y: { ticks: { color: c.fg, font:{size:11} }, grid: { color: c.grid } } }
+  });
+
+  const years = ['2018','2019','2020','2021','2022','2023','2024','2025e'];
+  const gdp = [1.8, 1.2, -3.9, 5.0, 2.9, 2.9, 3.4, 3.2];
+  const unemp = [12.3, 11.9, 13.8, 13.2, 9.3, 7.8, 6.2, 6.0];
+  const wage = [954, 998, 1045, 1100, 1212, 1320, 1412, 1518];
+  const selic = [6.5, 4.5, 2.0, 9.25, 13.75, 11.75, 11.25, 13.75];
+
+  const gdpColors = gdp.map(v => v < 0 ? 'rgba(220,38,38,0.8)' : 'rgba(21,73,201,0.8)');
+  const unempColors = unemp.map((_, i) => i < 4 ? 'rgba(220,38,38,0.7)' : 'rgba(5,150,105,0.7)');
+
+  window.chartInstances.gdp = new Chart(document.getElementById('chartGDP'), {
+    type: 'bar',
+    data: { labels: years, datasets: [{ data: gdp, backgroundColor: gdpColors, borderRadius: 4, borderSkipped: false }] },
+    options: { ...opts(), plugins: { ...opts().plugins, tooltip: { callbacks: { label: ctx => `${ctx.raw > 0 ? '+' : ''}${ctx.raw}%` } } } }
+  });
+
+  window.chartInstances.unemp = new Chart(document.getElementById('chartUnemp'), {
+    type: 'line',
+    data: { labels: years, datasets: [{ data: unemp, borderColor: 'rgba(220,38,38,0.9)', backgroundColor: 'rgba(220,38,38,0.1)', fill: true, tension: 0.3, pointBackgroundColor: unempColors, pointRadius: 5 }] },
+    options: { ...opts(), plugins: { ...opts().plugins, tooltip: { callbacks: { label: ctx => `${ctx.raw}%` } } } }
+  });
+
+  window.chartInstances.wage = new Chart(document.getElementById('chartWage'), {
+    type: 'line',
+    data: { labels: years, datasets: [{ data: wage, borderColor: 'rgba(5,150,105,0.9)', backgroundColor: 'rgba(5,150,105,0.1)', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { ...opts(), plugins: { ...opts().plugins, tooltip: { callbacks: { label: ctx => `R$ ${ctx.raw}` } } } }
+  });
+
+  window.chartInstances.selic = new Chart(document.getElementById('chartSelic'), {
+    type: 'line',
+    data: { labels: years, datasets: [{ data: selic, borderColor: 'rgba(217,119,6,0.9)', backgroundColor: 'rgba(217,119,6,0.1)', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { ...opts(), plugins: { ...opts().plugins, tooltip: { callbacks: { label: ctx => `${ctx.raw}% a.a.` } } } }
+  });
+}
+
+/* ═══════════ VIOLENCE STATE CHART ═══════════ */
+const violData = [
+  { uf:'AP', name:'Amapá',            rate:45.1, party:'Rede',          orient:'esq',  govName:'Clécio Luis' },
+  { uf:'BA', name:'Bahia',            rate:40.6, party:'PT',            orient:'esq',  govName:'Jerônimo Rodrigues' },
+  { uf:'CE', name:'Ceará',            rate:37.5, party:'PT',            orient:'esq',  govName:'Elmano de Freitas' },
+  { uf:'PE', name:'Pernambuco',       rate:36.2, party:'PSDB',          orient:'cdir', govName:'Raquel Lyra' },
+  { uf:'AL', name:'Alagoas',          rate:35.4, party:'MDB',           orient:'ctr',  govName:'Paulo Dantas' },
+  { uf:'MA', name:'Maranhão',         rate:30.4, party:'PDT',           orient:'cesq', govName:'Carlos Brandão' },
+  { uf:'MT', name:'Mato Grosso',      rate:29.8, party:'União',         orient:'dir',  govName:'Mauro Mendes' },
+  { uf:'PA', name:'Pará',             rate:29.5, party:'MDB',           orient:'ctr',  govName:'Helder Barbalho' },
+  { uf:'AM', name:'Amazonas',         rate:27.4, party:'União',         orient:'dir',  govName:'Wilson Lima' },
+  { uf:'RO', name:'Rondônia',         rate:26.1, party:'União',         orient:'dir',  govName:'Marcos Rocha' },
+  { uf:'PB', name:'Paraíba',          rate:25.6, party:'PSB',           orient:'cesq', govName:'João Azevêdo' },
+  { uf:'RN', name:'Rio Gde Norte',    rate:24.2, party:'PT',            orient:'esq',  govName:'Fátima Bezerra' },
+  { uf:'ES', name:'Espírito Santo',   rate:23.9, party:'PSB',           orient:'cesq', govName:'Casagrande' },
+  { uf:'SE', name:'Sergipe',          rate:22.8, party:'PSD',           orient:'cdir', govName:'Mitidieri' },
+  { uf:'RJ', name:'Rio de Janeiro',   rate:22.1, party:'PL',            orient:'dir',  govName:'Cláudio Castro' },
+  { uf:'AC', name:'Acre',             rate:20.3, party:'PP',            orient:'dir',  govName:'Gladson Cameli' },
+  { uf:'PI', name:'Piauí',            rate:20.3, party:'PT',            orient:'esq',  govName:'Rafael Fonteles' },
+  { uf:'TO', name:'Tocantins',        rate:19.8, party:'PL',            orient:'dir',  govName:'W. Barbosa' },
+  { uf:'GO', name:'Goiás',            rate:18.8, party:'União',         orient:'dir',  govName:'Ronaldo Caiado' },
+  { uf:'MS', name:'Mato Grosso do S.', rate:18.7, party:'PSDB',        orient:'cdir', govName:'Eduardo Riedel' },
+  { uf:'RR', name:'Roraima',          rate:18.6, party:'PP',            orient:'dir',  govName:'A. Denarium' },
+  { uf:'PR', name:'Paraná',           rate:18.4, party:'PSD',           orient:'cdir', govName:'Ratinho Jr' },
+  { uf:'MG', name:'Minas Gerais',     rate:15.1, party:'Novo',          orient:'dir',  govName:'Romeu Zema' },
+  { uf:'RS', name:'Rio Gde do Sul',   rate:15.0, party:'PSDB',          orient:'cdir', govName:'Eduardo Leite' },
+  { uf:'DF', name:'Distrito Federal', rate:8.9,  party:'MDB',           orient:'ctr',  govName:'Ibaneis Rocha' },
+  { uf:'SC', name:'Santa Catarina',   rate:8.5,  party:'PL',            orient:'dir',  govName:'Jorginho Mello' },
+  { uf:'SP', name:'São Paulo',        rate:8.2,  party:'PL',            orient:'dir',  govName:'Tarcísio de Freitas' }
+];
+
+const orientColor = {
+  'esq':  { fill:'#dc2626', label:'Esquerda (PT/Rede)' },
+  'cesq': { fill:'#f97316', label:'Centro-Esq. (PSB/PDT)' },
+  'ctr':  { fill:'#6b7280', label:'Centro (MDB/PSD)' },
+  'cdir': { fill:'#2563eb', label:'Centro-Dir. (PSDB/PSD)' },
+  'dir':  { fill:'#1d4ed8', label:'Direita (PL/União/PP/Novo)' }
+};
+
+function buildViolChart() {
+  const container = document.getElementById('violStateChart');
+  if (!container || container.dataset.built) return;
+  container.dataset.built = '1';
+
+  const maxRate = 48;
+  const national = 20.8;
+  const html = violData.map(d => {
+    const pct = (d.rate / maxRate * 100).toFixed(1);
+    const col = orientColor[d.orient].fill;
+    const isAbove = d.rate > national;
+    return `<div class="viol-state-bar">
+      <span class="viol-state-name">${d.uf}</span>
+      <span class="viol-state-fullname">${d.name}</span>
+      <div class="viol-bar-track">
+        <div class="viol-bar-fill" style="width:${pct}%;background:${col}" title="${d.name}: ${d.rate}/100k — ${d.party} (${d.govName})">${d.rate}</div>
+        ${isAbove ? '' : ''}
+      </div>
+      <span class="viol-rate">${d.rate}</span>
+      <span class="viol-party">${d.party} · ${d.orient === 'esq' || d.orient === 'cesq' ? 'Esq' : d.orient === 'ctr' ? 'Centro' : 'Dir'}</span>
+    </div>`;
+  }).join('');
+
+  // Legend
+  const legend = Object.values(orientColor).map(o =>
+    `<span style="display:inline-flex;align-items:center;gap:5px;margin:3px 8px 3px 0;font-size:.72rem;color:var(--fg2)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${o.fill};flex-shrink:0"></span>${o.label}</span>`
+  ).join('');
+
+  container.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:12px">${legend}</div>
+    <div style="position:relative">
+      ${html}
+      <div style="position:absolute;bottom:0;top:0;left:calc(28px + 130px + 8px + 8px + ${(national/maxRate*100).toFixed(1)}%);width:1px;background:var(--yellow);opacity:.8" title="Média nacional: ${national}"></div>
+    </div>
+    <p style="font-size:.7rem;color:var(--fg3);margin-top:6px">Linha amarela = média nacional (20,8/100k). Fonte: FBSP Anuário 2025 / Atlas da Violência IPEA</p>
+  `;
+}
+
+// Override showTab to also build violence chart
+const origShowTab = showTab;
+// Intercept violence tab
+document.querySelectorAll('.nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const match = btn.getAttribute('onclick').match(/showTab\('(.+)'\)/);
+    if (match && match[1] === 'violencia') {
+      setTimeout(buildViolChart, 50);
+    }
+    if (match && match[1] === 'economia') {
+      setTimeout(() => { if(!chartsInit['economia']) { chartsInit['economia'] = true; initEconomiaCharts(); } }, 50);
+    }
+  });
+});
+
+// Build chart if already on violencia tab (won't happen by default, but good practice)
+if (document.getElementById('violencia').classList.contains('active')) buildViolChart();
+</script>
+
+</body></html>
