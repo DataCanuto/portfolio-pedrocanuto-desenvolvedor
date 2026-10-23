@@ -43,7 +43,6 @@ export const transicaoCarreiraCulturaEconomia: Project = {
   milestones: [{ date: '2026-10', label: 'Primeira versão do dashboard (pesquisa em fontes oficiais)' }],
   icon: '🎸',
   reviewNotes: [
-    'Conflito de datas: o perfil registra "bandas desde 2016" (experiences.ts e profile.ts); nesta pesquisa Pedro diz que atuava como músico em bandas desde 2011. Não unificado até Pedro confirmar.',
     'Período em que Pedro participou da Lei Paulo Gustavo (2023 ou 2024) não registrado.',
     'Captação da Rouanet 2010–2020 é aproximada (derivada da fatia de pessoas físicas publicada pelo Itaú Cultural); 2021–2022 não registrados.',
     'Série anual de gasto federal executado em educação, renda de músicos (PNAD por ocupação) e editais estaduais/municipais por ano ainda não pesquisados.',

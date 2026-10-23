@@ -7,12 +7,13 @@ export const experiences: Experience[] = [
     role: 'Empreendedor / Educador Musical',
     organization: 'Atuação autônoma',
     type: 'autonomo',
-    // Linha do tempo informada pelo Pedro (out/2026): bandas desde 2016, aulas infantis desde
-    // 2018, empreendimentos musicais desde 2020.
-    start: '2016',
+    // Linha do tempo informada pelo Pedro (out/2026): bandas desde 2011 (com renda desde o início),
+    // estágio em musicalização infantil em 2016, aulas infantis desde 2018, empreendimentos
+    // musicais desde 2020. Corrigido em 23/10/2026: antes registrava bandas desde 2016.
+    start: '2011',
     location: 'Salvador/BA',
     highlights: [
-      'Atuação com bandas desde 2016, aulas de música para crianças desde 2018 e empreendimentos musicais desde 2020.',
+      'Atuação remunerada com bandas desde 2011, estágio em musicalização infantil em 2016, aulas de música para crianças desde 2018 e empreendimentos musicais desde 2020.',
       'Geri negócio próprio de educação musical e prestação de serviços em eventos, respondendo por planejamento financeiro, atendimento a clientes e operação de ponta a ponta.',
       'Desenvolvi visão de negócio aplicada hoje ao software: identificar o problema do usuário antes de propor a solução técnica.',
     ],
