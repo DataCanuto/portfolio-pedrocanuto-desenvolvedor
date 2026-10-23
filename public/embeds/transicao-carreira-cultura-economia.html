@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Da Música ao Código</title>
+<meta name="description" content="Pesquisa pessoal de Pedro Canuto: cultura, política e economia no Brasil de 2011 a 2026, com fontes oficiais, para explicar a transição de carreira da música para o desenvolvimento de software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  /* Paleta do portfólio (tailwind.config.js): dark.bg, dark.bg-secondary, dark.border, accent.orange */
+  color-scheme: dark;
+  --bg: #0F172A;
+  --card: #1E293B;
+  --fg: #F1F5F9;
+  --fg2: #CBD5E1;
+  --fg3: #94A3B8;
+  --border: #334155;
+  --grid: #273449;
+  --accent: #FF8C00;
+  --accent-soft: rgba(255,140,0,.15);
+  --series: #FF8C00;      /* série principal */
+  --series2: #FFA500;
+  --muted-bar: #64748B;
+  --band-a: rgba(148,163,184,.08);
+  --band-b: rgba(255,140,0,.08);
+  --warn-bg: rgba(255,165,0,.12);
+  --warn-fg: #FFD08A;
+  --r: 12px;
+  --font: 'Inter', 'Segoe UI', sans-serif;
+}
+*,*::before,*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.6 var(--font); }
+a { color: var(--accent); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+header.hero { padding: 40px 0 24px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; margin: 8px 0 12px; }
+h2 { font-size: 24px; margin: 0 0 6px; }
+h3 { font-size: 16px; margin: 0 0 4px; }
+.lede { color: var(--fg2); max-width: 760px; font-size: 16px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--border); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+nav.toc a { flex: none; text-decoration: none; color: var(--fg2); font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--card); }
+nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+section { padding: 36px 0 8px; }
+.sub { color: var(--fg2); margin: 0 0 18px; max-width: 780px; }
+.grid { display: grid; gap: 16px; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; min-width: 0; }
+.kpi .v { font-size: 30px; font-weight: 700; line-height: 1.1; margin: 4px 0; font-variant-numeric: tabular-nums; }
+.kpi .l { color: var(--fg2); font-size: 13px; }
+.kpi .s { color: var(--fg3); font-size: 12px; margin-top: 6px; }
+.chart { position: relative; height: 300px; margin-top: 8px; }
+.note { font-size: 12.5px; color: var(--fg3); margin-top: 10px; }
+.note b { color: var(--fg2); }
+.src { font-size: 12px; color: var(--fg3); margin-top: 8px; }
+.src a { color: var(--fg2); }
+details { margin-top: 10px; font-size: 13px; }
+summary { cursor: pointer; color: var(--fg2); font-weight: 500; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 13px; }
+th { color: var(--fg2); font-weight: 600; }
+.legend-bands { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--fg2); margin-top: 6px; }
+.legend-bands span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--border); }
+.legend-bands .a::before { background: var(--band-a); }
+.legend-bands .b::before { background: var(--band-b); }
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--border); }
+.timeline li { position: relative; padding: 0 0 16px 20px; }
+.timeline li::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2px solid var(--fg3); }
+.timeline li.key::before { border-color: var(--accent); background: var(--accent); }
+.timeline .d { font-size: 12px; font-weight: 600; color: var(--accent); }
+.timeline .t { font-weight: 600; }
+.timeline .x { color: var(--fg2); font-size: 14px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px; }
+.warn { background: var(--warn-bg); color: var(--warn-fg); border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-top: 12px; }
+.read { display: grid; gap: 12px; }
+.read .card h3 { display: flex; gap: 8px; align-items: baseline; }
+.ok { color: #4ADE80; } .mid { color: #FFA500; } .no { color: #F87171; }
+footer { padding: 32px 0 48px; color: var(--fg3); font-size: 13px; }
+@media (max-width: 520px) { .chart { height: 260px; } .kpi .v { font-size: 26px; } }
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="eyebrow">Pesquisa pessoal · Pedro Canuto · out/2026</div>
+  <h1>Da música ao código: cultura, política e economia no Brasil (2011–2026)</h1>
+  <p class="lede">Toco em bandas desde 2011 e, desde então, ganho dinheiro com música. Entre 2014 e 2016 também investi em editais. Hoje estudo desenvolvimento de sistemas. Este painel reúne dados públicos para entender o que mudou no financiamento da cultura, na política e na economia nesse período, e separa o que os números confirmam do que eles não conseguem medir.</p>
+</header>
+
+<nav class="toc" aria-label="Seções">
+  <div class="wrap">
+    <a href="#trajetoria">Trajetória</a>
+    <a href="#rouanet">Lei Rouanet</a>
+    <a href="#orcamento">Orçamento da cultura</a>
+    <a href="#politica">Linha do tempo política</a>
+    <a href="#economia">Economia</a>
+    <a href="#saude">Saúde e educação</a>
+    <a href="#tributos">Tributação</a>
+    <a href="#leitura">Leitura dos dados</a>
+    <a href="#fontes">Fontes</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- KPIs -->
+<section aria-label="Resumo">
+  <div class="grid g4">
+    <div class="card kpi">
+      <div class="l">Captação da Lei Rouanet, 2011 → 2016</div>
+      <div class="v">−39%</div>
+      <div class="s">Em valores corrigidos pelo IPCA. De ≈R$ 2,13 bi para ≈R$ 1,31 bi.</div>
+    </div>
+    <div class="card kpi">
+      <div class="l">Gasto federal com cultura, 2013 → 2023</div>
+      <div class="v">≈ −56%</div>
+      <div class="s">Em termos reais. Nominal: R$ 923,5 mi → R$ 856,1 mi, com IPCA de ~109% no período.</div>
+    </div>
+    <div class="card kpi">
+      <div class="l">PIB em 2015 e 2016</div>
+      <div class="v">−3,5% e −3,3%</div>
+      <div class="s">A recessão começou antes do impeachment e atravessou a troca de governo.</div>
+    </div>
+    <div class="card kpi">
+      <div class="l">Isenção do IR em salários mínimos</div>
+      <div class="v">1,57 → 3,08</div>
+      <div class="s">R$ 1.903,98 congelado de 2015 a 2022 (1,57 SM em 2022); R$ 5.000 em 2026 (3,08 SM).</div>
+    </div>
+  </div>
+</section>
+
+<!-- Trajetória -->
+<section id="trajetoria">
+  <h2>Minha trajetória</h2>
+  <p class="sub">A linha pessoal que este painel tenta explicar. As datas vêm do que registrei no portfólio.</p>
+  <div class="grid g2">
+    <div class="card">
+      <ul class="timeline">
+        <li class="key"><div class="d">2011</div><div class="t">Músico em bandas</div><div class="x">Começo a tocar e a ganhar dinheiro com música.</div></li>
+        <li><div class="d">2014–2019</div><div class="t">Bacharelado Interdisciplinar em Artes (UFBA)</div><div class="x">Ênfase em música popular.</div></li>
+        <li class="key"><div class="d">2014–2016</div><div class="t">Investimento em editais e projetos culturais</div><div class="x">Começa com a entrada no BI. Período em que via colegas movimentando muito recurso com editais.</div></li>
+        <li><div class="d">2016</div><div class="t">Estágio em musicalização infantil</div></li>
+        <li><div class="d">2018 e 2020</div><div class="t">Aulas de música para crianças e negócio próprio</div><div class="x">Educação musical e eventos.</div></li>
+        <li><div class="d">2020–2022</div><div class="t">Pós-graduação em Musicoterapia (Faculdade Alpha)</div></li>
+        <li class="key"><div class="d">2023–2024</div><div class="t">Último edital: Lei Paulo Gustavo</div></li>
+        <li class="key"><div class="d">2025</div><div class="t">Técnico em Desenvolvimento de Sistemas (SENAI CIMATEC)</div></li>
+        <li><div class="d">2026</div><div class="t">Engenharia de Software (Estácio)</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A pergunta deste painel</h3>
+      <p class="x" style="color:var(--fg2)">Em 2011–2016 parecia possível viver de arte no Brasil, comprar um carro, pensar em um imóvel. Hoje parece muito mais difícil. O que mudou de fato: o dinheiro disponível para a cultura, a estrutura política que o administra, ou a economia como um todo?</p>
+      <p class="x" style="color:var(--fg2)">Para responder, o painel olha quatro camadas: <b>financiamento da cultura</b> (Rouanet, orçamento, leis emergenciais), <b>política</b> (impeachment, extinção e recriação do Ministério da Cultura, teto de gastos), <b>economia</b> (PIB, desemprego, juros, salário mínimo) e <b>tributação</b> (isenção do IR e imposto mínimo sobre altas rendas).</p>
+    </div>
+  </div>
+</section>
+
+<!-- Rouanet -->
+<section id="rouanet">
+  <h2>Lei Rouanet: o auge foi em 2011</h2>
+  <p class="sub">A Rouanet não é um edital: é renúncia fiscal, em que empresas e pessoas patrocinam projetos aprovados e abatem do imposto. Mesmo assim, é o maior termômetro do dinheiro que circula na cultura. Em valores reais, a captação caiu ano a ano de 2011 a 2016, ficou estável até 2018 e só voltou a crescer de forma consistente a partir de 2023.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Captação anual, 2010–2020 (R$ bilhões, corrigido pelo IPCA)</h3>
+      <div class="chart"><canvas id="cRouanetReal" role="img" aria-label="Captação da Lei Rouanet de 2010 a 2020 corrigida pelo IPCA, com pico em 2011 e queda até 2016"></canvas></div>
+      <div class="legend-bands"><span class="a">Governo Dilma (até mai/2016)</span><span class="b">Governos Temer e Bolsonaro</span></div>
+      <p class="note"><b>Como o número foi obtido:</b> o Observatório Itaú Cultural publica, para cada ano, o valor captado de pessoas físicas e a fatia que ele representa do total. O total foi calculado a partir desses dois números, por isso é aproximado (±1%). O ano-base da correção não é informado pela fonte.</p>
+      <details><summary>Ver tabela</summary><table id="tRouanetReal"></table></details>
+      <p class="src">Fonte: Observatório Itaú Cultural, <a href="https://paineldedados.i-nove.org/publicacoes/boletins/analise-da-lei-federal-de-incentivo-a-cultura-2010-2020" target="_blank" rel="noopener">Análise da Lei Federal de Incentivo à Cultura 2010–2020</a> (mar/2021), dados do SalicNet/MinC.</p>
+    </div>
+    <div class="card">
+      <h3>Captação anual, 2023–2025 (R$ bilhões, valores nominais)</h3>
+      <div class="chart"><canvas id="cRouanetNom" role="img" aria-label="Captação nominal da Lei Rouanet: 2,35 bilhões em 2023, 3,04 em 2024 e 3,41 em 2025"></canvas></div>
+      <p class="note"><b>Atenção à comparação:</b> estes valores são nominais e não podem ser colocados no mesmo eixo do gráfico ao lado. Corrigido pela inflação, o Poder360 calculou o gasto com a renúncia em <b>R$ 2,8 bi em 2011</b> e <b>R$ 3,1 bi em 2024</b>: só em 2024 o volume real superou o de 2011. A FGV descreve 2024 como "o primeiro aumento real desde 2011".</p>
+      <p class="note"><b>2021 e 2022:</b> informação não registrada nesta pesquisa (a fonte cita R$ 7,3 bi somados em 2019–2022, sem valores por ano).</p>
+      <details><summary>Ver tabela</summary><table id="tRouanetNom"></table></details>
+      <p class="src">Fontes: Ministério da Cultura/Salic, via <a href="https://www.brasilparalelo.com.br/noticias/lei-rouanet-bate-recorde-e-capta-quase-r-3-5-bilhoes-em-2025" target="_blank" rel="noopener">Brasil Paralelo (jan/2026)</a> e <a href="https://spdiario.com.br/noticias/politica/lei-rouanet-capta-r-88-bilhoes-em-tres-anos-do-governo-lula.html" target="_blank" rel="noopener">Diário de SP (out/2026)</a>; <a href="https://www.poder360.com.br/poder-governo/saiba-em-graficos-como-e-gasto-o-dinheiro-da-lei-rouanet/" target="_blank" rel="noopener">Poder360 (jun/2025)</a>; <a href="https://static.poder360.com.br/2026/01/PESQUISA-ROUANET-fgv-1.pdf" target="_blank" rel="noopener">FGV/MinC, estudo de impacto 2024</a>.</p>
+    </div>
+  </div>
+  <div class="grid g4" style="margin-top:16px">
+    <div class="card kpi"><div class="l">Fatia dos 5 maiores patrocinadores, 2011</div><div class="v">39%</div><div class="s">Caiu para 15% em 2018 e voltou a 24–27% em 2019–2020.</div></div>
+    <div class="card kpi"><div class="l">Propostas apresentadas</div><div class="v">5,3 mil → 14 mil</div><div class="s">2018 → 2024 (+164%), segundo a FGV. Mais gente disputando o recurso.</div></div>
+    <div class="card kpi"><div class="l">Proponentes com captação em 2024</div><div class="v">3.135</div><div class="s">4.939 projetos executados com pagamentos (FGV/Salic).</div></div>
+    <div class="card kpi"><div class="l">Recurso próprio das empresas</div><div class="v">70% → 4%</div><div class="s">1993 → 2015. Quase todo patrocínio virou dinheiro de imposto (MinC, CPI da Lei Rouanet, 2016).</div></div>
+  </div>
+</section>
+
+<!-- Orçamento -->
+<section id="orcamento">
+  <h2>Orçamento público da cultura</h2>
+  <p class="sub">Além da Rouanet, a cultura depende do orçamento direto (Funarte, Fundo Nacional de Cultura, editais federais) e, desde 2020, de leis de repasse a estados e municípios, que são a origem da maioria dos editais locais.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Participação da cultura no gasto público total (3 esferas, %)</h3>
+      <div class="chart"><canvas id="cShare" role="img" aria-label="Participação da cultura no gasto público: 0,40% em 2013, 0,27% em 2021, 0,31% em 2022 e 0,38% em 2023"></canvas></div>
+      <p class="note">O IBGE informa os pontos de 2013, 2021 (mínimo da série), 2022 e 2023. Os anos intermediários não foram registrados nesta pesquisa. Na esfera federal, a fatia caiu de 0,09% (2013) para 0,04% (2023).</p>
+      <details><summary>Ver tabela</summary><table id="tShare"></table></details>
+      <p class="src">Fonte: IBGE, <a href="https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/45464-participacao-da-despesa-com-cultura-nos-gastos-publicos-cresce-em-2023-frente-a-2022" target="_blank" rel="noopener">Sistema de Informações e Indicadores Culturais (dez/2025)</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Gasto com cultura por esfera, 2013 × 2023 (R$ bilhões, nominal)</h3>
+      <div class="chart"><canvas id="cEsferas" role="img" aria-label="Gasto com cultura em 2013 e 2023: federal caiu de 0,92 para 0,86 bilhão; estadual subiu de 3,1 para 5,7; municipal de cerca de 4,5 para 12,3"></canvas></div>
+      <p class="note">O IPCA acumulou ~109% entre 2013 e 2023. O gasto <b>federal</b> caiu 7,3% em valores nominais, o que equivale a cerca de <b>−56% em termos reais</b> (cálculo desta pesquisa). Estados e municípios cresceram acima da inflação. O valor municipal de 2013 (≈R$ 4,5 bi) é derivado do total e das demais esferas.</p>
+      <details><summary>Ver tabela</summary><table id="tEsferas"></table></details>
+      <p class="src">Fonte: IBGE, SIIC (dez/2025).</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Leis de repasse para estados e municípios</h3>
+    <table>
+      <thead><tr><th>Lei</th><th>Ano</th><th>Valor</th><th>O que aconteceu</th></tr></thead>
+      <tbody>
+        <tr><td>Lei Aldir Blanc (Lei 14.017)</td><td>2020</td><td>R$ 3 bi</td><td>Auxílio emergencial à cultura na pandemia.</td></tr>
+        <tr><td>Lei Paulo Gustavo (LC 195)</td><td>2022 → 2023</td><td>R$ 3,86 bi</td><td>Vetada integralmente por Bolsonaro; veto derrubado e lei promulgada em jul/2022. A MP 1.135 (ago/2022) adiou os repasses. Recursos transferidos em jul–ago/2023.</td></tr>
+        <tr><td>Política Nacional Aldir Blanc (Lei 14.399)</td><td>2022 → 2023 em diante</td><td>R$ 3 bi por ano, por 5 anos</td><td>Mesmo caminho: veto integral derrubado em jul/2022. Repasse de R$ 3,0 bi em 2023.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Ordem de grandeza: uma única lei de repasse (R$ 3–3,9 bi) supera em mais de três vezes o gasto federal direto com cultura de 2023 (R$ 0,86 bi).</p>
+    <p class="src">Fontes: <a href="https://www.camara.leg.br/noticias/931577-na-area-da-cultura-aprovacao-da-lei-aldir-blanc-2-foi-destaque-em-2022" target="_blank" rel="noopener">Agência Câmara</a>; <a href="https://jcconcursos.com.br/noticia/brasil/leis-paulo-gustavo-e-aldir-blanc-2-bolsonaro-adia-repasse-de-recursos-saiba-detalhes-100125" target="_blank" rel="noopener">JC Concursos (MP 1.135/2022)</a>; IBGE, SIIC (repasses de 2023).</p>
+  </div>
+</section>
+
+<!-- Política -->
+<section id="politica">
+  <h2>Linha do tempo política da cultura</h2>
+  <p class="sub">Em sete anos, o Ministério da Cultura foi extinto duas vezes e recriado duas vezes.</p>
+  <div class="card">
+    <ul class="timeline">
+      <li><div class="d">jan/2011</div><div class="t">Dilma Rousseff toma posse</div><div class="x">Ano de maior captação real da Rouanet na série 2010–2020.</div></li>
+      <li><div class="d">2015</div><div class="t">Recessão</div><div class="x">PIB −3,5%. A captação da Rouanet cai 17% em termos reais frente a 2014.</div></li>
+      <li><div class="d">2 dez 2015</div><div class="t">Eduardo Cunha aceita o pedido de impeachment</div></li>
+      <li><div class="d">17 abr 2016</div><div class="t">Câmara aprova a abertura do processo (367 × 137)</div></li>
+      <li class="key"><div class="d">12 mai 2016</div><div class="t">Dilma é afastada; Temer assume e extingue o MinC (MP 726)</div><div class="x">A cultura é fundida ao Ministério da Educação.</div></li>
+      <li><div class="d">23 mai 2016</div><div class="t">MinC é recriado (MP 728), após protestos e ocupações</div></li>
+      <li class="key"><div class="d">31 ago 2016</div><div class="t">Senado aprova o impeachment (61 × 20)</div><div class="x">Acusação: crime de responsabilidade por pedaladas fiscais e créditos suplementares sem autorização do Congresso. Dilma mantém os direitos políticos.</div></li>
+      <li class="key"><div class="d">dez/2016</div><div class="t">EC 95: teto de gastos</div><div class="x">Despesas federais limitadas à inflação do ano anterior por 20 anos, inclusive os pisos de saúde e educação.</div></li>
+      <li class="key"><div class="d">2 jan 2019</div><div class="t">Bolsonaro extingue o MinC (Decreto 9.674)</div><div class="x">Vira Secretaria Especial da Cultura, no Ministério da Cidadania.</div></li>
+      <li><div class="d">6 nov 2019</div><div class="t">Secretaria transferida para o Ministério do Turismo (Decreto 10.107)</div></li>
+      <li><div class="d">jun/2020</div><div class="t">Lei Aldir Blanc: R$ 3 bi emergenciais na pandemia</div></li>
+      <li><div class="d">jul–ago/2022</div><div class="t">Vetos às leis Paulo Gustavo e Aldir Blanc 2 derrubados; MP 1.135 adia repasses</div></li>
+      <li class="key"><div class="d">jan/2023</div><div class="t">Lula recria o MinC</div><div class="x">Repasses da Lei Paulo Gustavo saem em jul–ago/2023. O arcabouço fiscal substitui o teto de gastos no mesmo ano.</div></li>
+      <li><div class="d">2024–2025</div><div class="t">Rouanet bate recordes nominais: R$ 3,04 bi e R$ 3,41 bi</div></li>
+    </ul>
+    <p class="src">Fontes: <a href="https://www.todamateria.com.br/impeachment-de-dilma-rousseff/" target="_blank" rel="noopener">cronologia do impeachment</a>; <a href="https://www12.senado.leg.br/publicacoes/estudos-legislativos/tipos-de-estudos/sumarios-de-proposicoes/mpv728" target="_blank" rel="noopener">Senado, sumário da MP 728/2016</a>; <a href="https://www.politize.com.br/secretaria-da-cultura/" target="_blank" rel="noopener">Politize (Decretos 9.674 e 10.107/2019)</a>; <a href="https://www.cnnbrasil.com.br/economia/com-fim-do-teto-de-gasto-orcamento-da-educacao-cresce-8-e-da-saude-30-em-2024/" target="_blank" rel="noopener">CNN Brasil (EC 95 e arcabouço)</a>.</p>
+  </div>
+</section>
+
+<!-- Economia -->
+<section id="economia">
+  <h2>Economia: a crise veio antes, a recuperação veio depois</h2>
+  <p class="sub">As faixas de fundo marcam os governos. Elas ajudam a localizar os anos, mas não provam causa: a recessão de 2015–2016 e a pandemia de 2020 pesam mais que qualquer troca de governo isolada.</p>
+  <div class="legend-bands" style="margin:-8px 0 12px"><span class="a">Dilma (2011–2015)</span><span class="b">Temer (2016–2018)</span><span class="a">Bolsonaro (2019–2022)</span><span class="b">Lula (2023–2025)</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Crescimento do PIB (% ao ano)</h3>
+      <div class="chart"><canvas id="cPib" role="img" aria-label="Crescimento anual do PIB de 2011 a 2025"></canvas></div>
+      <details><summary>Ver tabela</summary><table id="tPib"></table></details>
+      <p class="src">Fonte: IBGE, <a href="https://anuario.ibge.gov.br/images/aeb/2024/s7/2_pdf/s7t5103.pdf" target="_blank" rel="noopener">Anuário Estatístico 2024, tabela 7.5.1.3</a> (2022–2024 preliminares); 2025: IBGE via <a href="https://www.poder360.com.br/poder-economia/pib-do-brasil-cresce-23-em-2025/" target="_blank" rel="noopener">Poder360 (mar/2026)</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Desemprego no 4º trimestre (%)</h3>
+      <div class="chart"><canvas id="cDes" role="img" aria-label="Taxa de desocupação no quarto trimestre de 2012 a 2025, com pico de 14,2% em 2020 e mínima de 5,1% em 2025"></canvas></div>
+      <details><summary>Ver tabela</summary><table id="tDes"></table></details>
+      <p class="src">Fonte: IBGE, PNAD Contínua, tabela compilada pela <a href="https://abimaq.org.br//wp-content/uploads/2026/02/2026020773606001770054082.pdf" target="_blank" rel="noopener">ABIMAQ (fev/2026)</a>. Média anual de 2025: 5,6%, a menor da série (IBGE, jan/2026).</p>
+    </div>
+    <div class="card">
+      <h3>Taxa Selic no fim de cada ano (% ao ano)</h3>
+      <div class="chart"><canvas id="cSelic" role="img" aria-label="Taxa Selic no fim de cada ano de 2011 a 2025 e em outubro de 2026"></canvas></div>
+      <p class="note">Juros altos encarecem o financiamento de carro e imóvel. Em 2011–2014 a Selic ficou entre 7,25% e 11,75%; em 2025 chegou a 15%, e está em 13,75% desde set/2026.</p>
+      <details><summary>Ver tabela</summary><table id="tSelic"></table></details>
+      <p class="src">Fonte: Banco Central (decisões do Copom), via <a href="https://www.dadosdemercado.com.br/indices/meta-selic" target="_blank" rel="noopener">Dados de Mercado</a>; corte para 13,75% em 16/09/2026: <a href="https://www.canalrural.com.br/economia/copom-reafirma-cautela-e-reduz-selic-para-1375-ao-ano/" target="_blank" rel="noopener">Canal Rural</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Salário mínimo real (R$ de jan/2026)</h3>
+      <div class="chart"><canvas id="cSm" role="img" aria-label="Salário mínimo corrigido pelo IPCA de 2011 a 2026"></canvas></div>
+      <p class="note">Valor de janeiro de cada ano corrigido pelo IPCA acumulado até dez/2025 (cálculo desta pesquisa). O mínimo ficou praticamente parado em termos reais de 2016 a 2022 e voltou a ganhar poder de compra a partir de 2023.</p>
+      <details><summary>Ver tabela</summary><table id="tSm"></table></details>
+      <p class="src">Fontes: decretos e leis do salário mínimo, compilados pelo <a href="https://previdenciarista.com/tabela-historica-dos-salarios-minimos/" target="_blank" rel="noopener">Previdenciarista</a>; IPCA: IBGE, via <a href="https://www.dadosdemercado.com.br/indices/ipca" target="_blank" rel="noopener">Dados de Mercado</a>.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Rendimento médio real do trabalho (4º trimestre, R$)</h3>
+    <div class="chart" style="height:240px"><canvas id="cRenda" role="img" aria-label="Rendimento médio real habitual de 2014 a 2025"></canvas></div>
+    <p class="note">O rendimento real de 2022 (R$ 3.203) ainda estava abaixo do de 2014 (R$ 3.233). O pico de 2020 é efeito da pandemia: os empregos de menor renda foram os mais perdidos, o que eleva a média sem que ninguém ganhe mais. Desde 2023 a renda cresce acima do nível de 2014.</p>
+    <p class="src">Fonte: IBGE, PNAD Contínua, via ABIMAQ (fev/2026).</p>
+  </div>
+</section>
+
+<!-- Saúde e educação -->
+<section id="saude">
+  <h2>Saúde e educação sob o teto de gastos</h2>
+  <p class="sub">O teto (EC 95) congelou em termos reais o piso federal da saúde a partir de 2018. Com a população crescendo, o gasto por habitante caiu.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Piso federal da saúde por habitante (R$ de 2020)</h3>
+      <div class="chart"><canvas id="cSaude" role="img" aria-label="Piso federal da saúde por habitante, de 615 reais em 2014 a 573 reais em 2020"></canvas></div>
+      <div class="legend-bands"><span class="b">Teto de gastos aplicado ao piso (2018–2020)</span></div>
+      <p class="note">Excluídos os créditos extraordinários da covid, o Ipea estima que a saúde deixou de receber <b>R$ 64,8 bi</b> entre 2018 e 2022 em relação à regra anterior (15% da receita corrente líquida).</p>
+      <details><summary>Ver tabela</summary><table id="tSaude"></table></details>
+      <p class="src">Fonte: Ipea, <a href="https://repositorio.ipea.gov.br/bitstream/11058/12482/1/NT_109_Disoc_Evolucao.pdf" target="_blank" rel="noopener">Nota Técnica Disoc nº 109, Evolução do piso federal em saúde 2013–2020</a> (out/2023).</p>
+    </div>
+    <div class="card">
+      <h3>Fim do teto: orçamento proposto para 2024</h3>
+      <table>
+        <thead><tr><th>Área</th><th>2023</th><th>2024 (proposta)</th><th>Variação</th></tr></thead>
+        <tbody>
+          <tr><td>Saúde</td><td>R$ 168,1 bi</td><td>R$ 218,4 bi</td><td>≈ +30%</td></tr>
+          <tr><td>Educação</td><td>R$ 99,9 bi</td><td>R$ 108,3 bi</td><td>≈ +8%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Valores nominais do projeto de lei orçamentária, não da execução. Com o arcabouço fiscal, voltaram os pisos ligados à receita: 15% da receita corrente líquida para a saúde e 18% da receita de impostos para a educação.</p>
+      <p class="note"><b>Informação não registrada:</b> série anual de gasto federal executado em educação (2011–2025). Fica como próxima etapa da pesquisa.</p>
+      <p class="src">Fonte: <a href="https://www.cnnbrasil.com.br/economia/com-fim-do-teto-de-gasto-orcamento-da-educacao-cresce-8-e-da-saude-30-em-2024/" target="_blank" rel="noopener">CNN Brasil (set/2023)</a>, com base no PLOA 2024.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Tributação -->
+<section id="tributos">
+  <h2>Tributação: quem paga imposto de renda</h2>
+  <p class="sub">A faixa de isenção do IR ficou congelada em R$ 1.903,98 de 2015 a 2022. Como o salário mínimo subiu, cada vez mais gente de renda baixa passou a pagar. A Lei 15.270/2025 elevou a isenção a R$ 5.000 a partir de jan/2026 e criou um imposto mínimo para quem ganha mais de R$ 600 mil por ano.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Limite de isenção do IR, em salários mínimos</h3>
+      <div class="chart"><canvas id="cIsencao" role="img" aria-label="Limite de isenção do imposto de renda medido em salários mínimos de 2015 a 2026"></canvas></div>
+      <p class="note">Limite de isenção mensal dividido pelo salário mínimo de cada ano. De 2023 a 2025, o limite inclui o desconto simplificado que garantiu isenção até 2 salários mínimos (em 2023, mínimo de R$ 1.320 a partir de maio).</p>
+      <details><summary>Ver tabela</summary><table id="tIsencao"></table></details>
+      <p class="src">Fontes: Receita Federal, <a href="https://static.poder360.com.br/2025/05/IRPF-5-mil-e-alta-renda-Comissao-Especial-CD.pdf" target="_blank" rel="noopener">apresentação à Comissão Especial da Câmara (2025)</a>; <a href="https://documentacao.senior.com.br/exigenciaslegais/noticias/trabalhista-previdenciaria/2025/2025-11-27-trabalhista-lei-15-270-2025-sancionada-lei-que-amplia-isenção-do-imposto-de-renda-para-quem-ganha-ate-5-mil" target="_blank" rel="noopener">Lei 15.270/2025</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Alíquota efetiva média de IR (2022)</h3>
+      <div class="chart"><canvas id="cAliq" role="img" aria-label="Alíquota efetiva média de imposto de renda por grupo, 2022"></canvas></div>
+      <p class="note">Quem ganha mais de R$ 600 mil por ano pagava, em média, 2,54% de alíquota efetiva, porque grande parte dessa renda vem de lucros e dividendos isentos. Um professor de ensino médio pagava 9,6%. A Receita projeta que o imposto mínimo eleve a média do grupo para cerca de 9%.</p>
+      <details><summary>Ver tabela</summary><table id="tAliq"></table></details>
+      <p class="src">Fonte: Receita Federal, apresentação à Comissão Especial da Câmara (2025).</p>
+    </div>
+  </div>
+  <div class="grid g4" style="margin-top:16px">
+    <div class="card kpi"><div class="l">Deixam de pagar IR em 2026</div><div class="v">10 mi+</div><div class="s">Outros ~5 mi pagam menos (redução parcial até R$ 7.350/mês).</div></div>
+    <div class="card kpi"><div class="l">Imposto mínimo sobre alta renda</div><div class="v">0% → 10%</div><div class="s">Progressivo entre R$ 600 mil e R$ 1,2 mi por ano; ~141 mil contribuintes (0,13%).</div></div>
+    <div class="card kpi"><div class="l">Dividendos</div><div class="v">10% na fonte</div><div class="s">Acima de R$ 50 mil por mês, pagos a uma mesma pessoa física.</div></div>
+    <div class="card kpi"><div class="l">Sanção e vigência</div><div class="v">26/11/2025</div><div class="s">Publicada no DOU em 27/11/2025; vale desde jan/2026.</div></div>
+  </div>
+</section>
+
+<!-- Leitura -->
+<section id="leitura">
+  <h2>Leitura dos dados</h2>
+  <p class="sub">O que os números confirmam, o que complicam e o que ainda não medem.</p>
+  <div class="read">
+    <div class="card"><h3><span class="ok">✓</span> Confirmado: 2011 foi o auge, e o dinheiro da cultura encolheu até 2016–2018</h3><p class="x" style="color:var(--fg2);margin:0">A captação real da Rouanet caiu 39% de 2011 a 2016, o gasto federal direto com cultura perdeu mais da metade do valor real entre 2013 e 2023, e o Ministério da Cultura foi extinto em 2016 (por 11 dias) e de 2019 a 2022. A percepção de que "nunca mais houve tantos editais quanto na época da Dilma" tem respaldo nos dados até 2022.</p></div>
+    <div class="card"><h3><span class="mid">△</span> Complica: a queda começou antes do impeachment</h3><p class="x" style="color:var(--fg2);margin:0">A captação já caiu em 2012, 2013 e 2015, ainda no governo Dilma, junto com a recessão. O impeachment, o teto de gastos e a extinção do MinC aprofundaram e prolongaram a queda, mas não a iniciaram. Uma leitura honesta precisa mostrar as duas coisas.</p></div>
+    <div class="card"><h3><span class="mid">△</span> Complica: desde 2023 o dinheiro voltou</h3><p class="x" style="color:var(--fg2);margin:0">A Rouanet bateu recordes em 2024 e 2025, a Lei Paulo Gustavo repassou R$ 3,86 bi de uma vez em 2023 e a Política Nacional Aldir Blanc garante R$ 3 bi por ano a estados e municípios. O volume voltou; o que mudou é a disputa: as propostas na Rouanet quase triplicaram entre 2018 e 2024. Mais recurso, dividido entre muito mais gente.</p></div>
+    <div class="card"><h3><span class="ok">✓</span> Confirmado: o crédito está mais caro hoje</h3><p class="x" style="color:var(--fg2);margin:0">A Selic passou boa parte de 2025–2026 entre 13,75% e 15%, contra 7,25–11,75% em 2011–2014. Financiar carro ou imóvel ficou mais caro, mesmo com desemprego na mínima histórica (5,1% no fim de 2025) e renda real em alta desde 2023.</p></div>
+    <div class="card"><h3><span class="no">○</span> Ainda não medido</h3><p class="x" style="color:var(--fg2);margin:0">Renda de músicos e artistas ao longo do tempo (PNAD por ocupação), preço de carro e imóvel em relação à renda, quantidade de editais estaduais e municipais por ano, e a comparação com a renda e as vagas em tecnologia. São as próximas camadas desta pesquisa.</p></div>
+  </div>
+</section>
+
+<!-- Fontes -->
+<section id="fontes">
+  <h2>Metodologia e fontes</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:18px;color:var(--fg2);font-size:14px">
+      <li>Cada número tem a fonte indicada no próprio bloco. Cálculos feitos nesta pesquisa (variações reais, salário mínimo corrigido, isenção em salários mínimos) estão sinalizados.</li>
+      <li>Valores nominais e corrigidos nunca dividem o mesmo eixo.</li>
+      <li>As faixas de governo servem para localizar os anos. Correlação não é causalidade.</li>
+      <li>Quando um dado não foi encontrado em fonte confiável, o painel diz "informação não registrada" em vez de estimar.</li>
+      <li>Pesquisa e coleta de dados realizadas em out/2026. Fontes primárias: IBGE, Ipea, Receita Federal, Banco Central, Ministério da Cultura (Salic), Câmara dos Deputados e Senado Federal.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">Pedro Canuto · pesquisa pessoal em dados públicos · out/2026</footer>
+
+<script>
+(function () {
+  // ---------------- Dados ----------------
+  const rouanetReal = { 2010: 1.997, 2011: 2.127, 2012: 1.949, 2013: 1.803, 2014: 1.793, 2015: 1.485, 2016: 1.306, 2017: 1.312, 2018: 1.365, 2019: 1.510, 2020: 1.464 };
+  const rouanetNom = { 2023: 2.35, 2024: 3.04, 2025: 3.41 };
+  const share = { 2013: 0.40, 2021: 0.27, 2022: 0.31, 2023: 0.38 };
+  const esferas = { labels: ['Federal', 'Estadual', 'Municipal'], y2013: [0.9235, 3.1, 4.5], y2023: [0.8561, 5.7, 12.3] };
+  const pib = { 2011: 4.0, 2012: 1.9, 2013: 3.0, 2014: 0.5, 2015: -3.5, 2016: -3.3, 2017: 1.3, 2018: 1.8, 2019: 1.2, 2020: -3.3, 2021: 4.8, 2022: 3.0, 2023: 3.2, 2024: 3.4, 2025: 2.3 };
+  const des = { 2012: 6.9, 2013: 6.3, 2014: 6.6, 2015: 9.1, 2016: 12.2, 2017: 11.9, 2018: 11.7, 2019: 11.1, 2020: 14.2, 2021: 11.1, 2022: 7.9, 2023: 7.4, 2024: 6.2, 2025: 5.1 };
+  const selic = { 2011: 11.00, 2012: 7.25, 2013: 10.00, 2014: 11.75, 2015: 14.25, 2016: 13.75, 2017: 7.00, 2018: 6.50, 2019: 4.50, 2020: 2.00, 2021: 9.25, 2022: 13.75, 2023: 11.75, 2024: 12.25, 2025: 15.00, 'out/26': 13.75 };
+  const smNom = { 2011: 540, 2012: 622, 2013: 678, 2014: 724, 2015: 788, 2016: 880, 2017: 937, 2018: 954, 2019: 998, 2020: 1039, 2021: 1100, 2022: 1212, 2023: 1302, 2024: 1412, 2025: 1518, 2026: 1621 };
+  const ipca = { 2011: 6.50, 2012: 5.84, 2013: 5.91, 2014: 6.41, 2015: 10.67, 2016: 6.29, 2017: 2.95, 2018: 3.75, 2019: 4.31, 2020: 4.52, 2021: 10.06, 2022: 5.79, 2023: 4.62, 2024: 4.83, 2025: 4.26 };
+  const renda = { 2014: 3233, 2015: 3127, 2016: 3147, 2017: 3192, 2018: 3235, 2019: 3245, 2020: 3323, 2021: 2962, 2022: 3203, 2023: 3300, 2024: 3440, 2025: 3613 };
+  const saude = { 2013: 597, 2014: 615, 2015: 600, 2016: 593, 2017: 583, 2018: 577, 2019: 576, 2020: 573 };
+  const isencao = [
+    ['2015', 1903.98, 788], ['2016', 1903.98, 880], ['2017', 1903.98, 937], ['2018', 1903.98, 954], ['2019', 1903.98, 998],
+    ['2020', 1903.98, 1039], ['2021', 1903.98, 1100], ['2022', 1903.98, 1212], ['2023', 2640, 1320], ['2024', 2824, 1412],
+    ['2025', 3036, 1518], ['2026', 5000, 1621]
+  ];
+  const aliq = [
+    ['Policial militar', 9.8], ['Professor de ensino médio', 9.6], ['Jornalista', 9.0], ['Técnico em informática', 7.4],
+    ['Bancária', 7.2], ['Renda acima de R$ 600 mil/ano', 2.54], ['Motorista', 2.2]
+  ];
+
+  // Salário mínimo real: valor de janeiro × IPCA acumulado do próprio ano até dez/2025.
+  const smReal = {};
+  Object.keys(smNom).forEach(y => {
+    let f = 1;
+    for (let k = +y; k <= 2025; k++) f *= 1 + (ipca[k] || 0) / 100;
+    smReal[y] = Math.round(smNom[y] * f);
+  });
+
+  // ---------------- Tema ----------------
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const fmt = (v, d = 1) => v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const brl = v => 'R$ ' + v.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+
+  // Faixas de governo em eixos de categoria (anos).
+  const govBands = {
+    id: 'govBands',
+    beforeDatasetsDraw(chart, _a, opts) {
+      if (!opts || !opts.bands) return;
+      const { ctx, chartArea, scales: { x } } = chart;
+      const labels = chart.data.labels.map(String);
+      opts.bands.forEach(([from, to, cls]) => {
+        // Faixa recortada aos anos presentes no gráfico.
+        const idx = labels.map((l, i) => [l, i]).filter(([l]) => l === String(from) || l === String(to) || (!isNaN(+l) && +l >= +from && +l <= +to));
+        if (!idx.length) return;
+        const i0 = idx[0][1], i1 = idx[idx.length - 1][1];
+        const step = labels.length > 1 ? (x.getPixelForValue(1) - x.getPixelForValue(0)) : chartArea.width;
+        const left = Math.max(chartArea.left, x.getPixelForValue(i0) - step / 2);
+        const right = Math.min(chartArea.right, x.getPixelForValue(i1) + step / 2);
+        ctx.save();
+        ctx.fillStyle = css(cls === 'a' ? '--band-a' : '--band-b');
+        ctx.fillRect(left, chartArea.top, right - left, chartArea.bottom - chartArea.top);
+        ctx.restore();
+      });
+    }
+  };
+  Chart.register(govBands);
+  const BANDS = [[2011, 2015, 'a'], [2016, 2018, 'b'], [2019, 2022, 'a'], [2023, 2026, 'b'], ['out/26', 'out/26', 'b']];
+
+  const charts = [];
+  function base(yFmt, opts = {}) {
+    const o = {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: !!opts.legend, labels: { color: css('--fg2'), boxWidth: 10, boxHeight: 10, useBorderRadius: true, borderRadius: 2 } },
+        tooltip: { callbacks: { label: c => (c.dataset.label ? c.dataset.label + ': ' : '') + yFmt(c.parsed[opts.horizontal ? 'x' : 'y']) } },
+        govBands: { bands: opts.bands || null }
+      },
+      indexAxis: opts.horizontal ? 'y' : 'x',
+      scales: {
+        x: { beginAtZero: !!opts.horizontal, grid: { display: !!opts.horizontal, color: css('--grid') }, border: { color: css('--border') }, ticks: { color: css('--fg3'), maxRotation: 0, autoSkip: true } },
+        y: { beginAtZero: opts.zero !== false, grid: { display: !opts.horizontal, color: css('--grid') }, border: { display: false }, ticks: { color: css('--fg3') } }
+      }
+    };
+    // O callback de valor só entra no eixo numérico: em eixo de categoria ele substituiria os rótulos.
+    const valueAxis = opts.horizontal ? o.scales.x : o.scales.y;
+    valueAxis.ticks.callback = v => yFmt(v);
+    return o;
+  }
+  function bar(id, labels, data, yFmt, opts = {}) {
+    const colors = opts.colors || data.map(() => css('--series'));
+    charts.push(new Chart(document.getElementById(id), {
+      type: 'bar',
+      data: { labels, datasets: [{ label: opts.label || '', data, backgroundColor: colors, borderRadius: 4, borderSkipped: 'start', maxBarThickness: 36 }] },
+      options: base(yFmt, opts)
+    }));
+  }
+  function line(id, labels, data, yFmt, opts = {}) {
+    charts.push(new Chart(document.getElementById(id), {
+      type: 'line',
+      data: { labels, datasets: [{ label: opts.label || '', data, borderColor: css('--series'), backgroundColor: css('--series'), borderWidth: 2, pointRadius: 4, pointHoverRadius: 6, tension: 0, spanGaps: false }] },
+      options: base(yFmt, opts)
+    }));
+  }
+  function table(id, head, rows) {
+    document.getElementById(id).innerHTML = '<thead><tr>' + head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
+      rows.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody>';
+  }
+
+  function render() {
+    charts.splice(0).forEach(c => c.destroy());
+    Chart.defaults.font.family = css('--font');
+    Chart.defaults.color = css('--fg3');
+
+    const ry = Object.keys(rouanetReal);
+    bar('cRouanetReal', ry, ry.map(y => rouanetReal[y]), v => 'R$ ' + fmt(v, 2) + ' bi',
+      { bands: [[2010, 2015, 'a'], [2016, 2020, 'b']], colors: ry.map(y => y === '2011' ? css('--series') : css('--muted-bar')) });
+
+    const ny = Object.keys(rouanetNom);
+    bar('cRouanetNom', ny, ny.map(y => rouanetNom[y]), v => 'R$ ' + fmt(v, 2) + ' bi');
+
+    const sy = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'];
+    line('cShare', sy, sy.map(y => share[y] ?? null), v => fmt(v, 2) + '%', { zero: true });
+
+    charts.push(new Chart(document.getElementById('cEsferas'), {
+      type: 'bar',
+      data: { labels: esferas.labels, datasets: [
+        { label: '2013', data: esferas.y2013, backgroundColor: css('--muted-bar'), borderRadius: 4, maxBarThickness: 40 },
+        { label: '2023', data: esferas.y2023, backgroundColor: css('--series'), borderRadius: 4, maxBarThickness: 40 }
+      ] },
+      options: base(v => 'R$ ' + fmt(v, 2) + ' bi', { legend: true })
+    }));
+
+    const py = Object.keys(pib);
+    bar('cPib', py, py.map(y => pib[y]), v => fmt(v) + '%',
+      { bands: BANDS, colors: py.map(y => pib[y] < 0 ? css('--series') : css('--muted-bar')) });
+
+    const dy = Object.keys(des);
+    line('cDes', dy, dy.map(y => des[y]), v => fmt(v) + '%', { bands: BANDS });
+
+    const sl = Object.keys(selic).sort((a, b) => (a === 'out/26') - (b === 'out/26') || a - b);
+    line('cSelic', sl, sl.map(y => selic[y]), v => fmt(v, 2) + '%', { bands: BANDS });
+
+    const my = Object.keys(smNom);
+    line('cSm', my, my.map(y => smReal[y]), brl, { bands: BANDS, zero: false });
+
+    const ey = Object.keys(renda);
+    line('cRenda', ey, ey.map(y => renda[y]), brl, { bands: BANDS, zero: false });
+
+    const hy = Object.keys(saude);
+    line('cSaude', hy, hy.map(y => saude[y]), brl, { zero: false, bands: [[2018, 2020, 'b']] });
+
+    bar('cIsencao', isencao.map(r => r[0]), isencao.map(r => +(r[1] / r[2]).toFixed(2)), v => fmt(v, 2) + ' SM',
+      { colors: isencao.map(r => r[0] === '2026' ? css('--series') : css('--muted-bar')) });
+
+    bar('cAliq', aliq.map(r => r[0]), aliq.map(r => r[1]), v => fmt(v, 1) + '%',
+      { horizontal: true, colors: aliq.map(r => r[0].startsWith('Renda') ? css('--series') : css('--muted-bar')) });
+  }
+
+  // Tabelas (uma vez)
+  table('tRouanetReal', ['Ano', 'Captação (R$ bi, IPCA)'], Object.keys(rouanetReal).map(y => [y, fmt(rouanetReal[y], 3)]));
+  table('tRouanetNom', ['Ano', 'Captação (R$ bi, nominal)'], Object.keys(rouanetNom).map(y => [y, fmt(rouanetNom[y], 2)]));
+  table('tShare', ['Ano', '% do gasto público'], Object.keys(share).map(y => [y, fmt(share[y], 2) + '%']));
+  table('tEsferas', ['Esfera', '2013', '2023'], esferas.labels.map((l, i) => [l, 'R$ ' + fmt(esferas.y2013[i], 2) + ' bi', 'R$ ' + fmt(esferas.y2023[i], 2) + ' bi']));
+  table('tPib', ['Ano', 'PIB (%)'], Object.keys(pib).map(y => [y, fmt(pib[y])]));
+  table('tDes', ['Ano', 'Desocupação 4º tri (%)'], Object.keys(des).map(y => [y, fmt(des[y])]));
+  table('tSelic', ['Fim de', 'Selic (% a.a.)'], Object.keys(selic).map(y => [y, fmt(selic[y], 2)]));
+  table('tSm', ['Ano', 'Nominal (jan)', 'Real (R$ jan/2026)'], Object.keys(smNom).map(y => [y, brl(smNom[y]), brl(smReal[y])]));
+  table('tSaude', ['Ano', 'Piso por habitante (R$ 2020)'], Object.keys(saude).map(y => [y, brl(saude[y])]));
+  table('tIsencao', ['Ano', 'Limite de isenção', 'Salário mínimo', 'Em SM'], isencao.map(r => [r[0], 'R$ ' + r[1].toLocaleString('pt-BR', { minimumFractionDigits: 2 }), brl(r[2]), fmt(r[1] / r[2], 2)]));
+  table('tAliq', ['Grupo', 'Alíquota efetiva média'], aliq.map(r => [r[0], fmt(r[1], r[1] % 1 ? 2 : 1) + '%']));
+
+  render();
+})();
+</script>
+</body>
+</html>
