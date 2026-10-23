@@ -107,7 +107,7 @@ export const competencies: Competency[] = [
     name: 'Visualização de Dados e Dashboards',
     area: 'dados',
     level: 'intermediario',
-    technologies: ['matplotlib', 'seaborn', 'plotly', 'power-bi'],
+    technologies: ['matplotlib', 'seaborn', 'plotly', 'chartjs', 'power-bi'],
   },
   {
     id: 'engenharia-dados',

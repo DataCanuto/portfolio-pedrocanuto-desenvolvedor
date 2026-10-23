@@ -71,6 +71,7 @@ export const technologies: Technology[] = [
   { id: 'matplotlib', name: 'Matplotlib', kind: 'library' },
   { id: 'seaborn', name: 'Seaborn', kind: 'library' },
   { id: 'plotly', name: 'Plotly', kind: 'library' },
+  { id: 'chartjs', name: 'Chart.js', kind: 'library' },
   { id: 'pymupdf', name: 'PyMuPDF', kind: 'library' },
   { id: 'pypdf2', name: 'PyPDF2', kind: 'library' },
   { id: 'tesseract', name: 'Tesseract OCR', kind: 'tool' },
