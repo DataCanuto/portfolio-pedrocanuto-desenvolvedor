@@ -10,43 +10,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 :root {
-  color-scheme: light;
-  --bg: #f7f6f3;
-  --card: #ffffff;
-  --fg: #16151a;
-  --fg2: #4f4d55;
-  --fg3: #7a7882;
-  --border: #e3e1dc;
-  --grid: #ebe9e4;
-  --accent: #d4541f;      /* laranja do portfólio, texto e marcas */
-  --accent-soft: #fbe6dc;
-  --series: #eb6834;      /* série principal */
-  --series2: #2a78d6;     /* série de comparação */
-  --muted-bar: #b9b6ae;
-  --band-a: rgba(42,120,214,.07);
-  --band-b: rgba(235,104,52,.08);
-  --warn-bg: #fff6e0;
-  --warn-fg: #7a4b00;
-  --r: 12px;
-  --font: 'Inter', system-ui, -apple-system, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #111114; --card: #1a1a1f; --fg: #f0efec; --fg2: #c3c2b7; --fg3: #8f8e88;
-    --border: #2c2c33; --grid: #26262c; --accent: #f07a45; --accent-soft: #3a2218;
-    --series: #f07a45; --series2: #3987e5; --muted-bar: #5c5b58;
-    --band-a: rgba(57,135,229,.10); --band-b: rgba(240,122,69,.10);
-    --warn-bg: #2e2410; --warn-fg: #f3cf85;
-  }
-}
-:root[data-theme="dark"] {
+  /* Paleta do portfólio (tailwind.config.js): dark.bg, dark.bg-secondary, dark.border, accent.orange */
   color-scheme: dark;
-  --bg: #111114; --card: #1a1a1f; --fg: #f0efec; --fg2: #c3c2b7; --fg3: #8f8e88;
-  --border: #2c2c33; --grid: #26262c; --accent: #f07a45; --accent-soft: #3a2218;
-  --series: #f07a45; --series2: #3987e5; --muted-bar: #5c5b58;
-  --band-a: rgba(57,135,229,.10); --band-b: rgba(240,122,69,.10);
-  --warn-bg: #2e2410; --warn-fg: #f3cf85;
+  --bg: #0F172A;
+  --card: #1E293B;
+  --fg: #F1F5F9;
+  --fg2: #CBD5E1;
+  --fg3: #94A3B8;
+  --border: #334155;
+  --grid: #273449;
+  --accent: #FF8C00;
+  --accent-soft: rgba(255,140,0,.15);
+  --series: #FF8C00;      /* série principal */
+  --series2: #FFA500;
+  --muted-bar: #64748B;
+  --band-a: rgba(148,163,184,.08);
+  --band-b: rgba(255,140,0,.08);
+  --warn-bg: rgba(255,165,0,.12);
+  --warn-fg: #FFD08A;
+  --r: 12px;
+  --font: 'Inter', 'Segoe UI', sans-serif;
 }
 *,*::before,*::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 64px; }
@@ -97,9 +80,7 @@ th { color: var(--fg2); font-weight: 600; }
 .warn { background: var(--warn-bg); color: var(--warn-fg); border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-top: 12px; }
 .read { display: grid; gap: 12px; }
 .read .card h3 { display: flex; gap: 8px; align-items: baseline; }
-.ok { color: #1a8a5a; } .mid { color: #b07200; } .no { color: #c0392b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ok { color: #4cc38a; } :root:not([data-theme="light"]) .mid { color: #e0a93a; } :root:not([data-theme="light"]) .no { color: #ef7b6e; } }
-:root[data-theme="dark"] .ok { color: #4cc38a; } :root[data-theme="dark"] .mid { color: #e0a93a; } :root[data-theme="dark"] .no { color: #ef7b6e; }
+.ok { color: #4ADE80; } .mid { color: #FFA500; } .no { color: #F87171; }
 footer { padding: 32px 0 48px; color: var(--fg3); font-size: 13px; }
 @media (max-width: 520px) { .chart { height: 260px; } .kpi .v { font-size: 26px; } }
 </style>
@@ -566,9 +547,6 @@ footer { padding: 32px 0 48px; color: var(--fg3); font-size: 13px; }
   table('tAliq', ['Grupo', 'Alíquota efetiva média'], aliq.map(r => [r[0], fmt(r[1], r[1] % 1 ? 2 : 1) + '%']));
 
   render();
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  if (mq.addEventListener) mq.addEventListener('change', render);
-  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
 </body>

@@ -44,7 +44,7 @@ export default function TransicaoDeCarreiraPage() {
               Abrir em tela cheia
             </a>
           </div>
-          <div className="rounded-xl overflow-hidden border border-dark-border bg-white">
+          <div className="rounded-xl overflow-hidden border border-dark-border bg-dark-bg">
             <iframe
               src={project.deployment}
               title={project.name}
